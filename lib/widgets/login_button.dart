@@ -42,7 +42,8 @@ class LoginRaisedButton extends StatelessWidget {
         child: Text(text,
             style: TextStyle(
                 fontSize: 18,
-                color: Colors.white)),
+                color: Colors.white,
+            fontWeight: FontWeight.bold)),
       ),
     );
   }

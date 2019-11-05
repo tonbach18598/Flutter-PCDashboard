@@ -9,6 +9,8 @@ class _ClassPageState extends State<ClassPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.purple,
+
       child: Text("Lớp học"),
     );
   }

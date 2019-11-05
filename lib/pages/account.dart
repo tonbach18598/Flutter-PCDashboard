@@ -9,6 +9,7 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.cyan,
       child: Text("Tài khoản"),
     );
   }
