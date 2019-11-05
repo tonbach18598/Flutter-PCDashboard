@@ -1,3 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/app.dart';
-void main()=>runApp(App());
+import 'package:flutter_pcdashboard/pages/splash.dart';
+void main()=>runApp(MaterialApp(
+  home: SplashPage(),
+));

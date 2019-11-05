@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class LoginRaisedButton extends StatelessWidget {
   String text;
+  Function onClick;
 
-  LoginRaisedButton(this.text);
+  LoginRaisedButton(this.text, this.onClick);
 
   @override
   Widget build(BuildContext context) {
@@ -11,26 +12,37 @@ class LoginRaisedButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.2,
       height: MediaQuery.of(context).size.width / 8.0,
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey,
+                blurRadius: 5,
+                spreadRadius: 2,
+                offset: Offset(2, 2)),
+          ],
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
           gradient: new LinearGradient(
               begin: FractionalOffset.topLeft,
               end: FractionalOffset.bottomRight,
               colors: [
+                Colors.deepOrange,
+                Colors.deepOrangeAccent,
                 Colors.orange,
+                Colors.orangeAccent,
+                Colors.lightBlueAccent,
+                Colors.lightBlue,
                 Colors.blue,
+                Colors.blueAccent
               ])),
       child: FlatButton(
-        key: Key("login_button"),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0))),
         color: Colors.transparent,
         splashColor: Colors.black45,
-        onPressed: () {},
+        onPressed: onClick,
         child: Text(text,
             style: TextStyle(
                 fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.normal)),
+                color: Colors.white)),
       ),
     );
   }
