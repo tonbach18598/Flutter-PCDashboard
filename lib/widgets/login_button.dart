@@ -10,7 +10,7 @@ class LoginRaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width / 1.2,
-      height: MediaQuery.of(context).size.width / 8.0,
+      height: 50,
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

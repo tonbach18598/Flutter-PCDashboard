@@ -10,7 +10,6 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.pink,
-
       child: Text("Liên hệ"),
     );
   }

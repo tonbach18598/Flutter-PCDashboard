@@ -1,8 +1,7 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_pcdashboard/navigator.dart';
+import 'package:flutter_pcdashboard/router.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/login_button.dart';
@@ -15,7 +14,6 @@ class ForgetPage extends StatefulWidget {
 }
 
 class _ForgetPageState extends State<ForgetPage> {
-PageNavigator pageNavigator=PageNavigator.getInstance();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -34,7 +32,7 @@ PageNavigator pageNavigator=PageNavigator.getInstance();
                 padding: const EdgeInsets.only(top:75,bottom:10,right: 30, left: 30),
                 child: LoginTextField("Tài khoản", Icons.person),
               ),
-              ForgetPasswordFlatButton("Trở về",onFlatClick),
+              ForgetPasswordFlatButton("Trở về",onBackClick),
               SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height / 8,
@@ -47,7 +45,8 @@ PageNavigator pageNavigator=PageNavigator.getInstance();
     );
 
   }
-  onFlatClick(){
-      pageNavigator.navigate(context, PageNavigator.LOGIN_PAGE);
+  void onBackClick(){
+    Navigator.of(context).pop();
+
   }
 }

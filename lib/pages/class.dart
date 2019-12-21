@@ -10,8 +10,11 @@ class _ClassPageState extends State<ClassPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.purple,
-
-      child: Text("Lớp học"),
+      child: RaisedButton(
+        child: Text("Change Theme"),
+        onPressed: (){
+        },
+      ),
     );
   }
 }

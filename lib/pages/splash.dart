@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/pages/login.dart';
+import 'package:flutter_pcdashboard/pages/signin.dart';
 
-import '../widgets/splashscreen.dart';
+import '../widgets/splash.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -11,9 +11,9 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return SplashScreen(
+    return Splash(
       seconds: 5,
-      navigateAfterSeconds: LoginPage(),
+      navigateAfterSeconds: SigninPage(),
       image: Image.asset("logo.png",width: 300,height: 240,),
       photoSize: 240,
       loaderColor: Colors.orangeAccent,

@@ -1,8 +1,9 @@
 import 'dart:core';
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
+class Splash extends StatefulWidget {
   final int seconds;
   final Text title;
   final Color backgroundColor;
@@ -15,7 +16,7 @@ class SplashScreen extends StatefulWidget {
   final Text loadingText;
   final ImageProvider imageBackground;
   final Gradient gradientBackground;
-  SplashScreen(
+  Splash(
       {
         this.loaderColor,
         @required this.seconds,
@@ -38,10 +39,10 @@ class SplashScreen extends StatefulWidget {
 
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _SplashState createState() => _SplashState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
@@ -53,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
             // named route component
             Navigator.of(context).pushReplacementNamed(widget.navigateAfterSeconds);
           } else if (widget.navigateAfterSeconds is Widget) {
-            Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (BuildContext context) => widget.navigateAfterSeconds));
+            Navigator.of(context).pushReplacement(new CupertinoPageRoute(builder: (BuildContext context) => widget.navigateAfterSeconds));
           } else {
             throw new ArgumentError(
                 'widget.navigateAfterSeconds must either be a String or Widget'
