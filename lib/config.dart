@@ -7,6 +7,9 @@ class Config{
   static final String PASSWORD="Mật khẩu";
   static final String SIGN_IN="Đăng nhập";
   static final String SIGN_OUT="Đăng xuất";
+  static final String BACK="Trở về";
+  static final String FORGET_PASSWORD="Quên mật khẩu?";
+  static final String GET_PASSWORD="Lấy mật khẩu";
   static final String HOME_PAGE="Trang chủ";
   static final String STUDY="Học tập";
   static final String UPDATE_INFORMATION="Cập nhật thông tin";

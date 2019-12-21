@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/pages/department.dart';
 
-class LogoWidget extends StatelessWidget {
-  String title;
-
-  LogoWidget(this.title);
+class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

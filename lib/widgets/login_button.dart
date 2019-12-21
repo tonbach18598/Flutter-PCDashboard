@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class LoginRaisedButton extends StatelessWidget {
+class SigninButton extends StatelessWidget {
   String text;
-  Function onClick;
+  VoidCallback onClick;
 
-  LoginRaisedButton(this.text, this.onClick);
+  SigninButton({@required this.text, @required this.onClick});
 
   @override
   Widget build(BuildContext context) {

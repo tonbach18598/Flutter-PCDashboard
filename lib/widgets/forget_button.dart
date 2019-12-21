@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ForgetPasswordFlatButton extends StatelessWidget {
+class ForgetPasswordButton extends StatelessWidget {
   String text;
-  Function onClick;
+  VoidCallback onClick;
 
-  ForgetPasswordFlatButton(this.text, this.onClick);
+  ForgetPasswordButton({@required this.text, @required this.onClick});
 
   @override
   Widget build(BuildContext context) {
