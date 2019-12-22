@@ -4,19 +4,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_event.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_state.dart';
+import 'package:flutter_pcdashboard/blocs/forget/forget_stream.dart';
 import 'package:flutter_pcdashboard/config.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
-import 'package:flutter_pcdashboard/widgets/login_button.dart';
-import 'package:flutter_pcdashboard/widgets/login_text_field.dart';
+import 'package:flutter_pcdashboard/widgets/signin_button.dart';
+import 'package:flutter_pcdashboard/widgets/signin_text_field.dart';
 
 class ForgetPage extends StatefulWidget {
-  @override
   @override
   _ForgetPageState createState() => _ForgetPageState();
 }
 
 class _ForgetPageState extends State<ForgetPage> {
+  ForgetStream forgetStream;
+  TextEditingController usernameController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    forgetStream=ForgetStream();
+    usernameController=TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    forgetStream.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -27,8 +44,8 @@ class _ForgetPageState extends State<ForgetPage> {
             Navigator.of(context).pop();
           } else if (state is ClickGetPasswordState) {}
         },
-        child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state) {
-          return Scaffold(
+        child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state) 
+          => Scaffold(
             body: SingleChildScrollView(
               child: Container(
                 height: MediaQuery.of(context).size.height,
@@ -42,7 +59,19 @@ class _ForgetPageState extends State<ForgetPage> {
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 75, bottom: 10, right: 30, left: 30),
-                      child: LoginTextField(Config.ACCOUNT, Icons.person),
+                      child: StreamBuilder(
+                        stream: forgetStream.usernameStream,
+                        builder: (context,snapshot)=>
+                         SigninTextField(
+                                        textEditingController:
+                                            usernameController,
+                                        labelText: Config.ACCOUNT,
+                                        obscureText: false,
+                                        prefixIcon: Icons.person,
+                                        errorText: snapshot.hasError
+                                            ? snapshot.error
+                                            : null,
+                                      )),
                     ),
                     ForgetPasswordButton(
                       text: Config.BACK,
@@ -60,8 +89,8 @@ class _ForgetPageState extends State<ForgetPage> {
                 ),
               ),
             ),
-          );
-        }),
+          )
+        ),
       ),
     );
   }
