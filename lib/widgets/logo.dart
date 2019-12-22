@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/pages/department.dart';
 
 class Logo extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -41,3 +39,34 @@ class Logo extends StatelessWidget {
   }
 }
 
+class MyWavyClipper extends CustomClipper<Path>{
+  @override
+  Path getClip(Size size) {
+    // TODO: implement getClip
+    var path = Path();
+
+    path.lineTo(0, size.height-80);
+
+    path.quadraticBezierTo(0.3 * size.width, size.height, 0.68*size.width, size.height -80);
+
+    path.lineTo(0.68 * size.width, size.height-80);
+
+
+    path.quadraticBezierTo(0.8416 * size.width, size.height -120 , size.width, size.height -80);
+
+    path.lineTo(size.width, size.height-80);
+
+    path.lineTo(size.width, 0);
+
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    // TODO: implement shouldReclip
+    return false;
+  }
+
+}

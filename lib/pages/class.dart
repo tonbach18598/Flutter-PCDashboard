@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pcdashboard/model/class_post.dart';
+import 'package:flutter_pcdashboard/widgets/class_post_item.dart';
 
 class ClassPage extends StatefulWidget {
   @override
@@ -6,14 +8,13 @@ class ClassPage extends StatefulWidget {
 }
 
 class _ClassPageState extends State<ClassPage> {
+  List<ClassPost> posts=[];
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purple,
-      child: RaisedButton(
-        child: Text("Change Theme"),
-        onPressed: (){
-        },
+      child: ListView.builder(
+        itemCount: posts.length,
+        itemBuilder: (context,index)=>ClassPostItem(posts[index]),
       ),
     );
   }

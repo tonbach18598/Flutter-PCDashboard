@@ -45,11 +45,11 @@ class _SigninPageState extends State<SigninPage> {
       child: BlocListener<SigninBloc, SigninState>(
         listener: (context, state) {
           if (state is ClickSigninState) {
-            if (signinStream.isValid(usernameController.text.trim(),
-                passwordController.text.trim())) {
-              print("clicked");
+            // if (signinStream.isValid(usernameController.text.trim(),
+            //     passwordController.text.trim())) {
+            //   print("clicked");
               Navigator.of(context).pushNamed(Router.dashboardRoute);
-            }
+            // }
           } else if (state is ClickForgetPasswordState) {
             Navigator.of(context).pushNamed(Router.forgetRoute);
           }
