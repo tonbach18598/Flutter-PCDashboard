@@ -11,15 +11,15 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   Stream<SigninState> mapEventToState(SigninEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if (event is ClickSigninEvent) {
+      if (event is ClickSigninButtonEvent) {
         if (event.username.isNotEmpty&&event.password.isNotEmpty)
           yield SuccessSigninState();
         else {
-          yield FailureSigninState();
+          yield WarningSigninState();
           yield InitialSigninState();
         }
-      } else if (event is ClickForgetPasswordEvent) {
-        yield ClickForgetPasswordState();
+      } else if (event is ClickForgetButtonEvent) {
+        yield ClickForgetButtonState();
         yield InitialSigninState();
       }
     } catch (e) {}

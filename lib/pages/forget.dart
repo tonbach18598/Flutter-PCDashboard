@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_event.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_state.dart';
-import 'package:flutter_pcdashboard/blocs/forget/forget_stream.dart';
 import 'package:flutter_pcdashboard/config.dart';
+import 'package:flutter_pcdashboard/toast.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
@@ -17,20 +17,17 @@ class ForgetPage extends StatefulWidget {
 }
 
 class _ForgetPageState extends State<ForgetPage> {
-  ForgetStream forgetStream;
   TextEditingController usernameController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    forgetStream=ForgetStream();
     usernameController=TextEditingController();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    forgetStream.dispose();
     super.dispose();
   }
 
@@ -40,9 +37,15 @@ class _ForgetPageState extends State<ForgetPage> {
       builder: (context) => ForgetBloc(),
       child: BlocListener<ForgetBloc, ForgetState>(
         listener: (context, state) {
-          if (state is ClickBackState) {
+          if (state is ClickBackButtonState) {
             Navigator.of(context).pop();
-          } else if (state is ClickGetPasswordState) {}
+          } else if (state is SuccessGetPasswordState) {
+            Toast.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
+          }else if(state is FailureGetPasswordState){
+            Toast.showFailureToast("Lấy mật khẩu thất bại");
+          }else if(state is WarningGetPasswordState){
+            Toast.showWarningToast("Tài khoản không được để trống");
+          }
         },
         child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state)
           => Scaffold(
@@ -60,21 +63,17 @@ class _ForgetPageState extends State<ForgetPage> {
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 75, bottom: 10, right: 30, left: 30),
-                      child: StreamBuilder(
-                        stream: forgetStream.usernameStream,
-                        builder: (context,snapshot)=>
-                         SigninTextField(
+                      child: SigninTextField(
                                         textEditingController:
                                             usernameController,
                                         labelText: Config.ACCOUNT,
                                         obscureText: false,
                                         prefixIcon: Icons.person,
                                       )),
-                    ),
                     ForgetPasswordButton(
                       text: Config.BACK,
                       onClick: () {
-                        BlocProvider.of<ForgetBloc>(context).add(ClickBackEvent());},
+                        BlocProvider.of<ForgetBloc>(context).add(ClickBackButtonEvent());},
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -82,7 +81,9 @@ class _ForgetPageState extends State<ForgetPage> {
                     ),
                     SigninButton(
                       text: Config.GET_PASSWORD,
-                      onClick: () {},
+                      onClick: () {
+
+                      },
                     ),
                   ],
                 ),

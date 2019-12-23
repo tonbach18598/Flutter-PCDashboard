@@ -11,14 +11,20 @@ class ForgetBloc extends Bloc<ForgetEvent,ForgetState>{
   Stream<ForgetState> mapEventToState(ForgetEvent event) async* {
     // TODO: implement mapEventToState
     try{
-        if(event is ClickGetPasswordEvent){
-          yield ClickGetPasswordState();
-        }else if(event is ClickBackEvent){
-          yield ClickBackState();
+        if(event is ClickGetPasswordButtonEvent){
+          if(event.username.isNotEmpty){
+            yield SuccessGetPasswordState();
+            yield InitialForgetState();
+          }
+          else {
+          yield WarningGetPasswordState();
+          yield InitialForgetState();
+          }
+        }else if(event is ClickBackButtonEvent){
+          yield ClickBackButtonState();
           yield InitialForgetState();
       }
     }catch (e){
-      yield ErrorState();
     }
   }
 }

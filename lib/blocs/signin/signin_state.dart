@@ -8,14 +8,24 @@ class InitialSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => [];
-
 }
 
-class ClickForgetPasswordState extends SigninState{
+class ClickForgetButtonState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => [];
-  
+}
+
+class SuccessSigninState extends SigninState{
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
+
+class FailureSigninState extends SigninState{
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
 }
 
 class WarningSigninState extends SigninState{
@@ -23,19 +33,4 @@ class WarningSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => [];
-  
-}
-
-class SuccessSigninState extends SigninState{
-  @override
-  // TODO: implement props
-  List<Object> get props => [];
-
-}
-
-class FailureSigninState extends SigninState{
-  @override
-  // TODO: implement props
-  List<Object> get props => [];
-
 }

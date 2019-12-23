@@ -6,11 +6,11 @@ import 'package:flutter_pcdashboard/blocs/signin/signin_event.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
 import 'package:flutter_pcdashboard/config.dart';
 import 'package:flutter_pcdashboard/router.dart';
+import 'package:flutter_pcdashboard/toast.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_text_field.dart';
-import 'package:oktoast/oktoast.dart';
 
 class SigninPage extends StatefulWidget {
   @override
@@ -42,38 +42,14 @@ class _SigninPageState extends State<SigninPage> {
       child: BlocListener<SigninBloc, SigninState>(
         listener: (context, state) {
           if (state is SuccessSigninState) {
-            showToast(
-              "Đăng nhập thành công",
-              duration: Duration(seconds: 1),
-              position: ToastPosition.center,
-              backgroundColor: Colors.green.withOpacity(0.8),
-              radius: 30.0,
-              textPadding: EdgeInsets.all(15),
-              textStyle: TextStyle(color:Colors.white, fontSize: 16),
-            );
+              Toast.showSuccessToast("Đăng nhập thành công");
               Navigator.of(context).pushReplacementNamed(Router.dashboardRoute);
           } else if(state is FailureSigninState){
-            showToast(
-              "Đăng nhập thất bại",
-              duration: Duration(seconds: 1),
-              position: ToastPosition.center,
-              backgroundColor: Colors.red.withOpacity(0.8),
-              radius: 30.0,
-              textPadding: EdgeInsets.all(15),
-              textStyle: TextStyle(color:Colors.white, fontSize: 16),
-            );
+            Toast.showFailureToast("Đăng nhập thất bại");
           } else if(state is WarningSigninState){
-            showToast(
-              "Tài khoản hoặc mật khẩu không được trống",
-              duration: Duration(seconds: 1),
-              position: ToastPosition.center,
-              backgroundColor: Colors.amber.withOpacity(0.8),
-              radius: 30.0,
-              textPadding: EdgeInsets.all(15),
-              textStyle: TextStyle(color:Colors.white, fontSize: 16),
-            );
+            Toast.showWarningToast("Tài khoản hoặc mật khẩu không được để trống");
           }
-          else if (state is ClickForgetPasswordState) {
+          else if (state is ClickForgetButtonState) {
             Navigator.of(context).pushNamed(Router.forgetRoute);
           }
         },
@@ -116,7 +92,7 @@ class _SigninPageState extends State<SigninPage> {
                                 text: Config.FORGET_PASSWORD,
                                 onClick: () {
                                   BlocProvider.of<SigninBloc>(context)
-                                      .add(ClickForgetPasswordEvent());
+                                      .add(ClickForgetButtonEvent());
                                 }),
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
@@ -126,7 +102,7 @@ class _SigninPageState extends State<SigninPage> {
                                 text: Config.SIGN_IN.toUpperCase(),
                                 onClick: () {
                                   BlocProvider.of<SigninBloc>(context)
-                                      .add(ClickSigninEvent(usernameController.text.trim(),passwordController.text.trim()));
+                                      .add(ClickSigninButtonEvent(usernameController.text.trim(),passwordController.text.trim()));
                                 }),
                           ],
                         ),

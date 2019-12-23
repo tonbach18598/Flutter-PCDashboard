@@ -11,23 +11,27 @@ class InitialForgetState extends ForgetState{
 
 }
 
-class ClickBackState extends ForgetState{
+class ClickBackButtonState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => [];
   
 }
 
-class ClickGetPasswordState extends ForgetState{
+class SuccessGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => [];
-  
 }
 
-class ErrorState extends ForgetState{
+class FailureGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => [];
+}
 
+class WarningGetPasswordState extends ForgetState{
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
 }
