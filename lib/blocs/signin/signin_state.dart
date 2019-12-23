@@ -18,14 +18,22 @@ class ClickForgetPasswordState extends SigninState{
   
 }
 
-class ClickSigninState extends SigninState{
+class WarningSigninState extends SigninState{
+
   @override
   // TODO: implement props
   List<Object> get props => [];
   
 }
 
-class ErrorState extends SigninState{
+class SuccessSigninState extends SigninState{
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+
+}
+
+class FailureSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => [];

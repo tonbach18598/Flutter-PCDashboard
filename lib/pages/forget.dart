@@ -44,7 +44,7 @@ class _ForgetPageState extends State<ForgetPage> {
             Navigator.of(context).pop();
           } else if (state is ClickGetPasswordState) {}
         },
-        child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state) 
+        child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state)
           => Scaffold(
             body: SingleChildScrollView(
               child: Container(
@@ -54,6 +54,7 @@ class _ForgetPageState extends State<ForgetPage> {
                   children: <Widget>[
                     Logo(),
                     SizedBox(
+                      width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 16,
                     ),
                     Padding(
@@ -68,17 +69,15 @@ class _ForgetPageState extends State<ForgetPage> {
                                         labelText: Config.ACCOUNT,
                                         obscureText: false,
                                         prefixIcon: Icons.person,
-                                        errorText: snapshot.hasError
-                                            ? snapshot.error
-                                            : null,
                                       )),
                     ),
                     ForgetPasswordButton(
                       text: Config.BACK,
-                      onClick: () {BlocProvider.of<ForgetBloc>(context).add(ClickBackEvent());},
+                      onClick: () {
+                        BlocProvider.of<ForgetBloc>(context).add(ClickBackEvent());},
                     ),
                     SizedBox(
-                      width: double.infinity,
+                      width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 8,
                     ),
                     SigninButton(

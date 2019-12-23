@@ -6,15 +6,13 @@ class SigninTextField extends StatelessWidget {
   bool obscureText;
   IconData prefixIcon;
   IconData suffixIcon;
-  String errorText;
 
   SigninTextField(
       {this.textEditingController,
       this.labelText,
       this.obscureText,
       this.prefixIcon,
-      this.suffixIcon,
-      this.errorText});
+      this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,6 @@ class SigninTextField extends StatelessWidget {
             cursorColor: Colors.orange,
             obscureText: obscureText,
             decoration: InputDecoration(
-              errorText: errorText,
               enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(const Radius.circular(30.0)),
