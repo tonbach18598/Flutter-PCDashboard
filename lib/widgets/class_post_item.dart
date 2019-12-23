@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/model/class_post.dart';
+import 'package:flutter_pcdashboard/response/class_response.dart';
 
 class ClassPostItem extends StatefulWidget {
-  ClassPost classPost;
+  ClassResponse classPost;
 
   ClassPostItem(this.classPost);
 

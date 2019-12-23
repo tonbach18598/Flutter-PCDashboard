@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/model/department_post.dart';
+import 'package:flutter_pcdashboard/response/department_response.dart';
 
 class DepartmentPostItem extends StatefulWidget {
-  DeparmentPost deparmentPost;
+  DepartmentResponse deparmentPost;
 
   DepartmentPostItem(this.deparmentPost);
 
@@ -14,7 +14,7 @@ class _DepartmentPostItemState extends State<DepartmentPostItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text("${widget.deparmentPost.name}")),
+      child: Center(child: Text("${widget.deparmentPost.time}")),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/model/class_post.dart';
+import 'package:flutter_pcdashboard/response/class_response.dart';
 import 'package:flutter_pcdashboard/widgets/class_post_item.dart';
 
 class ClassPage extends StatefulWidget {
@@ -8,7 +8,7 @@ class ClassPage extends StatefulWidget {
 }
 
 class _ClassPageState extends State<ClassPage> {
-  List<ClassPost> posts=[];
+  List<ClassResponse> posts=[];
   @override
   Widget build(BuildContext context) {
     return Container(

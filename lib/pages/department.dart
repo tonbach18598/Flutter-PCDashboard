@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/model/department_post.dart';
+import 'package:flutter_pcdashboard/response/department_response.dart';
 import 'package:flutter_pcdashboard/widgets/department_post_item.dart';
 
 class DepartmentPage extends StatefulWidget {
@@ -8,7 +8,7 @@ class DepartmentPage extends StatefulWidget {
 }
 
 class _DepartmentPageState extends State<DepartmentPage> {
-  List<DeparmentPost> posts=[new DeparmentPost("Bui ngo ton bach"),new DeparmentPost("Bui ngo ton bach 2")];
+  List<DepartmentResponse> posts=[];
   @override
   Widget build(BuildContext context) {
     return Container(
