@@ -27,7 +27,7 @@ class Logo extends StatelessWidget {
                     end: FractionalOffset.bottomRight),
                 color: Colors.black),
           ),
-          clipper: MyWavyClipper(),
+          clipper: WavyClipper(),
         ),
         Image.asset(
           "logo.png",
@@ -39,7 +39,7 @@ class Logo extends StatelessWidget {
   }
 }
 
-class MyWavyClipper extends CustomClipper<Path>{
+class WavyClipper extends CustomClipper<Path>{
   @override
   Path getClip(Size size) {
     // TODO: implement getClip

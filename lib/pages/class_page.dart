@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/response/class_response.dart';
+import 'package:flutter_pcdashboard/responses/class_response.dart';
 import 'package:flutter_pcdashboard/widgets/class_post_item.dart';
 
 class ClassPage extends StatefulWidget {

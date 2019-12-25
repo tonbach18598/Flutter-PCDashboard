@@ -1,6 +1,4 @@
-class Config{
-  static final String baseUrl="http://pcdashboard.herokuapp.com/";
-  
+class Value{
   static final String DEPARTMENT="Bộ môn";
   static final String CLASS="Lớp học";
   static final String CONTACT="Liên hệ";

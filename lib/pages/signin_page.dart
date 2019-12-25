@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_event.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
-import 'package:flutter_pcdashboard/config.dart';
-import 'package:flutter_pcdashboard/router.dart';
-import 'package:flutter_pcdashboard/toast.dart';
+import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utility/router.dart';
+import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
@@ -73,7 +73,7 @@ class _SigninPageState extends State<SigninPage> {
                               child:SigninTextField(
                                         textEditingController:
                                             usernameController,
-                                        labelText: Config.ACCOUNT,
+                                        labelText: Value.ACCOUNT,
                                         obscureText: false,
                                         prefixIcon: Icons.person,
                                       )),
@@ -83,13 +83,13 @@ class _SigninPageState extends State<SigninPage> {
                                 child:SigninTextField(
                                           textEditingController:
                                               passwordController,
-                                          labelText: Config.PASSWORD,
+                                          labelText: Value.PASSWORD,
                                           obscureText: true,
                                           prefixIcon: Icons.lock,
                                           suffixIcon: Icons.visibility,
                                         )),
                             ForgetPasswordButton(
-                                text: Config.FORGET_PASSWORD,
+                                text: Value.FORGET_PASSWORD,
                                 onClick: () {
                                   BlocProvider.of<SigninBloc>(context)
                                       .add(ClickForgetButtonEvent());
@@ -99,7 +99,7 @@ class _SigninPageState extends State<SigninPage> {
                               height: MediaQuery.of(context).size.height / 8,
                             ),
                             SigninButton(
-                                text: Config.SIGN_IN.toUpperCase(),
+                                text: Value.SIGN_IN.toUpperCase(),
                                 onClick: () {
                                   BlocProvider.of<SigninBloc>(context)
                                       .add(ClickSigninButtonEvent(usernameController.text.trim(),passwordController.text.trim()));

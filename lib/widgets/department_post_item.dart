@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/response/department_response.dart';
+import 'package:flutter_pcdashboard/responses/department_response.dart';
 
 class DepartmentPostItem extends StatefulWidget {
   DepartmentResponse deparmentPost;

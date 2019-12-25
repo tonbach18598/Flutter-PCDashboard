@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/pages/dashboard.dart';
-import 'package:flutter_pcdashboard/pages/forget.dart';
-import 'package:flutter_pcdashboard/pages/signin.dart';
-import 'package:flutter_pcdashboard/pages/splash.dart';
+import 'package:flutter_pcdashboard/pages/dashboard_page.dart';
+import 'package:flutter_pcdashboard/pages/forget_page.dart';
+import 'package:flutter_pcdashboard/pages/signin_page.dart';
+import 'package:flutter_pcdashboard/pages/splash_page.dart';
 
 class Router{
   static const splashRoute='/';

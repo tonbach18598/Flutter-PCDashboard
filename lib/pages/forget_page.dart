@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_event.dart';
 import 'package:flutter_pcdashboard/blocs/forget/forget_state.dart';
-import 'package:flutter_pcdashboard/config.dart';
-import 'package:flutter_pcdashboard/toast.dart';
+import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
@@ -66,12 +66,12 @@ class _ForgetPageState extends State<ForgetPage> {
                       child: SigninTextField(
                                         textEditingController:
                                             usernameController,
-                                        labelText: Config.ACCOUNT,
+                                        labelText: Value.ACCOUNT,
                                         obscureText: false,
                                         prefixIcon: Icons.person,
                                       )),
                     ForgetPasswordButton(
-                      text: Config.BACK,
+                      text: Value.BACK,
                       onClick: () {
                         BlocProvider.of<ForgetBloc>(context).add(ClickBackButtonEvent());},
                     ),
@@ -80,7 +80,7 @@ class _ForgetPageState extends State<ForgetPage> {
                       height: MediaQuery.of(context).size.height / 8,
                     ),
                     SigninButton(
-                      text: Config.GET_PASSWORD,
+                      text: Value.GET_PASSWORD,
                       onClick: () {
 
                       },

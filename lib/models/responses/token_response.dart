@@ -4,20 +4,20 @@
 
 import 'dart:convert';
 
-SigninResponse signinResponseFromJson(String str) => SigninResponse.fromJson(json.decode(str));
+TokenResponse tokenResponseFromJson(String str) => TokenResponse.fromJson(json.decode(str));
 
-String signinResponseToJson(SigninResponse data) => json.encode(data.toJson());
+String tokenResponseToJson(TokenResponse data) => json.encode(data.toJson());
 
-class SigninResponse {
+class TokenResponse {
   String tokenType;
   String accessToken;
 
-  SigninResponse({
+  TokenResponse({
     this.tokenType,
     this.accessToken,
   });
 
-  factory SigninResponse.fromJson(Map<String, dynamic> json) => SigninResponse(
+  factory TokenResponse.fromJson(Map<String, dynamic> json) => TokenResponse(
     tokenType: json["tokenType"] == null ? null : json["tokenType"],
     accessToken: json["accessToken"] == null ? null : json["accessToken"],
   );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/pages/signin.dart';
+import 'package:flutter_pcdashboard/pages/signin_page.dart';
 
 import '../widgets/splash.dart';
 

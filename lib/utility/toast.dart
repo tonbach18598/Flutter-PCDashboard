@@ -5,7 +5,7 @@ class Toast {
   static showSuccessToast(String message) {
     showToast(
       message,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 2),
       position: ToastPosition.center,
       backgroundColor: Colors.green.withOpacity(0.8),
       radius: 30.0,
@@ -17,7 +17,7 @@ class Toast {
   static showFailureToast(String message) {
     showToast(
       message,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 2),
       position: ToastPosition.center,
       backgroundColor: Colors.red.withOpacity(0.8),
       radius: 30.0,
@@ -29,7 +29,7 @@ class Toast {
   static showWarningToast(String message) {
     showToast(
       message,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 2),
       position: ToastPosition.center,
       backgroundColor: Colors.amber.withOpacity(0.8),
       radius: 30.0,
