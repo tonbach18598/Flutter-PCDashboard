@@ -12,6 +12,7 @@ class Value{
   static final String GET_PASSWORD="Lấy mật khẩu";
   static final String HOME_PAGE="Trang chủ";
   static final String STUDY="Học tập";
+  static final String COMMENT="Bình luận";
   static final String UPDATE_INFORMATION="Cập nhật thông tin";
   static final String CHANGE_PASSWORD="Thay đổi mật khẩu";
   static final String FEEDBACK="Phản hồi";

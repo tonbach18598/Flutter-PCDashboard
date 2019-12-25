@@ -55,7 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   Container(
                     constraints: BoxConstraints(maxHeight: 150),
                     child: TabBar(
-                      indicatorColor: Colors.orange,
+                      indicatorColor: Colors.deepOrangeAccent,
                       unselectedLabelColor: Colors.blue,
                       labelColor: Colors.orange,
                       tabs: <Widget>[

@@ -15,7 +15,7 @@ class _DepartmentPostItemState extends State<DepartmentPostItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      elevation: 5,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15)),
       child: Column(
@@ -27,19 +27,27 @@ class _DepartmentPostItemState extends State<DepartmentPostItem> {
               widget.deparmentPost.title,
               style: TextStyle(
                   fontSize: 18,
-                  color: Colors.orange,
+                  color: Colors.deepOrangeAccent,
                   fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+            padding: const EdgeInsets.fromLTRB(10,5,10,0),
             child: Text(
-              widget.deparmentPost.content,
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              widget.deparmentPost.time,
+              style:
+              TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+            child: Text(
+              widget.deparmentPost.content,
+              style: TextStyle(fontSize: 14, color: Colors.black),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: CachedNetworkImage(
@@ -48,54 +56,6 @@ class _DepartmentPostItemState extends State<DepartmentPostItem> {
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                        const EdgeInsets.only(left: 10, right: 5),
-                        child: Icon(Icons.favorite),
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.only(left: 5, right: 10),
-                        child: Text(
-                          "Thích",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                        const EdgeInsets.only(left: 10, right: 5),
-                        child: Icon(Icons.comment),
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.only(left: 5, right: 10),
-                        child: Text(
-                          "Bình luận",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
         ],
       ),
     );
