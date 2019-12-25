@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_event.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
 import 'package:flutter_pcdashboard/utility/config.dart';
-import 'package:flutter_pcdashboard/requests/signin_request.dart';
-import 'package:flutter_pcdashboard/responses/token_response.dart';
+import 'package:flutter_pcdashboard/models/requests/signin_request.dart';
+import 'package:flutter_pcdashboard/models/responses/token_response.dart';
 import 'package:flutter_pcdashboard/utility/validation.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {

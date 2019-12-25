@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter_pcdashboard/utility/config.dart';
+
 class Validation{
   static bool isValidUsername(String username){
     return username.isNotEmpty;
@@ -15,5 +19,28 @@ class Validation{
   static bool isValidPhone(String phone) {
     RegExp regExp = new RegExp(r'^(?:[+0]9)?[0-9]{10}$');
     return regExp.hasMatch(phone);
+  }
+
+  static Future<bool> isConnectedNetwork() async {
+    try {
+      final result = await InternetAddress.lookup(Config.baseUrl)
+          .timeout(const Duration(seconds: 20));
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+    return false;
+  }
+
+  static bool isUrl(String string) {
+    RegExp reg = new RegExp(
+        r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?",
+        caseSensitive: false);
+    if (reg.hasMatch(string)) {
+      return true;
+    }
+    return false;
   }
 }
