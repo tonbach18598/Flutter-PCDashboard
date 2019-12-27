@@ -18,11 +18,11 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     // TODO: implement mapEventToState
     try {
       if (event is ClickSigninButtonEvent) {
-        if (Validation.isValidUsername(event.username)&&event.password.isNotEmpty){
+        if (Validation.isValidUsername(event.username) &&
+            event.password.isNotEmpty) {
           await onSignin(event.username, event.password);
           yield SuccessSigninState();
-        }
-        else {
+        } else {
           yield WarningSigninState();
           yield InitialSigninState();
         }
@@ -36,13 +36,26 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   }
 }
 
-void onSignin(String username,String password) async {
+void onSignin(String username, String password) async {
   try {
-    Response response = await Dio().post(Config.baseUrl+Config.signinUrl,data: SigninRequest(userId: username,password: password).toJson());
-    String token=TokenResponse.fromJson(response.data).tokenType+" "+TokenResponse.fromJson(response.data).accessToken;
+    Response response = await Dio().post(Config.baseUrl + Config.signinUrl,
+        data: SigninRequest(userId: username, password: password).toJson());
+    String token = TokenResponse.fromJson(response.data).tokenType +
+        " " +
+        TokenResponse.fromJson(response.data).accessToken;
     await PreferencesUtil.saveToken(token);
+    await getSelfDetails(token);
   } catch (e) {
     print(e);
   }
 }
 
+void getSelfDetails(String token) async {
+  try {
+    Response response = await Dio().get(Config.baseUrl + Config.selfUrl,
+        options: Options(headers: {"Authorization": token}));
+    print(response.data);
+  } catch (e) {
+    print(e);
+  }
+}

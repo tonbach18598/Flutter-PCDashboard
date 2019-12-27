@@ -47,14 +47,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     Colors.deepOrangeAccent,
                     Colors.orange,
                     Colors.orangeAccent,
-                    Colors.white
                   ],
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
             ),
-            drawer: ClipPath(
-              clipper: OvalRightBorderClipper(),
-              child: Drawer(
+            drawer: Drawer(
                 child: ListView(
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
@@ -81,7 +78,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               Colors.deepOrangeAccent,
                               Colors.orange,
                               Colors.orangeAccent,
-                              Colors.white
                             ],
                             begin: FractionalOffset.bottomLeft,
                             end: FractionalOffset.topRight),
@@ -113,7 +109,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         }),
                   ],
                 ),
-              ),
             ),
             body: Column(
               children: <Widget>[

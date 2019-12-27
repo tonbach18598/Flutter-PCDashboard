@@ -59,30 +59,51 @@ class _ClassPageState extends State<ClassPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: <Widget>[
-                    CircleAvatar(),
-                    Container(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.grey[100],
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width / 7,
+                          height: MediaQuery.of(context).size.width / 7,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: CircleAvatar(),
+                          ))),
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height / 22,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10), color: Colors.white),
-                      child: Text("Chia sẻ suy nghĩ của bạn..."),
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.white),
+                      child: Center(child: Text("Chia sẻ suy nghĩ của bạn...",style: TextStyle(fontSize: 16),)),
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width / 8,
+                          height: MediaQuery.of(context).size.width / 8))
+                ],
               ),
-              Expanded(
-                flex: 9,
-                child: ListView.builder(
-                    itemCount: posts.length,
-                    itemBuilder: (context, index) => ClassPostItem(posts[index])),
-              ),
-            ],
-        ),
+            ),
+          ),
+          Expanded(
+            flex: 9,
+            child: ListView.builder(
+                itemCount: posts.length,
+                itemBuilder: (context, index) => ClassPostItem(posts[index])),
+          ),
+        ],
+      ),
     );
   }
 }

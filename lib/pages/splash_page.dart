@@ -14,8 +14,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Splash(
-      seconds: 5,
-      navigateAfterSeconds: PreferencesUtil.loadToken() !=null?DashboardPage():SigninPage(),
+      seconds: 3,
+      navigateAfterSeconds: SigninPage(),
       image: Image.asset("logo.png",width: 300,height: 240),
       photoSize: 240,
       loaderColor: Colors.orangeAccent,

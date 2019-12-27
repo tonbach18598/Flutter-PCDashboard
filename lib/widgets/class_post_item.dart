@@ -73,24 +73,43 @@ class _ClassPostItemState extends State<ClassPostItem> {
                   errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.orange,),
                 )),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10,bottom: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: Icon(Icons.comment,color: Colors.orange,),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    Value.COMMENT,
-                    style: TextStyle(fontSize: 16),
+          GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: Icon(Icons.comment,color: Colors.orange,),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text(
+                      Value.COMMENT,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
             ),
+            onTap: (){showBottomSheet(
+                shape: RoundedRectangleBorder(
+                  borderRadius:  BorderRadius.only(
+                topLeft: Radius.circular(30),
+              topRight: Radius.circular(30))
+                ),
+                context: context,
+                builder: (context) => Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30))),
+                    height:
+                    MediaQuery.of(context).size.height,
+                  ),
+                );},
           )
         ],
       ),
