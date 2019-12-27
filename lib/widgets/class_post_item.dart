@@ -17,7 +17,7 @@ class _ClassPostItemState extends State<ClassPostItem> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -38,7 +38,7 @@ class _ClassPostItemState extends State<ClassPostItem> {
                     children: <Widget>[
                       Text(
                         widget.classPost.userName,
-                        style: TextStyle(fontSize: 16, color: Colors.deepOrangeAccent,fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 16, color: Colors.deepOrange,fontWeight: FontWeight.bold),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 5),
@@ -63,14 +63,14 @@ class _ClassPostItemState extends State<ClassPostItem> {
           Padding(
             padding: const EdgeInsets.all(5),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
                   imageUrl: widget.classPost.image,
                   placeholder: (context, url) => Center(
                       child: CircularProgressIndicator(
                     backgroundColor: Colors.orange,
                   )),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.orange,),
                 )),
           ),
           Padding(
@@ -80,7 +80,7 @@ class _ClassPostItemState extends State<ClassPostItem> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 5),
-                  child: Icon(Icons.comment),
+                  child: Icon(Icons.comment,color: Colors.orange,),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 5),

@@ -25,6 +25,7 @@ class ForgetBloc extends Bloc<ForgetEvent,ForgetState>{
           yield InitialForgetState();
       }
     }catch (e){
+      print(e);
     }
   }
 }

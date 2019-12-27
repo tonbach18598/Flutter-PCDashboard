@@ -5,6 +5,7 @@ import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
 import 'package:flutter_pcdashboard/utility/config.dart';
 import 'package:flutter_pcdashboard/models/requests/signin_request.dart';
 import 'package:flutter_pcdashboard/models/responses/token_response.dart';
+import 'package:flutter_pcdashboard/utility/shared_preferences.dart';
 import 'package:flutter_pcdashboard/utility/validation.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
@@ -18,9 +19,8 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     try {
       if (event is ClickSigninButtonEvent) {
         if (Validation.isValidUsername(event.username)&&event.password.isNotEmpty){
-          await getToken(event.username, event.password);
+          await onSignin(event.username, event.password);
           yield SuccessSigninState();
-          print("signin");
         }
         else {
           yield WarningSigninState();
@@ -30,15 +30,17 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
         yield ClickForgetButtonState();
         yield InitialSigninState();
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
-void getToken(String username,String password) async {
+void onSignin(String username,String password) async {
   try {
     Response response = await Dio().post(Config.baseUrl+Config.signinUrl,data: SigninRequest(userId: username,password: password).toJson());
     String token=TokenResponse.fromJson(response.data).tokenType+" "+TokenResponse.fromJson(response.data).accessToken;
-    print(token);
+    await PreferencesUtil.saveToken(token);
   } catch (e) {
     print(e);
   }

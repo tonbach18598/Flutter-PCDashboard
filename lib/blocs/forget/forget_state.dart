@@ -7,31 +7,31 @@ abstract class ForgetState extends Equatable{
 class InitialForgetState extends ForgetState{
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
 
 }
 
 class ClickBackButtonState extends ForgetState{
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
   
 }
 
 class SuccessGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
 }
 
 class FailureGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
 }
 
 class WarningGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
 }

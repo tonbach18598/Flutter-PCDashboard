@@ -40,11 +40,11 @@ class _ForgetPageState extends State<ForgetPage> {
           if (state is ClickBackButtonState) {
             Navigator.of(context).pop();
           } else if (state is SuccessGetPasswordState) {
-            Toast.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
+            ToastUtil.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
           }else if(state is FailureGetPasswordState){
-            Toast.showFailureToast("Lấy mật khẩu thất bại");
+            ToastUtil.showFailureToast("Lấy mật khẩu thất bại");
           }else if(state is WarningGetPasswordState){
-            Toast.showWarningToast("Tài khoản không được để trống");
+            ToastUtil.showWarningToast("Tài khoản không được để trống");
           }
         },
         child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state)

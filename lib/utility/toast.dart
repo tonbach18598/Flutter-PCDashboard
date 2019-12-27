@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
-class Toast {
+class ToastUtil {
   static showSuccessToast(String message) {
     showToast(
       message,

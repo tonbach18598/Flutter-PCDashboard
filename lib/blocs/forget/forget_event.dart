@@ -8,7 +8,7 @@ abstract class ForgetEvent extends Equatable{
 class ClickBackButtonEvent extends ForgetEvent{
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
 }
 
 class ClickGetPasswordButtonEvent extends ForgetEvent{
@@ -18,5 +18,5 @@ class ClickGetPasswordButtonEvent extends ForgetEvent{
 
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => null;
 }

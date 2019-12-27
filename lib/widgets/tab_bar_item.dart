@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DashboardTabBarItem extends StatelessWidget {
-  String _title;
-  IconData _icon;
+  String title;
+  IconData icon;
 
-  DashboardTabBarItem(this._title, this._icon);
+  DashboardTabBarItem(this.title, this.icon);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,11 @@ class DashboardTabBarItem extends StatelessWidget {
       child: Tab(
         child: Column(
           children: <Widget>[
-            Icon(_icon),
-            Text(_title)
+            Icon(icon),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Text(title,style: TextStyle(fontSize: 12),),
+            )
           ],
         ),
       ),

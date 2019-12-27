@@ -16,4 +16,6 @@ class Value{
   static final String UPDATE_INFORMATION="Cập nhật thông tin";
   static final String CHANGE_PASSWORD="Thay đổi mật khẩu";
   static final String FEEDBACK="Phản hồi";
+  static final String EDIT="Sửa";
+  static final String DELETE="Xoá";
 }

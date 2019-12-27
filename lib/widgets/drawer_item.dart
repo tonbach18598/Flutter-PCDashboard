@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 class DashboardDrawerItem extends StatelessWidget {
   String title;
   IconData icon;
+  VoidCallback onClick;
 
-  DashboardDrawerItem(this.title, this.icon);
+  DashboardDrawerItem({@required this.title, @required this.icon, @required this.onClick});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon,color: Colors.orange,),
-      title: Text(title,style: TextStyle(fontSize: 16),),
+      title: Text(title,style: TextStyle(fontSize: 14),),
       onTap: () {
-        // Update the state of the app.
-        // ...
+        onClick();
       },
     );
   }

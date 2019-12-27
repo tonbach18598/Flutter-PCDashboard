@@ -58,8 +58,31 @@ class _ClassPageState extends State<ClassPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, index) => ClassPostItem(posts[index]));
+    return Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: <Widget>[
+                    CircleAvatar(),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10), color: Colors.white),
+                      child: Text("Chia sẻ suy nghĩ của bạn..."),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 9,
+                child: ListView.builder(
+                    itemCount: posts.length,
+                    itemBuilder: (context, index) => ClassPostItem(posts[index])),
+              ),
+            ],
+        ),
+    );
   }
 }
