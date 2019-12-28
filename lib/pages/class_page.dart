@@ -63,133 +63,137 @@ class _ClassPageState extends State<ClassPage> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,
-      child: Column(
+      child: Stack(
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: GestureDetector(
-              child: Container(
-                color: Colors.grey[100],
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 2,
-                        child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 7,
-                            height: MediaQuery.of(context).size.width / 7,
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: CircleAvatar(),
-                            ))),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        height: MediaQuery.of(context).size.height / 22,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.white),
-                        child: Center(child: Text("Chia sẻ suy nghĩ của bạn...",style: TextStyle(fontSize: 16),)),
-                      ),
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 8,
-                            height: MediaQuery.of(context).size.width / 8))
-                  ],
-                ),
-              ),
-              onTap: (){Navigator.of(context).pushNamed(Router.postRoute);},
-            ),
-          ),
-          Expanded(
-            flex: 9,
-            child: ListView.builder(
-                itemCount: posts.length,
-                itemBuilder: (context, index) => Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width / 6,
-                                height: MediaQuery.of(context).size.width / 6,
-                                child: CircleAvatar(
-                                  child: Image.network(posts[index].userAvatar),
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    posts[index].userName,
-                                    style: TextStyle(fontSize: 16, color: Colors.deepOrange,fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5),
-                                    child: Text(
-                                      posts[index].time,
-                                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
-                        child: Text(
-                          posts[index].content,
-                          style: TextStyle(fontSize: 14, color: Colors.black),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: CachedNetworkImage(
-                              imageUrl: posts[index].image,
-                              placeholder: (context, url) => Center(
-                                  child: SpinKitCircle(
-                                    color: Colors.orange,
-                                  )),
-                              errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.orange,),
-                            )),
-                      ),
-                      GestureDetector(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10,bottom: 15),
+          ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) => Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+                              SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircleAvatar(
+                                    child:
+                                        Image.network(posts[index].userAvatar),
+                                  )),
                               Padding(
-                                padding: const EdgeInsets.only(right: 5),
-                                child: Icon(Icons.comment,color: Colors.orange,),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Text(
-                                  Value.COMMENT,
-                                  style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      posts[index].userName,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.deepOrange,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        posts[index].time,
+                                        style: TextStyle(
+                                            fontSize: 12, color: Colors.grey),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               )
                             ],
                           ),
                         ),
-                        onTap: (){Navigator.of(context).pushNamed(Router.commentRoute);},
-                      )
-                    ],
-                  ),
-                )),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                          child: Text(
+                            posts[index].content,
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: CachedNetworkImage(
+                                imageUrl: posts[index].image,
+                                placeholder: (context, url) => Center(
+                                    child: SpinKitCircle(
+                                  color: Colors.orange,
+                                )),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.error,
+                                  color: Colors.orange,
+                                ),
+                              )),
+                        ),
+                        GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Icon(
+                                    Icons.comment,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    Value.COMMENT,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(Router.commentRoute);
+                          },
+                        )
+                      ],
+                    ),
+                  )),
+          Positioned(
+            left: 5,
+            top: 15,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30), color: Colors.blue),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(70,10, 10, 10),
+                child: Text(
+                  "ĐĂNG",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
           ),
+          Positioned(
+            left: 5,
+            top: 5,
+            child: SizedBox(
+              width: 60,
+              height: 60,
+              child: CircleAvatar(),
+            ),
+          )
         ],
       ),
     );
