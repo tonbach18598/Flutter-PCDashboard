@@ -22,6 +22,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         yield ClickUpdateInformationDrawerState();
         yield InitialDashboardState();
       }else if(event is ClickChangePasswordDrawerEvent){
+
         yield ClickChangePasswordDrawerState();
         yield InitialDashboardState();
       }
@@ -38,6 +39,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
   }
   void onSignout()async{
-    await PreferencesUtil.saveToken(null);
+    await PreferencesUtil.clearAll();
   }
 }

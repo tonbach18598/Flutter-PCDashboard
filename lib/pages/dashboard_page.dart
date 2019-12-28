@@ -56,33 +56,35 @@ class _DashboardPageState extends State<DashboardPage> {
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
                   children: <Widget>[
-                    UserAccountsDrawerHeader(
-                      accountName: Text(
-                        "NGUYỄN HỒNG SỸ NGUYÊN",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                    GestureDetector(
+                      child: UserAccountsDrawerHeader(
+                        accountName: Text(
+                          "NGUYỄN HỒNG SỸ NGUYÊN",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        accountEmail: Text(
+                          "1613013",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        currentAccountPicture: SizedBox(
+                          child: CircleAvatar(),
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [
+                                Colors.deepOrange,
+                                Colors.deepOrangeAccent,
+                                Colors.orange,
+                                Colors.orangeAccent,
+                              ],
+                              begin: FractionalOffset.bottomLeft,
+                              end: FractionalOffset.topRight),
+                        ),
                       ),
-                      accountEmail: Text(
-                        "1613013",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      currentAccountPicture: SizedBox(
-                        child: CircleAvatar(),
-                        width: double.infinity,
-                        height: double.infinity,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.deepOrange,
-                              Colors.deepOrangeAccent,
-                              Colors.orange,
-                              Colors.orangeAccent,
-                            ],
-                            begin: FractionalOffset.bottomLeft,
-                            end: FractionalOffset.topRight),
-                      ),
-                      onDetailsPressed: () {},
+                      onTap: (){},
                     ),
                     DashboardDrawerItem(
                         title: Value.HOME_PAGE,

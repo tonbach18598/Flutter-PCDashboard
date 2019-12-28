@@ -11,7 +11,7 @@ class DashboardDrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon,color: Colors.orange,),
-      title: Text(title,style: TextStyle(fontSize: 14),),
+      title: Text(title,style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
       onTap: () {
         onClick();
       },

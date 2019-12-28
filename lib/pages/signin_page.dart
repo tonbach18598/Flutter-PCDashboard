@@ -7,6 +7,7 @@ import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
+import 'package:flutter_pcdashboard/widgets/loading.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
@@ -38,12 +39,12 @@ class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      builder: (context) => SigninBloc(),
+      create: (context) => SigninBloc(),
       child: BlocListener<SigninBloc, SigninState>(
         listener: (context, state) {
           if (state is SuccessSigninState) {
-              ToastUtil.showSuccessToast("Đăng nhập thành công");
-              Navigator.of(context).pushReplacementNamed(Router.dashboardRoute);
+            ToastUtil.showSuccessToast("Đăng nhập thành công");
+            Navigator.of(context).pushReplacementNamed(Router.dashboardRoute);
           } else if(state is FailureSigninState){
             ToastUtil.showFailureToast("Đăng nhập thất bại");
           } else if(state is WarningSigninState){
@@ -54,62 +55,68 @@ class _SigninPageState extends State<SigninPage> {
           }
         },
         child: BlocBuilder<SigninBloc, SigninState>(
-            builder: (context, state) => Scaffold(
-                  body: SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      color: Color(0xf5f5f5),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            Logo(),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height / 16,
+            builder: (context, state) => Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                Scaffold(
+                      body: SingleChildScrollView(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          color: Color(0xf5f5f5),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                Logo(),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height / 16,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(right: 30, left: 30),
+                                  child:SigninTextField(
+                                            textEditingController:
+                                                usernameController,
+                                            labelText: Value.ACCOUNT,
+                                            obscureText: false,
+                                            prefixIcon: Icons.person,
+                                          )),
+                                Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, bottom: 10, left: 30, right: 30),
+                                    child:SigninTextField(
+                                              textEditingController:
+                                                  passwordController,
+                                              labelText: Value.PASSWORD,
+                                              obscureText: true,
+                                              prefixIcon: Icons.lock,
+                                              suffixIcon: Icons.visibility,
+                                            )),
+                                ForgetPasswordButton(
+                                    text: Value.FORGET_PASSWORD,
+                                    onClick: () {
+                                      BlocProvider.of<SigninBloc>(context)
+                                          .add(ClickForgetButtonEvent());
+                                    }),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height / 8,
+                                ),
+                                SigninButton(
+                                    text: Value.SIGN_IN.toUpperCase(),
+                                    onClick: () {
+                                      BlocProvider.of<SigninBloc>(context)
+                                          .add(ClickSigninButtonEvent(usernameController.text.trim(),passwordController.text.trim()));
+                                    }),
+                              ],
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 30, left: 30),
-                              child:SigninTextField(
-                                        textEditingController:
-                                            usernameController,
-                                        labelText: Value.ACCOUNT,
-                                        obscureText: false,
-                                        prefixIcon: Icons.person,
-                                      )),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20, bottom: 10, left: 30, right: 30),
-                                child:SigninTextField(
-                                          textEditingController:
-                                              passwordController,
-                                          labelText: Value.PASSWORD,
-                                          obscureText: true,
-                                          prefixIcon: Icons.lock,
-                                          suffixIcon: Icons.visibility,
-                                        )),
-                            ForgetPasswordButton(
-                                text: Value.FORGET_PASSWORD,
-                                onClick: () {
-                                  BlocProvider.of<SigninBloc>(context)
-                                      .add(ClickForgetButtonEvent());
-                                }),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height / 8,
-                            ),
-                            SigninButton(
-                                text: Value.SIGN_IN.toUpperCase(),
-                                onClick: () {
-                                  BlocProvider.of<SigninBloc>(context)
-                                      .add(ClickSigninButtonEvent(usernameController.text.trim(),passwordController.text.trim()));
-                                }),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )),
+                state is LoadingState?Loading():Container()
+              ],
+            )),
       ),
     );
   }

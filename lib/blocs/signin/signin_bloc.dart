@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/signin/signin_event.dart';
@@ -18,10 +20,12 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     // TODO: implement mapEventToState
     try {
       if (event is ClickSigninButtonEvent) {
+        yield LoadingState();
         if (Validation.isValidUsername(event.username) &&
             event.password.isNotEmpty) {
-          await onSignin(event.username, event.password);
-          yield SuccessSigninState();
+          if(await onSignin(event.username, event.password))
+            yield SuccessSigninState();
+          else yield FailureSigninState();
         } else {
           yield WarningSigninState();
           yield InitialSigninState();
@@ -36,7 +40,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   }
 }
 
-void onSignin(String username, String password) async {
+Future<bool> onSignin(String username, String password) async {
   try {
     Response response = await Dio().post(Config.baseUrl + Config.signinUrl,
         data: SigninRequest(userId: username, password: password).toJson());
@@ -45,12 +49,13 @@ void onSignin(String username, String password) async {
         TokenResponse.fromJson(response.data).accessToken;
     await PreferencesUtil.saveToken(token);
     await getSelfDetails(token);
+    return true;
   } catch (e) {
     print(e);
   }
 }
 
-void getSelfDetails(String token) async {
+Future getSelfDetails(String token) async {
   try {
     Response response = await Dio().get(Config.baseUrl + Config.selfUrl,
         options: Options(headers: {"Authorization": token}));

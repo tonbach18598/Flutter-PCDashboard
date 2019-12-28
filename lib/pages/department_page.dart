@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/models/responses/department_response.dart';
-import 'package:flutter_pcdashboard/widgets/department_post_item.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class DepartmentPage extends StatefulWidget {
   @override
@@ -44,6 +45,50 @@ class _DepartmentPageState extends State<DepartmentPage> {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: posts.length,
-        itemBuilder: (context, index) => DepartmentPostItem(posts[index]));
+        itemBuilder: (context, index) => Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: Text(
+                  posts[index].title,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10,5,10,0),
+                child: Text(
+                  posts[index].time,
+                  style:
+                  TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                child: Text(
+                  posts[index].content,
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    imageUrl: posts[index].image,
+                    placeholder: (context, url) => Center(child: SpinKitCircle(color: Colors.orange,)),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),),
+              ),
+            ],
+          ),
+        ));
   }
 }

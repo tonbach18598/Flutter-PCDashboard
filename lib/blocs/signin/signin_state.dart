@@ -10,6 +10,13 @@ class InitialSigninState extends SigninState{
   List<Object> get props => null;
 }
 
+class LoadingState extends SigninState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
 class ClickForgetButtonState extends SigninState{
   @override
   // TODO: implement props

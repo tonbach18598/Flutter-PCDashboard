@@ -9,7 +9,11 @@ class PreferencesUtil {
 
   static Future<String> loadToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String token = preferences.getString('token') ?? null;
+    String token = preferences.getString('token');
     return token;
+  }
+  static void clearAll() async{
+    SharedPreferences preferences=await SharedPreferences.getInstance();
+    preferences.clear();
   }
 }
