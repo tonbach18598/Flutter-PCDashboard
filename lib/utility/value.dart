@@ -18,4 +18,6 @@ class Value{
   static final String FEEDBACK="Phản hồi";
   static final String EDIT="Sửa";
   static final String DELETE="Xoá";
+  static final String SCHEDULE="Thời khoá biểu";
+  static final String EXAM="Thi cử";
 }

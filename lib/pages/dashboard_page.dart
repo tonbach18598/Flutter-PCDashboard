@@ -7,7 +7,7 @@ import 'package:flutter_pcdashboard/blocs/dashboard/dashboard_state.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
-import 'package:flutter_pcdashboard/pages/account_page.dart';
+import 'package:flutter_pcdashboard/pages/study_page.dart';
 import 'package:flutter_pcdashboard/pages/contact_page.dart';
 import 'package:flutter_pcdashboard/pages/department_page.dart';
 import 'package:flutter_pcdashboard/widgets/drawer_item.dart';
@@ -140,7 +140,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               DepartmentPage(),
                               ClassPage(),
                               ContactPage(),
-                              HomePage(),
+                              StudyPage(),
                             ],
                           ),
                         ),
