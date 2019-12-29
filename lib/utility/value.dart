@@ -20,4 +20,5 @@ class Value{
   static final String DELETE="Xoá";
   static final String SCHEDULE="Thời khoá biểu";
   static final String EXAM="Thi cử";
+
 }

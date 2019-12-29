@@ -10,37 +10,37 @@ class InitialDashboardState extends DashboardState{
   List<Object> get props => null;
 }
 
-class ClickSelfDetailsDrawerState extends DashboardState{
+class ClickSelfDetailsState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickHomeDrawerState extends DashboardState{
+class ClickHomeState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickUpdateInformationDrawerState extends DashboardState{
+class ClickUpdateInformationState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickChangePasswordDrawerState extends DashboardState{
+class ClickChangePasswordState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickFeedbackDrawerState extends DashboardState{
+class ClickFeedbackState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickSignoutDrawerState extends DashboardState{
+class ClickSignoutState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;

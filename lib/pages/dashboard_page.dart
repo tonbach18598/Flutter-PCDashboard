@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/dashboard/dashboard_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/dashboard/dashboard_event.dart';
-import 'package:flutter_pcdashboard/blocs/dashboard/dashboard_state.dart';
+import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_bloc.dart';
+import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_event.dart';
+import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_state.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
@@ -28,12 +28,16 @@ class _DashboardPageState extends State<DashboardPage> {
       builder: (context) => DashboardBloc(),
       child: BlocListener<DashboardBloc, DashboardState>(
         listener: (context, state) {
-          if (state is ClickSelfDetailsDrawerState) {
-          } else if (state is ClickHomeDrawerState) {
-          } else if (state is ClickUpdateInformationDrawerState) {
-          } else if (state is ClickChangePasswordDrawerState) {
-          } else if (state is ClickFeedbackDrawerState) {
-          } else if (state is ClickSignoutDrawerState) {
+          if (state is ClickSelfDetailsState) {
+          } else if (state is ClickHomeState) {
+            Navigator.of(context).pushNamed(Router.homeRoute);
+          } else if (state is ClickUpdateInformationState) {
+            Navigator.of(context).pushNamed(Router.updateRoute);
+          } else if (state is ClickChangePasswordState) {
+            Navigator.of(context).pushNamed(Router.changeRoute);
+          } else if (state is ClickFeedbackState) {
+            Navigator.of(context).pushNamed(Router.feedbackRoute);
+          } else if (state is ClickSignoutState) {
             ToastUtil.showSuccessToast("Đăng xuất thành công");
             Navigator.of(context).pushReplacementNamed(Router.signinRoute);          }
         },
@@ -89,25 +93,25 @@ class _DashboardPageState extends State<DashboardPage> {
                     DashboardDrawerItem(
                         title: Value.HOME_PAGE,
                         icon: Icons.home,
-                        onClick: () {}),
+                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickHomeEvent());}),
                     DashboardDrawerItem(
                         title: Value.UPDATE_INFORMATION,
                         icon: Icons.account_circle,
-                        onClick: () {}),
+                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickUpdateInformationEvent());}),
                     DashboardDrawerItem(
                         title: Value.CHANGE_PASSWORD,
                         icon: Icons.settings,
-                        onClick: () {}),
+                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickChangePasswordEvent());}),
                     DashboardDrawerItem(
                         title: Value.FEEDBACK,
                         icon: Icons.feedback,
-                        onClick: () {}),
+                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickFeedbackEvent());}),
                     DashboardDrawerItem(
                         title: Value.SIGN_OUT,
                         icon: Icons.exit_to_app,
                         onClick: () {
                           BlocProvider.of<DashboardBloc>(context)
-                              .add(ClickSignoutDrawerEvent());
+                              .add(ClickSignoutEvent());
                         }),
                   ],
                 ),

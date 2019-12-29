@@ -1,13 +1,13 @@
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_pcdashboard/blocs/signin/signin_event.dart';
-import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
+import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_event.dart';
+import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_state.dart';
+import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utility/config.dart';
 import 'package:flutter_pcdashboard/models/requests/signin_request.dart';
 import 'package:flutter_pcdashboard/models/responses/token_response.dart';
-import 'package:flutter_pcdashboard/utility/shared_preferences.dart';
+import 'package:flutter_pcdashboard/utility/preferences.dart';
 import 'package:flutter_pcdashboard/utility/validation.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
@@ -19,7 +19,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   Stream<SigninState> mapEventToState(SigninEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if (event is ClickSigninButtonEvent) {
+      if (event is ClickSigninEvent) {
         yield LoadingState();
         if (Validation.isValidUsername(event.username) &&
             event.password.isNotEmpty) {
@@ -30,8 +30,8 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
           yield WarningSigninState();
           yield InitialSigninState();
         }
-      } else if (event is ClickForgetButtonEvent) {
-        yield ClickForgetButtonState();
+      } else if (event is ClickForgetEvent) {
+        yield ClickForgetState();
         yield InitialSigninState();
       }
     } catch (e) {
@@ -42,24 +42,27 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
 Future<bool> onSignin(String username, String password) async {
   try {
-    Response response = await Dio().post(Config.baseUrl + Config.signinUrl,
+    Response response = await Dio().post(Config.baseUrl + Config.tokenPath,
         data: SigninRequest(userId: username, password: password).toJson());
     String token = TokenResponse.fromJson(response.data).tokenType +
         " " +
         TokenResponse.fromJson(response.data).accessToken;
-    await PreferencesUtil.saveToken(token);
+    PreferencesUtil.saveToken(token);
     await getSelfDetails(token);
     return true;
   } catch (e) {
     print(e);
+    return false;
   }
 }
 
 Future getSelfDetails(String token) async {
   try {
-    Response response = await Dio().get(Config.baseUrl + Config.selfUrl,
+    Response response = await Dio().get(Config.baseUrl + Config.selfPath,
         options: Options(headers: {"Authorization": token}));
     print(response.data);
+    SelfResponse self=SelfResponse.fromJson(response.data);
+    PreferencesUtil.saveSelf(self);
   } catch (e) {
     print(e);
   }

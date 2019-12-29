@@ -11,7 +11,7 @@ class InitialForgetState extends ForgetState{
 
 }
 
-class ClickBackButtonState extends ForgetState{
+class ClickBackState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => null;

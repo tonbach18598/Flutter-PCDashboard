@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/forget/forget_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/forget/forget_event.dart';
-import 'package:flutter_pcdashboard/blocs/forget/forget_state.dart';
+import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_bloc.dart';
+import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_event.dart';
+import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_state.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
@@ -37,7 +37,7 @@ class _ForgetPageState extends State<ForgetPage> {
       builder: (context) => ForgetBloc(),
       child: BlocListener<ForgetBloc, ForgetState>(
         listener: (context, state) {
-          if (state is ClickBackButtonState) {
+          if (state is ClickBackState) {
             Navigator.of(context).pop();
           } else if (state is SuccessGetPasswordState) {
             ToastUtil.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
@@ -73,7 +73,7 @@ class _ForgetPageState extends State<ForgetPage> {
                     ForgetPasswordButton(
                       text: Value.BACK,
                       onClick: () {
-                        BlocProvider.of<ForgetBloc>(context).add(ClickBackButtonEvent());},
+                        BlocProvider.of<ForgetBloc>(context).add(ClickBackEvent());},
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,

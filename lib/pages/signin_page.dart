@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/signin/signin_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/signin/signin_event.dart';
-import 'package:flutter_pcdashboard/blocs/signin/signin_state.dart';
+import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_bloc.dart';
+import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_event.dart';
+import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_state.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
@@ -50,7 +50,7 @@ class _SigninPageState extends State<SigninPage> {
           } else if(state is WarningSigninState){
             ToastUtil.showWarningToast("Tài khoản hoặc mật khẩu không được để trống");
           }
-          else if (state is ClickForgetButtonState) {
+          else if (state is ClickForgetState) {
             Navigator.of(context).pushNamed(Router.forgetRoute);
           }
         },
@@ -96,7 +96,7 @@ class _SigninPageState extends State<SigninPage> {
                                     text: Value.FORGET_PASSWORD,
                                     onClick: () {
                                       BlocProvider.of<SigninBloc>(context)
-                                          .add(ClickForgetButtonEvent());
+                                          .add(ClickForgetEvent());
                                     }),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
@@ -106,7 +106,7 @@ class _SigninPageState extends State<SigninPage> {
                                     text: Value.SIGN_IN.toUpperCase(),
                                     onClick: () {
                                       BlocProvider.of<SigninBloc>(context)
-                                          .add(ClickSigninButtonEvent(usernameController.text.trim(),passwordController.text.trim()));
+                                          .add(ClickSigninEvent(usernameController.text.trim(),passwordController.text.trim()));
                                     }),
                               ],
                             ),

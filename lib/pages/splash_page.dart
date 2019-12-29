@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter_pcdashboard/pages/signin_page.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
-import 'package:flutter_pcdashboard/utility/shared_preferences.dart';
+import 'package:flutter_pcdashboard/utility/preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashPage extends StatefulWidget {

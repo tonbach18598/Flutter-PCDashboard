@@ -5,16 +5,16 @@ abstract class ForgetEvent extends Equatable{
   const ForgetEvent();
 }
 
-class ClickBackButtonEvent extends ForgetEvent{
+class ClickBackEvent extends ForgetEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickGetPasswordButtonEvent extends ForgetEvent{
+class ClickGetPasswordEvent extends ForgetEvent{
   String username;
 
-  ClickGetPasswordButtonEvent(this.username);
+  ClickGetPasswordEvent(this.username);
 
   @override
   // TODO: implement props

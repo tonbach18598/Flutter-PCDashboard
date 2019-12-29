@@ -1,40 +1,42 @@
 import 'package:equatable/equatable.dart';
 
-abstract class DashboardEvent extends Equatable{
-  const DashboardEvent();
+abstract class SigninState extends Equatable{
+  const SigninState();
 }
 
-class ClickSelfDetailsDrawerEvent extends DashboardEvent{
+class InitialSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickHomeDrawerEvent extends DashboardEvent{
+class LoadingState extends SigninState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class ClickForgetState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickUpdateInformationDrawerEvent extends DashboardEvent{
+class SuccessSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickChangePasswordDrawerEvent extends DashboardEvent{
+class FailureSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickFeedbackDrawerEvent extends DashboardEvent{
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
+class WarningSigninState extends SigninState{
 
-class ClickSignoutDrawerEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;

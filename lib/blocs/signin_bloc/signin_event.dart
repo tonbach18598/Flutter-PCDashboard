@@ -4,17 +4,17 @@ abstract class SigninEvent extends Equatable{
   const SigninEvent();
 }
 
-class ClickForgetButtonEvent extends SigninEvent{
+class ClickForgetEvent extends SigninEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickSigninButtonEvent extends SigninEvent{
+class ClickSigninEvent extends SigninEvent{
   String username;
   String password;
 
-  ClickSigninButtonEvent(this.username,this.password);
+  ClickSigninEvent(this.username,this.password);
 
   @override
   // TODO: implement props
