@@ -2,7 +2,7 @@ import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesUtil {
-  static void saveToken(String token) async {
+  static Future saveToken(String token) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('token', token);
   }
@@ -12,12 +12,12 @@ class PreferencesUtil {
     String token = preferences.getString('token');
     return token;
   }
-  static void clearAll() async{
+  static Future clearAll() async{
     SharedPreferences preferences=await SharedPreferences.getInstance();
     preferences.clear();
   }
 
-  static void saveSelf(SelfResponse self) async {
+  static Future saveSelf(SelfResponse self) async {
     SharedPreferences preferences =await SharedPreferences.getInstance();
     preferences.setString('selfId', self.userId);
     preferences.setString('selfName', self.name);

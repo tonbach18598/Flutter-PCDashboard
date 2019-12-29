@@ -34,7 +34,7 @@ class _ForgetPageState extends State<ForgetPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      builder: (context) => ForgetBloc(),
+      create: (context) => ForgetBloc(),
       child: BlocListener<ForgetBloc, ForgetState>(
         listener: (context, state) {
           if (state is ClickBackState) {

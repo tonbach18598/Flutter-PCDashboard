@@ -7,10 +7,10 @@ abstract class ChangeEvent extends Equatable{
 
 class ClickChangePasswordEvent extends ChangeEvent{
   String oldPassword;
-  String reOldPassword;
   String newPassword;
+  String reNewPassword;
 
-  ClickChangePasswordEvent(this.oldPassword,this.reOldPassword,this.newPassword);
+  ClickChangePasswordEvent(this.oldPassword,this.newPassword,this.reNewPassword);
 
   @override
   // TODO: implement props

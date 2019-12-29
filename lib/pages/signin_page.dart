@@ -7,7 +7,7 @@ import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_state.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
-import 'package:flutter_pcdashboard/widgets/loading.dart';
+import 'package:flutter_pcdashboard/widgets/loading_signin.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
@@ -114,7 +114,7 @@ class _SigninPageState extends State<SigninPage> {
                         ),
                       ),
                     ),
-                state is LoadingState?Loading():Container()
+                state is LoadingState?LoadingSignin():Container()
               ],
             )),
       ),

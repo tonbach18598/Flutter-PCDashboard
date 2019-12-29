@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter_pcdashboard/pages/signin_page.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -35,7 +34,7 @@ class _SplashPageState extends State<SplashPage>
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset("logo.png",width: 360,height: 240,),
+              Image.asset("logo.png",width: MediaQuery.of(context).size.width*0.9,height: MediaQuery.of(context).size.width*0.6,),
               SpinKitRing(
                 color: Colors.white,
                 size: 50.0,

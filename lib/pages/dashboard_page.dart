@@ -11,7 +11,6 @@ import 'package:flutter_pcdashboard/pages/study_page.dart';
 import 'package:flutter_pcdashboard/pages/contact_page.dart';
 import 'package:flutter_pcdashboard/pages/department_page.dart';
 import 'package:flutter_pcdashboard/widgets/drawer_item.dart';
-import 'package:flutter_pcdashboard/widgets/oval_right_border_clipper.dart';
 import 'package:flutter_pcdashboard/widgets/tab_bar_item.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'class_page.dart';
@@ -25,7 +24,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      builder: (context) => DashboardBloc(),
+      create: (context) => DashboardBloc(),
       child: BlocListener<DashboardBloc, DashboardState>(
         listener: (context, state) {
           if (state is ClickSelfDetailsState) {

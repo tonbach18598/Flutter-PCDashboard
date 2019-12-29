@@ -5,9 +5,16 @@ abstract class ClassEvent extends Equatable{
   const ClassEvent();
 }
 
-class ClickPostEvent extends ClassEvent{
+class FetchListEvent extends ClassEvent{
+  int number;
+  FetchListEvent(this.number);
 
-  ClickPostEvent();
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class ClickPostEvent extends ClassEvent{
 
   @override
   // TODO: implement props
@@ -16,9 +23,8 @@ class ClickPostEvent extends ClassEvent{
 
 class ClickCommentEvent extends ClassEvent{
 
-  ClickCommentEvent();
-
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
+
