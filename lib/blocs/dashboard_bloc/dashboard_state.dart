@@ -1,10 +1,20 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 
 abstract class DashboardState extends Equatable{
   const DashboardState();
 }
 
 class InitialDashboardState extends DashboardState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class InitSelfDetailsState extends DashboardState{
+  SelfResponse self;
+  InitSelfDetailsState(this.self);
+
   @override
   // TODO: implement props
   List<Object> get props => null;

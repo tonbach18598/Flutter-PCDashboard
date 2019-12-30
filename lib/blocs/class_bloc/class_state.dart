@@ -39,3 +39,21 @@ class TapPostState extends ClassState{
   // TODO: implement props
   List<Object> get props => null;
 }
+
+class TapCommentState extends ClassState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressMoreState extends ClassState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressCancelState extends ClassState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}

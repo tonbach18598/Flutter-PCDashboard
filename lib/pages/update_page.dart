@@ -17,12 +17,12 @@ class _UpdatePageState extends State<UpdatePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    classController=TextEditingController();
-    emailController=TextEditingController();
-    phoneController=TextEditingController();
-    classController.text="K16";
-    emailController.text="tonbach18598@gmail.com";
-    phoneController.text="01234566789";
+    classController = TextEditingController();
+    emailController = TextEditingController();
+    phoneController = TextEditingController();
+    classController.text = "K16";
+    emailController.text = "tonbach18598@gmail.com";
+    phoneController.text = "01234566789";
   }
 
   @override
@@ -46,10 +46,10 @@ class _UpdatePageState extends State<UpdatePage> {
             end: FractionalOffset.bottomCenter),
       ),
       body: SingleChildScrollView(
-          child: Column(
+        child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 30,bottom: 20),
+                padding: const EdgeInsets.only(top: 30, bottom: 20),
                 child: SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
                     height: MediaQuery.of(context).size.width / 3,
@@ -71,86 +71,79 @@ class _UpdatePageState extends State<UpdatePage> {
                     child: Text("1613013",
                         style: TextStyle(
                             fontSize: 20,
-                            color: Colors.blueAccent,fontWeight: FontWeight.bold)),
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30,20,30,0),
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 2,
-                        color: Colors.orange
-                      ),
+                      border: Border.all(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: TextField(
                     readOnly: true,
                     controller: classController,
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.people,
-                          color: Colors.orange,
-                        ),),
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.people,
+                        color: Colors.orange,
+                      ),
+                    ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30,20,30,0),
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2,
-                          color: Colors.blue
-                      ),
+                      border: Border.all(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: TextField(
                     controller: emailController,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                        border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.email,
                           color: Colors.orange,
                         ),
-                        hintText: "Email"),
+                        hintText: Value.EMAIL),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30,20,30,30),
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2,
-                          color: Colors.blue
-                      ),
+                      border: Border.all(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: TextField(
                     controller: phoneController,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                        border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.smartphone,
                           color: Colors.orange,
                         ),
-                        hintText: "Số điện thoại"),
+                        hintText: Value.PHONE),
                   ),
                 ),
               ),
-              SigninButton(
-                text: Value.UPDATE_INFORMATION,
-                onPress: () {},
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: SigninButton(
+                  text: Value.UPDATE_INFORMATION,
+                  onPress: () {},
+                ),
               )
             ],
           ),
-      ),
+        ),
     );
   }
 }

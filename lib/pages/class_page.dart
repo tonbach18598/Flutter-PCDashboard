@@ -30,6 +30,14 @@ class _ClassPageState extends State<ClassPage> {
             posts = state.posts;
           } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast("Tải bảng tin thất bại");
+          }else if(state is TapPostState){
+            Navigator.of(context).pushNamed(Router.postRoute);
+          }else if(state is TapCommentState){
+            Navigator.of(context).pushNamed(Router.commentRoute);
+          }else if(state is PressMoreState){
+            showActionSheet(context);
+          }else if(state is PressCancelState){
+            Navigator.of(context).pop();
           }
         },
         child: BlocBuilder<ClassBloc, ClassState>(
@@ -45,7 +53,9 @@ class _ClassPageState extends State<ClassPage> {
                           pinned: false,
                           snap: true,
                           title: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              BlocProvider.of<ClassBloc>(context).add(TapPostEvent());
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -62,7 +72,7 @@ class _ClassPageState extends State<ClassPage> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          "Chia sẻ cảm nghĩ của bạn...",
+                                          Value.SHARE_YOUR_THINKING,
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 14),
                                         ),
@@ -219,8 +229,7 @@ class _ClassPageState extends State<ClassPage> {
                                           ),
                                         ),
                                         onTap: () {
-                                          Navigator.of(context)
-                                              .pushNamed(Router.commentRoute);
+                                          BlocProvider.of<ClassBloc>(context).add(TapCommentEvent());
                                         },
                                       )
                                     ],
@@ -234,7 +243,7 @@ class _ClassPageState extends State<ClassPage> {
                                         color: Colors.orange,
                                       ),
                                       onPressed: () {
-                                        showActionSheet();
+                                        BlocProvider.of<ClassBloc>(context).add(PressMoreEvent());
                                       },
                                     ),
                                   )
@@ -252,7 +261,7 @@ class _ClassPageState extends State<ClassPage> {
     );
   }
 
-  Future<void> showActionSheet() async {
+  Future<void> showActionSheet(BuildContext blocContext) async {
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
@@ -280,7 +289,7 @@ class _ClassPageState extends State<ClassPage> {
             child:
                 Text(Value.CANCEL, style: TextStyle(color: Colors.deepOrange)),
             onPressed: () {
-              /** */
+              BlocProvider.of<ClassBloc>(blocContext).add(PressCancelEvent());
             },
           ),
         );

@@ -28,3 +28,17 @@ class TapCommentEvent extends ClassEvent{
   List<Object> get props => null;
 }
 
+class PressMoreEvent extends ClassEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressCancelEvent extends ClassEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+

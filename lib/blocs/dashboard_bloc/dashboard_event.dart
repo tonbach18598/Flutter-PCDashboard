@@ -4,6 +4,12 @@ abstract class DashboardEvent extends Equatable{
   const DashboardEvent();
 }
 
+class InitSelfDetailsEvent extends DashboardEvent{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class TapSelfDetailsEvent extends DashboardEvent{
   @override
   // TODO: implement props

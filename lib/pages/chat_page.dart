@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
+import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ChatPage extends StatefulWidget {
@@ -137,7 +138,7 @@ class _ChatPageState extends State<ChatPage> {
                               ),
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "Nhập nội dung...",
+                                  hintText: Value.ENTER_CONTENT,
                                   hintStyle: TextStyle(
                                       fontSize: 16
                                   )

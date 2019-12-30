@@ -11,22 +11,25 @@ class ChangePage extends StatefulWidget {
 class _ChangePageState extends State<ChangePage> {
   TextEditingController oldController;
   TextEditingController newController;
-  TextEditingController reNewController;
+  TextEditingController retypeController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    oldController=TextEditingController();
-    newController=TextEditingController();
-    reNewController=TextEditingController();
+    oldController = TextEditingController();
+    newController = TextEditingController();
+    retypeController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: Text(Value.CHANGE_PASSWORD.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text(
+          Value.CHANGE_PASSWORD.toUpperCase(),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         elevation: 0,
         automaticallyImplyLeading: true,
         gradient: LinearGradient(
@@ -40,48 +43,42 @@ class _ChangePageState extends State<ChangePage> {
             end: FractionalOffset.bottomCenter),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
+        child: Column(
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 30),
-                child: Image.asset("logo.png",width: MediaQuery.of(context).size.width*0.75,height: MediaQuery.of(context).size.width*0.5,),
+                child: Image.asset(
+                  "logo.png",
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  height: MediaQuery.of(context).size.width * 0.5,
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 30,right: 30),
+                padding: const EdgeInsets.only(left: 30, right: 30),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2,
-                          color: Colors.orange
-                      ),
+                      border: Border.all(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: TextField(
                     controller: oldController,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        Icons.lock,
-                        color: Colors.orange,
-                      ),
-                      hintText: "Mật khẩu cũ"
-                    ),
+                        border: InputBorder.none,
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Colors.orange,
+                        ),
+                        hintText: Value.OLD_PASSWORD),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30,20,30,0),
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2,
-                          color: Colors.blue
-                      ),
+                      border: Border.all(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: TextField(
                     controller: newController,
                     decoration: InputDecoration(
@@ -90,41 +87,39 @@ class _ChangePageState extends State<ChangePage> {
                           Icons.lock_outline,
                           color: Colors.orange,
                         ),
-                        hintText: "Mật khẩu mới"),
+                        hintText: Value.NEW_PASSWORD),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30,20,30,50),
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 50),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2,
-                          color: Colors.blue
-                      ),
+                      border: Border.all(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: TextField(
-                    controller: reNewController,
+                    controller: retypeController,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.lock_open,
                           color: Colors.orange,
                         ),
-                        hintText: "Nhập lại mật khẩu mới"),
+                        hintText: Value.RETYPE_PASSWORD),
                   ),
                 ),
               ),
-              SigninButton(
-                text: Value.CHANGE_PASSWORD,
-                onPress: () {},
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: SigninButton(
+                  text: Value.CHANGE_PASSWORD,
+                  onPress: () {},
+                ),
               )
             ],
           ),
         ),
-      ),
     );
   }
 }

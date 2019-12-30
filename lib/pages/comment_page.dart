@@ -139,7 +139,7 @@ class _CommentPageState extends State<CommentPage> {
                                 ),
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Nhập nội dung...",
+                                    hintText: Value.ENTER_CONTENT,
                                     hintStyle: TextStyle(
                                         fontSize: 16
                                     )

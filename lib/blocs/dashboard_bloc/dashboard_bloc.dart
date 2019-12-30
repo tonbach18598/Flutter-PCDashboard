@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_state.dart';
+import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utility/preferences.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
@@ -12,32 +13,35 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Stream<DashboardState> mapEventToState(DashboardEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if(event is TapSelfDetailsEvent){
+      if (event is InitSelfDetailsEvent) {
+        SelfResponse self=await initSelf();
+        yield InitSelfDetailsState(self);
+      } else if (event is TapSelfDetailsEvent) {
         yield TapSelfDetailsState();
-        yield InitialDashboardState();
-      }else if(event is TapHomeEvent){
+      } else if (event is TapHomeEvent) {
         yield TapHomeState();
-        yield InitialDashboardState();
-      }else if(event is TapUpdateInformationEvent){
+      } else if (event is TapUpdateInformationEvent) {
         yield TapUpdateInformationState();
-        yield InitialDashboardState();
-      }else if(event is TapChangePasswordEvent){
+      } else if (event is TapChangePasswordEvent) {
         yield TapChangePasswordState();
-        yield InitialDashboardState();
-      }
-      else if(event is TapFeedbackEvent){
+      } else if (event is TapFeedbackEvent) {
         yield TapFeedbackState();
-        yield InitialDashboardState();
-      }
-      else if(event is TapSignoutEvent){
+      } else if (event is TapSignoutEvent) {
         await onSignout();
         yield TapSignoutState();
       }
+      yield InitialDashboardState();
     } catch (e) {
       print(e);
     }
   }
-  void onSignout()async{
+
+  Future<SelfResponse> initSelf()async{
+    SelfResponse self=await PreferencesUtil.loadSelf();
+    return self;
+  }
+
+  void onSignout() async {
     await PreferencesUtil.clearAll();
   }
 }

@@ -23,8 +23,8 @@ class DepartmentBloc extends Bloc<DepartmentEvent,DepartmentState>{
         if(posts!=null)
           yield SuccessFetchListState(posts);
         else yield FailureFetchListState();
-        yield InitialDepartmentState();
       }
+      yield InitialDepartmentState();
     }catch (e){
       print(e);
     }

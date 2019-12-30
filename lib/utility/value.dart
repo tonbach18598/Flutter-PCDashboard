@@ -24,4 +24,11 @@ class Value{
   static final String EXAM='Thi cử';
   static final String CANCEL='Huỷ';
   static final String OPTION='Tuỳ chọn';
+  static final String EMAIL='Email';
+  static final String PHONE='Số điện thoại';
+  static final String OLD_PASSWORD='Mật khẩu cũ';
+  static final String NEW_PASSWORD='Mật khẩu mới';
+  static final String RETYPE_PASSWORD='Nhập lại mật khẩu';
+  static final String ENTER_CONTENT='Nhập nội dung...';
+  static final String SHARE_YOUR_THINKING='Chia sẻ cảm nghĩ của bạn...';
 }

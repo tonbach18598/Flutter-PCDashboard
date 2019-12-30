@@ -24,8 +24,16 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
         } else {
           yield FailureFetchListState();
         }
-        yield InitialClassState();
+      }else if(event is TapPostEvent){
+        yield TapPostState();
+      }else if(event is TapCommentEvent){
+        yield TapCommentState();
+      }else if(event is PressMoreEvent){
+        yield PressMoreState();
+      }else if(event is PressCancelEvent){
+        yield PressCancelState();
       }
+      yield InitialClassState();
     } catch (e) {
       print(e);
     }
