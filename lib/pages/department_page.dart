@@ -24,10 +24,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       child: BlocListener<DepartmentBloc, DepartmentState>(
         listener: (context, state) {
           if (state is SuccessFetchListState) {
-            setState(() {
               posts = state.posts;
-            });
-            ;
           } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast("Tải bảng tin thất bại");
           }
@@ -64,7 +61,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                               child: Text(
                                 posts[index].content,
                                 style: TextStyle(
@@ -73,7 +70,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                             ),
                             posts[index].image != null
                                 ? Padding(
-                                    padding: const EdgeInsets.all(5),
+                                    padding: const EdgeInsets.fromLTRB(5,0,5,5),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: CachedNetworkImage(

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ForgetPasswordButton extends StatelessWidget {
   String text;
-  VoidCallback onClick;
+  VoidCallback onPress;
 
-  ForgetPasswordButton({@required this.text, @required this.onClick});
+  ForgetPasswordButton({@required this.text, @required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ForgetPasswordButton extends StatelessWidget {
               text,
               style: TextStyle(color: Colors.black54,fontSize: 16),
             ),
-            onPressed: onClick,
+            onPressed: onPress,
           ),
         ),
       ],

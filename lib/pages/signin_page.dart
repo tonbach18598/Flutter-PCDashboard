@@ -50,7 +50,7 @@ class _SigninPageState extends State<SigninPage> {
           } else if(state is WarningSigninState){
             ToastUtil.showWarningToast("Tài khoản hoặc mật khẩu không được để trống");
           }
-          else if (state is ClickForgetState) {
+          else if (state is PressForgetState) {
             Navigator.of(context).pushNamed(Router.forgetRoute);
           }
         },
@@ -94,9 +94,9 @@ class _SigninPageState extends State<SigninPage> {
                                             )),
                                 ForgetPasswordButton(
                                     text: Value.FORGET_PASSWORD,
-                                    onClick: () {
+                                    onPress: () {
                                       BlocProvider.of<SigninBloc>(context)
-                                          .add(ClickForgetEvent());
+                                          .add(PressForgetEvent());
                                     }),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
@@ -104,9 +104,9 @@ class _SigninPageState extends State<SigninPage> {
                                 ),
                                 SigninButton(
                                     text: Value.SIGN_IN.toUpperCase(),
-                                    onClick: () {
+                                    onPress: () {
                                       BlocProvider.of<SigninBloc>(context)
-                                          .add(ClickSigninEvent(usernameController.text.trim(),passwordController.text.trim()));
+                                          .add(PressSigninEvent(usernameController.text.trim(),passwordController.text.trim()));
                                     }),
                               ],
                             ),

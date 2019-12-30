@@ -5,10 +5,10 @@ abstract class PostEvent extends Equatable{
   const PostEvent();
 }
 
-class ClickPostEvent extends PostEvent{
+class PressPostEvent extends PostEvent{
   String content;
 
-  ClickPostEvent(this.content);
+  PressPostEvent(this.content);
 
   @override
   // TODO: implement props

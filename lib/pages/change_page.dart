@@ -119,7 +119,7 @@ class _ChangePageState extends State<ChangePage> {
               ),
               SigninButton(
                 text: Value.CHANGE_PASSWORD,
-                onClick: () {},
+                onPress: () {},
               )
             ],
           ),

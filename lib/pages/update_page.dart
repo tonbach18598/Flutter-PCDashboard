@@ -146,7 +146,7 @@ class _UpdatePageState extends State<UpdatePage> {
               ),
               SigninButton(
                 text: Value.UPDATE_INFORMATION,
-                onClick: () {},
+                onPress: () {},
               )
             ],
           ),

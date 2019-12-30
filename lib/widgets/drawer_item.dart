@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class DashboardDrawerItem extends StatelessWidget {
   String title;
   IconData icon;
-  VoidCallback onClick;
+  VoidCallback onTap;
 
-  DashboardDrawerItem({@required this.title, @required this.icon, @required this.onClick});
+  DashboardDrawerItem({@required this.title, @required this.icon, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class DashboardDrawerItem extends StatelessWidget {
       leading: Icon(icon,color: Colors.orange,),
       title: Text(title,style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
       onTap: () {
-        onClick();
+        onTap();
       },
     );
   }

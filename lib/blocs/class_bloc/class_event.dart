@@ -14,14 +14,14 @@ class FetchListEvent extends ClassEvent{
   List<Object> get props => null;
 }
 
-class ClickPostEvent extends ClassEvent{
+class TapPostEvent extends ClassEvent{
 
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickCommentEvent extends ClassEvent{
+class TapCommentEvent extends ClassEvent{
 
   @override
   // TODO: implement props

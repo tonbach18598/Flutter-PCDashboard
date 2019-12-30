@@ -5,9 +5,7 @@ abstract class UserEvent extends Equatable{
   const UserEvent();
 }
 
-class ClickUserEvent extends UserEvent{
-
-  ClickUserEvent();
+class TapUserEvent extends UserEvent{
 
   @override
   // TODO: implement props

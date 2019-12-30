@@ -18,7 +18,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   Stream<SigninState> mapEventToState(SigninEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if (event is ClickSigninEvent) {
+      if (event is PressSigninEvent) {
         yield LoadingState();
         if (Validation.isValidUsername(event.username) &&
             event.password.isNotEmpty) {
@@ -30,8 +30,8 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
           yield WarningSigninState();
           yield InitialSigninState();
         }
-      } else if (event is ClickForgetEvent) {
-        yield ClickForgetState();
+      } else if (event is PressForgetEvent) {
+        yield PressForgetState();
         yield InitialSigninState();
       }
     } catch (e) {

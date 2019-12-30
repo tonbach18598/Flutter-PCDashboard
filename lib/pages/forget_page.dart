@@ -37,7 +37,7 @@ class _ForgetPageState extends State<ForgetPage> {
       create: (context) => ForgetBloc(),
       child: BlocListener<ForgetBloc, ForgetState>(
         listener: (context, state) {
-          if (state is ClickBackState) {
+          if (state is PressBackState) {
             Navigator.of(context).pop();
           } else if (state is SuccessGetPasswordState) {
             ToastUtil.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
@@ -72,8 +72,8 @@ class _ForgetPageState extends State<ForgetPage> {
                                       )),
                     ForgetPasswordButton(
                       text: Value.BACK,
-                      onClick: () {
-                        BlocProvider.of<ForgetBloc>(context).add(ClickBackEvent());},
+                      onPress: () {
+                        BlocProvider.of<ForgetBloc>(context).add(PressBackEvent());},
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -81,7 +81,7 @@ class _ForgetPageState extends State<ForgetPage> {
                     ),
                     SigninButton(
                       text: Value.GET_PASSWORD,
-                      onClick: () {
+                      onPress: () {
 
                       },
                     ),

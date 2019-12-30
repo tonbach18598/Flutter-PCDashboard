@@ -5,11 +5,11 @@ abstract class UpdateEvent extends Equatable{
   const UpdateEvent();
 }
 
-class ClickUpdateInformationEvent extends UpdateEvent{
+class PressUpdateInformationEvent extends UpdateEvent{
   String email;
   String phone;
 
-  ClickUpdateInformationEvent(this.email,this.phone);
+  PressUpdateInformationEvent(this.email,this.phone);
 
   @override
   // TODO: implement props

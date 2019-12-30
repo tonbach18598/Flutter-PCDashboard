@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
+import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class CommentPage extends StatefulWidget {
@@ -158,6 +160,41 @@ class _CommentPageState extends State<CommentPage> {
             ],
           ),
       ),
+    );
+  }
+  Future<void> showActionSheet() async {
+    return showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoActionSheet(
+          title: Text(Value.OPTION,style: TextStyle(color: Colors.blueAccent),),
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              child: Text(
+                Value.EDIT_COMMENT,
+                style: TextStyle(color: Colors.orange),
+              ),
+              onPressed: () {
+                /** */
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: Text(Value.DELETE_COMMENT, style: TextStyle(color: Colors.orange)),
+              onPressed: () {
+                /** */
+              },
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            isDefaultAction: true,
+            child:
+            Text(Value.CANCEL, style: TextStyle(color: Colors.deepOrange)),
+            onPressed: () {
+              /** */
+            },
+          ),
+        );
+      },
     );
   }
 }

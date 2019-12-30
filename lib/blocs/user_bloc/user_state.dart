@@ -11,7 +11,7 @@ class InitialUserState extends UserState{
 
 }
 
-class ClickUserItemState extends UserState{
+class TapUserItemState extends UserState{
   @override
   // TODO: implement props
   List<Object> get props => null;

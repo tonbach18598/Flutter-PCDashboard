@@ -37,7 +37,7 @@ Future<List<ClassResponse>> fetchList(int number) async {
     String token = await PreferencesUtil.loadToken();
     SelfResponse self = await PreferencesUtil.loadSelf();
     Response response = await Dio().get(
-        Config.baseUrl + Config.classPath + "K16",
+        Config.baseUrl + Config.classPath + self.classId,
         queryParameters: {"number": number},
         options: Options(headers: {"Authorization": token}));
     print(response.data);

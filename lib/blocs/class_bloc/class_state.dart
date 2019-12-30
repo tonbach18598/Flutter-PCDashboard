@@ -34,7 +34,7 @@ class FailureFetchListState extends ClassState{
   List<Object> get props => null;
 }
 
-class ClickPostState extends ClassState{
+class TapPostState extends ClassState{
   @override
   // TODO: implement props
   List<Object> get props => null;

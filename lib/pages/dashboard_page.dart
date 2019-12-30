@@ -27,16 +27,16 @@ class _DashboardPageState extends State<DashboardPage> {
       create: (context) => DashboardBloc(),
       child: BlocListener<DashboardBloc, DashboardState>(
         listener: (context, state) {
-          if (state is ClickSelfDetailsState) {
-          } else if (state is ClickHomeState) {
+          if (state is TapSelfDetailsState) {
+          } else if (state is TapHomeState) {
             Navigator.of(context).pushNamed(Router.homeRoute);
-          } else if (state is ClickUpdateInformationState) {
+          } else if (state is TapUpdateInformationState) {
             Navigator.of(context).pushNamed(Router.updateRoute);
-          } else if (state is ClickChangePasswordState) {
+          } else if (state is TapChangePasswordState) {
             Navigator.of(context).pushNamed(Router.changeRoute);
-          } else if (state is ClickFeedbackState) {
+          } else if (state is TapFeedbackState) {
             Navigator.of(context).pushNamed(Router.feedbackRoute);
-          } else if (state is ClickSignoutState) {
+          } else if (state is TapSignoutState) {
             ToastUtil.showSuccessToast("Đăng xuất thành công");
             Navigator.of(context).pushReplacementNamed(Router.signinRoute);          }
         },
@@ -59,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
                   children: <Widget>[
-                    GestureDetector(
+                    InkWell(
                       child: UserAccountsDrawerHeader(
                         accountName: Text(
                           "NGUYỄN HỒNG SỸ NGUYÊN",
@@ -92,25 +92,25 @@ class _DashboardPageState extends State<DashboardPage> {
                     DashboardDrawerItem(
                         title: Value.HOME_PAGE,
                         icon: Icons.home,
-                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickHomeEvent());}),
+                        onTap: () {BlocProvider.of<DashboardBloc>(context).add(TapHomeEvent());}),
                     DashboardDrawerItem(
                         title: Value.UPDATE_INFORMATION,
                         icon: Icons.account_circle,
-                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickUpdateInformationEvent());}),
+                        onTap: () {BlocProvider.of<DashboardBloc>(context).add(TapUpdateInformationEvent());}),
                     DashboardDrawerItem(
                         title: Value.CHANGE_PASSWORD,
                         icon: Icons.settings,
-                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickChangePasswordEvent());}),
+                        onTap: () {BlocProvider.of<DashboardBloc>(context).add(TapChangePasswordEvent());}),
                     DashboardDrawerItem(
                         title: Value.FEEDBACK,
                         icon: Icons.feedback,
-                        onClick: () {BlocProvider.of<DashboardBloc>(context).add(ClickFeedbackEvent());}),
+                        onTap: () {BlocProvider.of<DashboardBloc>(context).add(TapFeedbackEvent());}),
                     DashboardDrawerItem(
                         title: Value.SIGN_OUT,
                         icon: Icons.exit_to_app,
-                        onClick: () {
+                        onTap: () {
                           BlocProvider.of<DashboardBloc>(context)
-                              .add(ClickSignoutEvent());
+                              .add(TapSignoutEvent());
                         }),
                   ],
                 ),

@@ -5,10 +5,10 @@ abstract class FeedbackEvent extends Equatable{
   const FeedbackEvent();
 }
 
-class ClickSendEvent extends FeedbackEvent{
+class PressSendEvent extends FeedbackEvent{
   String content;
 
-  ClickSendEvent(this.content);
+  PressSendEvent(this.content);
 
   @override
   // TODO: implement props

@@ -4,37 +4,37 @@ abstract class DashboardEvent extends Equatable{
   const DashboardEvent();
 }
 
-class ClickSelfDetailsEvent extends DashboardEvent{
+class TapSelfDetailsEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickHomeEvent extends DashboardEvent{
+class TapHomeEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickUpdateInformationEvent extends DashboardEvent{
+class TapUpdateInformationEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickChangePasswordEvent extends DashboardEvent{
+class TapChangePasswordEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickFeedbackEvent extends DashboardEvent{
+class TapFeedbackEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class ClickSignoutEvent extends DashboardEvent{
+class TapSignoutEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;
