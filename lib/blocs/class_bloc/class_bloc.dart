@@ -16,7 +16,10 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
   Stream<ClassState> mapEventToState(ClassEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if (event is FetchListEvent) {
+      if(event is InitSelfEvent){
+        SelfResponse self=await initSelf();
+        yield InitSelfState(self);
+      }else if (event is FetchListEvent) {
         yield LoadingState();
         List<ClassResponse> posts = await fetchList(event.number);
         if (posts != null) {
@@ -38,6 +41,11 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
       print(e);
     }
   }
+}
+
+Future<SelfResponse> initSelf()async{
+  SelfResponse self=await PreferencesUtil.loadSelf();
+  return self;
 }
 
 Future<List<ClassResponse>> fetchList(int number) async {

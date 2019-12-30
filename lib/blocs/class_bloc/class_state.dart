@@ -1,26 +1,36 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
+import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 
-abstract class ClassState extends Equatable{
+abstract class ClassState extends Equatable {
   const ClassState();
 }
 
-class InitialClassState extends ClassState{
+class InitialClassState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;
-
 }
 
-class LoadingState extends ClassState{
-
+class LoadingState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
-class SuccessFetchListState extends ClassState{
+class InitSelfState extends ClassState {
+  SelfResponse self;
+
+  InitSelfState(this.self);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class SuccessFetchListState extends ClassState {
   List<ClassResponse> posts;
+
   SuccessFetchListState(this.posts);
 
   @override
@@ -28,21 +38,19 @@ class SuccessFetchListState extends ClassState{
   List<Object> get props => null;
 }
 
-class FailureFetchListState extends ClassState{
+class FailureFetchListState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapPostState extends ClassState{
-
+class TapPostState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapCommentState extends ClassState{
-
+class TapCommentState extends ClassState {
   ClassResponse post;
 
   TapCommentState(this.post);
@@ -52,13 +60,13 @@ class TapCommentState extends ClassState{
   List<Object> get props => null;
 }
 
-class PressMoreState extends ClassState{
+class PressMoreState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class PressCancelState extends ClassState{
+class PressCancelState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;

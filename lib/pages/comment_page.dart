@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/widgets/loading_comment.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class CommentPage extends StatefulWidget {
@@ -29,23 +31,23 @@ class _CommentPageState extends State<CommentPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    post=widget.arguments;
+    post = widget.arguments;
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>CommentBloc()..add(FetchListEvent(post.id)),
-      child: BlocListener<CommentBloc,CommentState>(
-        listener: (context,state){
-          if(state is SuccessFetchListState){
-            comments=state.comments;
-          }else if(state is FailureFetchListState){
+      create: (context) => CommentBloc()..add(FetchListEvent(post.id)),
+      child: BlocListener<CommentBloc, CommentState>(
+        listener: (context, state) {
+          if (state is SuccessFetchListState) {
+            comments = state.comments;
+          } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast("Tải bình luận thất bại");
           }
         },
-        child: BlocBuilder<CommentBloc,CommentState>(
-          builder:(context,state)=> Scaffold(
+        child: BlocBuilder<CommentBloc, CommentState>(
+          builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
               elevation: 0,
               automaticallyImplyLeading: true,
@@ -65,117 +67,160 @@ class _CommentPageState extends State<CommentPage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Stack(
-                      children: <Widget>[
-                        ListView.builder(
-                            itemCount: comments.length,
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10, right: 10),
-                                    child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(25),
-                                          child: CircleAvatar(
-                                            child: Image.network(comments[index].userAvatar),
+                    children: <Widget>[
+                      ListView.builder(
+                          itemCount: comments.length,
+                          itemBuilder: (context, index) => Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 10, 10, 0),
+                                      child: SizedBox(
+                                        width: 40,
+                                        height: 40,
+                                        child: CachedNetworkImage(
+                                          imageUrl: comments[index].userAvatar,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
-                                        )),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(15),
-                                            color: Colors.grey[300]
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(15,10,15,10),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text("${comments[index].userName}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.deepOrange),),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 5),
-                                                child: Text("${comments[index].content}",style: TextStyle(fontSize: 14),),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 5,left: 15),
-                                        child: Text("${comments[index].time}",style: TextStyle(fontSize: 12,color: Colors.grey),),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Colors.deepOrange,
-                                      Colors.deepOrangeAccent,
-                                      Colors.orange,
-                                      Colors.orangeAccent,
-                                    ],
-                                    begin: FractionalOffset.bottomCenter,
-                                    end: FractionalOffset.topCenter)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(20,10,0,10),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: Colors.white
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 20),
-                                        child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: 3,
-                                          minLines: 1,
-                                          style: TextStyle(
-                                              fontSize: 16
-                                          ),
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: Value.ENTER_CONTENT,
-                                              hintStyle: TextStyle(
-                                                  fontSize: 16
-                                              )
+                                          placeholder: (context, url) => Center(
+                                              child: SpinKitDualRing(
+                                            color: Colors.orange,
+                                          )),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(
+                                            Icons.error,
+                                            color: Colors.orange,
                                           ),
                                         ),
                                       ),
                                     ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              color: Colors.grey[300]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 10, 15, 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  "${comments[index].userName}",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.deepOrange),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                    "${comments[index].content}",
+                                                    style:
+                                                        TextStyle(fontSize: 14),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 5, left: 15),
+                                          child: Text(
+                                            "${comments[index].time}",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.grey),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [
+                                Colors.deepOrange,
+                                Colors.deepOrangeAccent,
+                                Colors.orange,
+                                Colors.orangeAccent,
+                              ],
+                                  begin: FractionalOffset.bottomCenter,
+                                  end: FractionalOffset.topCenter)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 5,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.white),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: 3,
+                                        minLines: 1,
+                                        style: TextStyle(fontSize: 16),
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: Value.ENTER_CONTENT,
+                                            hintStyle: TextStyle(fontSize: 16)),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                Expanded(
-                                  flex: 1,
-                                  child: IconButton(icon: Icon(Icons.send,size: 30,color: Colors.white,)),
-                                )
-                              ],
-                            ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: IconButton(
+                                    icon: Icon(
+                                  Icons.send,
+                                  size: 30,
+                                  color: Colors.white,
+                                )),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                state is LoadingState?LoadingComment():Container()
+                state is LoadingState ? LoadingComment() : Container()
               ],
             ),
           ),
@@ -183,12 +228,16 @@ class _CommentPageState extends State<CommentPage> {
       ),
     );
   }
+
   Future<void> showActionSheet() async {
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          title: Text(Value.OPTION,style: TextStyle(color: Colors.blueAccent),),
+          title: Text(
+            Value.OPTION,
+            style: TextStyle(color: Colors.blueAccent),
+          ),
           actions: <Widget>[
             CupertinoActionSheetAction(
               child: Text(
@@ -200,7 +249,8 @@ class _CommentPageState extends State<CommentPage> {
               },
             ),
             CupertinoActionSheetAction(
-              child: Text(Value.DELETE_COMMENT, style: TextStyle(color: Colors.orange)),
+              child: Text(Value.DELETE_COMMENT,
+                  style: TextStyle(color: Colors.orange)),
               onPressed: () {
                 /** */
               },
@@ -209,7 +259,7 @@ class _CommentPageState extends State<CommentPage> {
           cancelButton: CupertinoActionSheetAction(
             isDefaultAction: true,
             child:
-            Text(Value.CANCEL, style: TextStyle(color: Colors.deepOrange)),
+                Text(Value.CANCEL, style: TextStyle(color: Colors.deepOrange)),
             onPressed: () {
               /** */
             },

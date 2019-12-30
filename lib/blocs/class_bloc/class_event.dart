@@ -5,6 +5,12 @@ abstract class ClassEvent extends Equatable {
   const ClassEvent();
 }
 
+class InitSelfEvent extends ClassEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class FetchListEvent extends ClassEvent {
   int number;
 

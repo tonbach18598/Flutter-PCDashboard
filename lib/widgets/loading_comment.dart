@@ -10,7 +10,7 @@ class LoadingComment extends StatelessWidget {
       child: Center(
         child:SpinKitSquareCircle(
           color: Colors.orange,
-          size: 60.0,
+          size: 50.0,
         ),
       ),
     );

@@ -88,26 +88,29 @@ class _DashboardPageState extends State<DashboardPage> {
                       currentAccountPicture: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width,
-                        child: ClipRRect(
-                            borderRadius:
-                            BorderRadius.circular(MediaQuery.of(context).size.width/2),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                              self.avatar,
-                              placeholder: (context,
-                                  url) =>
-                                  Center(
-                                      child:
-                                      SpinKitRipple(
-                                        color: Colors.blue,
-                                      )),
-                              errorWidget:
-                                  (context, url, error) =>
-                                  Icon(
-                                    Icons.error,
-                                    color: Colors.blue,
+                        child: CachedNetworkImage(
+                          imageUrl: self.avatar,
+                          imageBuilder:
+                              (context, imageProvider) =>
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
                                   ),
-                            )),
+                                ),
+                              ),
+                          placeholder: (context, url) => Center(
+                              child: SpinKitDualRing(
+                                color: Colors.blue,
+                              )),
+                          errorWidget: (context, url, error) =>
+                              Icon(
+                                Icons.error,
+                                color: Colors.orange,
+                              ),
+                        ),
                       ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(

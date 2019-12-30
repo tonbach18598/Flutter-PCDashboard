@@ -6,6 +6,7 @@ import 'package:flutter_pcdashboard/blocs/class_bloc/class_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/class_bloc/class_event.dart';
 import 'package:flutter_pcdashboard/blocs/class_bloc/class_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
+import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utility/router.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
@@ -18,25 +19,37 @@ class ClassPage extends StatefulWidget {
 }
 
 class _ClassPageState extends State<ClassPage> {
+  SelfResponse self;
   List<ClassResponse> posts = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    self = SelfResponse(avatar: '');
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ClassBloc()..add(FetchListEvent(10)),
+      create: (context) =>
+          ClassBloc()..add(InitSelfEvent())..add(FetchListEvent(10)),
       child: BlocListener<ClassBloc, ClassState>(
         listener: (context, state) {
-          if (state is SuccessFetchListState) {
+          if (state is InitSelfState) {
+            self = state.self;
+          } else if (state is SuccessFetchListState) {
             posts = state.posts;
           } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast("Tải bảng tin thất bại");
-          }else if(state is TapPostState){
+          } else if (state is TapPostState) {
             Navigator.of(context).pushNamed(Router.postRoute);
-          }else if(state is TapCommentState){
-            Navigator.of(context).pushNamed(Router.commentRoute,arguments: state.post);
-          }else if(state is PressMoreState){
+          } else if (state is TapCommentState) {
+            Navigator.of(context)
+                .pushNamed(Router.commentRoute, arguments: state.post);
+          } else if (state is PressMoreState) {
             showActionSheet(context);
-          }else if(state is PressCancelState){
+          } else if (state is PressCancelState) {
             Navigator.of(context).pop();
           }
         },
@@ -52,14 +65,42 @@ class _ClassPageState extends State<ClassPage> {
                           floating: true,
                           pinned: false,
                           snap: true,
+                          centerTitle: true,
                           title: InkWell(
                             onTap: () {
-                              BlocProvider.of<ClassBloc>(context).add(TapPostEvent());
+                              BlocProvider.of<ClassBloc>(context)
+                                  .add(TapPostEvent());
                             },
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Expanded(flex: 1, child: CircleAvatar()),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: CachedNetworkImage(
+                                      imageUrl: self.avatar,
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      placeholder: (context, url) => Center(
+                                          child: SpinKitDualRing(
+                                        color: Colors.orange,
+                                      )),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(
+                                        Icons.error,
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 Expanded(
                                   flex: 5,
                                   child: Padding(
@@ -106,26 +147,32 @@ class _ClassPageState extends State<ClassPage> {
                                             SizedBox(
                                               width: 40,
                                               height: 40,
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  child: CachedNetworkImage(
-                                                    imageUrl:
-                                                        posts[index].userAvatar,
-                                                    placeholder: (context,
-                                                            url) =>
-                                                        Center(
-                                                            child:
-                                                                SpinKitDualRing(
-                                                      color: Colors.orange,
-                                                    )),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            Icon(
-                                                      Icons.error,
-                                                      color: Colors.orange,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    posts[index].userAvatar,
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                        Container(
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
                                                     ),
-                                                  )),
+                                                  ),
+                                                ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                        child: SpinKitDualRing(
+                                                  color: Colors.orange,
+                                                )),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(
+                                                  Icons.error,
+                                                  color: Colors.orange,
+                                                ),
+                                              ),
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(
@@ -229,7 +276,9 @@ class _ClassPageState extends State<ClassPage> {
                                           ),
                                         ),
                                         onTap: () {
-                                          BlocProvider.of<ClassBloc>(context).add(TapCommentEvent(posts[index]));
+                                          BlocProvider.of<ClassBloc>(context)
+                                              .add(TapCommentEvent(
+                                                  posts[index]));
                                         },
                                       )
                                     ],
@@ -243,7 +292,8 @@ class _ClassPageState extends State<ClassPage> {
                                         color: Colors.orange,
                                       ),
                                       onPressed: () {
-                                        BlocProvider.of<ClassBloc>(context).add(PressMoreEvent());
+                                        BlocProvider.of<ClassBloc>(context)
+                                            .add(PressMoreEvent());
                                       },
                                     ),
                                   )
@@ -266,7 +316,10 @@ class _ClassPageState extends State<ClassPage> {
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          title: Text(Value.OPTION,style: TextStyle(color: Colors.blueAccent),),
+          title: Text(
+            Value.OPTION,
+            style: TextStyle(color: Colors.blueAccent),
+          ),
           actions: <Widget>[
             CupertinoActionSheetAction(
               child: Text(
@@ -278,7 +331,8 @@ class _ClassPageState extends State<ClassPage> {
               },
             ),
             CupertinoActionSheetAction(
-              child: Text(Value.DELETE_POST, style: TextStyle(color: Colors.orange)),
+              child: Text(Value.DELETE_POST,
+                  style: TextStyle(color: Colors.orange)),
               onPressed: () {
                 /** */
               },

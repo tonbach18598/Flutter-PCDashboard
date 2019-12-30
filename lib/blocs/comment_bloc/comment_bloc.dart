@@ -37,6 +37,9 @@ Future<List<CommentResponse>> fetchList(String postId)async{
   try{
     String token=await PreferencesUtil.loadToken();
     Response response=await Dio().get(Config.baseUrl+Config.commentPath+postId,options: Options(headers: {"Authorization": token}));
+    print(token);
+    print(Config.baseUrl+Config.commentPath+postId);
+    print(response.data);
     List<CommentResponse> comments=(response.data as List).map((item)=>CommentResponse.fromJson(item)).toList();
     return comments;
   }catch (e){

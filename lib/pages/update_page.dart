@@ -1,6 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pcdashboard/blocs/update_bloc/update_bloc.dart';
+import 'package:flutter_pcdashboard/blocs/update_bloc/update_event.dart';
+import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
+import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -9,6 +16,7 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
+  SelfResponse self;
   TextEditingController classController;
   TextEditingController emailController;
   TextEditingController phoneController;
@@ -17,133 +25,162 @@ class _UpdatePageState extends State<UpdatePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    self = SelfResponse(
+        userId: '', name: '', avatar: '', classId: '', email: '', phone: '');
     classController = TextEditingController();
     emailController = TextEditingController();
     phoneController = TextEditingController();
-    classController.text = "K16";
-    emailController.text = "tonbach18598@gmail.com";
-    phoneController.text = "01234566789";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: GradientAppBar(
-        title: Text(
-          Value.UPDATE_INFORMATION.toUpperCase(),
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        elevation: 0,
-        automaticallyImplyLeading: true,
-        gradient: LinearGradient(
-            colors: [
-              Colors.deepOrange,
-              Colors.deepOrangeAccent,
-              Colors.orange,
-              Colors.orangeAccent,
-            ],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 20),
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.width / 3,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          MediaQuery.of(context).size.width / 6),
-                      child: CircleAvatar(),
-                    )),
+    return BlocProvider(
+      create: (context) => UpdateBloc()..add(InitSelfEvent()),
+      child: BlocListener<UpdateBloc, UpdateState>(
+        listener: (context, state) {
+          if (state is InitSelfState) {
+            self = state.self;
+            classController.text = self.classId;
+            emailController.text = self.email;
+            phoneController.text = self.phone;
+          }
+        },
+        child: BlocBuilder<UpdateBloc, UpdateState>(
+          builder: (context, state) => Scaffold(
+            appBar: GradientAppBar(
+              title: Text(
+                Value.UPDATE_INFORMATION.toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Column(
+              elevation: 0,
+              automaticallyImplyLeading: true,
+              gradient: LinearGradient(
+                  colors: [
+                    Colors.deepOrange,
+                    Colors.deepOrangeAccent,
+                    Colors.orange,
+                    Colors.orangeAccent,
+                  ],
+                  begin: FractionalOffset.topCenter,
+                  end: FractionalOffset.bottomCenter),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
                 children: <Widget>[
-                  Text("BÙI NGÔ TÔN BÁCH",
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.deepOrange,
-                          fontWeight: FontWeight.bold)),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Text("1613013",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.orange),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: TextField(
-                    readOnly: true,
-                    controller: classController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        Icons.people,
-                        color: Colors.orange,
+                    padding: const EdgeInsets.only(top: 30, bottom: 20),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.width / 3,
+                      child: CachedNetworkImage(
+                        imageUrl: self.avatar,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) => Center(
+                            child: SpinKitDoubleBounce(
+                          color: Colors.orange,
+                        )),
+                        errorWidget: (context, url, error) => Image.asset(
+                          "logo.png",
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.blue),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Colors.orange,
-                        ),
-                        hintText: Value.EMAIL),
+                  Column(
+                    children: <Widget>[
+                      Text(self.name,
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.deepOrange,
+                              fontWeight: FontWeight.bold)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(self.userId,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blueAccent,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.blue),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: TextField(
-                    controller: phoneController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.smartphone,
-                          color: Colors.orange,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.orange),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white),
+                      child: TextField(
+                        readOnly: true,
+                        controller: classController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.people,
+                            color: Colors.orange,
+                          ),
                         ),
-                        hintText: Value.PHONE),
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.blue),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white),
+                      child: TextField(
+                        controller: emailController,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: Colors.orange,
+                            ),
+                            hintText: Value.EMAIL),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.blue),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white),
+                      child: TextField(
+                        controller: phoneController,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: Icon(
+                              Icons.smartphone,
+                              color: Colors.orange,
+                            ),
+                            hintText: Value.PHONE),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: SigninButton(
+                      text: Value.UPDATE_INFORMATION,
+                      onPress: () {},
+                    ),
+                  )
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: SigninButton(
-                  text: Value.UPDATE_INFORMATION,
-                  onPress: () {},
-                ),
-              )
-            ],
+            ),
           ),
         ),
+      ),
     );
   }
 }
