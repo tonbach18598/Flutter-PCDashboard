@@ -35,12 +35,18 @@ class FailureFetchListState extends ClassState{
 }
 
 class TapPostState extends ClassState{
+
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
 class TapCommentState extends ClassState{
+
+  ClassResponse post;
+
+  TapCommentState(this.post);
+
   @override
   // TODO: implement props
   List<Object> get props => null;

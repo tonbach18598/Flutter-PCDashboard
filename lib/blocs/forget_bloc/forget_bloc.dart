@@ -13,11 +13,11 @@ class ForgetBloc extends Bloc<ForgetEvent,ForgetState>{
     try{
         if(event is PressGetPasswordEvent){
           if(event.username.isNotEmpty){
-            yield SuccessGetPasswordState();
+            yield SuccessPressGetPasswordState();
             yield InitialForgetState();
           }
           else {
-          yield WarningGetPasswordState();
+          yield WarningPressGetPasswordState();
           yield InitialForgetState();
           }
         }else if(event is PressBackEvent){

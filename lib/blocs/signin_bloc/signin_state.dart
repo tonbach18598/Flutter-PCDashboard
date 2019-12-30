@@ -23,19 +23,19 @@ class PressForgetState extends SigninState{
   List<Object> get props => null;
 }
 
-class SuccessSigninState extends SigninState{
+class SuccessPressSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailureSigninState extends SigninState{
+class FailurePressSigninState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningSigninState extends SigninState{
+class WarningPressSigninState extends SigninState{
 
   @override
   // TODO: implement props

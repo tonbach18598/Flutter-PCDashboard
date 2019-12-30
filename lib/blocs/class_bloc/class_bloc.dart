@@ -27,7 +27,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
       }else if(event is TapPostEvent){
         yield TapPostState();
       }else if(event is TapCommentEvent){
-        yield TapCommentState();
+        yield TapCommentState(event.post);
       }else if(event is PressMoreEvent){
         yield PressMoreState();
       }else if(event is PressCancelEvent){
@@ -48,7 +48,6 @@ Future<List<ClassResponse>> fetchList(int number) async {
         Config.baseUrl + Config.classPath + self.classId,
         queryParameters: {"number": number},
         options: Options(headers: {"Authorization": token}));
-    print(response.data);
     List<ClassResponse> posts = (response.data as List)
         .map((item) => ClassResponse.fromJson(item))
         .toList();

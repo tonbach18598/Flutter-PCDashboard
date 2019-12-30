@@ -11,19 +11,19 @@ class InitialPostState extends PostState{
 
 }
 
-class SuccessPostState extends PostState{
+class SuccessPressPostState extends PostState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailurePostState extends PostState{
+class FailurePressPostState extends PostState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningPostState extends PostState{
+class WarningPressPostState extends PostState{
   @override
   // TODO: implement props
   List<Object> get props => null;

@@ -18,19 +18,19 @@ class PressBackState extends ForgetState{
   
 }
 
-class SuccessGetPasswordState extends ForgetState{
+class SuccessPressGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailureGetPasswordState extends ForgetState{
+class FailurePressGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningGetPasswordState extends ForgetState{
+class WarningPressGetPasswordState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => null;

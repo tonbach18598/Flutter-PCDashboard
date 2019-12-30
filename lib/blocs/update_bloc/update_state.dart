@@ -11,19 +11,19 @@ class InitialUpdateState extends UpdateState{
 
 }
 
-class SuccessUpdateInformationState extends UpdateState{
+class SuccessPressUpdateInformationState extends UpdateState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailureUpdateInformationState extends UpdateState{
+class FailurePressUpdateInformationState extends UpdateState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningUpdateInformationState extends UpdateState{
+class WarningPressUpdateInformationState extends UpdateState{
   @override
   // TODO: implement props
   List<Object> get props => null;

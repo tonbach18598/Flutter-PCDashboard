@@ -11,19 +11,19 @@ class InitialFeedbackState extends FeedbackState{
 
 }
 
-class SuccessSendState extends FeedbackState{
+class SuccessPressSendState extends FeedbackState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailureSendState extends FeedbackState{
+class FailurePressSendState extends FeedbackState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningSendState extends FeedbackState{
+class WarningPressSendState extends FeedbackState{
   @override
   // TODO: implement props
   List<Object> get props => null;

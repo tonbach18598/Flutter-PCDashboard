@@ -23,11 +23,11 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
         if (Validation.isValidUsername(event.username) &&
             event.password.isNotEmpty) {
           if (await onSignin(event.username, event.password))
-            yield SuccessSigninState();
+            yield SuccessPressSigninState();
           else
-            yield FailureSigninState();
+            yield FailurePressSigninState();
         } else {
-          yield WarningSigninState();
+          yield WarningPressSigninState();
         }
       } else if (event is PressForgetEvent) {
         yield PressForgetState();

@@ -4,7 +4,7 @@ abstract class DashboardEvent extends Equatable{
   const DashboardEvent();
 }
 
-class InitSelfDetailsEvent extends DashboardEvent{
+class InitSelfEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;

@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_event.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_state.dart';
+import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
+import 'package:flutter_pcdashboard/utility/config.dart';
+import 'package:flutter_pcdashboard/utility/preferences.dart';
 
 
 class CommentBloc extends Bloc<CommentEvent,CommentState>{
@@ -12,9 +16,31 @@ class CommentBloc extends Bloc<CommentEvent,CommentState>{
   Stream<CommentState> mapEventToState(CommentEvent event) async* {
     // TODO: implement mapEventToState
     try{
+      if(event is FetchListEvent){
+        yield LoadingState();
+        List<CommentResponse> comments = await fetchList(event.postId);
+        if (comments != null) {
+          yield SuccessFetchListState(comments);
+        } else {
+          yield FailureFetchListState();
+        }
+      }else if(event is PressSendEvent){
 
+      }
     }catch (e){
       print(e);
     }
+  }
+}
+
+Future<List<CommentResponse>> fetchList(String postId)async{
+  try{
+    String token=await PreferencesUtil.loadToken();
+    Response response=await Dio().get(Config.baseUrl+Config.commentPath+postId,options: Options(headers: {"Authorization": token}));
+    List<CommentResponse> comments=(response.data as List).map((item)=>CommentResponse.fromJson(item)).toList();
+    return comments;
+  }catch (e){
+    print(e);
+    return null;
   }
 }

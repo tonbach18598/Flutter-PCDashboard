@@ -27,6 +27,7 @@ class Router{
   static const changeRoute='/change';
   static const feedbackRoute='/feedback';
   static Route<dynamic> generateRoute(RouteSettings settings){
+    final arguments = settings.arguments;
       switch(settings.name){
         case splashRoute:
           return CupertinoPageRoute(builder: (_)=>SplashPage());
@@ -39,7 +40,7 @@ class Router{
         case postRoute:
           return CupertinoPageRoute(builder: (_)=>PostPage());
         case commentRoute:
-          return CupertinoPageRoute(builder: (_)=>CommentPage());
+          return CupertinoPageRoute(builder: (_)=>CommentPage(arguments));
         case scheduleRoute:
           return CupertinoPageRoute(builder: (_)=>SchedulePage());
         case examRoute:

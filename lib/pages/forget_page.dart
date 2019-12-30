@@ -39,11 +39,11 @@ class _ForgetPageState extends State<ForgetPage> {
         listener: (context, state) {
           if (state is PressBackState) {
             Navigator.of(context).pop();
-          } else if (state is SuccessGetPasswordState) {
+          } else if (state is SuccessPressGetPasswordState) {
             ToastUtil.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
-          }else if(state is FailureGetPasswordState){
+          }else if(state is FailurePressGetPasswordState){
             ToastUtil.showFailureToast("Lấy mật khẩu thất bại");
-          }else if(state is WarningGetPasswordState){
+          }else if(state is WarningPressGetPasswordState){
             ToastUtil.showWarningToast("Tài khoản không được để trống");
           }
         },

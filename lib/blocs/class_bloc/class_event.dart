@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 
-
-abstract class ClassEvent extends Equatable{
+abstract class ClassEvent extends Equatable {
   const ClassEvent();
 }
 
-class FetchListEvent extends ClassEvent{
+class FetchListEvent extends ClassEvent {
   int number;
+
   FetchListEvent(this.number);
 
   @override
@@ -14,31 +15,30 @@ class FetchListEvent extends ClassEvent{
   List<Object> get props => null;
 }
 
-class TapPostEvent extends ClassEvent{
+class TapPostEvent extends ClassEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class TapCommentEvent extends ClassEvent {
+  ClassResponse post;
+
+  TapCommentEvent(this.post);
 
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapCommentEvent extends ClassEvent{
-
+class PressMoreEvent extends ClassEvent {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class PressMoreEvent extends ClassEvent{
-
+class PressCancelEvent extends ClassEvent {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
-
-class PressCancelEvent extends ClassEvent{
-
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
-

@@ -13,9 +13,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Stream<DashboardState> mapEventToState(DashboardEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if (event is InitSelfDetailsEvent) {
+      if (event is InitSelfEvent) {
         SelfResponse self=await initSelf();
-        yield InitSelfDetailsState(self);
+        yield InitSelfState(self);
       } else if (event is TapSelfDetailsEvent) {
         yield TapSelfDetailsState();
       } else if (event is TapHomeEvent) {

@@ -33,7 +33,7 @@ class _ClassPageState extends State<ClassPage> {
           }else if(state is TapPostState){
             Navigator.of(context).pushNamed(Router.postRoute);
           }else if(state is TapCommentState){
-            Navigator.of(context).pushNamed(Router.commentRoute);
+            Navigator.of(context).pushNamed(Router.commentRoute,arguments: state.post);
           }else if(state is PressMoreState){
             showActionSheet(context);
           }else if(state is PressCancelState){
@@ -229,7 +229,7 @@ class _ClassPageState extends State<ClassPage> {
                                           ),
                                         ),
                                         onTap: () {
-                                          BlocProvider.of<ClassBloc>(context).add(TapCommentEvent());
+                                          BlocProvider.of<ClassBloc>(context).add(TapCommentEvent(posts[index]));
                                         },
                                       )
                                     ],
