@@ -7,9 +7,9 @@ import 'package:flutter_pcdashboard/blocs/class_bloc/class_event.dart';
 import 'package:flutter_pcdashboard/blocs/class_bloc/class_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utility/router.dart';
-import 'package:flutter_pcdashboard/utility/toast.dart';
-import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utilities/router.dart';
+import 'package:flutter_pcdashboard/utilities/toast.dart';
+import 'package:flutter_pcdashboard/utilities/value.dart';
 import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 

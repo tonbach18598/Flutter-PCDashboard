@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/models/responses/exam_response.dart';
-import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utilities/value.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ExamPage extends StatefulWidget {

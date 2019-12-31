@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utilities/value.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
 import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';

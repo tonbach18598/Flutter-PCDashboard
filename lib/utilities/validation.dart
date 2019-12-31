@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter_pcdashboard/utility/config.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
 
 class Validation{
   static bool isValidUsername(String username){

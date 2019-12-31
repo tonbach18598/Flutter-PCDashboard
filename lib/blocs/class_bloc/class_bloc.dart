@@ -4,8 +4,8 @@ import 'package:flutter_pcdashboard/blocs/class_bloc/class_event.dart';
 import 'package:flutter_pcdashboard/blocs/class_bloc/class_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utility/config.dart';
-import 'package:flutter_pcdashboard/utility/preferences.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class ClassBloc extends Bloc<ClassEvent, ClassState> {
   @override
@@ -61,8 +61,8 @@ Future<List<ClassResponse>> fetchList(int number) async {
     SelfResponse self = await PreferencesUtil.loadSelf();
     Response response = await Dio().get(
         Config.baseUrl + Config.classPath + self.classId,
-        queryParameters: {"number": number},
-        options: Options(headers: {"Authorization": token}));
+        queryParameters: {'number': number},
+        options: Options(headers: {'Authorization': token}));
     List<ClassResponse> posts = (response.data as List)
         .map((item) => ClassResponse.fromJson(item))
         .toList();
@@ -78,7 +78,7 @@ Future<bool> deletePost(String postId) async {
     String token = await PreferencesUtil.loadToken();
     Response response = await Dio().delete(
         Config.baseUrl + Config.classPath + postId,
-        options: Options(headers: {"Authorization": token}));
+        options: Options(headers: {'Authorization': token}));
     return response.data;
   } catch (e) {
     print(e);

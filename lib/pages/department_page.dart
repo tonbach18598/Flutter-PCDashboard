@@ -5,7 +5,7 @@ import 'package:flutter_pcdashboard/blocs/department_bloc/department_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_event.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_state.dart';
 import 'package:flutter_pcdashboard/models/responses/department_response.dart';
-import 'package:flutter_pcdashboard/utility/toast.dart';
+import 'package:flutter_pcdashboard/utilities/toast.dart';
 import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 

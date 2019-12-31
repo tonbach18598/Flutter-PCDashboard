@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/pages/change_page.dart';
+import 'package:flutter_pcdashboard/pages/chat_page.dart';
 import 'package:flutter_pcdashboard/pages/comment_page.dart';
 import 'package:flutter_pcdashboard/pages/dashboard_page.dart';
 import 'package:flutter_pcdashboard/pages/exam_page.dart';
@@ -26,6 +27,7 @@ class Router{
   static const updateRoute='/update';
   static const changeRoute='/change';
   static const feedbackRoute='/feedback';
+  static const chatRoute='/chat';
   static Route<dynamic> generateRoute(RouteSettings settings){
     final arguments = settings.arguments;
       switch(settings.name){
@@ -53,6 +55,8 @@ class Router{
           return CupertinoPageRoute(builder: (_)=>ChangePage());
         case feedbackRoute:
           return CupertinoPageRoute(builder: (_)=>FeedbackPage());
+        case chatRoute:
+          return CupertinoPageRoute(builder: (_)=>ChatPage());
       }
   }
 }

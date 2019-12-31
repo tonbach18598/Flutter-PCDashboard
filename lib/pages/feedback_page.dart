@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utilities/value.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class FeedbackPage extends StatefulWidget {

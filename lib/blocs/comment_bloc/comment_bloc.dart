@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_event.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_state.dart';
 import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
-import 'package:flutter_pcdashboard/utility/config.dart';
-import 'package:flutter_pcdashboard/utility/preferences.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class CommentBloc extends Bloc<CommentEvent, CommentState> {
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pcdashboard/utilities/router.dart';
 
 class ContactPage extends StatefulWidget {
   @override
@@ -14,11 +15,14 @@ class _ContactPageState extends State<ContactPage> {
           flex: 1,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(10,10,10,5),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.red
+            child: InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red
+                ),
               ),
+              onTap: (){Navigator.of(context).pushNamed(Router.chatRoute);},
             ),
           ),
         ),

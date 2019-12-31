@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utility/router.dart';
+import 'package:flutter_pcdashboard/utilities/router.dart';
 import 'package:oktoast/oktoast.dart';
 
 void main() => runApp(App());

@@ -5,7 +5,7 @@ import 'package:flutter_pcdashboard/blocs/update_bloc/update_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_event.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utility/value.dart';
+import 'package:flutter_pcdashboard/utilities/value.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
 import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_event.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_state.dart';
 import 'package:flutter_pcdashboard/models/responses/department_response.dart';
-import 'package:flutter_pcdashboard/utility/config.dart';
-import 'package:flutter_pcdashboard/utility/preferences.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 
 class DepartmentBloc extends Bloc<DepartmentEvent,DepartmentState>{

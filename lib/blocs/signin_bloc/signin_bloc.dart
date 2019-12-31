@@ -3,11 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_event.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utility/config.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
 import 'package:flutter_pcdashboard/models/requests/signin_request.dart';
 import 'package:flutter_pcdashboard/models/responses/token_response.dart';
-import 'package:flutter_pcdashboard/utility/preferences.dart';
-import 'package:flutter_pcdashboard/utility/validation.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
+import 'package:flutter_pcdashboard/utilities/validation.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
   @override

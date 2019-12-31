@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utility/router.dart';
+import 'package:flutter_pcdashboard/utilities/router.dart';
 
 class StudyPage extends StatefulWidget {
   @override

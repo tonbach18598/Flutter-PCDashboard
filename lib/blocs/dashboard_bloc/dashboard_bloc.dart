@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utility/preferences.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   @override

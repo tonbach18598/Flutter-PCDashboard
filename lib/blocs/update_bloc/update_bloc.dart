@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_event.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utility/preferences.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent,UpdateState>{
   @override
