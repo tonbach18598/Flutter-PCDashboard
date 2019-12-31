@@ -16,10 +16,10 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
   Stream<ClassState> mapEventToState(ClassEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if(event is InitSelfEvent){
-        SelfResponse self=await initSelf();
+      if (event is InitSelfEvent) {
+        SelfResponse self = await initSelf();
         yield InitSelfState(self);
-      }else if (event is FetchListEvent) {
+      } else if (event is FetchListEvent) {
         yield LoadingState();
         List<ClassResponse> posts = await fetchList(event.number);
         if (posts != null) {
@@ -27,17 +27,20 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
         } else {
           yield FailureFetchListState();
         }
-      }else if(event is TapPostEvent){
+      } else if (event is TapPostEvent) {
         yield TapPostState();
-      }else if(event is TapCommentEvent){
+      } else if (event is TapCommentEvent) {
         yield TapCommentState(event.post);
-      }else if(event is PressMoreEvent){
-        yield PressMoreState();
-      }else if(event is PressEditEvent){
+      } else if (event is PressMoreEvent) {
+        yield PressMoreState(event.post);
+      } else if (event is PressEditEvent) {
         yield PressEditState();
-      }else if(event is PressDeleteEvent){
-        yield PressDeleteState();
-      }else if(event is PressCancelEvent){
+      } else if (event is PressDeleteEvent) {
+        if (await deletePost(event.post.id)) {
+          yield SuccessPressDeleteState(event.post);
+        } else
+          yield FailurePressDeleteState();
+      } else if (event is PressCancelEvent) {
         yield PressCancelState();
       }
       yield InitialClassState();
@@ -47,8 +50,8 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
   }
 }
 
-Future<SelfResponse> initSelf()async{
-  SelfResponse self=await PreferencesUtil.loadSelf();
+Future<SelfResponse> initSelf() async {
+  SelfResponse self = await PreferencesUtil.loadSelf();
   return self;
 }
 
@@ -67,5 +70,18 @@ Future<List<ClassResponse>> fetchList(int number) async {
   } catch (e) {
     print(e);
     return null;
+  }
+}
+
+Future<bool> deletePost(String postId) async {
+  try {
+    String token = await PreferencesUtil.loadToken();
+    Response response = await Dio().delete(
+        Config.baseUrl + Config.classPath + postId,
+        options: Options(headers: {"Authorization": token}));
+    return response.data;
+  } catch (e) {
+    print(e);
+    return false;
   }
 }

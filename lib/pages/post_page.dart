@@ -78,6 +78,7 @@ class _PostPageState extends State<PostPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
                 child: TextField(
+                  cursorColor: Colors.lightBlue,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   style: TextStyle(fontSize: 20),

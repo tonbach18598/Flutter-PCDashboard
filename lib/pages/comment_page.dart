@@ -44,12 +44,21 @@ class _CommentPageState extends State<CommentPage> {
           if (state is SuccessFetchListState) {
             comments = state.comments;
           } else if (state is FailureFetchListState) {
-            ToastUtil.showFailureToast("Tải bình luận thất bại");
+            ToastUtil.showFailureToast('Tải bình luận thất bại');
+          } else if(state is SuccessPressDeleteState){
+            comments.remove(state.comment);
+            ToastUtil.showSuccessToast('Xoá bình luận thành công');
+          } else if(state is FailurePressDeleteState){
+            ToastUtil.showFailureToast('Xoá bình luận thất bại');
           }
         },
         child: BlocBuilder<CommentBloc, CommentState>(
           builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
+              title: Text(
+                Value.COMMENT.toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -129,7 +138,7 @@ class _CommentPageState extends State<CommentPage> {
                                                     CrossAxisAlignment.start,
                                                 children: <Widget>[
                                                   Text(
-                                                    "${comments[index].userName}",
+                                                    '${comments[index].userName}',
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         fontWeight:
@@ -141,7 +150,7 @@ class _CommentPageState extends State<CommentPage> {
                                                         const EdgeInsets.only(
                                                             top: 5),
                                                     child: Text(
-                                                      "${comments[index].content}",
+                                                      '${comments[index].content}',
                                                       style:
                                                           TextStyle(fontSize: 14),
                                                     ),
@@ -154,7 +163,7 @@ class _CommentPageState extends State<CommentPage> {
                                             padding: const EdgeInsets.only(
                                                 top: 5, left: 15),
                                             child: Text(
-                                              "${comments[index].time}",
+                                              '${comments[index].time}',
                                               style: TextStyle(
                                                   fontSize: 12,
                                                   color: Colors.grey),
@@ -170,13 +179,17 @@ class _CommentPageState extends State<CommentPage> {
                                 caption: Value.EDIT,
                                 color: Colors.lightBlueAccent,
                                 icon: Icons.edit,
-                                onTap: () {},
+                                onTap: () {
+                                  BlocProvider.of<CommentBloc>(context).add(PressEditEvent(comments[index]));
+                                },
                               ),
                               IconSlideAction(
                                 caption: Value.DELETE,
                                 color: Colors.blueAccent,
                                 icon: Icons.delete,
-                                onTap: () {},
+                                onTap: () {
+                                  BlocProvider.of<CommentBloc>(context).add(PressDeleteEvent(comments[index]));
+                                },
                               ),
                             ],
                           )),
@@ -210,6 +223,7 @@ class _CommentPageState extends State<CommentPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 20),
                                       child: TextField(
+                                        cursorColor: Colors.lightBlue,
                                         keyboardType: TextInputType.multiline,
                                         maxLines: 3,
                                         minLines: 1,

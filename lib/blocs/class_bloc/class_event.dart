@@ -38,18 +38,30 @@ class TapCommentEvent extends ClassEvent {
 }
 
 class PressMoreEvent extends ClassEvent {
+  ClassResponse post;
+
+  PressMoreEvent(this.post);
+
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
 class PressEditEvent extends ClassEvent {
+  ClassResponse post;
+
+  PressEditEvent(this.post);
+
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
 class PressDeleteEvent extends ClassEvent {
+  ClassResponse post;
+
+  PressDeleteEvent(this.post);
+
   @override
   // TODO: implement props
   List<Object> get props => null;

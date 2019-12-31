@@ -6,8 +6,7 @@ import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
 import 'package:flutter_pcdashboard/utility/config.dart';
 import 'package:flutter_pcdashboard/utility/preferences.dart';
 
-
-class CommentBloc extends Bloc<CommentEvent,CommentState>{
+class CommentBloc extends Bloc<CommentEvent, CommentState> {
   @override
   // TODO: implement initialState
   CommentState get initialState => InitialCommentState();
@@ -15,8 +14,8 @@ class CommentBloc extends Bloc<CommentEvent,CommentState>{
   @override
   Stream<CommentState> mapEventToState(CommentEvent event) async* {
     // TODO: implement mapEventToState
-    try{
-      if(event is FetchListEvent){
+    try {
+      if (event is FetchListEvent) {
         yield LoadingState();
         List<CommentResponse> comments = await fetchList(event.postId);
         if (comments != null) {
@@ -24,31 +23,47 @@ class CommentBloc extends Bloc<CommentEvent,CommentState>{
         } else {
           yield FailureFetchListState();
         }
-      }else if(event is PressSendEvent){
-
-      }else if(event is PressEditEvent){
+      } else if (event is PressSendEvent) {
+      } else if (event is PressEditEvent) {
         yield PressEditState();
-      }else if(event is PressDeleteEvent){
-        yield PressDeleteState();
+      } else if (event is PressDeleteEvent) {
+        if (await deleteComment(event.comment.id)) {
+          yield SuccessPressDeleteState(event.comment);
+        } else
+          yield FailurePressDeleteState();
       }
       yield InitialCommentState();
-    }catch (e){
+    } catch (e) {
       print(e);
     }
   }
 }
 
-Future<List<CommentResponse>> fetchList(String postId)async{
-  try{
-    String token=await PreferencesUtil.loadToken();
-    Response response=await Dio().get(Config.baseUrl+Config.commentPath+postId,options: Options(headers: {"Authorization": token}));
-    print(token);
-    print(Config.baseUrl+Config.commentPath+postId);
-    print(response.data);
-    List<CommentResponse> comments=(response.data as List).map((item)=>CommentResponse.fromJson(item)).toList();
+Future<List<CommentResponse>> fetchList(String postId) async {
+  try {
+    String token = await PreferencesUtil.loadToken();
+    Response response = await Dio().get(
+        Config.baseUrl + Config.commentPath + postId,
+        options: Options(headers: {"Authorization": token}));
+    List<CommentResponse> comments = (response.data as List)
+        .map((item) => CommentResponse.fromJson(item))
+        .toList();
     return comments;
-  }catch (e){
+  } catch (e) {
     print(e);
     return null;
+  }
+}
+
+Future<bool> deleteComment(String commentId) async {
+  try {
+    String token = await PreferencesUtil.loadToken();
+    Response response = await Dio().delete(
+        Config.baseUrl + Config.commentPath + commentId,
+        options: Options(headers: {"Authorization": token}));
+    return response.data;
+  } catch (e) {
+    print(e);
+    return false;
   }
 }

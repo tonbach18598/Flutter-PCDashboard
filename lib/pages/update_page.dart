@@ -7,6 +7,7 @@ import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
+import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -112,66 +113,36 @@ class _UpdatePageState extends State<UpdatePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.orange),
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white),
-                      child: TextField(
-                        readOnly: true,
-                        controller: classController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Icon(
-                            Icons.people,
-                            color: Colors.orange,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: UpdateInformationTextField(
+                      readOnly: true,
+                      prefixIcon: Icon(Icons.people,color: Colors.orange,),
+                      borderColor: Colors.orange,
+                      hintText: Value.CLASS,
+                      controller: classController,
+                    )
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.blue),
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white),
-                      child: TextField(
+                      child: UpdateInformationTextField(
+                        prefixIcon: Icon(Icons.mail,color: Colors.lightBlue,),
+                        borderColor: Colors.lightBlue,
+                        hintText: Value.EMAIL,
                         controller: emailController,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Colors.orange,
-                            ),
-                            hintText: Value.EMAIL),
-                      ),
-                    ),
+                      )
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.blue),
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white),
-                      child: TextField(
+                      child: UpdateInformationTextField(
+                        prefixIcon: Icon(Icons.smartphone,color: Colors.lightBlue,),
+                        borderColor: Colors.lightBlue,
+                        hintText: Value.PHONE,
                         controller: phoneController,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.smartphone,
-                              color: Colors.orange,
-                            ),
-                            hintText: Value.PHONE),
-                      ),
-                    ),
+                      )
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: SigninButton(
-                      text: Value.UPDATE_INFORMATION,
+                      text: Value.UPDATE_INFORMATION.toUpperCase(),
                       onPress: () {},
                     ),
                   )

@@ -8,42 +8,45 @@ class Logo extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2.5,
-          child: RotatedBox(
-            quarterTurns: 2,
-            child: WaveWidget(
-              config: CustomConfig(
-                gradients: [
-                  [
-                    Colors.deepOrange,
-                    Colors.orange,
-                    Colors.lightBlue,
-                    Colors.blueAccent
+        Opacity(
+          opacity: 0.9,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2.5,
+            child: RotatedBox(
+              quarterTurns: 2,
+              child: WaveWidget(
+                config: CustomConfig(
+                  gradients: [
+                    [
+                      Colors.deepOrange,
+                      Colors.orange,
+                      Colors.lightBlue,
+                      Colors.blueAccent
+                    ],
+                    [
+                      Colors.blueAccent,
+                      Colors.blue,
+                      Colors.lightBlue,
+                      Colors.lightBlueAccent,
+                      Colors.white,
+                      Colors.orangeAccent,
+                      Colors.orange,
+                      Colors.deepOrangeAccent,
+                      Colors.deepOrange
+                    ],
                   ],
-                  [
-                    Colors.blueAccent,
-                    Colors.blue,
-                    Colors.lightBlue,
-                    Colors.lightBlueAccent,
-                    Colors.white,
-                    Colors.orangeAccent,
-                    Colors.orange,
-                    Colors.deepOrangeAccent,
-                    Colors.deepOrange
-                  ],
-                ],
-                durations: [19440, 10800],
-                heightPercentages: [0.20, 0.25],
-                blur: MaskFilter.blur(BlurStyle.solid, 10),
-                gradientBegin: Alignment.topLeft,
-                gradientEnd: Alignment.bottomRight,
-              ),
-              waveAmplitude: 0,
-              size: Size(
-                double.infinity,
-                double.infinity,
+                  durations: [19440, 10800],
+                  heightPercentages: [0.20, 0.25],
+                  blur: MaskFilter.blur(BlurStyle.solid, 10),
+                  gradientBegin: Alignment.topLeft,
+                  gradientEnd: Alignment.bottomRight,
+                ),
+                waveAmplitude: 0,
+                size: Size(
+                  double.infinity,
+                  double.infinity,
+                ),
               ),
             ),
           ),

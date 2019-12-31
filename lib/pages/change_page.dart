@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
+import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ChangePage extends StatefulWidget {
@@ -44,82 +45,58 @@ class _ChangePageState extends State<ChangePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Image.asset(
-                  "logo.png",
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  height: MediaQuery.of(context).size.width * 0.5,
-                ),
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Image.asset(
+                "logo.png",
+                width: MediaQuery.of(context).size.width * 0.75,
+                height: MediaQuery.of(context).size.width * 0.5,
               ),
-              Padding(
+            ),
+            Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.orange),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: TextField(
-                    controller: oldController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Colors.orange,
-                        ),
-                        hintText: Value.OLD_PASSWORD),
+                child: UpdateInformationTextField(
+                  prefixIcon: Icon(
+                    Icons.vpn_key,
+                    color: Colors.orange,
                   ),
-                ),
-              ),
-              Padding(
+                  borderColor: Colors.orange,
+                  hintText: Value.OLD_PASSWORD,
+                  controller: oldController,
+                )),
+            Padding(
                 padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.blue),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: TextField(
-                    controller: newController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.lock_outline,
-                          color: Colors.orange,
-                        ),
-                        hintText: Value.NEW_PASSWORD),
+                child: UpdateInformationTextField(
+                  prefixIcon: Icon(
+                    Icons.lock_open,
+                    color: Colors.lightBlue,
                   ),
-                ),
-              ),
-              Padding(
+                  borderColor: Colors.lightBlue,
+                  hintText: Value.NEW_PASSWORD,
+                  controller: newController,
+                )),
+            Padding(
                 padding: const EdgeInsets.fromLTRB(30, 20, 30, 50),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.blue),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: TextField(
-                    controller: retypeController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.lock_open,
-                          color: Colors.orange,
-                        ),
-                        hintText: Value.RETYPE_PASSWORD),
+                child: UpdateInformationTextField(
+                  prefixIcon: Icon(
+                    Icons.lock_outline,
+                    color: Colors.lightBlue,
                   ),
-                ),
+                  borderColor: Colors.lightBlue,
+                  hintText: Value.RETYPE_PASSWORD,
+                  controller: retypeController,
+                )),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: SigninButton(
+                text: Value.CHANGE_PASSWORD.toUpperCase(),
+                onPress: () {},
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: SigninButton(
-                  text: Value.CHANGE_PASSWORD,
-                  onPress: () {},
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
+      ),
     );
   }
 }

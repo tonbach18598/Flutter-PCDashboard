@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
 
 
 abstract class CommentEvent extends Equatable{
@@ -27,6 +28,9 @@ class PressSendEvent extends CommentEvent{
 }
 
 class PressEditEvent extends CommentEvent{
+  CommentResponse comment;
+
+  PressEditEvent(this.comment);
 
   @override
   // TODO: implement props
@@ -34,8 +38,11 @@ class PressEditEvent extends CommentEvent{
 }
 
 class PressDeleteEvent extends CommentEvent{
+CommentResponse comment;
 
-  @override
+PressDeleteEvent(this.comment);
+
+@override
   // TODO: implement props
   List<Object> get props => null;
 }

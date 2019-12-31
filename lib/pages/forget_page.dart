@@ -80,7 +80,7 @@ class _ForgetPageState extends State<ForgetPage> {
                       height: MediaQuery.of(context).size.height / 8,
                     ),
                     SigninButton(
-                      text: Value.GET_PASSWORD,
+                      text: Value.GET_PASSWORD.toUpperCase(),
                       onPress: () {
 
                       },

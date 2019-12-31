@@ -58,7 +58,17 @@ class PressEditState extends CommentState{
   List<Object> get props => null;
 }
 
-class PressDeleteState extends CommentState{
+class SuccessPressDeleteState extends CommentState{
+  CommentResponse comment;
+
+  SuccessPressDeleteState(this.comment);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class FailurePressDeleteState extends CommentState{
   @override
   // TODO: implement props
   List<Object> get props => null;

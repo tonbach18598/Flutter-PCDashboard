@@ -33,6 +33,10 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
+        title: Text(
+          Value.CHAT.toUpperCase(),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         elevation: 0,
         automaticallyImplyLeading: true,
         gradient: LinearGradient(
@@ -130,6 +134,7 @@ class _ChatPageState extends State<ChatPage> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: TextField(
+                              cursorColor: Colors.lightBlue,
                               keyboardType: TextInputType.multiline,
                               maxLines: 3,
                               minLines: 1,

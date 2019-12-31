@@ -20,7 +20,7 @@ class SigninTextField extends StatelessWidget {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.grey,
+                color: Colors.grey[400],
                 blurRadius: 10,
                 spreadRadius: 1,
                 offset: Offset(5, 5)),
@@ -33,7 +33,7 @@ class SigninTextField extends StatelessWidget {
         ),
         child: TextField(
             controller: textEditingController,
-            cursorColor: Colors.orange,
+            cursorColor: Colors.lightBlue,
             obscureText: obscureText,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),

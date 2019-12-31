@@ -41,16 +41,23 @@ class _ClassPageState extends State<ClassPage> {
           } else if (state is SuccessFetchListState) {
             posts = state.posts;
           } else if (state is FailureFetchListState) {
-            ToastUtil.showFailureToast("Tải bảng tin thất bại");
+            ToastUtil.showFailureToast('Tải bảng tin thất bại');
           } else if (state is TapPostState) {
             Navigator.of(context).pushNamed(Router.postRoute);
           } else if (state is TapCommentState) {
             Navigator.of(context)
                 .pushNamed(Router.commentRoute, arguments: state.post);
           } else if (state is PressMoreState) {
-            showActionSheet(context);
+            showActionSheet(context,state.post);
           } else if (state is PressCancelState) {
             Navigator.of(context).pop();
+          } else if(state is SuccessPressDeleteState){
+            Navigator.of(context).pop();
+            posts.remove(state.post);
+            ToastUtil.showSuccessToast('Xoá bài viết thành công');
+          } else if(state is FailurePressDeleteState){
+            Navigator.of(context).pop();
+            ToastUtil.showFailureToast('Xoá bài viết thất bại');
           }
         },
         child: BlocBuilder<ClassBloc, ClassState>(
@@ -293,7 +300,7 @@ class _ClassPageState extends State<ClassPage> {
                                       ),
                                       onPressed: () {
                                         BlocProvider.of<ClassBloc>(context)
-                                            .add(PressMoreEvent());
+                                            .add(PressMoreEvent(posts[index]));
                                       },
                                     ),
                                   )
@@ -311,13 +318,13 @@ class _ClassPageState extends State<ClassPage> {
     );
   }
 
-  Future<void> showActionSheet(BuildContext blocContext) async {
+  Future<void> showActionSheet(BuildContext blocContext,ClassResponse post) async {
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
           title: Text(
-            Value.OPTION,
+            Value.OPTION.toUpperCase(),
             style: TextStyle(color: Colors.blueAccent),
           ),
           actions: <Widget>[
@@ -334,7 +341,7 @@ class _ClassPageState extends State<ClassPage> {
               child: Text(Value.DELETE,
                   style: TextStyle(color: Colors.orange)),
               onPressed: () {
-                /** */
+                BlocProvider.of<ClassBloc>(blocContext).add(PressDeleteEvent(post));
               },
             ),
           ],
