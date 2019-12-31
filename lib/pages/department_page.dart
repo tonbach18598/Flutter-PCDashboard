@@ -35,7 +35,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
             children: <Widget>[
               ListView.builder(
                   itemCount: posts.length,
-                  physics: PageScrollPhysics(),
                   itemBuilder: (context, index) => Card(
                         elevation: 5,
                         shape: RoundedRectangleBorder(
