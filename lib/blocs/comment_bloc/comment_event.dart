@@ -18,9 +18,10 @@ class FetchListEvent extends CommentEvent{
 }
 
 class PressSendEvent extends CommentEvent{
+  String postId;
   String content;
 
-  PressSendEvent(this.content);
+  PressSendEvent(this.postId,this.content);
 
   @override
   // TODO: implement props

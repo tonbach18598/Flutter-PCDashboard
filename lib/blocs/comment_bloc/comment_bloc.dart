@@ -24,6 +24,16 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           yield FailureFetchListState();
         }
       } else if (event is PressSendEvent) {
+        yield LoadingState();
+        if(event.content.isNotEmpty){
+          if(await createComment(event.postId, event.content)){
+            yield SuccessPressSendState();
+          }else{
+            yield FailurePressSendState();
+          }
+        }else {
+          yield WarningPressSendState();
+        }
       } else if (event is PressEditEvent) {
         yield PressEditState();
       } else if (event is PressDeleteEvent) {
@@ -67,3 +77,20 @@ Future<bool> deleteComment(String commentId) async {
     return false;
   }
 }
+
+Future<bool> createComment(String postId, String content)async{
+  try {
+    String token = await PreferencesUtil.loadToken();
+    Response response = await Dio().post(
+        Config.baseUrl + Config.commentPath + postId,
+        queryParameters: {"content": content},
+        options: Options(headers: {"Authorization": token}));
+    return response.data;
+  } catch (e) {
+    print(e);
+    return false;
+  }
+}
+
+
+

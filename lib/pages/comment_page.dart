@@ -27,12 +27,14 @@ class CommentPage extends StatefulWidget {
 class _CommentPageState extends State<CommentPage> {
   List<CommentResponse> comments = [];
   ClassResponse post;
+  TextEditingController textEditingController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     post = widget.arguments;
+    textEditingController = TextEditingController();
   }
 
   @override
@@ -45,10 +47,16 @@ class _CommentPageState extends State<CommentPage> {
             comments = state.comments;
           } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast('Tải bình luận thất bại');
-          } else if(state is SuccessPressDeleteState){
+          } else if (state is SuccessPressSendState) {
+            BlocProvider.of<CommentBloc>(context).add(FetchListEvent(post.id));
+          } else if (state is WarningPressSendState) {
+            ToastUtil.showWarningToast('Nội dung bình luận không được để trống');
+          } else if (state is FailurePressSendState) {
+            ToastUtil.showFailureToast('Bình luận thất bại');
+          } else if (state is SuccessPressDeleteState) {
             comments.remove(state.comment);
             ToastUtil.showSuccessToast('Xoá bình luận thành công');
-          } else if(state is FailurePressDeleteState){
+          } else if (state is FailurePressDeleteState) {
             ToastUtil.showFailureToast('Xoá bình luận thất bại');
           }
         },
@@ -81,14 +89,15 @@ class _CommentPageState extends State<CommentPage> {
                       ListView.builder(
                           itemCount: comments.length,
                           itemBuilder: (context, index) => Slidable(
-                            actionPane: SlidableDrawerActionPane(),
-                            actionExtentRatio: 0.25,
-                            child: Padding(
+                                actionPane: SlidableDrawerActionPane(),
+                                actionExtentRatio: 0.25,
+                                child: Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
@@ -97,7 +106,8 @@ class _CommentPageState extends State<CommentPage> {
                                           width: 40,
                                           height: 40,
                                           child: CachedNetworkImage(
-                                            imageUrl: comments[index].userAvatar,
+                                            imageUrl:
+                                                comments[index].userAvatar,
                                             imageBuilder:
                                                 (context, imageProvider) =>
                                                     Container(
@@ -109,12 +119,13 @@ class _CommentPageState extends State<CommentPage> {
                                                 ),
                                               ),
                                             ),
-                                            placeholder: (context, url) => Center(
-                                                child: SpinKitDualRing(
+                                            placeholder: (context, url) =>
+                                                Center(
+                                                    child: SpinKitDualRing(
                                               color: Colors.orange,
                                             )),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(
+                                            errorWidget:
+                                                (context, url, error) => Icon(
                                               Icons.error,
                                               color: Colors.orange,
                                             ),
@@ -131,8 +142,9 @@ class _CommentPageState extends State<CommentPage> {
                                                     BorderRadius.circular(15),
                                                 color: Colors.grey[300]),
                                             child: Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  15, 10, 15, 10),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      15, 10, 15, 10),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -143,7 +155,8 @@ class _CommentPageState extends State<CommentPage> {
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: Colors.deepOrange),
+                                                        color:
+                                                            Colors.deepOrange),
                                                   ),
                                                   Padding(
                                                     padding:
@@ -151,8 +164,8 @@ class _CommentPageState extends State<CommentPage> {
                                                             top: 5),
                                                     child: Text(
                                                       '${comments[index].content}',
-                                                      style:
-                                                          TextStyle(fontSize: 14),
+                                                      style: TextStyle(
+                                                          fontSize: 14),
                                                     ),
                                                   )
                                                 ],
@@ -174,25 +187,27 @@ class _CommentPageState extends State<CommentPage> {
                                     ],
                                   ),
                                 ),
-                            actions: <Widget>[
-                              IconSlideAction(
-                                caption: Value.EDIT,
-                                color: Colors.lightBlueAccent,
-                                icon: Icons.edit,
-                                onTap: () {
-                                  BlocProvider.of<CommentBloc>(context).add(PressEditEvent(comments[index]));
-                                },
-                              ),
-                              IconSlideAction(
-                                caption: Value.DELETE,
-                                color: Colors.blueAccent,
-                                icon: Icons.delete,
-                                onTap: () {
-                                  BlocProvider.of<CommentBloc>(context).add(PressDeleteEvent(comments[index]));
-                                },
-                              ),
-                            ],
-                          )),
+                                actions: <Widget>[
+                                  IconSlideAction(
+                                    caption: Value.EDIT,
+                                    color: Colors.lightBlueAccent,
+                                    icon: Icons.edit,
+                                    onTap: () {
+                                      BlocProvider.of<CommentBloc>(context)
+                                          .add(PressEditEvent(comments[index]));
+                                    },
+                                  ),
+                                  IconSlideAction(
+                                    caption: Value.DELETE,
+                                    color: Colors.blueAccent,
+                                    icon: Icons.delete,
+                                    onTap: () {
+                                      BlocProvider.of<CommentBloc>(context).add(
+                                          PressDeleteEvent(comments[index]));
+                                    },
+                                  ),
+                                ],
+                              )),
                       Positioned(
                         bottom: 0,
                         left: 0,
@@ -223,6 +238,7 @@ class _CommentPageState extends State<CommentPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 20),
                                       child: TextField(
+                                        controller: textEditingController,
                                         cursorColor: Colors.lightBlue,
                                         keyboardType: TextInputType.multiline,
                                         maxLines: 3,
@@ -240,11 +256,17 @@ class _CommentPageState extends State<CommentPage> {
                               Expanded(
                                 flex: 1,
                                 child: IconButton(
-                                    icon: Icon(
-                                  Icons.send,
-                                  size: 30,
-                                  color: Colors.white,
-                                )),
+                                  icon: Icon(
+                                    Icons.send,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    BlocProvider.of<CommentBloc>(context).add(
+                                        PressSendEvent(post.id,
+                                            textEditingController.text.trim()));
+                                  },
+                                ),
                               )
                             ],
                           ),
