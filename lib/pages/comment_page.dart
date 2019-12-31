@@ -88,6 +88,7 @@ class _CommentPageState extends State<CommentPage> {
                     children: <Widget>[
                       ListView.builder(
                           itemCount: comments.length,
+                          physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) => Slidable(
                                 actionPane: SlidableDrawerActionPane(),
                                 actionExtentRatio: 0.25,
