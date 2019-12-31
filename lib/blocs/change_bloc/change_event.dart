@@ -5,12 +5,12 @@ abstract class ChangeEvent extends Equatable{
   const ChangeEvent();
 }
 
-class PressChangePasswordEvent extends ChangeEvent{
+class PressConfirmEvent extends ChangeEvent{
   String oldPassword;
   String newPassword;
-  String reNewPassword;
+  String retypePassword;
 
-  PressChangePasswordEvent(this.oldPassword,this.newPassword,this.reNewPassword);
+  PressConfirmEvent(this.oldPassword,this.newPassword,this.retypePassword);
 
   @override
   // TODO: implement props

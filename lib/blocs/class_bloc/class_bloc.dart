@@ -16,9 +16,9 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
   Stream<ClassState> mapEventToState(ClassEvent event) async* {
     // TODO: implement mapEventToState
     try {
-      if (event is InitSelfEvent) {
-        SelfResponse self = await initSelf();
-        yield InitSelfState(self);
+      if (event is InitializeSelfEvent) {
+        SelfResponse self = await initializeSelf();
+        yield InitializeSelfState(self);
       } else if (event is FetchListEvent) {
         yield LoadingState();
         List<ClassResponse> posts = await fetchList(event.number);
@@ -36,6 +36,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
       } else if (event is PressEditEvent) {
         yield PressEditState();
       } else if (event is PressDeleteEvent) {
+        yield LoadingState();
         if (await deletePost(event.post.id)) {
           yield SuccessPressDeleteState(event.post);
         } else
@@ -50,7 +51,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
   }
 }
 
-Future<SelfResponse> initSelf() async {
+Future<SelfResponse> initializeSelf() async {
   SelfResponse self = await PreferencesUtil.loadSelf();
   return self;
 }

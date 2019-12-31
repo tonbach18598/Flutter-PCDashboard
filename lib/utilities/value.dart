@@ -29,4 +29,5 @@ class Value{
   static final String RETYPE_PASSWORD='Nhập lại mật khẩu';
   static final String ENTER_CONTENT='Nhập nội dung...';
   static final String SHARE_YOUR_THINKING='Chia sẻ cảm nghĩ của bạn...';
+  static final String CONFIRM='Xác nhận';
 }

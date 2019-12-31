@@ -2,9 +2,6 @@ import 'dart:io';
 import 'package:flutter_pcdashboard/utilities/config.dart';
 
 class Validation{
-  static bool isValidUsername(String username){
-    return username.isNotEmpty;
-  }
 
   static bool isValidPassword(String password){
     return password.length>=6?true:false;

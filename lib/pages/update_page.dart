@@ -5,7 +5,9 @@ import 'package:flutter_pcdashboard/blocs/update_bloc/update_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_event.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
+import 'package:flutter_pcdashboard/utilities/toast.dart';
 import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/widgets/loading_update.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
 import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -36,14 +38,25 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UpdateBloc()..add(InitSelfEvent()),
+      create: (context) => UpdateBloc()..add(InitializeSelfEvent()),
       child: BlocListener<UpdateBloc, UpdateState>(
         listener: (context, state) {
-          if (state is InitSelfState) {
+          if (state is InitializeSelfState) {
             self = state.self;
             classController.text = self.classId;
             emailController.text = self.email;
             phoneController.text = self.phone;
+          }else if(state is SuccessPressConfirmState){
+            BlocProvider.of<UpdateBloc>(context).add(InitializeSelfEvent());
+            ToastUtil.showSuccessToast('Cập nhật thông tin thành công');
+          }else if(state is WarningEmptyPressConfirmState){
+            ToastUtil.showWarningToast('Email hoặc số điện thoại không được để trống');
+          }else if(state is WarningEmailPressConfirmState){
+            ToastUtil.showWarningToast('Email không hợp lệ');
+          }else if(state is WarningPhonePressConfirmState){
+            ToastUtil.showWarningToast('Số điện thoại không hợp lệ');
+          }else if(state is FailurePressConfirmState){
+            ToastUtil.showFailureToast('Cập nhật thông tin thất bại');
           }
         },
         child: BlocBuilder<UpdateBloc, UpdateState>(
@@ -65,89 +78,96 @@ class _UpdatePageState extends State<UpdatePage> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 20),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      height: MediaQuery.of(context).size.width / 3,
-                      child: CachedNetworkImage(
-                        imageUrl: self.avatar,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
+            body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30, bottom: 20),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.width / 3,
+                          child: CachedNetworkImage(
+                            imageUrl: self.avatar,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            placeholder: (context, url) => Center(
+                                child: SpinKitDoubleBounce(
+                              color: Colors.orange,
+                            )),
+                            errorWidget: (context, url, error) => Image.asset(
+                              "logo.png",
                             ),
                           ),
                         ),
-                        placeholder: (context, url) => Center(
-                            child: SpinKitDoubleBounce(
-                          color: Colors.orange,
-                        )),
-                        errorWidget: (context, url, error) => Image.asset(
-                          "logo.png",
-                        ),
                       ),
-                    ),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Text(self.name,
-                          style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.deepOrange,
-                              fontWeight: FontWeight.bold)),
+                      Column(
+                        children: <Widget>[
+                          Text(self.name,
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.deepOrange,
+                                  fontWeight: FontWeight.bold)),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Text(self.userId,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.blueAccent,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Text(self.userId,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.blueAccent,
-                                fontWeight: FontWeight.bold)),
+                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                        child: UpdateInformationTextField(
+                          readOnly: true,
+                          prefixIcon: Icon(Icons.people,color: Colors.orange,),
+                          borderColor: Colors.orange,
+                          hintText: Value.CLASS,
+                          controller: classController,
+                        )
                       ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                          child: UpdateInformationTextField(
+                            prefixIcon: Icon(Icons.mail,color: Colors.lightBlue,),
+                            borderColor: Colors.lightBlue,
+                            hintText: Value.EMAIL,
+                            controller: emailController,
+                          )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
+                          child: UpdateInformationTextField(
+                            prefixIcon: Icon(Icons.smartphone,color: Colors.lightBlue,),
+                            borderColor: Colors.lightBlue,
+                            hintText: Value.PHONE,
+                            controller: phoneController,
+                          )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: SigninButton(
+                          text: Value.CONFIRM.toUpperCase(),
+                          onPress: () {
+                            BlocProvider.of<UpdateBloc>(context).add(PressConfirmEvent(emailController.text,phoneController.text));
+                          },
+                        ),
+                      )
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                    child: UpdateInformationTextField(
-                      readOnly: true,
-                      prefixIcon: Icon(Icons.people,color: Colors.orange,),
-                      borderColor: Colors.orange,
-                      hintText: Value.CLASS,
-                      controller: classController,
-                    )
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                      child: UpdateInformationTextField(
-                        prefixIcon: Icon(Icons.mail,color: Colors.lightBlue,),
-                        borderColor: Colors.lightBlue,
-                        hintText: Value.EMAIL,
-                        controller: emailController,
-                      )
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
-                      child: UpdateInformationTextField(
-                        prefixIcon: Icon(Icons.smartphone,color: Colors.lightBlue,),
-                        borderColor: Colors.lightBlue,
-                        hintText: Value.PHONE,
-                        controller: phoneController,
-                      )
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: SigninButton(
-                      text: Value.UPDATE_INFORMATION.toUpperCase(),
-                      onPress: () {},
-                    ),
-                  )
-                ],
-              ),
+                ),
+                state is LoadingState?LoadingUpdate():Container()
+              ],
             ),
           ),
         ),

@@ -5,19 +5,19 @@ abstract class UpdateEvent extends Equatable{
   const UpdateEvent();
 }
 
-class InitSelfEvent extends UpdateEvent{
+class InitializeSelfEvent extends UpdateEvent{
 
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class PressUpdateInformationEvent extends UpdateEvent{
+class PressConfirmEvent extends UpdateEvent{
 
   String email;
   String phone;
 
-  PressUpdateInformationEvent(this.email,this.phone);
+  PressConfirmEvent(this.email,this.phone);
 
   @override
   // TODO: implement props

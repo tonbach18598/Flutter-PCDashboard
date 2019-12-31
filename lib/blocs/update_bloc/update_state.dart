@@ -12,10 +12,17 @@ class InitialUpdateState extends UpdateState{
 
 }
 
-class InitSelfState extends UpdateState{
+class LoadingState extends UpdateState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class InitializeSelfState extends UpdateState{
   SelfResponse self;
 
-  InitSelfState(this.self);
+  InitializeSelfState(this.self);
 
   @override
   // TODO: implement props
@@ -23,19 +30,31 @@ class InitSelfState extends UpdateState{
 
 }
 
-class SuccessPressUpdateInformationState extends UpdateState{
+class SuccessPressConfirmState extends UpdateState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailurePressUpdateInformationState extends UpdateState{
+class FailurePressConfirmState extends UpdateState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningPressUpdateInformationState extends UpdateState{
+class WarningEmptyPressConfirmState extends UpdateState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class WarningEmailPressConfirmState extends UpdateState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class WarningPhonePressConfirmState extends UpdateState{
   @override
   // TODO: implement props
   List<Object> get props => null;

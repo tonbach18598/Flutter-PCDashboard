@@ -36,10 +36,10 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DashboardBloc()..add(InitSelfEvent()),
+      create: (context) => DashboardBloc()..add(InitializeSelfEvent()),
       child: BlocListener<DashboardBloc, DashboardState>(
         listener: (context, state) {
-          if (state is InitSelfState) {
+          if (state is InitializeSelfState) {
             self = state.self;
           } else if (state is TapSelfDetailsState) {
           } else if (state is TapHomeState) {

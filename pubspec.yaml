@@ -35,7 +35,7 @@ dependencies:
   after_layout: 1.0.7+2
   flutter_spinkit: 4.1.1+1
   wave: 0.0.8
-
+  easy_web_view: 1.0.1
 
 dev_dependencies:
   flutter_test:

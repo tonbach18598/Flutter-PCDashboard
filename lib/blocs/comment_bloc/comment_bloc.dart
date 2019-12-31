@@ -37,6 +37,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       } else if (event is PressEditEvent) {
         yield PressEditState();
       } else if (event is PressDeleteEvent) {
+        yield LoadingState();
         if (await deleteComment(event.comment.id)) {
           yield SuccessPressDeleteState(event.comment);
         } else

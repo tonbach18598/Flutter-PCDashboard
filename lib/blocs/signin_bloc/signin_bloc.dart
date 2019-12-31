@@ -20,7 +20,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     try {
       if (event is PressSigninEvent) {
         yield LoadingState();
-        if (Validation.isValidUsername(event.username) &&
+        if (event.username.isNotEmpty &&
             event.password.isNotEmpty) {
           if (await onSignin(event.username, event.password))
             yield SuccessPressSigninState();
@@ -57,9 +57,8 @@ Future<bool> onSignin(String username, String password) async {
 
 Future getSelfDetails(String token) async {
   try {
-    Response response = await Dio().get(Config.baseUrl + Config.selfPath,
+    Response response = await Dio().get(Config.baseUrl + Config.userPath,
         options: Options(headers: {"Authorization": token}));
-    print(response.data);
     SelfResponse self = SelfResponse.fromJson(response.data);
     await PreferencesUtil.saveSelf(self);
   } catch (e) {

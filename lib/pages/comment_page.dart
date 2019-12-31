@@ -107,7 +107,7 @@ class _CommentPageState extends State<CommentPage> {
                                   actionPane: SlidableDrawerActionPane(),
                                   actionExtentRatio: 0.25,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.fromLTRB(10,5,10,5),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -152,6 +152,7 @@ class _CommentPageState extends State<CommentPage> {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Container(
+                                              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*0.7),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(15),

@@ -18,10 +18,10 @@ class LoadingState extends ClassState {
   List<Object> get props => [];
 }
 
-class InitSelfState extends ClassState {
+class InitializeSelfState extends ClassState {
   SelfResponse self;
 
-  InitSelfState(this.self);
+  InitializeSelfState(this.self);
 
   @override
   // TODO: implement props

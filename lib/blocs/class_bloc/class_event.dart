@@ -5,7 +5,7 @@ abstract class ClassEvent extends Equatable {
   const ClassEvent();
 }
 
-class InitSelfEvent extends ClassEvent {
+class InitializeSelfEvent extends ClassEvent {
   @override
   // TODO: implement props
   List<Object> get props => null;

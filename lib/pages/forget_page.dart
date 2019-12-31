@@ -18,11 +18,12 @@ class ForgetPage extends StatefulWidget {
 
 class _ForgetPageState extends State<ForgetPage> {
   TextEditingController usernameController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    usernameController=TextEditingController();
+    usernameController = TextEditingController();
   }
 
   @override
@@ -40,57 +41,61 @@ class _ForgetPageState extends State<ForgetPage> {
           if (state is PressBackState) {
             Navigator.of(context).pop();
           } else if (state is SuccessPressGetPasswordState) {
-            ToastUtil.showSuccessToast("Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
-          }else if(state is FailurePressGetPasswordState){
+            usernameController.text = '';
+            ToastUtil.showSuccessToast(
+                "Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
+          } else if (state is FailurePressGetPasswordState) {
             ToastUtil.showFailureToast("Lấy mật khẩu thất bại");
-          }else if(state is WarningPressGetPasswordState){
+          } else if (state is WarningPressGetPasswordState) {
             ToastUtil.showWarningToast("Tài khoản không được để trống");
           }
         },
-        child: BlocBuilder<ForgetBloc, ForgetState>(builder: (context, state)
-          => Scaffold(
-            body: SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                color: Color(0xf5f5f5),
-                child: Column(
-                  children: <Widget>[
-                    Logo(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height / 16,
+        child: BlocBuilder<ForgetBloc, ForgetState>(
+            builder: (context, state) => Scaffold(
+                  body: SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      color: Color(0xf5f5f5),
+                      child: Column(
+                        children: <Widget>[
+                          Logo(),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 16,
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 75, bottom: 10, right: 30, left: 30),
+                              child: SigninTextField(
+                                textEditingController: usernameController,
+                                labelText: Value.ACCOUNT,
+                                obscureText: false,
+                                prefixIcon: Icons.person,
+                              )),
+                          ForgetPasswordButton(
+                            text: Value.BACK,
+                            onPress: () {
+                              BlocProvider.of<ForgetBloc>(context)
+                                  .add(PressBackEvent());
+                            },
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 8,
+                          ),
+                          SigninButton(
+                            text: Value.GET_PASSWORD.toUpperCase(),
+                            onPress: () {
+                              BlocProvider.of<ForgetBloc>(context).add(
+                                  PressGetPasswordEvent(
+                                      usernameController.text));
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 75, bottom: 10, right: 30, left: 30),
-                      child: SigninTextField(
-                                        textEditingController:
-                                            usernameController,
-                                        labelText: Value.ACCOUNT,
-                                        obscureText: false,
-                                        prefixIcon: Icons.person,
-                                      )),
-                    ForgetPasswordButton(
-                      text: Value.BACK,
-                      onPress: () {
-                        BlocProvider.of<ForgetBloc>(context).add(PressBackEvent());},
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height / 8,
-                    ),
-                    SigninButton(
-                      text: Value.GET_PASSWORD.toUpperCase(),
-                      onPress: () {
-
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ),
+                  ),
+                )),
       ),
     );
   }

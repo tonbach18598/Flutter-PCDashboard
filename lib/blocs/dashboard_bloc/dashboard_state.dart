@@ -11,9 +11,9 @@ class InitialDashboardState extends DashboardState{
   List<Object> get props => null;
 }
 
-class InitSelfState extends DashboardState{
+class InitializeSelfState extends DashboardState{
   SelfResponse self;
-  InitSelfState(this.self);
+  InitializeSelfState(this.self);
 
   @override
   // TODO: implement props

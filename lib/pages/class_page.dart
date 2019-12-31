@@ -33,10 +33,10 @@ class _ClassPageState extends State<ClassPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ClassBloc()..add(InitSelfEvent())..add(FetchListEvent(10)),
+          ClassBloc()..add(InitializeSelfEvent())..add(FetchListEvent(10)),
       child: BlocListener<ClassBloc, ClassState>(
         listener: (context, state) {
-          if (state is InitSelfState) {
+          if (state is InitializeSelfState) {
             self = state.self;
           } else if (state is SuccessFetchListState) {
             posts = state.posts;

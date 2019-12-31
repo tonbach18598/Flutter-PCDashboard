@@ -1,4 +1,6 @@
+import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
 import 'package:flutter_pcdashboard/utilities/value.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -24,16 +26,10 @@ class _HomePageState extends State<HomePage> {
             ],
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
-          ),
-          IconButton(
-            icon: Icon(Icons.arrow_forward_ios,color: Colors.white,),
-          )
-        ],
       ),
-      body: Container(),
+      body: EasyWebView(
+        src: Config.homeUrl,
+      )
     );
   }
 }

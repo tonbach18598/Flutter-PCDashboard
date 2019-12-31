@@ -69,7 +69,7 @@ class _ChatPageState extends State<ChatPage> {
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) => Padding(
                           padding:
-                          const EdgeInsets.all(10),
+                          const EdgeInsets.fromLTRB(10,5,10,5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment:

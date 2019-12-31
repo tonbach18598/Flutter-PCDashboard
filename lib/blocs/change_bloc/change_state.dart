@@ -11,19 +11,38 @@ class InitialChangeState extends ChangeState{
 
 }
 
-class SuccessChangePasswordState extends ChangeState{
+class LoadingState extends ChangeState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class SuccessPressConfirmState extends ChangeState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailureChangePasswordState extends ChangeState{
+class FailurePressConfirmState extends ChangeState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningChangePasswordState extends ChangeState{
+class WarningEmptyPressConfirmState extends ChangeState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class WarningPasswordPressConfirmState extends ChangeState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class WarningMatchPressConfirmState extends ChangeState{
   @override
   // TODO: implement props
   List<Object> get props => null;
