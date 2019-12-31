@@ -73,241 +73,243 @@ class _ClassPageState extends State<ClassPage> {
                           pinned: false,
                           snap: true,
                           centerTitle: true,
-                          title: InkWell(
-                            onTap: () {
-                              BlocProvider.of<ClassBloc>(context)
-                                  .add(TapPostEvent());
-                            },
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 1,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: CachedNetworkImage(
-                                      imageUrl: self.avatar,
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
+                          title: Container(
+                            child: InkWell(
+                              onTap: () {
+                                BlocProvider.of<ClassBloc>(context)
+                                    .add(TapPostEvent());
+                              },
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 55,
+                                    height: 55,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: CachedNetworkImage(
+                                        imageUrl: self.avatar,
+                                        imageBuilder: (context, imageProvider) =>
+                                            Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        placeholder: (context, url) => Center(
+                                            child: SpinKitDualRing(
+                                          color: Colors.orange,
+                                        )),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(
+                                          Icons.error,
+                                          color: Colors.orange,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 10, 20, 10),
+                                      child: Container(
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(25),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            Value.SHARE_YOUR_THINKING,
+                                            style: TextStyle(
+                                                color: Colors.grey, fontSize: 14),
                                           ),
                                         ),
                                       ),
-                                      placeholder: (context, url) => Center(
-                                          child: SpinKitDualRing(
-                                        color: Colors.orange,
-                                      )),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(
-                                        Icons.error,
-                                        color: Colors.orange,
-                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 10, 20, 10),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          Value.SHARE_YOUR_THINKING,
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 14),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         SliverList(
                           delegate:
-                              SliverChildListDelegate(List<Widget>.generate(
-                            posts.length,
-                            (index) => Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Stack(
-                                children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 10, 10, 0),
-                                        child: Row(
+                              SliverChildBuilderDelegate(
+                                  (context,index)=>Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                           children: <Widget>[
-                                            SizedBox(
-                                              width: 40,
-                                              height: 40,
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    posts[index].userAvatar,
-                                                imageBuilder:
-                                                    (context, imageProvider) =>
-                                                        Container(
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    image: DecorationImage(
-                                                      image: imageProvider,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                        child: SpinKitDualRing(
-                                                  color: Colors.orange,
-                                                )),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(
-                                                  Icons.error,
-                                                  color: Colors.orange,
-                                                ),
-                                              ),
-                                            ),
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  10, 10, 10, 0),
+                                              child: Row(
                                                 children: <Widget>[
-                                                  Text(
-                                                    posts[index].userName,
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color:
-                                                            Colors.deepOrange,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 40,
+                                                    child: CachedNetworkImage(
+                                                      imageUrl:
+                                                      posts[index].userAvatar,
+                                                      imageBuilder:
+                                                          (context, imageProvider) =>
+                                                          Container(
+                                                            decoration: BoxDecoration(
+                                                              shape: BoxShape.circle,
+                                                              image: DecorationImage(
+                                                                image: imageProvider,
+                                                                fit: BoxFit.cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                      placeholder: (context, url) =>
+                                                          Center(
+                                                              child: SpinKitDualRing(
+                                                                color: Colors.orange,
+                                                              )),
+                                                      errorWidget:
+                                                          (context, url, error) =>
+                                                          Icon(
+                                                            Icons.error,
+                                                            color: Colors.orange,
+                                                          ),
+                                                    ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5),
-                                                    child: Text(
-                                                      posts[index].time,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.grey),
+                                                    padding: const EdgeInsets.only(
+                                                        left: 10),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      children: <Widget>[
+                                                        Text(
+                                                          posts[index].userName,
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              color:
+                                                              Colors.deepOrange,
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsets.only(
+                                                              top: 5),
+                                                          child: Text(
+                                                            posts[index].time,
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: Colors.grey),
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 10, 10, 5),
-                                        child: Text(
-                                          posts[index].content,
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black),
-                                        ),
-                                      ),
-                                      posts[index].image != null
-                                          ? Padding(
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  10, 10, 10, 5),
+                                              child: Text(
+                                                posts[index].content,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                            posts[index].image != null
+                                                ? Padding(
                                               padding: const EdgeInsets.all(5),
                                               child: ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                  BorderRadius.circular(10),
                                                   child: CachedNetworkImage(
                                                     imageUrl:
-                                                        posts[index].image,
+                                                    posts[index].image,
                                                     placeholder: (context,
-                                                            url) =>
+                                                        url) =>
                                                         Center(
                                                             child:
-                                                                SpinKitCircle(
-                                                      color: Colors.orange,
-                                                    )),
+                                                            SpinKitCircle(
+                                                              color: Colors.orange,
+                                                            )),
                                                     errorWidget:
                                                         (context, url, error) =>
-                                                            Icon(
-                                                      Icons.error,
-                                                      color: Colors.orange,
-                                                    ),
+                                                        Icon(
+                                                          Icons.error,
+                                                          color: Colors.orange,
+                                                        ),
                                                   )),
                                             )
-                                          : Container(),
-                                      InkWell(
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10, bottom: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Padding(
+                                                : Container(),
+                                            InkWell(
+                                              borderRadius: BorderRadius.only(
+                                                  bottomLeft: Radius.circular(10),
+                                                  bottomRight: Radius.circular(10)),
+                                              child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 5),
-                                                child: Icon(
-                                                  Icons.comment,
-                                                  color: Colors.orange,
+                                                    top: 10, bottom: 15),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          right: 5),
+                                                      child: Icon(
+                                                        Icons.comment,
+                                                        color: Colors.orange,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          left: 5),
+                                                      child: Text(
+                                                        Value.COMMENT,
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                            FontWeight.bold),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 5),
-                                                child: Text(
-                                                  Value.COMMENT,
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                              onTap: () {
+                                                BlocProvider.of<ClassBloc>(context)
+                                                    .add(TapCommentEvent(
+                                                    posts[index]));
+                                              },
+                                            )
+                                          ],
                                         ),
-                                        onTap: () {
-                                          BlocProvider.of<ClassBloc>(context)
-                                              .add(TapCommentEvent(
-                                                  posts[index]));
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                  Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.more_horiz,
-                                        color: Colors.orange,
-                                      ),
-                                      onPressed: () {
-                                        BlocProvider.of<ClassBloc>(context)
-                                            .add(PressMoreEvent(posts[index]));
-                                      },
+                                        Positioned(
+                                          right: 0,
+                                          top: 0,
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.more_horiz,
+                                              color: Colors.orange,
+                                            ),
+                                            onPressed: () {
+                                              BlocProvider.of<ClassBloc>(context)
+                                                  .add(PressMoreEvent(posts[index]));
+                                            },
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  )
-                                ],
+                                  ),
+                                childCount:posts.length,
                               ),
-                            ),
-                          )),
                         )
                       ],
                     ),
