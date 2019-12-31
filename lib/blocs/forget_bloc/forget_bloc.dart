@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_event.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_state.dart';
+import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
   @override
@@ -12,6 +15,7 @@ class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
     // TODO: implement mapEventToState
     try {
       if (event is PressGetPasswordEvent) {
+        yield LoadingState();
         if (event.username.isNotEmpty) {
           if (await getPassword(event.username)) {
             yield SuccessPressGetPasswordState();
@@ -32,18 +36,12 @@ class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
 }
 
 Future<bool> getPassword(String userId) async {
-  return true;
-//  try {
-//    String token = await PreferencesUtil.loadToken();
-//    String userId = (await PreferencesUtil.loadSelf()).userId;
-//    Response response = await Dio().put(Config.baseUrl + Config.changePath,
-//        data:
-//        ChangePasswordRequest(userId: userId, oldPassword: oldPassword, newPassword: newPassword)
-//            .toJson(),
-//        options: Options(headers: {'Authorization': token}));
-//    return response.data;
-//  } catch (e) {
-//    print(e);
-//    return false;
-//  }
+  try {
+    Response response =
+        await Dio().put(Config.baseUrl + Config.forgetPath + userId);
+    return response.data;
+  } catch (e) {
+    print(e);
+    return false;
+  }
 }

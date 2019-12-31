@@ -4,15 +4,15 @@ class SigninTextField extends StatelessWidget {
   TextEditingController textEditingController;
   String labelText;
   bool obscureText;
-  IconData prefixIcon;
-  IconData suffixIcon;
+  Icon prefixIcon;
 
-  SigninTextField(
-      {this.textEditingController,
-      this.labelText,
-      this.obscureText,
-      this.prefixIcon,
-      this.suffixIcon});
+
+  SigninTextField({
+    @required this.textEditingController,
+    @required this.labelText,
+    @required this.prefixIcon,
+    this.obscureText=false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +45,7 @@ class SigninTextField extends StatelessWidget {
               labelStyle: TextStyle(fontSize: 18),
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 20, right: 20),
-                child: Icon(prefixIcon),
-              ),
-              suffixIcon: Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Icon(suffixIcon),
+                child: prefixIcon,
               ),
             )),
       ),

@@ -44,7 +44,7 @@ Future<bool> onSignin(String username, String password) async {
     Response response = await Dio().post(Config.baseUrl + Config.tokenPath,
         data: SigninRequest(userId: username, password: password).toJson());
     String token = TokenResponse.fromJson(response.data).tokenType +
-        " " +
+        ' ' +
         TokenResponse.fromJson(response.data).accessToken;
     await PreferencesUtil.saveToken(token);
     await getSelfDetails(token);
@@ -58,7 +58,7 @@ Future<bool> onSignin(String username, String password) async {
 Future getSelfDetails(String token) async {
   try {
     Response response = await Dio().get(Config.baseUrl + Config.userPath,
-        options: Options(headers: {"Authorization": token}));
+        options: Options(headers: {'Authorization': token}));
     SelfResponse self = SelfResponse.fromJson(response.data);
     await PreferencesUtil.saveSelf(self);
   } catch (e) {

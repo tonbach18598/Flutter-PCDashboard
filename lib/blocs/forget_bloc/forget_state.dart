@@ -11,6 +11,13 @@ class InitialForgetState extends ForgetState{
 
 }
 
+class LoadingState extends ForgetState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
 class PressBackState extends ForgetState{
   @override
   // TODO: implement props

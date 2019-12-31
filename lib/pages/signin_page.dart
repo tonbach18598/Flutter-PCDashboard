@@ -78,8 +78,7 @@ class _SigninPageState extends State<SigninPage> {
                                             textEditingController:
                                                 usernameController,
                                             labelText: Value.ACCOUNT,
-                                            obscureText: false,
-                                            prefixIcon: Icons.person,
+                                            prefixIcon: Icon(Icons.person),
                                           )),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -89,8 +88,7 @@ class _SigninPageState extends State<SigninPage> {
                                                   passwordController,
                                               labelText: Value.PASSWORD,
                                               obscureText: true,
-                                              prefixIcon: Icons.lock,
-                                              suffixIcon: Icons.visibility,
+                                              prefixIcon: Icon(Icons.lock),
                                             )),
                                 ForgetPasswordButton(
                                     text: Value.FORGET_PASSWORD,

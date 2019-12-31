@@ -118,7 +118,7 @@ class _ChangePageState extends State<ChangePage> {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: SigninButton(
                           text: Value.CONFIRM.toUpperCase(),
-                          onPress: () {BlocProvider.of<ChangeBloc>(context).add(PressConfirmEvent(oldController.text,newController.text,retypeController.text));},
+                          onPress: () {BlocProvider.of<ChangeBloc>(context).add(PressConfirmEvent(oldController.text.trim(),newController.text.trim(),retypeController.text.trim()));},
                         ),
                       )
                     ],

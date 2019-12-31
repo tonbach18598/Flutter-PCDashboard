@@ -9,5 +9,5 @@ class Config{
   static final String classPath='/post/class/';
   static final String commentPath='/comment/';
   static final String changePath='/user/change-password';
-  static final String forgetPaht='/user/forget-password/';
+  static final String forgetPath='/user/forget-password/';
 }

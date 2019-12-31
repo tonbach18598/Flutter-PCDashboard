@@ -159,7 +159,7 @@ class _UpdatePageState extends State<UpdatePage> {
                         child: SigninButton(
                           text: Value.CONFIRM.toUpperCase(),
                           onPress: () {
-                            BlocProvider.of<UpdateBloc>(context).add(PressConfirmEvent(emailController.text,phoneController.text));
+                            BlocProvider.of<UpdateBloc>(context).add(PressConfirmEvent(emailController.text.trim(),phoneController.text.trim()));
                           },
                         ),
                       )
