@@ -26,7 +26,12 @@ class CommentBloc extends Bloc<CommentEvent,CommentState>{
         }
       }else if(event is PressSendEvent){
 
+      }else if(event is PressEditEvent){
+        yield PressEditState();
+      }else if(event is PressDeleteEvent){
+        yield PressDeleteState();
       }
+      yield InitialCommentState();
     }catch (e){
       print(e);
     }

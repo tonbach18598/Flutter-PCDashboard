@@ -11,6 +11,7 @@ import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
 import 'package:flutter_pcdashboard/utility/toast.dart';
 import 'package:flutter_pcdashboard/utility/value.dart';
 import 'package:flutter_pcdashboard/widgets/loading_comment.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -70,97 +71,115 @@ class _CommentPageState extends State<CommentPage> {
                     children: <Widget>[
                       ListView.builder(
                           itemCount: comments.length,
-                          itemBuilder: (context, index) => Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 10, 10, 0),
-                                      child: SizedBox(
-                                        width: 40,
-                                        height: 40,
-                                        child: CachedNetworkImage(
-                                          imageUrl: comments[index].userAvatar,
-                                          imageBuilder:
-                                              (context, imageProvider) =>
-                                                  Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover,
+                          itemBuilder: (context, index) => Slidable(
+                            actionPane: SlidableDrawerActionPane(),
+                            actionExtentRatio: 0.25,
+                            child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 10, 10, 0),
+                                        child: SizedBox(
+                                          width: 40,
+                                          height: 40,
+                                          child: CachedNetworkImage(
+                                            imageUrl: comments[index].userAvatar,
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          placeholder: (context, url) => Center(
-                                              child: SpinKitDualRing(
-                                            color: Colors.orange,
-                                          )),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(
-                                            Icons.error,
-                                            color: Colors.orange,
+                                            placeholder: (context, url) => Center(
+                                                child: SpinKitDualRing(
+                                              color: Colors.orange,
+                                            )),
+                                            errorWidget: (context, url, error) =>
+                                                Icon(
+                                              Icons.error,
+                                              color: Colors.orange,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              color: Colors.grey[300]),
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                15, 10, 15, 10),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  "${comments[index].userName}",
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.deepOrange),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5),
-                                                  child: Text(
-                                                    "${comments[index].content}",
-                                                    style:
-                                                        TextStyle(fontSize: 14),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color: Colors.grey[300]),
+                                            child: Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  15, 10, 15, 10),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    "${comments[index].userName}",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.deepOrange),
                                                   ),
-                                                )
-                                              ],
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
+                                                    child: Text(
+                                                      "${comments[index].content}",
+                                                      style:
+                                                          TextStyle(fontSize: 14),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 5, left: 15),
-                                          child: Text(
-                                            "${comments[index].time}",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey),
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 5, left: 15),
+                                            child: Text(
+                                              "${comments[index].time}",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              )),
+                            actions: <Widget>[
+                              IconSlideAction(
+                                caption: Value.EDIT,
+                                color: Colors.lightBlueAccent,
+                                icon: Icons.edit,
+                                onTap: () {},
+                              ),
+                              IconSlideAction(
+                                caption: Value.DELETE,
+                                color: Colors.blueAccent,
+                                icon: Icons.delete,
+                                onTap: () {},
+                              ),
+                            ],
+                          )),
                       Positioned(
                         bottom: 0,
                         left: 0,
@@ -226,46 +245,6 @@ class _CommentPageState extends State<CommentPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> showActionSheet() async {
-    return showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoActionSheet(
-          title: Text(
-            Value.OPTION,
-            style: TextStyle(color: Colors.blueAccent),
-          ),
-          actions: <Widget>[
-            CupertinoActionSheetAction(
-              child: Text(
-                Value.EDIT_COMMENT,
-                style: TextStyle(color: Colors.orange),
-              ),
-              onPressed: () {
-                /** */
-              },
-            ),
-            CupertinoActionSheetAction(
-              child: Text(Value.DELETE_COMMENT,
-                  style: TextStyle(color: Colors.orange)),
-              onPressed: () {
-                /** */
-              },
-            ),
-          ],
-          cancelButton: CupertinoActionSheetAction(
-            isDefaultAction: true,
-            child:
-                Text(Value.CANCEL, style: TextStyle(color: Colors.deepOrange)),
-            onPressed: () {
-              /** */
-            },
-          ),
-        );
-      },
     );
   }
 }

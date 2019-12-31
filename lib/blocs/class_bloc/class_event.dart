@@ -43,8 +43,21 @@ class PressMoreEvent extends ClassEvent {
   List<Object> get props => null;
 }
 
+class PressEditEvent extends ClassEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressDeleteEvent extends ClassEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class PressCancelEvent extends ClassEvent {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
+

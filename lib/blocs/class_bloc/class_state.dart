@@ -66,6 +66,18 @@ class PressMoreState extends ClassState {
   List<Object> get props => null;
 }
 
+class PressEditState extends ClassState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressDeleteState extends ClassState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class PressCancelState extends ClassState {
   @override
   // TODO: implement props

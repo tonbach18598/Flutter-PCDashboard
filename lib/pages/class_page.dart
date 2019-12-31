@@ -323,7 +323,7 @@ class _ClassPageState extends State<ClassPage> {
           actions: <Widget>[
             CupertinoActionSheetAction(
               child: Text(
-                Value.EDIT_POST,
+                Value.EDIT,
                 style: TextStyle(color: Colors.orange),
               ),
               onPressed: () {
@@ -331,7 +331,7 @@ class _ClassPageState extends State<ClassPage> {
               },
             ),
             CupertinoActionSheetAction(
-              child: Text(Value.DELETE_POST,
+              child: Text(Value.DELETE,
                   style: TextStyle(color: Colors.orange)),
               onPressed: () {
                 /** */

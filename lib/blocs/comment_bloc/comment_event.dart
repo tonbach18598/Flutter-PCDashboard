@@ -25,3 +25,17 @@ class PressSendEvent extends CommentEvent{
   // TODO: implement props
   List<Object> get props => null;
 }
+
+class PressEditEvent extends CommentEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressDeleteEvent extends CommentEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}

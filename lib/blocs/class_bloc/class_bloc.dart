@@ -33,6 +33,10 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
         yield TapCommentState(event.post);
       }else if(event is PressMoreEvent){
         yield PressMoreState();
+      }else if(event is PressEditEvent){
+        yield PressEditState();
+      }else if(event is PressDeleteEvent){
+        yield PressDeleteState();
       }else if(event is PressCancelEvent){
         yield PressCancelState();
       }

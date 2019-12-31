@@ -16,10 +16,8 @@ class Value{
   static final String UPDATE_INFORMATION='Cập nhật thông tin';
   static final String CHANGE_PASSWORD='Thay đổi mật khẩu';
   static final String FEEDBACK='Phản hồi';
-  static final String EDIT_POST='Sửa bài viết';
-  static final String DELETE_POST='Xoá bài viết';
-  static final String EDIT_COMMENT='Sửa bình luận';
-  static final String DELETE_COMMENT='Xoá bình luận';
+  static final String EDIT='Sửa';
+  static final String DELETE='Xoá';
   static final String SCHEDULE='Thời khoá biểu';
   static final String EXAM='Thi cử';
   static final String CANCEL='Huỷ';
