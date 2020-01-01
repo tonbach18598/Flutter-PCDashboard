@@ -84,6 +84,7 @@ class _ChangePageState extends State<ChangePage> {
                       Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),
                           child: UpdateInformationTextField(
+                            obscureText: true,
                             prefixIcon: Icon(
                               Icons.vpn_key,
                               color: Colors.orange,
@@ -95,6 +96,7 @@ class _ChangePageState extends State<ChangePage> {
                       Padding(
                           padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                           child: UpdateInformationTextField(
+                            obscureText: true,
                             prefixIcon: Icon(
                               Icons.lock_open,
                               color: Colors.lightBlue,
@@ -106,6 +108,7 @@ class _ChangePageState extends State<ChangePage> {
                       Padding(
                           padding: const EdgeInsets.fromLTRB(30, 20, 30, 50),
                           child: UpdateInformationTextField(
+                            obscureText: true,
                             prefixIcon: Icon(
                               Icons.lock_outline,
                               color: Colors.lightBlue,
