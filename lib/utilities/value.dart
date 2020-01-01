@@ -30,4 +30,6 @@ class Value{
   static final String ENTER_CONTENT='Nhập nội dung...';
   static final String SHARE_YOUR_THINKING='Chia sẻ cảm nghĩ của bạn...';
   static final String CONFIRM='Xác nhận';
+  static final String STUDENT_LIST='Danh sách sinh viên';
+  static final String TEACHER_LIST='Danh sách giảng viên';
 }

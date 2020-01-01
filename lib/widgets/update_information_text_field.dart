@@ -17,6 +17,7 @@ class UpdateInformationTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           color: Colors.white),
       child: TextField(
+        cursorColor: Colors.lightBlue,
         textAlignVertical: TextAlignVertical.center,
         readOnly: readOnly,
         controller: controller,

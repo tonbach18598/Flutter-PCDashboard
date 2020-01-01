@@ -13,9 +13,9 @@ class UserResponse {
   String userId;
   String email;
   String phone;
-  ClassId classId;
+  String classId;
   String avatar;
-  Role role;
+  String role;
 
   UserResponse({
     this.name,
@@ -32,9 +32,9 @@ class UserResponse {
     userId: json["userId"] == null ? null : json["userId"],
     email: json["email"] == null ? null : json["email"],
     phone: json["phone"] == null ? null : json["phone"],
-    classId: json["classId"] == null ? null : classIdValues.map[json["classId"]],
+    classId: json["classId"] == null ? null : json["classId"],
     avatar: json["avatar"] == null ? null : json["avatar"],
-    role: json["role"] == null ? null : roleValues.map[json["role"]],
+    role: json["role"] == null ? null : json["role"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -42,36 +42,8 @@ class UserResponse {
     "userId": userId == null ? null : userId,
     "email": email == null ? null : email,
     "phone": phone == null ? null : phone,
-    "classId": classId == null ? null : classIdValues.reverse[classId],
+    "classId": classId == null ? null : classId,
     "avatar": avatar == null ? null : avatar,
-    "role": role == null ? null : roleValues.reverse[role],
+    "role": role == null ? null : role,
   };
-}
-
-enum ClassId { K16 }
-
-final classIdValues = EnumValues({
-  "K16": ClassId.K16
-});
-
-enum Role { ROLE_STUDENT, ROLE_ADMIN, ROLE_MONITOR }
-
-final roleValues = EnumValues({
-  "ROLE_ADMIN": Role.ROLE_ADMIN,
-  "ROLE_MONITOR": Role.ROLE_MONITOR,
-  "ROLE_STUDENT": Role.ROLE_STUDENT
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
 }

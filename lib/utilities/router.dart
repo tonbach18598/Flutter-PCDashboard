@@ -13,6 +13,7 @@ import 'package:flutter_pcdashboard/pages/schedule_page.dart';
 import 'package:flutter_pcdashboard/pages/signin_page.dart';
 import 'package:flutter_pcdashboard/pages/splash_page.dart';
 import 'package:flutter_pcdashboard/pages/update_page.dart';
+import 'package:flutter_pcdashboard/pages/user_page.dart';
 
 class Router{
   static const splashRoute='/';
@@ -28,6 +29,7 @@ class Router{
   static const changeRoute='/change';
   static const feedbackRoute='/feedback';
   static const chatRoute='/chat';
+  static const userRoute='/user';
   static Route<dynamic> generateRoute(RouteSettings settings){
     final arguments = settings.arguments;
       switch(settings.name){
@@ -57,6 +59,8 @@ class Router{
           return CupertinoPageRoute(builder: (_)=>FeedbackPage());
         case chatRoute:
           return CupertinoPageRoute(builder: (_)=>ChatPage());
+        case userRoute:
+          return CupertinoPageRoute(builder: (_)=>UserPage(arguments));
       }
   }
 }
