@@ -5,6 +5,17 @@ abstract class ChatEvent extends Equatable{
   const ChatEvent();
 }
 
+class FetchListEvent extends ChatEvent{
+
+  int number;
+
+  FetchListEvent(this.number);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class PressSendEvent extends ChatEvent{
   String content;
 

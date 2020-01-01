@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_pcdashboard/models/responses/chat_response.dart';
 
 abstract class ChatState extends Equatable{
   const ChatState();
@@ -11,19 +12,45 @@ class InitialChatState extends ChatState{
 
 }
 
-class SuccessSendState extends ChatState{
+class LoadingState extends ChatState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class SuccessFetchListState extends ChatState{
+  List<ChatResponse> messages;
+
+
+  SuccessFetchListState(this.messages);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class FailureFetchListState extends ChatState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class SuccessPressSendState extends ChatState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailureSendState extends ChatState{
+class FailurePressSendState extends ChatState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningSendState extends ChatState{
+class WarningPressSendState extends ChatState{
   @override
   // TODO: implement props
   List<Object> get props => null;

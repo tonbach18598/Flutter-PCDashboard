@@ -71,7 +71,7 @@ Future<bool> deleteComment(String commentId) async {
     String token = await PreferencesUtil.loadToken();
     Response response = await Dio().delete(
         Config.baseUrl + Config.commentPath + commentId,
-        options: Options(headers: {"Authorization": token}));
+        options: Options(headers: {'Authorization': token}));
     return response.data;
   } catch (e) {
     print(e);

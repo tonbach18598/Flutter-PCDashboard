@@ -10,4 +10,5 @@ class Config{
   static final String commentPath='/comment/';
   static final String changePath='/user/change-password';
   static final String forgetPath='/user/forget-password/';
+  static final String chatPath='/message';
 }

@@ -28,7 +28,7 @@ class CommentPage extends StatefulWidget {
 class _CommentPageState extends State<CommentPage> {
   List<CommentResponse> comments = [];
   ClassResponse post;
-  TextEditingController textEditingController;
+  TextEditingController contentController;
   ScrollController scrollController;
 
   @override
@@ -36,7 +36,7 @@ class _CommentPageState extends State<CommentPage> {
     // TODO: implement initState
     super.initState();
     post = widget.arguments;
-    textEditingController = TextEditingController();
+    contentController = TextEditingController();
     scrollController = ScrollController();
   }
 
@@ -58,13 +58,13 @@ class _CommentPageState extends State<CommentPage> {
           } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast('Tải bình luận thất bại');
           } else if (state is SuccessPressSendState) {
-            textEditingController.text = '';
+            contentController.text = '';
             BlocProvider.of<CommentBloc>(context).add(FetchListEvent(post.id));
           } else if (state is WarningPressSendState) {
             ToastUtil.showWarningToast(
                 'Nội dung bình luận không được để trống');
           } else if (state is FailurePressSendState) {
-            ToastUtil.showFailureToast('Bình luận thất bại');
+            ToastUtil.showFailureToast('Gửi bình luận thất bại');
           } else if (state is SuccessPressDeleteState) {
             comments.remove(state.comment);
             ToastUtil.showSuccessToast('Xoá bình luận thành công');
@@ -253,7 +253,7 @@ class _CommentPageState extends State<CommentPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20),
                                     child: TextField(
-                                      controller: textEditingController,
+                                      controller: contentController,
                                       cursorColor: Colors.lightBlue,
                                       keyboardType: TextInputType.multiline,
                                       maxLines: 3,
@@ -279,7 +279,7 @@ class _CommentPageState extends State<CommentPage> {
                                 onPressed: () {
                                   BlocProvider.of<CommentBloc>(context).add(
                                       PressSendEvent(post.id,
-                                          textEditingController.text.trim()));
+                                          contentController.text.trim()));
                                 },
                               ),
                             )
