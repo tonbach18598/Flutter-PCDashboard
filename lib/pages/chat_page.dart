@@ -27,6 +27,7 @@ class _ChatPageState extends State<ChatPage> {
   ScrollController scrollController;
   SocketIOManager manager;
   SocketIO socket;
+  String id = '1613013';
 
   @override
   void initState() {
@@ -99,94 +100,128 @@ class _ChatPageState extends State<ChatPage> {
                     children: <Widget>[
                       Expanded(
                         child: ListView.builder(
-                          controller: scrollController,
-                          itemCount: messages.length,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 10, 10, 0),
-                                  child: SizedBox(
-                                    width: 40,
-                                    height: 40,
-                                    child: CachedNetworkImage(
-                                      imageUrl: messages[index].userAvatar,
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
+                            controller: scrollController,
+                            itemCount: messages.length,
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) => messages[index]
+                                        .userId ==
+                                    id
+                                ? Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Container(
+                                          constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.7),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              color: Colors.deepOrange),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 10, 15, 10),
+                                            child: Text(
+                                              '${messages[index].content}',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.white),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      placeholder: (context, url) => Center(
-                                          child: SpinKitDualRing(
-                                        color: Colors.orange,
-                                      )),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(
-                                        Icons.error,
-                                        color: Colors.orange,
-                                      ),
+                                      ],
                                     ),
-                                  ),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.grey[300]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 10, 15, 10),
-                                        child: Column(
+                                  )
+                                : Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 10),
+                                          child: SizedBox(
+                                            width: 40,
+                                            height: 40,
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  messages[index].userAvatar,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      Container(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  Center(
+                                                      child: SpinKitDualRing(
+                                                color: Colors.orange,
+                                              )),
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                Icons.error,
+                                                color: Colors.orange,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
-                                            Text(
-                                              '${messages[index].userName}',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.deepOrange),
-                                            ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.only(top: 5),
+                                                  const EdgeInsets.fromLTRB(
+                                                      10, 0, 0, 5),
                                               child: Text(
-                                                '${messages[index].content}',
-                                                style: TextStyle(fontSize: 14),
+                                                '${messages[index].userName}',
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.grey),
                                               ),
-                                            )
+                                            ),
+                                            Container(
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.7),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  color: Colors.white),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        15, 10, 15, 10),
+                                                child: Text(
+                                                  '${messages[index].content}',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.deepOrange),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, left: 15),
-                                      child: Text(
-                                        '${messages[index].time}',
-                                        style: TextStyle(
-                                            fontSize: 12, color: Colors.grey),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                                  )),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -238,9 +273,11 @@ class _ChatPageState extends State<ChatPage> {
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
-                                  BlocProvider.of<ChatBloc>(context).add(
-                                      PressSendEvent(
-                                          contentController.text.trim()));
+                                  contentController.text.isNotEmpty
+                                      ? haveMessage()
+                                      : ToastUtil.showWarningToast(
+                                          'Nội dung tin nhắn không được để trống');
+                                  ;
                                 },
                               ),
                             )
@@ -259,16 +296,13 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  void connectSocket() async {
-    socket =
-        await manager.createInstance(SocketOptions(Config.socketUrl));
+  Future<void> connectSocket() async {
+    socket = await manager.createInstance(SocketOptions(Config.socketUrl));
     socket.connect();
     socket.onConnect((data) async {
-      print("connected...");
       socket.emit('join', [(await PreferencesUtil.loadSelf()).classId]);
     });
-    socket.on("message", (data) {
-      print("message");
+    socket.on('message', (data) {
       ChatResponse message = ChatResponse.fromJson(data);
       setState(() {
         messages.add(message);
@@ -280,6 +314,14 @@ class _ChatPageState extends State<ChatPage> {
           );
         });
       });
+    });
+  }
+
+  Future<void> haveMessage() async {
+    socket.emit('haveMessage',
+        [contentController.text.trim(), await PreferencesUtil.loadToken()]);
+    setState(() {
+      contentController.text = '';
     });
   }
 

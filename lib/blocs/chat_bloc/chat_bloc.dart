@@ -29,11 +29,7 @@ class ChatBloc extends Bloc<ChatEvent,ChatState>{
       } else if (event is PressSendEvent) {
         yield LoadingState();
         if (event.content.isNotEmpty) {
-//          if(true){
-//            yield SuccessPressSendState();
-//          }else{
-//            yield FailurePressSendState();
-//          }
+
         } else {
           yield WarningPressSendState();
         }
