@@ -36,6 +36,7 @@ dependencies:
   flutter_spinkit: 4.1.1+1
   wave: 0.0.8
   easy_web_view: 1.0.1
+  adhara_socket_io: 0.4.1
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:adhara_socket_io/adhara_socket_io.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/chat_bloc/chat_event.dart';
@@ -6,8 +7,9 @@ import 'package:flutter_pcdashboard/models/responses/chat_response.dart';
 import 'package:flutter_pcdashboard/utilities/config.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
-
 class ChatBloc extends Bloc<ChatEvent,ChatState>{
+  SocketIO socket;
+
   @override
   // TODO: implement initialState
   ChatState get initialState => InitialChatState();
@@ -26,15 +28,17 @@ class ChatBloc extends Bloc<ChatEvent,ChatState>{
         }
       } else if (event is PressSendEvent) {
         yield LoadingState();
-        if(event.content.isNotEmpty){
+        if (event.content.isNotEmpty) {
 //          if(true){
 //            yield SuccessPressSendState();
 //          }else{
 //            yield FailurePressSendState();
 //          }
-        }else {
+        } else {
           yield WarningPressSendState();
         }
+      } else if (event is ConnectSocketEvent) {
+        yield ConnectSocketState();
       }
       yield InitialChatState();
     } catch (e) {

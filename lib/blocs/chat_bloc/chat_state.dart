@@ -19,6 +19,13 @@ class LoadingState extends ChatState{
 
 }
 
+class ConnectSocketState extends ChatState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
 class SuccessFetchListState extends ChatState{
   List<ChatResponse> messages;
 
