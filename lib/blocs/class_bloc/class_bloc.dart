@@ -34,7 +34,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
       } else if (event is PressMoreEvent) {
         yield PressMoreState(event.post);
       } else if (event is PressEditEvent) {
-        yield PressEditState();
+        yield PressEditState(event.post);
       } else if (event is PressDeleteEvent) {
         yield LoadingState();
         if (await deletePost(event.post.id)) {

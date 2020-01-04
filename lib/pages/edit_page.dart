@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/post_bloc/post_bloc.dart';
-import 'package:flutter_pcdashboard/blocs/post_bloc/post_event.dart';
-import 'package:flutter_pcdashboard/blocs/post_bloc/post_state.dart';
+import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_bloc.dart';
+import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_event.dart';
+import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_state.dart';
+import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utilities/toast.dart';
 import 'package:flutter_pcdashboard/utilities/value.dart';
@@ -11,14 +12,19 @@ import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class PostPage extends StatefulWidget {
+class EditPage extends StatefulWidget {
+  final arguments;
+
+  EditPage(this.arguments);
+
   @override
-  _PostPageState createState() => _PostPageState();
+  _EditPageState createState() => _EditPageState();
 }
 
-class _PostPageState extends State<PostPage> {
+class _EditPageState extends State<EditPage> {
   TextEditingController contentController;
   SelfResponse self;
+  ClassResponse post;
 
   @override
   void initState() {
@@ -26,26 +32,28 @@ class _PostPageState extends State<PostPage> {
     super.initState();
     contentController=TextEditingController();
     self=SelfResponse(name: '',classId: '',avatar: '');
+    post=widget.arguments;
+    contentController.text=post.content;
   }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>PostBloc()..add(InitializeSelfEvent()),
-      child: BlocListener<PostBloc,PostState>(
+      create: (context)=>EditBloc()..add(InitializeSelfEvent()),
+      child: BlocListener<EditBloc,EditState>(
         listener: (context,state){
           if(state is InitializeSelfState){
             self=state.self;
           }
-          else if(state is SuccessPressPostState){
-            ToastUtil.showSuccessToast('Đăng bài thành công');
+          else if(state is SuccessPressEditState){
+            ToastUtil.showSuccessToast('Sửa bài đăng thành công');
             Navigator.of(context).pop();
-          }else if(state is WarningPressPostState){
+          }else if(state is WarningPressEditState){
             ToastUtil.showWarningToast('Nội dung bài đăng không được để trống');
-          }else if(state is FailurePressPostState){
-            ToastUtil.showFailureToast('Đăng bài thất bại');
+          }else if(state is FailurePressEditState){
+            ToastUtil.showFailureToast('Sửa bài đăng thất bại');
           }
         },
-        child: BlocBuilder<PostBloc,PostState>(
+        child: BlocBuilder<EditBloc,EditState>(
           builder:(context,state)=> Scaffold(
             appBar: GradientAppBar(
               elevation: 0,
@@ -62,13 +70,13 @@ class _PostPageState extends State<PostPage> {
               actions: <Widget>[
                 FlatButton(
                   child: Text(
-                    Value.POST.toUpperCase(),
+                    Value.EDIT.toUpperCase(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   ),
-                  onPressed: (){BlocProvider.of<PostBloc>(context).add(PressPostEvent(contentController.text));},
+                  onPressed: (){BlocProvider.of<EditBloc>(context).add(PressEditEvent(post,contentController.text));},
                 )
               ],
             ),
@@ -158,11 +166,11 @@ class _PostPageState extends State<PostPage> {
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors: [
-                      Colors.deepOrange,
-                      Colors.deepOrangeAccent,
-                      Colors.orange,
-                      Colors.orangeAccent,
-                    ],
+                          Colors.deepOrange,
+                          Colors.deepOrangeAccent,
+                          Colors.orange,
+                          Colors.orangeAccent,
+                        ],
                         begin: FractionalOffset.bottomCenter,
                         end: FractionalOffset.topCenter)),
                 child: Row(
@@ -181,10 +189,10 @@ class _PostPageState extends State<PostPage> {
                         flex: 1,
                         child: IconButton(
                             icon: Icon(
-                          Icons.image,
-                          size: 30,
-                          color: Colors.white,
-                        )))
+                              Icons.image,
+                              size: 30,
+                              color: Colors.white,
+                            )))
                   ],
                 ),
               ),

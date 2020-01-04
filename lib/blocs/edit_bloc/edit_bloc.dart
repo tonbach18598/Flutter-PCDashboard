@@ -1,34 +1,34 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_pcdashboard/blocs/post_bloc/post_event.dart';
-import 'package:flutter_pcdashboard/blocs/post_bloc/post_state.dart';
+import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_event.dart';
+import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utilities/config.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 
-class PostBloc extends Bloc<PostEvent,PostState>{
+class EditBloc extends Bloc<EditEvent,EditState>{
   @override
   // TODO: implement initialState
-  PostState get initialState => InitialPostState();
+  EditState get initialState => InitialEditState();
 
   @override
-  Stream<PostState> mapEventToState(PostEvent event) async* {
+  Stream<EditState> mapEventToState(EditEvent event) async* {
     // TODO: implement mapEventToState
     try{
       if(event is InitializeSelfEvent){
         SelfResponse self=await initializeSelf();
         yield InitializeSelfState(self);
-      }else if(event is PressPostEvent){
+      }else if(event is PressEditEvent){
         yield LoadingState();
-        if(event.content.isNotEmpty){
-          if(await createPost(event.content)){
-            yield SuccessPressPostState();
+        if(event.newContent.isNotEmpty){
+          if(await updatePost(event.post.id,event.newContent)){
+            yield SuccessPressEditState();
           }else{
-            yield FailurePressPostState();
+            yield FailurePressEditState();
           }
         }else{
-          yield WarningPressPostState();
+          yield WarningPressEditState();
         }
       }
     }catch (e){
@@ -42,13 +42,12 @@ Future<SelfResponse> initializeSelf()async{
   return self;
 }
 
-Future<bool> createPost(String content)async{
+Future<bool> updatePost(String postId,String content)async{
   try {
     String token = await PreferencesUtil.loadToken();
-    String classId=(await PreferencesUtil.loadSelf()).classId;
-    Response response = await Dio().post(
-        Config.baseUrl + Config.classPath,
-        queryParameters: {'content': content,'classId':classId},
+    Response response = await Dio().put(
+        Config.baseUrl + Config.classPath+postId,
+        queryParameters: {'content': content},
         options: Options(headers: {'Authorization': token}));
     return response.data;
   } catch (e) {

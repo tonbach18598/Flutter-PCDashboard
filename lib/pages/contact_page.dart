@@ -19,9 +19,9 @@ class _ContactPageState extends State<ContactPage> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 5),
+                      Radius.circular(MediaQuery.of(context).size.height / 4),
                   bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 5)),
+                      Radius.circular(MediaQuery.of(context).size.height / 4)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -35,9 +35,9 @@ class _ContactPageState extends State<ContactPage> {
                       end: FractionalOffset.bottomCenter),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(
-                          MediaQuery.of(context).size.height / 10),
+                          MediaQuery.of(context).size.height / 8),
                       bottomRight: Radius.circular(
-                          MediaQuery.of(context).size.height / 10)),
+                          MediaQuery.of(context).size.height / 8)),
                 ),
                 child: Center(child: Text(Value.CHAT.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),
@@ -54,9 +54,9 @@ class _ContactPageState extends State<ContactPage> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 5),
+                      Radius.circular(MediaQuery.of(context).size.height / 4),
                   bottomLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 5)),
+                      Radius.circular(MediaQuery.of(context).size.height / 4)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -70,9 +70,9 @@ class _ContactPageState extends State<ContactPage> {
                       end: FractionalOffset.bottomCenter),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(
-                          MediaQuery.of(context).size.height / 10),
+                          MediaQuery.of(context).size.height / 8),
                       bottomLeft: Radius.circular(
-                          MediaQuery.of(context).size.height / 10)),
+                          MediaQuery.of(context).size.height / 8)),
                 ),
                 child: Center(child: Text(Value.STUDENT_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),
@@ -90,9 +90,9 @@ class _ContactPageState extends State<ContactPage> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 5),
+                      Radius.circular(MediaQuery.of(context).size.height / 4),
                   bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 5)),
+                      Radius.circular(MediaQuery.of(context).size.height / 4)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -106,9 +106,9 @@ class _ContactPageState extends State<ContactPage> {
                       end: FractionalOffset.bottomCenter),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(
-                          MediaQuery.of(context).size.height / 10),
+                          MediaQuery.of(context).size.height / 8),
                       bottomRight: Radius.circular(
-                          MediaQuery.of(context).size.height / 10)),
+                          MediaQuery.of(context).size.height / 8)),
                 ),
                 child: Center(child: Text(Value.TEACHER_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),

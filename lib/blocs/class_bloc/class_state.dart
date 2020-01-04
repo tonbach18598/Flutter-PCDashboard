@@ -71,6 +71,10 @@ class PressMoreState extends ClassState {
 }
 
 class PressEditState extends ClassState {
+  ClassResponse post;
+
+  PressEditState(this.post);
+
   @override
   // TODO: implement props
   List<Object> get props => null;

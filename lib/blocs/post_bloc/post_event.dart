@@ -5,6 +5,13 @@ abstract class PostEvent extends Equatable{
   const PostEvent();
 }
 
+class InitializeSelfEvent extends PostEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class PressPostEvent extends PostEvent{
   String content;
 

@@ -6,7 +6,7 @@ import 'package:flutter_pcdashboard/blocs/department_bloc/department_event.dart'
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_state.dart';
 import 'package:flutter_pcdashboard/models/responses/department_response.dart';
 import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/widgets/loading_post.dart';
+import 'package:flutter_pcdashboard/widgets/loading_dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class DepartmentPage extends StatefulWidget {
@@ -88,7 +88,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                           ],
                         ),
                       )),
-              state is LoadingState ? LoadingPost() : Container()
+              state is LoadingState ? LoadingDashboard() : Container()
             ],
           );
         }),

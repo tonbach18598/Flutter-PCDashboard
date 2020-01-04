@@ -4,6 +4,7 @@ import 'package:flutter_pcdashboard/pages/change_page.dart';
 import 'package:flutter_pcdashboard/pages/chat_page.dart';
 import 'package:flutter_pcdashboard/pages/comment_page.dart';
 import 'package:flutter_pcdashboard/pages/dashboard_page.dart';
+import 'package:flutter_pcdashboard/pages/edit_page.dart';
 import 'package:flutter_pcdashboard/pages/exam_page.dart';
 import 'package:flutter_pcdashboard/pages/feedback_page.dart';
 import 'package:flutter_pcdashboard/pages/forget_page.dart';
@@ -21,6 +22,7 @@ class Router{
   static const forgetRoute='/forget';
   static const dashboardRoute='/dashboard';
   static const postRoute='/post';
+  static const editRoute='/edit';
   static const commentRoute='/comment';
   static const scheduleRoute='/schedule';
   static const examRoute='/exam';
@@ -43,6 +45,8 @@ class Router{
           return CupertinoPageRoute(builder: (_)=>ForgetPage());
         case postRoute:
           return CupertinoPageRoute(builder: (_)=>PostPage());
+        case editRoute:
+          return CupertinoPageRoute(builder: (_)=>EditPage(arguments));
         case commentRoute:
           return CupertinoPageRoute(builder: (_)=>CommentPage(arguments));
         case scheduleRoute:

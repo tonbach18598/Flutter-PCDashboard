@@ -10,7 +10,7 @@ import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:flutter_pcdashboard/utilities/router.dart';
 import 'package:flutter_pcdashboard/utilities/toast.dart';
 import 'package:flutter_pcdashboard/utilities/value.dart';
-import 'package:flutter_pcdashboard/widgets/loading_post.dart';
+import 'package:flutter_pcdashboard/widgets/loading_dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ClassPage extends StatefulWidget {
@@ -51,6 +51,9 @@ class _ClassPageState extends State<ClassPage> {
             showActionSheet(context,state.post);
           } else if (state is PressCancelState) {
             Navigator.of(context).pop();
+          } else if(state is PressEditState){
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(Router.editRoute,arguments: state.post);
           } else if(state is SuccessPressDeleteState){
             Navigator.of(context).pop();
             posts.remove(state.post);
@@ -313,7 +316,7 @@ class _ClassPageState extends State<ClassPage> {
                         )
                       ],
                     ),
-                    state is LoadingState ? LoadingPost() : Container()
+                    state is LoadingState ? LoadingDashboard() : Container()
                   ],
                 )),
       ),
@@ -336,7 +339,7 @@ class _ClassPageState extends State<ClassPage> {
                 style: TextStyle(color: Colors.orange),
               ),
               onPressed: () {
-                /** */
+                BlocProvider.of<ClassBloc>(blocContext).add(PressEditEvent(post));
               },
             ),
             CupertinoActionSheetAction(

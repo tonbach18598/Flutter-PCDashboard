@@ -9,9 +9,9 @@ class LoadingPost extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       color: Colors.black12,
       child: Center(
-        child:SpinKitHourGlass(
+        child:SpinKitCubeGrid(
           color: Colors.orange,
-          size: 60.0,
+          size: 50.0,
         ),
       ),
     );

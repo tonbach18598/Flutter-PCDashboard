@@ -1,24 +1,24 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 
-abstract class PostState extends Equatable{
-  const PostState();
+abstract class EditState extends Equatable{
+  const EditState();
 }
 
-class InitialPostState extends PostState{
+class InitialEditState extends EditState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class LoadingState extends PostState{
+class LoadingState extends EditState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 
 }
 
-class InitializeSelfState extends PostState{
+class InitializeSelfState extends EditState{
   SelfResponse self;
 
   InitializeSelfState(this.self);
@@ -29,19 +29,19 @@ class InitializeSelfState extends PostState{
 
 }
 
-class SuccessPressPostState extends PostState{
+class SuccessPressEditState extends EditState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailurePressPostState extends PostState{
+class FailurePressEditState extends EditState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningPressPostState extends PostState{
+class WarningPressEditState extends EditState{
   @override
   // TODO: implement props
   List<Object> get props => null;

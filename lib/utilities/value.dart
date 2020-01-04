@@ -32,4 +32,8 @@ class Value{
   static final String CONFIRM='Xác nhận';
   static final String STUDENT_LIST='Danh sách sinh viên';
   static final String TEACHER_LIST='Danh sách giảng viên';
+  static final String POST='Đăng';
+  static final String YOUR_THINKING='Cảm nghĩ của bạn...';
+  static final String ADD_IMAGE='Thêm hình ảnh';
+  static final String MEMBER_OF='Thành viên của ';
 }
