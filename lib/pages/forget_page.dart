@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_event.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_state.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/widgets/loading_signin.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
@@ -43,12 +43,12 @@ class _ForgetPageState extends State<ForgetPage> {
             Navigator.of(context).pop();
           } else if (state is SuccessPressGetPasswordState) {
             usernameController.text = '';
-            ToastUtil.showSuccessToast(
+            Toasts.showSuccessToast(
                 "Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
           } else if (state is FailurePressGetPasswordState) {
-            ToastUtil.showFailureToast("Lấy mật khẩu thất bại");
+            Toasts.showFailureToast("Lấy mật khẩu thất bại");
           } else if (state is WarningPressGetPasswordState) {
-            ToastUtil.showWarningToast("Tài khoản không được để trống");
+            Toasts.showWarningToast("Tài khoản không được để trống");
           }
         },
         child: BlocBuilder<ForgetBloc, ForgetState>(
@@ -56,45 +56,58 @@ class _ForgetPageState extends State<ForgetPage> {
               alignment: AlignmentDirectional.center,
               children: <Widget>[
                 Scaffold(
-                      body: SingleChildScrollView(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          color: Color(0xf5f5f5),
-                          child: Column(
-                            children: <Widget>[
-                              Logo(),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: MediaQuery.of(context).size.height / 16,
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 75, bottom: 10, right: 30, left: 30),
-                                  child: SigninTextField(
-                                    textEditingController: usernameController,
-                                    labelText: Value.ACCOUNT,
-                                    prefixIcon: Icon(Icons.person),
-                                  )),
-                              ForgetPasswordButton(
-                                text: Value.BACK,
-                                onPress: () {
-                                  BlocProvider.of<ForgetBloc>(context)
-                                      .add(PressBackEvent());
-                                },
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: MediaQuery.of(context).size.height / 8,
-                              ),
-                              SigninButton(
-                                text: Value.GET_PASSWORD.toUpperCase(),
-                                onPress: () {
-                                  BlocProvider.of<ForgetBloc>(context).add(
-                                      PressGetPasswordEvent(
-                                          usernameController.text.trim()));
-                                },
-                              ),
-                            ],
+                      body: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                        Logo(),
+                                        Column(
+                                            children: <Widget>[
+                                              Padding(
+                                                  padding: const EdgeInsets.fromLTRB(
+                                                      30,10,30,10),
+                                                  child: SigninTextField(
+                                                    textEditingController: usernameController,
+                                                    labelText: Values.ACCOUNT,
+                                                    prefixIcon: Icon(Icons.person),
+                                                  )),
+                                              ForgetPasswordButton(
+                                                text: Values.BACK,
+                                                onPress: () {
+                                                  BlocProvider.of<ForgetBloc>(context)
+                                                      .add(PressBackEvent());
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                      ],
+                                    ),
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(0,10,0,10),
+                                      child: SigninButton(
+                                        text: Values.GET_PASSWORD.toUpperCase(),
+                                        onPress: () {
+                                          BlocProvider.of<ForgetBloc>(context).add(
+                                              PressGetPasswordEvent(
+                                                  usernameController.text.trim()));
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(height: MediaQuery.of(context).size.height/10,)
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 
 class ContactPage extends StatefulWidget {
   @override
@@ -39,10 +39,10 @@ class _ContactPageState extends State<ContactPage> {
                       bottomRight: Radius.circular(
                           MediaQuery.of(context).size.height / 8)),
                 ),
-                child: Center(child: Text(Value.CHAT.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(child: Text(Values.CHAT.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),
               onTap: () {
-                Navigator.of(context).pushNamed(Router.chatRoute);
+                Navigator.of(context).pushNamed(Routes.chatRoute);
               },
             ),
           ),
@@ -74,11 +74,11 @@ class _ContactPageState extends State<ContactPage> {
                       bottomLeft: Radius.circular(
                           MediaQuery.of(context).size.height / 8)),
                 ),
-                child: Center(child: Text(Value.STUDENT_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(child: Text(Values.STUDENT_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),
               onTap: () {
                 Navigator.of(context)
-                    .pushNamed(Router.userRoute, arguments: 'SV');
+                    .pushNamed(Routes.userRoute, arguments: 'SV');
               },
             ),
           ),
@@ -110,11 +110,11 @@ class _ContactPageState extends State<ContactPage> {
                       bottomRight: Radius.circular(
                           MediaQuery.of(context).size.height / 8)),
                 ),
-                child: Center(child: Text(Value.TEACHER_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(child: Text(Values.TEACHER_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),
               onTap: () {
                 Navigator.of(context)
-                    .pushNamed(Router.userRoute, arguments: 'GV');
+                    .pushNamed(Routes.userRoute, arguments: 'GV');
               },
             ),
           ),

@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 
-class Validation{
+class Validations{
 
   static bool isValidPassword(String password){
     return password.length>=6?true:false;
@@ -19,7 +19,7 @@ class Validation{
 
   static Future<bool> isConnectedNetwork() async {
     try {
-      final result = await InternetAddress.lookup(Config.baseUrl)
+      final result = await InternetAddress.lookup(Configs.baseUrl)
           .timeout(const Duration(seconds: 20));
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return true;

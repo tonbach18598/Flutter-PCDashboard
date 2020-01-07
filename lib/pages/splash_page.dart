@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -47,9 +47,9 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   Future afterFirstLayout(BuildContext context) async{
-    if (await PreferencesUtil.loadToken() == null)
-      Navigator.of(context).pushReplacementNamed(Router.signinRoute);
+    if (await Preferences.loadToken() == null)
+      Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
     else
-      Navigator.of(context).pushReplacementNamed(Router.dashboardRoute);
+      Navigator.of(context).pushReplacementNamed(Routes.dashboardRoute);
   }
 }

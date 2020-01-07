@@ -1,4 +1,4 @@
-class Config{
+class Configs{
   static final String currentVersion='1.0.0';
   static final String baseUrl='http://pcdashboard.herokuapp.com';
   static final String homeUrl='http://www.phys.hcmus.edu.vn/vlth';

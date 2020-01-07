@@ -6,8 +6,8 @@ import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_event.dart';
 import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -45,12 +45,12 @@ class _EditPageState extends State<EditPage> {
             self=state.self;
           }
           else if(state is SuccessPressEditState){
-            ToastUtil.showSuccessToast('Sửa bài đăng thành công');
+            Toasts.showSuccessToast('Sửa bài đăng thành công');
             Navigator.of(context).pop();
           }else if(state is WarningPressEditState){
-            ToastUtil.showWarningToast('Nội dung bài đăng không được để trống');
+            Toasts.showWarningToast('Nội dung bài đăng không được để trống');
           }else if(state is FailurePressEditState){
-            ToastUtil.showFailureToast('Sửa bài đăng thất bại');
+            Toasts.showFailureToast('Sửa bài đăng thất bại');
           }
         },
         child: BlocBuilder<EditBloc,EditState>(
@@ -70,7 +70,7 @@ class _EditPageState extends State<EditPage> {
               actions: <Widget>[
                 FlatButton(
                   child: Text(
-                    Value.EDIT.toUpperCase(),
+                    Values.EDIT.toUpperCase(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -130,7 +130,7 @@ class _EditPageState extends State<EditPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5),
                                   child: Text(
-                                    Value.MEMBER_OF+self.classId,
+                                    Values.MEMBER_OF+self.classId,
                                     style: TextStyle(fontSize: 12, color: Colors.grey),
                                   ),
                                 )
@@ -150,7 +150,7 @@ class _EditPageState extends State<EditPage> {
                             style: TextStyle(fontSize: 20),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: Value.YOUR_THINKING,
+                                hintText: Values.YOUR_THINKING,
                                 hintStyle: TextStyle(fontSize: 20)),
                           ),
                         ),
@@ -181,7 +181,7 @@ class _EditPageState extends State<EditPage> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
                           child: Text(
-                            Value.ADD_IMAGE,
+                            Values.ADD_IMAGE,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         )),

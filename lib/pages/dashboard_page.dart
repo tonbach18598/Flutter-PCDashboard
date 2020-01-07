@@ -6,9 +6,9 @@ import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/pages/study_page.dart';
 import 'package:flutter_pcdashboard/pages/contact_page.dart';
 import 'package:flutter_pcdashboard/pages/department_page.dart';
@@ -43,16 +43,16 @@ class _DashboardPageState extends State<DashboardPage> {
             self = state.self;
           } else if (state is TapSelfDetailsState) {
           } else if (state is TapHomeState) {
-            Navigator.of(context).pushNamed(Router.homeRoute);
+            Navigator.of(context).pushNamed(Routes.homeRoute);
           } else if (state is TapUpdateInformationState) {
-            Navigator.of(context).pushNamed(Router.updateRoute);
+            Navigator.of(context).pushNamed(Routes.updateRoute);
           } else if (state is TapChangePasswordState) {
-            Navigator.of(context).pushNamed(Router.changeRoute);
+            Navigator.of(context).pushNamed(Routes.changeRoute);
           } else if (state is TapFeedbackState) {
-            Navigator.of(context).pushNamed(Router.feedbackRoute);
+            Navigator.of(context).pushNamed(Routes.feedbackRoute);
           } else if (state is TapSignoutState) {
-            ToastUtil.showSuccessToast("Đăng xuất thành công");
-            Navigator.of(context).pushReplacementNamed(Router.signinRoute);
+            Toasts.showSuccessToast("Đăng xuất thành công");
+            Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
           }
         },
         child: BlocBuilder<DashboardBloc, DashboardState>(
@@ -108,7 +108,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           errorWidget: (context, url, error) =>
                               Icon(
                                 Icons.error,
-                                color: Colors.orange,
+                                color: Colors.blue,
                               ),
                         ),
                       ),
@@ -127,35 +127,35 @@ class _DashboardPageState extends State<DashboardPage> {
                     onTap: () {},
                   ),
                   DashboardDrawerItem(
-                      title: Value.HOME_PAGE,
+                      title: Values.HOME_PAGE,
                       icon: Icons.home,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapHomeEvent());
                       }),
                   DashboardDrawerItem(
-                      title: Value.UPDATE_INFORMATION,
+                      title: Values.UPDATE_INFORMATION,
                       icon: Icons.account_circle,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapUpdateInformationEvent());
                       }),
                   DashboardDrawerItem(
-                      title: Value.CHANGE_PASSWORD,
+                      title: Values.CHANGE_PASSWORD,
                       icon: Icons.settings,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapChangePasswordEvent());
                       }),
                   DashboardDrawerItem(
-                      title: Value.FEEDBACK,
+                      title: Values.FEEDBACK,
                       icon: Icons.feedback,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapFeedbackEvent());
                       }),
                   DashboardDrawerItem(
-                      title: Value.SIGN_OUT,
+                      title: Values.SIGN_OUT,
                       icon: Icons.exit_to_app,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
@@ -179,10 +179,10 @@ class _DashboardPageState extends State<DashboardPage> {
                             labelColor: Colors.deepOrangeAccent,
                             tabs: <Widget>[
                               DashboardTabBarItem(
-                                  Value.DEPARTMENT, Icons.fiber_new),
-                              DashboardTabBarItem(Value.CLASS, Icons.people),
-                              DashboardTabBarItem(Value.CONTACT, Icons.public),
-                              DashboardTabBarItem(Value.STUDY, Icons.school)
+                                  Values.DEPARTMENT, Icons.fiber_new),
+                              DashboardTabBarItem(Values.CLASS, Icons.people),
+                              DashboardTabBarItem(Values.CONTACT, Icons.public),
+                              DashboardTabBarItem(Values.STUDY, Icons.school)
                             ],
                           ),
                         ),

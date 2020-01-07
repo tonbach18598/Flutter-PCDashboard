@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/chat_bloc/chat_event.dart';
 import 'package:flutter_pcdashboard/blocs/chat_bloc/chat_state.dart';
 import 'package:flutter_pcdashboard/models/responses/chat_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class ChatBloc extends Bloc<ChatEvent,ChatState>{
@@ -45,9 +45,9 @@ class ChatBloc extends Bloc<ChatEvent,ChatState>{
 
 Future<List<ChatResponse>> fetchList(int number) async {
   try {
-    String token = await PreferencesUtil.loadToken();
+    String token = await Preferences.loadToken();
     Response response = await Dio().get(
-        Config.baseUrl + Config.chatPath,
+        Configs.baseUrl + Configs.chatPath,
         queryParameters: {'number':number},
         options: Options(headers: {'Authorization': token}));
     List<ChatResponse> messages = (response.data as List)

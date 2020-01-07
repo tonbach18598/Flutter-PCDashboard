@@ -5,7 +5,7 @@ import 'package:flutter_pcdashboard/blocs/department_bloc/department_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_event.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_state.dart';
 import 'package:flutter_pcdashboard/models/responses/department_response.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/widgets/loading_dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -26,7 +26,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
           if (state is SuccessFetchListState) {
               posts = state.posts;
           } else if (state is FailureFetchListState) {
-            ToastUtil.showFailureToast("Tải bảng tin thất bại");
+            Toasts.showFailureToast("Tải bảng tin thất bại");
           }
         },
         child: BlocBuilder<DepartmentBloc, DepartmentState>(

@@ -6,9 +6,9 @@ import 'package:flutter_pcdashboard/blocs/update_bloc/update_event.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
 import 'package:flutter_pcdashboard/models/requests/update_information_request.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
-import 'package:flutter_pcdashboard/utilities/validation.dart';
+import 'package:flutter_pcdashboard/utilities/validations.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   @override
@@ -25,9 +25,9 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       } else if (event is PressConfirmEvent) {
         yield LoadingState();
         if (event.email.isNotEmpty && event.phone.isNotEmpty) {
-          if (!Validation.isValidEmail(event.email)) {
+          if (!Validations.isValidEmail(event.email)) {
             yield WarningEmailPressConfirmState();
-          } else if (!Validation.isValidPhone(event.phone)) {
+          } else if (!Validations.isValidPhone(event.phone)) {
             yield WarningPhonePressConfirmState();
           } else {
             SelfResponse self =
@@ -50,21 +50,21 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
 }
 
 Future<SelfResponse> initializeSelf() async {
-  SelfResponse self = await PreferencesUtil.loadSelf();
+  SelfResponse self = await Preferences.loadSelf();
   return self;
 }
 
 Future<SelfResponse> updateInformation(String email, String phone) async {
   try {
-    String token = await PreferencesUtil.loadToken();
-    String userId = (await PreferencesUtil.loadSelf()).userId;
-    Response response = await Dio().put(Config.baseUrl + Config.userPath,
+    String token = await Preferences.loadToken();
+    String userId = (await Preferences.loadSelf()).userId;
+    Response response = await Dio().put(Configs.baseUrl + Configs.userPath,
         data:
             UpdateInformationRequest(userId: userId, email: email, phone: phone)
                 .toJson(),
         options: Options(headers: {'Authorization': token}));
     SelfResponse self = SelfResponse.fromJson(response.data);
-    await PreferencesUtil.saveSelf(self);
+    await Preferences.saveSelf(self);
     return self;
   } catch (e) {
     print(e);

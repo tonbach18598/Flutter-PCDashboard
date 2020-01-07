@@ -5,8 +5,8 @@ import 'package:flutter_pcdashboard/blocs/update_bloc/update_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_event.dart';
 import 'package:flutter_pcdashboard/blocs/update_bloc/update_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_update.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
 import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
@@ -48,22 +48,22 @@ class _UpdatePageState extends State<UpdatePage> {
             phoneController.text = self.phone;
           }else if(state is SuccessPressConfirmState){
             BlocProvider.of<UpdateBloc>(context).add(InitializeSelfEvent());
-            ToastUtil.showSuccessToast('Cập nhật thông tin thành công');
+            Toasts.showSuccessToast('Cập nhật thông tin thành công');
           }else if(state is WarningEmptyPressConfirmState){
-            ToastUtil.showWarningToast('Email hoặc số điện thoại không được để trống');
+            Toasts.showWarningToast('Email hoặc số điện thoại không được để trống');
           }else if(state is WarningEmailPressConfirmState){
-            ToastUtil.showWarningToast('Email không hợp lệ');
+            Toasts.showWarningToast('Email không hợp lệ');
           }else if(state is WarningPhonePressConfirmState){
-            ToastUtil.showWarningToast('Số điện thoại không hợp lệ');
+            Toasts.showWarningToast('Số điện thoại không hợp lệ');
           }else if(state is FailurePressConfirmState){
-            ToastUtil.showFailureToast('Cập nhật thông tin thất bại');
+            Toasts.showFailureToast('Cập nhật thông tin thất bại');
           }
         },
         child: BlocBuilder<UpdateBloc, UpdateState>(
           builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
               title: Text(
-                Value.UPDATE_INFORMATION.toUpperCase(),
+                Values.UPDATE_INFORMATION.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               elevation: 0,
@@ -132,7 +132,7 @@ class _UpdatePageState extends State<UpdatePage> {
                           readOnly: true,
                           prefixIcon: Icon(Icons.people,color: Colors.orange,),
                           borderColor: Colors.orange,
-                          hintText: Value.CLASS,
+                          hintText: Values.CLASS,
                           controller: classController,
                         )
                       ),
@@ -141,7 +141,7 @@ class _UpdatePageState extends State<UpdatePage> {
                           child: UpdateInformationTextField(
                             prefixIcon: Icon(Icons.mail,color: Colors.lightBlue,),
                             borderColor: Colors.lightBlue,
-                            hintText: Value.EMAIL,
+                            hintText: Values.EMAIL,
                             controller: emailController,
                           )
                       ),
@@ -150,14 +150,14 @@ class _UpdatePageState extends State<UpdatePage> {
                           child: UpdateInformationTextField(
                             prefixIcon: Icon(Icons.smartphone,color: Colors.lightBlue,),
                             borderColor: Colors.lightBlue,
-                            hintText: Value.PHONE,
+                            hintText: Values.PHONE,
                             controller: phoneController,
                           )
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: SigninButton(
-                          text: Value.CONFIRM.toUpperCase(),
+                          text: Values.CONFIRM.toUpperCase(),
                           onPress: () {
                             BlocProvider.of<UpdateBloc>(context).add(PressConfirmEvent(emailController.text.trim(),phoneController.text.trim()));
                           },

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/change_bloc/change_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/change_bloc/change_event.dart';
 import 'package:flutter_pcdashboard/blocs/change_bloc/change_state.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_update.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
 import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
@@ -37,23 +37,23 @@ class _ChangePageState extends State<ChangePage> {
       child: BlocListener<ChangeBloc,ChangeState>(
         listener: (context,state){
           if(state is SuccessPressConfirmState){
-            ToastUtil.showSuccessToast('Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại');
-            Navigator.of(context).pushReplacementNamed(Router.signinRoute);
+            Toasts.showSuccessToast('Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại');
+            Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
           }else if(state is WarningEmptyPressConfirmState){
-            ToastUtil.showWarningToast('Mật khẩu cũ hoặc mới không được để trống');
+            Toasts.showWarningToast('Mật khẩu cũ hoặc mới không được để trống');
           }else if(state is WarningPasswordPressConfirmState){
-            ToastUtil.showWarningToast('Mật khẩu không hợp lệ');
+            Toasts.showWarningToast('Mật khẩu không hợp lệ');
           }else if(state is WarningMatchPressConfirmState){
-            ToastUtil.showWarningToast('Mật khẩu mới nhập lại không khớp');
+            Toasts.showWarningToast('Mật khẩu mới nhập lại không khớp');
           }else if(state is FailurePressConfirmState){
-            ToastUtil.showFailureToast('Thay đổi mật khẩu thất bại');
+            Toasts.showFailureToast('Thay đổi mật khẩu thất bại');
           }
         },
         child: BlocBuilder<ChangeBloc,ChangeState>(
           builder:(context,state)=> Scaffold(
             appBar: GradientAppBar(
               title: Text(
-                Value.CHANGE_PASSWORD.toUpperCase(),
+                Values.CHANGE_PASSWORD.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               elevation: 0,
@@ -90,7 +90,7 @@ class _ChangePageState extends State<ChangePage> {
                               color: Colors.orange,
                             ),
                             borderColor: Colors.orange,
-                            hintText: Value.OLD_PASSWORD,
+                            hintText: Values.OLD_PASSWORD,
                             controller: oldController,
                           )),
                       Padding(
@@ -102,7 +102,7 @@ class _ChangePageState extends State<ChangePage> {
                               color: Colors.lightBlue,
                             ),
                             borderColor: Colors.lightBlue,
-                            hintText: Value.NEW_PASSWORD,
+                            hintText: Values.NEW_PASSWORD,
                             controller: newController,
                           )),
                       Padding(
@@ -114,13 +114,13 @@ class _ChangePageState extends State<ChangePage> {
                               color: Colors.lightBlue,
                             ),
                             borderColor: Colors.lightBlue,
-                            hintText: Value.RETYPE_PASSWORD,
+                            hintText: Values.RETYPE_PASSWORD,
                             controller: retypeController,
                           )),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: SigninButton(
-                          text: Value.CONFIRM.toUpperCase(),
+                          text: Values.CONFIRM.toUpperCase(),
                           onPress: () {BlocProvider.of<ChangeBloc>(context).add(PressConfirmEvent(oldController.text.trim(),newController.text.trim(),retypeController.text.trim()));},
                         ),
                       )

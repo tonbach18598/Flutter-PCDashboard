@@ -7,9 +7,9 @@ import 'package:flutter_pcdashboard/blocs/class_bloc/class_event.dart';
 import 'package:flutter_pcdashboard/blocs/class_bloc/class_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -41,26 +41,26 @@ class _ClassPageState extends State<ClassPage> {
           } else if (state is SuccessFetchListState) {
             posts = state.posts;
           } else if (state is FailureFetchListState) {
-            ToastUtil.showFailureToast('Tải bảng tin thất bại');
+            Toasts.showFailureToast('Tải bảng tin thất bại');
           } else if (state is TapPostState) {
-            await Navigator.of(context).pushNamed(Router.postRoute).then((_){BlocProvider.of<ClassBloc>(context).add(FetchListEvent(10));});
+            await Navigator.of(context).pushNamed(Routes.postRoute).then((_){BlocProvider.of<ClassBloc>(context).add(FetchListEvent(10));});
           } else if (state is TapCommentState) {
             Navigator.of(context)
-                .pushNamed(Router.commentRoute, arguments: state.post);
+                .pushNamed(Routes.commentRoute, arguments: state.post);
           } else if (state is PressMoreState) {
             showActionSheet(context,state.post);
           } else if (state is PressCancelState) {
             Navigator.of(context).pop();
           } else if(state is PressEditState){
             Navigator.of(context).pop();
-            Navigator.of(context).pushNamed(Router.editRoute,arguments: state.post);
+            Navigator.of(context).pushNamed(Routes.editRoute,arguments: state.post);
           } else if(state is SuccessPressDeleteState){
             Navigator.of(context).pop();
             posts.remove(state.post);
-            ToastUtil.showSuccessToast('Xoá bài viết thành công');
+            Toasts.showSuccessToast('Xoá bài viết thành công');
           } else if(state is FailurePressDeleteState){
             Navigator.of(context).pop();
-            ToastUtil.showFailureToast('Xoá bài viết thất bại');
+            Toasts.showFailureToast('Xoá bài viết thất bại');
           }
         },
         child: BlocBuilder<ClassBloc, ClassState>(
@@ -124,7 +124,7 @@ class _ClassPageState extends State<ClassPage> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            Value.SHARE_YOUR_THINKING,
+                                            Values.SHARE_YOUR_THINKING,
                                             style: TextStyle(
                                                 color: Colors.grey, fontSize: 14),
                                           ),
@@ -276,7 +276,7 @@ class _ClassPageState extends State<ClassPage> {
                                                       padding: const EdgeInsets.only(
                                                           left: 5),
                                                       child: Text(
-                                                        Value.COMMENT,
+                                                        Values.COMMENT,
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight:
@@ -329,13 +329,13 @@ class _ClassPageState extends State<ClassPage> {
       builder: (BuildContext context) {
         return CupertinoActionSheet(
           title: Text(
-            Value.OPTION.toUpperCase(),
+            Values.OPTION.toUpperCase(),
             style: TextStyle(color: Colors.blueAccent),
           ),
           actions: <Widget>[
             CupertinoActionSheetAction(
               child: Text(
-                Value.EDIT,
+                Values.EDIT,
                 style: TextStyle(color: Colors.orange),
               ),
               onPressed: () {
@@ -343,7 +343,7 @@ class _ClassPageState extends State<ClassPage> {
               },
             ),
             CupertinoActionSheetAction(
-              child: Text(Value.DELETE,
+              child: Text(Values.DELETE,
                   style: TextStyle(color: Colors.orange)),
               onPressed: () {
                 BlocProvider.of<ClassBloc>(blocContext).add(PressDeleteEvent(post));
@@ -353,7 +353,7 @@ class _ClassPageState extends State<ClassPage> {
           cancelButton: CupertinoActionSheetAction(
             isDefaultAction: true,
             child:
-                Text(Value.CANCEL, style: TextStyle(color: Colors.deepOrange)),
+                Text(Values.CANCEL, style: TextStyle(color: Colors.deepOrange)),
             onPressed: () {
               BlocProvider.of<ClassBloc>(blocContext).add(PressCancelEvent());
             },

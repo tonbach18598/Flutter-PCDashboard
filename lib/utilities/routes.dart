@@ -16,7 +16,7 @@ import 'package:flutter_pcdashboard/pages/splash_page.dart';
 import 'package:flutter_pcdashboard/pages/update_page.dart';
 import 'package:flutter_pcdashboard/pages/user_page.dart';
 
-class Router{
+class Routes{
   static const splashRoute='/';
   static const signinRoute='/signin';
   static const forgetRoute='/forget';

@@ -1,7 +1,7 @@
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferencesUtil {
+class Preferences {
   static Future saveToken(String token) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('token', token);

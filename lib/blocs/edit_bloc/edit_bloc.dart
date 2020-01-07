@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_event.dart';
 import 'package:flutter_pcdashboard/blocs/edit_bloc/edit_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 
@@ -38,15 +38,15 @@ class EditBloc extends Bloc<EditEvent,EditState>{
 }
 
 Future<SelfResponse> initializeSelf()async{
-  SelfResponse self=await PreferencesUtil.loadSelf();
+  SelfResponse self=await Preferences.loadSelf();
   return self;
 }
 
 Future<bool> updatePost(String postId,String content)async{
   try {
-    String token = await PreferencesUtil.loadToken();
+    String token = await Preferences.loadToken();
     Response response = await Dio().put(
-        Config.baseUrl + Config.classPath+postId,
+        Configs.baseUrl + Configs.classPath+postId,
         queryParameters: {'content': content},
         options: Options(headers: {'Authorization': token}));
     return response.data;

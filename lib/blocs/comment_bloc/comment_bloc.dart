@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_event.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_state.dart';
 import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class CommentBloc extends Bloc<CommentEvent, CommentState> {
@@ -52,9 +52,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
 
 Future<List<CommentResponse>> fetchList(String postId) async {
   try {
-    String token = await PreferencesUtil.loadToken();
+    String token = await Preferences.loadToken();
     Response response = await Dio().get(
-        Config.baseUrl + Config.commentPath + postId,
+        Configs.baseUrl + Configs.commentPath + postId,
         options: Options(headers: {'Authorization': token}));
     List<CommentResponse> comments = (response.data as List)
         .map((item) => CommentResponse.fromJson(item))
@@ -68,9 +68,9 @@ Future<List<CommentResponse>> fetchList(String postId) async {
 
 Future<bool> deleteComment(String commentId) async {
   try {
-    String token = await PreferencesUtil.loadToken();
+    String token = await Preferences.loadToken();
     Response response = await Dio().delete(
-        Config.baseUrl + Config.commentPath + commentId,
+        Configs.baseUrl + Configs.commentPath + commentId,
         options: Options(headers: {'Authorization': token}));
     return response.data;
   } catch (e) {
@@ -81,9 +81,9 @@ Future<bool> deleteComment(String commentId) async {
 
 Future<bool> createComment(String postId, String content)async{
   try {
-    String token = await PreferencesUtil.loadToken();
+    String token = await Preferences.loadToken();
     Response response = await Dio().post(
-        Config.baseUrl + Config.commentPath + postId,
+        Configs.baseUrl + Configs.commentPath + postId,
         queryParameters: {'content': content},
         options: Options(headers: {'Authorization': token}));
     return response.data;

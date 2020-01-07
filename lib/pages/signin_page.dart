@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_event.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_state.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/widgets/loading_signin.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_button.dart';
@@ -43,78 +43,91 @@ class _SigninPageState extends State<SigninPage> {
       child: BlocListener<SigninBloc, SigninState>(
         listener: (context, state) {
           if (state is SuccessPressSigninState) {
-            ToastUtil.showSuccessToast("Đăng nhập thành công");
-            Navigator.of(context).pushReplacementNamed(Router.dashboardRoute);
-          } else if(state is FailurePressSigninState){
-            ToastUtil.showFailureToast("Đăng nhập thất bại");
-          } else if(state is WarningPressSigninState){
-            ToastUtil.showWarningToast("Tài khoản hoặc mật khẩu không được để trống");
-          }
-          else if (state is PressForgetState) {
-            Navigator.of(context).pushNamed(Router.forgetRoute);
+            Toasts.showSuccessToast("Đăng nhập thành công");
+            Navigator.of(context).pushReplacementNamed(Routes.dashboardRoute);
+          } else if (state is FailurePressSigninState) {
+            Toasts.showFailureToast("Đăng nhập thất bại");
+          } else if (state is WarningPressSigninState) {
+            Toasts.showWarningToast(
+                "Tài khoản hoặc mật khẩu không được để trống");
+          } else if (state is PressForgetState) {
+            Navigator.of(context).pushNamed(Routes.forgetRoute);
           }
         },
         child: BlocBuilder<SigninBloc, SigninState>(
             builder: (context, state) => Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                Scaffold(
-                      body: SingleChildScrollView(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          color: Color(0xf5f5f5),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Logo(),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height / 16,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 30, left: 30),
-                                  child:SigninTextField(
-                                            textEditingController:
-                                                usernameController,
-                                            labelText: Value.ACCOUNT,
-                                            prefixIcon: Icon(Icons.person),
-                                          )),
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20, bottom: 10, left: 30, right: 30),
-                                    child:SigninTextField(
-                                              textEditingController:
-                                                  passwordController,
-                                              labelText: Value.PASSWORD,
-                                              obscureText: true,
-                                              prefixIcon: Icon(Icons.lock),
-                                            )),
-                                ForgetPasswordButton(
-                                    text: Value.FORGET_PASSWORD,
-                                    onPress: () {
-                                      BlocProvider.of<SigninBloc>(context)
-                                          .add(PressForgetEvent());
-                                    }),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height / 8,
-                                ),
-                                SigninButton(
-                                    text: Value.SIGN_IN.toUpperCase(),
-                                    onPress: () {
-                                      BlocProvider.of<SigninBloc>(context)
-                                          .add(PressSigninEvent(usernameController.text.trim(),passwordController.text.trim()));
-                                    }),
-                              ],
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    Scaffold(
+                      body: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: SingleChildScrollView(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
+                                      children: <Widget>[
+                                        Logo(),
+                                        Column(
+                                            children: <Widget>[
+                                              Padding(
+                                                  padding: const EdgeInsets.fromLTRB(
+                                                      30, 10, 30, 10),
+                                                  child: SigninTextField(
+                                                    textEditingController: usernameController,
+                                                    labelText: Values.ACCOUNT,
+                                                    prefixIcon: Icon(Icons.person),
+                                                  )),
+                                              Padding(
+                                                  padding: const EdgeInsets.fromLTRB(
+                                                      30, 10, 30, 10),
+                                                  child: SigninTextField(
+                                                    textEditingController: passwordController,
+                                                    labelText: Values.PASSWORD,
+                                                    obscureText: true,
+                                                    prefixIcon: Icon(Icons.lock),
+                                                  )),
+                                              ForgetPasswordButton(
+                                                  text: Values.FORGET_PASSWORD,
+                                                  onPress: () {
+                                                    BlocProvider.of<SigninBloc>(context)
+                                                        .add(PressForgetEvent());
+                                                  }),
+                                            ],
+                                          ),
+                                      ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                        child: SigninButton(
+                                            text: Values.SIGN_IN.toUpperCase(),
+                                            onPress: () {
+                                              BlocProvider.of<SigninBloc>(context).add(
+                                                  PressSigninEvent(
+                                                      usernameController.text.trim(),
+                                                      passwordController.text.trim()));
+                                            }),
+                                      ),
+                                      SizedBox(
+                                        height: MediaQuery.of(context).size.height/10,
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
                         ),
                       ),
                     ),
-                state is LoadingState?LoadingSignin():Container()
-              ],
-            )),
+                    state is LoadingState ? LoadingSignin() : Container()
+                  ],
+                )),
       ),
     );
   }

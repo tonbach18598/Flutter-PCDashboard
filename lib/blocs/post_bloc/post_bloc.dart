@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/post_bloc/post_event.dart';
 import 'package:flutter_pcdashboard/blocs/post_bloc/post_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -45,17 +45,17 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 }
 
 Future<SelfResponse> initializeSelf() async {
-  SelfResponse self = await PreferencesUtil.loadSelf();
+  SelfResponse self = await Preferences.loadSelf();
   return self;
 }
 
 Future<bool> createPost(String content, File image) async {
   try {
-    String token = await PreferencesUtil.loadToken();
-    String classId = (await PreferencesUtil.loadSelf()).classId;
+    String token = await Preferences.loadToken();
+    String classId = (await Preferences.loadSelf()).classId;
     Response response;
     if (image == null) {
-      response = await Dio().post(Config.baseUrl + Config.classPath,
+      response = await Dio().post(Configs.baseUrl + Configs.classPath,
           queryParameters: {'content': content, 'classId': classId},
           options: Options(headers: {'Authorization': token}));
     } else {

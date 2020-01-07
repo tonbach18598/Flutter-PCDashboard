@@ -37,11 +37,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }
 
   Future<SelfResponse> initializeSelf()async{
-    SelfResponse self=await PreferencesUtil.loadSelf();
+    SelfResponse self=await Preferences.loadSelf();
     return self;
   }
 
   void onSignout() async {
-    await PreferencesUtil.clearAll();
+    await Preferences.clearAll();
   }
 }

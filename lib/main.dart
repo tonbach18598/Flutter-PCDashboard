@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:oktoast/oktoast.dart';
 
 void main() => runApp(App());
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
     return OKToast(
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          onGenerateRoute: Router.generateRoute,
+          onGenerateRoute: Routes.generateRoute,
           initialRoute: '/',
       ),
     );

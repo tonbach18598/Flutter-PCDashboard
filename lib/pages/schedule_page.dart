@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/models/responses/schedule_response.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -94,7 +94,7 @@ class _SchedulePageState extends State<SchedulePage> {
         elevation: 0,
         automaticallyImplyLeading: true,
         title: Text(
-          Value.SCHEDULE.toUpperCase(),
+          Values.SCHEDULE.toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         gradient: LinearGradient(

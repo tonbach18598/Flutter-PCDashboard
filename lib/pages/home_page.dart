@@ -1,7 +1,7 @@
 import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: Text(Value.HOME_PAGE.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text(Values.HOME_PAGE.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
         elevation: 0,
         automaticallyImplyLeading: true,
         gradient: LinearGradient(
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             end: FractionalOffset.bottomCenter),
       ),
       body: EasyWebView(
-        src: Config.homeUrl,
+        src: Configs.homeUrl,
       )
     );
   }

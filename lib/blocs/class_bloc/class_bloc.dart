@@ -4,7 +4,7 @@ import 'package:flutter_pcdashboard/blocs/class_bloc/class_event.dart';
 import 'package:flutter_pcdashboard/blocs/class_bloc/class_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class ClassBloc extends Bloc<ClassEvent, ClassState> {
@@ -52,16 +52,16 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
 }
 
 Future<SelfResponse> initializeSelf() async {
-  SelfResponse self = await PreferencesUtil.loadSelf();
+  SelfResponse self = await Preferences.loadSelf();
   return self;
 }
 
 Future<List<ClassResponse>> fetchList(int number) async {
   try {
-    String token = await PreferencesUtil.loadToken();
-    SelfResponse self = await PreferencesUtil.loadSelf();
+    String token = await Preferences.loadToken();
+    SelfResponse self = await Preferences.loadSelf();
     Response response = await Dio().get(
-        Config.baseUrl + Config.classPath + self.classId,
+        Configs.baseUrl + Configs.classPath + self.classId,
         queryParameters: {'number': number},
         options: Options(headers: {'Authorization': token}));
     List<ClassResponse> posts = (response.data as List)
@@ -76,9 +76,9 @@ Future<List<ClassResponse>> fetchList(int number) async {
 
 Future<bool> deletePost(String postId) async {
   try {
-    String token = await PreferencesUtil.loadToken();
+    String token = await Preferences.loadToken();
     Response response = await Dio().delete(
-        Config.baseUrl + Config.classPath + postId,
+        Configs.baseUrl + Configs.classPath + postId,
         options: Options(headers: {'Authorization': token}));
     return response.data;
   } catch (e) {

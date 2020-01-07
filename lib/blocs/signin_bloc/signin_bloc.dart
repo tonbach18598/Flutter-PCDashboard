@@ -3,11 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_event.dart';
 import 'package:flutter_pcdashboard/blocs/signin_bloc/signin_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/models/requests/signin_request.dart';
 import 'package:flutter_pcdashboard/models/responses/token_response.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
-import 'package:flutter_pcdashboard/utilities/validation.dart';
+import 'package:flutter_pcdashboard/utilities/validations.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
   @override
@@ -41,12 +41,12 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
 Future<bool> onSignin(String username, String password) async {
   try {
-    Response response = await Dio().post(Config.baseUrl + Config.tokenPath,
+    Response response = await Dio().post(Configs.baseUrl + Configs.tokenPath,
         data: SigninRequest(userId: username, password: password).toJson());
     String token = TokenResponse.fromJson(response.data).tokenType +
         ' ' +
         TokenResponse.fromJson(response.data).accessToken;
-    await PreferencesUtil.saveToken(token);
+    await Preferences.saveToken(token);
     await getSelfDetails(token);
     return true;
   } catch (e) {
@@ -57,10 +57,10 @@ Future<bool> onSignin(String username, String password) async {
 
 Future getSelfDetails(String token) async {
   try {
-    Response response = await Dio().get(Config.baseUrl + Config.userPath,
+    Response response = await Dio().get(Configs.baseUrl + Configs.userPath,
         options: Options(headers: {'Authorization': token}));
     SelfResponse self = SelfResponse.fromJson(response.data);
-    await PreferencesUtil.saveSelf(self);
+    await Preferences.saveSelf(self);
   } catch (e) {
     print(e);
   }

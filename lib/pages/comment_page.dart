@@ -9,8 +9,8 @@ import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_event.dart';
 import 'package:flutter_pcdashboard/blocs/comment_bloc/comment_state.dart';
 import 'package:flutter_pcdashboard/models/responses/class_response.dart';
 import 'package:flutter_pcdashboard/models/responses/comment_response.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_comment.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -56,27 +56,27 @@ class _CommentPageState extends State<CommentPage> {
               );
             });
           } else if (state is FailureFetchListState) {
-            ToastUtil.showFailureToast('Tải bình luận thất bại');
+            Toasts.showFailureToast('Tải bình luận thất bại');
           } else if (state is SuccessPressSendState) {
             contentController.text = '';
             BlocProvider.of<CommentBloc>(context).add(FetchListEvent(post.id));
           } else if (state is WarningPressSendState) {
-            ToastUtil.showWarningToast(
+            Toasts.showWarningToast(
                 'Nội dung bình luận không được để trống');
           } else if (state is FailurePressSendState) {
-            ToastUtil.showFailureToast('Gửi bình luận thất bại');
+            Toasts.showFailureToast('Gửi bình luận thất bại');
           } else if (state is SuccessPressDeleteState) {
             comments.remove(state.comment);
-            ToastUtil.showSuccessToast('Xoá bình luận thành công');
+            Toasts.showSuccessToast('Xoá bình luận thành công');
           } else if (state is FailurePressDeleteState) {
-            ToastUtil.showFailureToast('Xoá bình luận thất bại');
+            Toasts.showFailureToast('Xoá bình luận thất bại');
           }
         },
         child: BlocBuilder<CommentBloc, CommentState>(
           builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
               title: Text(
-                Value.COMMENT.toUpperCase(),
+                Values.COMMENT.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               elevation: 0,
@@ -205,7 +205,7 @@ class _CommentPageState extends State<CommentPage> {
                                   ),
                                   actions: <Widget>[
                                     IconSlideAction(
-                                      caption: Value.EDIT,
+                                      caption: Values.EDIT,
                                       color: Colors.lightBlueAccent,
                                       icon: Icons.edit,
                                       onTap: () {
@@ -215,7 +215,7 @@ class _CommentPageState extends State<CommentPage> {
                                       },
                                     ),
                                     IconSlideAction(
-                                      caption: Value.DELETE,
+                                      caption: Values.DELETE,
                                       color: Colors.blueAccent,
                                       icon: Icons.delete,
                                       onTap: () {
@@ -261,7 +261,7 @@ class _CommentPageState extends State<CommentPage> {
                                       style: TextStyle(fontSize: 16),
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
-                                          hintText: Value.ENTER_CONTENT,
+                                          hintText: Values.ENTER_CONTENT,
                                           hintStyle: TextStyle(fontSize: 16)),
                                     ),
                                   ),

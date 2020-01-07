@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_event.dart';
 import 'package:flutter_pcdashboard/blocs/department_bloc/department_state.dart';
 import 'package:flutter_pcdashboard/models/responses/department_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 
@@ -33,8 +33,8 @@ class DepartmentBloc extends Bloc<DepartmentEvent,DepartmentState>{
 
 Future<List<DepartmentResponse>> fetchList(int number)async{
   try{
-    String token=await PreferencesUtil.loadToken();
-    Response response=await Dio().get(Config.baseUrl+Config.departmentPath,queryParameters: {"number":number},options: Options(headers: {"Authorization": token}));
+    String token=await Preferences.loadToken();
+    Response response=await Dio().get(Configs.baseUrl+Configs.departmentPath,queryParameters: {"number":number},options: Options(headers: {"Authorization": token}));
     List<DepartmentResponse> posts=(response.data as List).map((item)=>DepartmentResponse.fromJson(item)).toList();
     return posts;
   }catch (e){

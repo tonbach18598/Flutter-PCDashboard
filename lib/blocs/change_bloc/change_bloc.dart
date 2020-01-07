@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/change_bloc/change_event.dart';
 import 'package:flutter_pcdashboard/blocs/change_bloc/change_state.dart';
 import 'package:flutter_pcdashboard/models/requests/change_password_request.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
-import 'package:flutter_pcdashboard/utilities/validation.dart';
+import 'package:flutter_pcdashboard/utilities/validations.dart';
 
 
 class ChangeBloc extends Bloc<ChangeEvent,ChangeState>{
@@ -20,7 +20,7 @@ class ChangeBloc extends Bloc<ChangeEvent,ChangeState>{
        if (event is PressConfirmEvent) {
         yield LoadingState();
         if (event.oldPassword.isNotEmpty && event.newPassword.isNotEmpty) {
-          if (!Validation.isValidPassword(event.oldPassword)||!Validation.isValidPassword(event.newPassword)) {
+          if (!Validations.isValidPassword(event.oldPassword)||!Validations.isValidPassword(event.newPassword)) {
             yield WarningPasswordPressConfirmState();
           } else if (event.newPassword!=event.retypePassword) {
             yield WarningMatchPressConfirmState();
@@ -45,9 +45,9 @@ class ChangeBloc extends Bloc<ChangeEvent,ChangeState>{
 
 Future<bool> changePassword(String oldPassword, String newPassword) async {
   try {
-    String token = await PreferencesUtil.loadToken();
-    String userId = (await PreferencesUtil.loadSelf()).userId;
-    Response response = await Dio().put(Config.baseUrl + Config.changePath,
+    String token = await Preferences.loadToken();
+    String userId = (await Preferences.loadSelf()).userId;
+    Response response = await Dio().put(Configs.baseUrl + Configs.changePath,
         data:
         ChangePasswordRequest(userId: userId, oldPassword: oldPassword, newPassword: newPassword)
             .toJson(),
@@ -60,5 +60,5 @@ Future<bool> changePassword(String oldPassword, String newPassword) async {
 }
 
 void onSignout() async {
-  await PreferencesUtil.clearAll();
+  await Preferences.clearAll();
 }

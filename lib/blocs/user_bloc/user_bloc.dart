@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/user_bloc/user_event.dart';
 import 'package:flutter_pcdashboard/blocs/user_bloc/user_state.dart';
 import 'package:flutter_pcdashboard/models/responses/user_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 
@@ -36,10 +36,10 @@ class UserBloc extends Bloc<UserEvent,UserState>{
 
 Future<List<UserResponse>> fetchList(String classId)async{
   try{
-    String token=await PreferencesUtil.loadToken();
+    String token=await Preferences.loadToken();
     if(classId!='GV')
-      classId=(await PreferencesUtil.loadSelf()).classId;
-  Response response=await Dio().get(Config.baseUrl+Config.userPath+classId,options: Options(headers: {"Authorization": token}));
+      classId=(await Preferences.loadSelf()).classId;
+  Response response=await Dio().get(Configs.baseUrl+Configs.userPath+classId,options: Options(headers: {"Authorization": token}));
   List<UserResponse> users=(response.data as List).map((item)=>UserResponse.fromJson(item)).toList();
   return users;
   }catch (e){

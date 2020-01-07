@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_event.dart';
 import 'package:flutter_pcdashboard/blocs/forget_bloc/forget_state.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 
 class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
@@ -38,7 +38,7 @@ class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
 Future<bool> getPassword(String userId) async {
   try {
     Response response =
-        await Dio().put(Config.baseUrl + Config.forgetPath + userId);
+        await Dio().put(Configs.baseUrl + Configs.forgetPath + userId);
     return response.data;
   } catch (e) {
     print(e);

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/models/responses/exam_response.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ExamPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _ExamPageState extends State<ExamPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: GradientAppBar(
-          title: Text(Value.EXAM.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
+          title: Text(Values.EXAM.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
           elevation: 0,
           automaticallyImplyLeading: true,
           gradient: LinearGradient(

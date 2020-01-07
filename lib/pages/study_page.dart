@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/utilities/router.dart';
+import 'package:flutter_pcdashboard/utilities/routes.dart';
 
 class StudyPage extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _StudyPageState extends State<StudyPage> {
                     color: Colors.red
                 ),
               ),
-              onTap: (){Navigator.of(context).pushNamed(Router.scheduleRoute);},
+              onTap: (){Navigator.of(context).pushNamed(Routes.scheduleRoute);},
             ),
           ),
         ),
@@ -37,7 +37,7 @@ class _StudyPageState extends State<StudyPage> {
                     color: Colors.green
                 ),
               ),
-              onTap: (){Navigator.of(context).pushNamed(Router.examRoute);},
+              onTap: (){Navigator.of(context).pushNamed(Routes.examRoute);},
             ),
           ),
         ),

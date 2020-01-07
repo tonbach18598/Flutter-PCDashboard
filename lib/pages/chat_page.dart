@@ -8,10 +8,10 @@ import 'package:flutter_pcdashboard/blocs/chat_bloc/chat_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/chat_bloc/chat_event.dart';
 import 'package:flutter_pcdashboard/blocs/chat_bloc/chat_state.dart';
 import 'package:flutter_pcdashboard/models/responses/chat_response.dart';
-import 'package:flutter_pcdashboard/utilities/config.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_comment.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -63,20 +63,20 @@ class _ChatPageState extends State<ChatPage> {
               );
             });
           } else if (state is FailureFetchListState) {
-            ToastUtil.showFailureToast('Tải tin nhắn thất bại');
+            Toasts.showFailureToast('Tải tin nhắn thất bại');
           } else if (state is SuccessPressSendState) {
             contentController.text = '';
           } else if (state is WarningPressSendState) {
-            ToastUtil.showWarningToast('Nội dung tin nhắn không được để trống');
+            Toasts.showWarningToast('Nội dung tin nhắn không được để trống');
           } else if (state is FailurePressSendState) {
-            ToastUtil.showFailureToast('Gửi tin nhắn thất bại');
+            Toasts.showFailureToast('Gửi tin nhắn thất bại');
           }
         },
         child: BlocBuilder<ChatBloc, ChatState>(
           builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
               title: Text(
-                Value.CHAT.toUpperCase(),
+                Values.CHAT.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               elevation: 0,
@@ -257,7 +257,7 @@ class _ChatPageState extends State<ChatPage> {
                                       style: TextStyle(fontSize: 16),
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
-                                          hintText: Value.ENTER_CONTENT,
+                                          hintText: Values.ENTER_CONTENT,
                                           hintStyle: TextStyle(fontSize: 16)),
                                     ),
                                   ),
@@ -275,7 +275,7 @@ class _ChatPageState extends State<ChatPage> {
                                 onPressed: () {
                                   contentController.text.isNotEmpty
                                       ? haveMessage()
-                                      : ToastUtil.showWarningToast(
+                                      : Toasts.showWarningToast(
                                           'Nội dung tin nhắn không được để trống');
                                   ;
                                 },
@@ -297,10 +297,10 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<void> connectSocket() async {
-    socket = await manager.createInstance(SocketOptions(Config.socketUrl));
+    socket = await manager.createInstance(SocketOptions(Configs.socketUrl));
     socket.connect();
     socket.onConnect((data) async {
-      socket.emit('join', [(await PreferencesUtil.loadSelf()).classId]);
+      socket.emit('join', [(await Preferences.loadSelf()).classId]);
     });
     socket.on('message', (data) {
       ChatResponse message = ChatResponse.fromJson(data);
@@ -319,7 +319,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> haveMessage() async {
     socket.emit('haveMessage',
-        [contentController.text.trim(), await PreferencesUtil.loadToken()]);
+        [contentController.text.trim(), await Preferences.loadToken()]);
     setState(() {
       contentController.text = '';
     });

@@ -8,8 +8,8 @@ import 'package:flutter_pcdashboard/blocs/post_bloc/post_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/post_bloc/post_event.dart';
 import 'package:flutter_pcdashboard/blocs/post_bloc/post_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -41,12 +41,12 @@ class _PostPageState extends State<PostPage> {
             self=state.self;
           }
           else if(state is SuccessPressPostState){
-            ToastUtil.showSuccessToast('Đăng bài thành công');
+            Toasts.showSuccessToast('Đăng bài thành công');
             Navigator.of(context).pop();
           }else if(state is WarningPressPostState){
-            ToastUtil.showWarningToast('Nội dung bài đăng không được để trống');
+            Toasts.showWarningToast('Nội dung bài đăng không được để trống');
           }else if(state is FailurePressPostState){
-            ToastUtil.showFailureToast('Đăng bài thất bại');
+            Toasts.showFailureToast('Đăng bài thất bại');
           }else if(state is TapImageState){
             image=state.image;
           }
@@ -68,7 +68,7 @@ class _PostPageState extends State<PostPage> {
               actions: <Widget>[
                 FlatButton(
                   child: Text(
-                    Value.POST.toUpperCase(),
+                    Values.POST.toUpperCase(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -129,7 +129,7 @@ class _PostPageState extends State<PostPage> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 5),
                                     child: Text(
-                                      Value.MEMBER_OF+self.classId,
+                                      Values.MEMBER_OF+self.classId,
                                       style: TextStyle(fontSize: 12, color: Colors.grey),
                                     ),
                                   )
@@ -148,7 +148,7 @@ class _PostPageState extends State<PostPage> {
                               style: TextStyle(fontSize: 20),
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: Value.YOUR_THINKING,
+                                  hintText: Values.YOUR_THINKING,
                                   hintStyle: TextStyle(fontSize: 20)),
                             ),
                           ),
@@ -180,7 +180,7 @@ class _PostPageState extends State<PostPage> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
                           child: Text(
-                            Value.ADD_IMAGE,
+                            Values.ADD_IMAGE,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         )),

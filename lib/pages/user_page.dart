@@ -6,8 +6,8 @@ import 'package:flutter_pcdashboard/blocs/user_bloc/user_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/user_bloc/user_event.dart';
 import 'package:flutter_pcdashboard/blocs/user_bloc/user_state.dart';
 import 'package:flutter_pcdashboard/models/responses/user_response.dart';
-import 'package:flutter_pcdashboard/utilities/toast.dart';
-import 'package:flutter_pcdashboard/utilities/value.dart';
+import 'package:flutter_pcdashboard/utilities/toasts.dart';
+import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_user.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -42,9 +42,9 @@ class _UserPageState extends State<UserPage> {
             users = state.users;
           } else if (state is FailureFetchListState) {
             classId == 'GV'
-                ? ToastUtil.showFailureToast(
+                ? Toasts.showFailureToast(
                     'Tải danh sách giảng viên thất bại')
-                : ToastUtil.showFailureToast(
+                : Toasts.showFailureToast(
                     'Tải danh sách sinh viên thất bại');
           } else if (state is TapUserState) {
             showBottomSheet(context, state.user);
@@ -55,8 +55,8 @@ class _UserPageState extends State<UserPage> {
               appBar: GradientAppBar(
                 title: Text(
                   classId == 'GV'
-                      ? Value.TEACHER_LIST.toUpperCase()
-                      : Value.STUDENT_LIST.toUpperCase(),
+                      ? Values.TEACHER_LIST.toUpperCase()
+                      : Values.STUDENT_LIST.toUpperCase(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 elevation: 0,
