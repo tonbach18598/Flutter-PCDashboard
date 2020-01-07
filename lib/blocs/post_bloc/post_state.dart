@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
 
@@ -42,6 +44,16 @@ class FailurePressPostState extends PostState{
 }
 
 class WarningPressPostState extends PostState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class TapImageState extends PostState{
+  File image;
+
+  TapImageState(this.image);
+
   @override
   // TODO: implement props
   List<Object> get props => null;

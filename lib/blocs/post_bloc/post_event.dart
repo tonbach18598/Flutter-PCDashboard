@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 
@@ -14,8 +16,17 @@ class InitializeSelfEvent extends PostEvent{
 
 class PressPostEvent extends PostEvent{
   String content;
+  File image;
 
-  PressPostEvent(this.content);
+  PressPostEvent(this.content,this.image);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+
+class TapImageEvent extends PostEvent{
 
   @override
   // TODO: implement props

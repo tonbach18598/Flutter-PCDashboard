@@ -35,7 +35,7 @@ class _ClassPageState extends State<ClassPage> {
       create: (context) =>
           ClassBloc()..add(InitializeSelfEvent())..add(FetchListEvent(10)),
       child: BlocListener<ClassBloc, ClassState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is InitializeSelfState) {
             self = state.self;
           } else if (state is SuccessFetchListState) {
@@ -43,7 +43,7 @@ class _ClassPageState extends State<ClassPage> {
           } else if (state is FailureFetchListState) {
             ToastUtil.showFailureToast('Tải bảng tin thất bại');
           } else if (state is TapPostState) {
-            Navigator.of(context).pushNamed(Router.postRoute);
+            await Navigator.of(context).pushNamed(Router.postRoute).then((_){BlocProvider.of<ClassBloc>(context).add(FetchListEvent(10));});
           } else if (state is TapCommentState) {
             Navigator.of(context)
                 .pushNamed(Router.commentRoute, arguments: state.post);
