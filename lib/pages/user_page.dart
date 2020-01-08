@@ -47,7 +47,7 @@ class _UserPageState extends State<UserPage> {
                 : Toasts.showFailureToast(
                     'Tải danh sách sinh viên thất bại');
           } else if (state is TapUserState) {
-            showBottomSheet(context, state.user);
+            showInformationBottomSheet(context, state.user);
           }
         },
         child: BlocBuilder<UserBloc, UserState>(
@@ -158,13 +158,13 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Future<void> showBottomSheet(BuildContext blocContext,UserResponse use) async {
+  Future<void> showInformationBottomSheet(BuildContext blocContext,UserResponse use) async {
     return showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
           return Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height*0.5,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0,10,0,10),
                 child: Column(

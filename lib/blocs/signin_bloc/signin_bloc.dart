@@ -41,7 +41,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
 Future<bool> onSignin(String username, String password) async {
   try {
-    Response response = await Dio().post(Configs.baseUrl + Configs.tokenPath,
+    Response response = await Dio().post(Configs.baseUrl + Configs.tokenPath,queryParameters: {'account':'student'},
         data: SigninRequest(userId: username, password: password).toJson());
     String token = TokenResponse.fromJson(response.data).tokenType +
         ' ' +

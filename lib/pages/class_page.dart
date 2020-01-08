@@ -48,12 +48,12 @@ class _ClassPageState extends State<ClassPage> {
             Navigator.of(context)
                 .pushNamed(Routes.commentRoute, arguments: state.post);
           } else if (state is PressMoreState) {
-            showActionSheet(context,state.post);
+            showMoreActionSheet(context,state.post);
           } else if (state is PressCancelState) {
             Navigator.of(context).pop();
           } else if(state is PressEditState){
             Navigator.of(context).pop();
-            Navigator.of(context).pushNamed(Routes.editRoute,arguments: state.post);
+            await Navigator.of(context).pushNamed(Routes.editRoute,arguments: state.post).then((_){BlocProvider.of<ClassBloc>(context).add(FetchListEvent(10));});
           } else if(state is SuccessPressDeleteState){
             Navigator.of(context).pop();
             posts.remove(state.post);
@@ -323,7 +323,7 @@ class _ClassPageState extends State<ClassPage> {
     );
   }
 
-  Future<void> showActionSheet(BuildContext blocContext,ClassResponse post) async {
+  Future<void> showMoreActionSheet(BuildContext blocContext,ClassResponse post) async {
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {

@@ -30,6 +30,7 @@ class _CommentPageState extends State<CommentPage> {
   ClassResponse post;
   TextEditingController contentController;
   ScrollController scrollController;
+  TextEditingController editController;
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _CommentPageState extends State<CommentPage> {
     post = widget.arguments;
     contentController = TextEditingController();
     scrollController = ScrollController();
+    editController = TextEditingController();
   }
 
   @override
@@ -57,14 +59,26 @@ class _CommentPageState extends State<CommentPage> {
             });
           } else if (state is FailureFetchListState) {
             Toasts.showFailureToast('Tải bình luận thất bại');
+          } else if (state is SuccessPressConfirmState) {
+            Toasts.showSuccessToast('Sửa bình luận thành công');
+            Navigator.of(context).pop();
+            BlocProvider.of<CommentBloc>(context).add(FetchListEvent(post.id));
+          } else if (state is WarningPressConfirmState) {
+            Toasts.showWarningToast('Nội dung bình luận không được để trống');
+          } else if (state is FailurePressConfirmState) {
+            Toasts.showFailureToast('Sửa bình luận thất bại');
+          } else if (state is PressCancelState) {
+            Navigator.of(context).pop();
           } else if (state is SuccessPressSendState) {
             contentController.text = '';
             BlocProvider.of<CommentBloc>(context).add(FetchListEvent(post.id));
           } else if (state is WarningPressSendState) {
-            Toasts.showWarningToast(
-                'Nội dung bình luận không được để trống');
+            Toasts.showWarningToast('Nội dung bình luận không được để trống');
           } else if (state is FailurePressSendState) {
             Toasts.showFailureToast('Gửi bình luận thất bại');
+          } else if (state is PressEditState) {
+            editController.text = state.comment.content;
+            showEditDialog(context, state.comment);
           } else if (state is SuccessPressDeleteState) {
             comments.remove(state.comment);
             Toasts.showSuccessToast('Xoá bình luận thành công');
@@ -107,7 +121,8 @@ class _CommentPageState extends State<CommentPage> {
                                   actionPane: SlidableDrawerActionPane(),
                                   actionExtentRatio: 0.25,
                                   child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(10,5,10,5),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -152,7 +167,12 @@ class _CommentPageState extends State<CommentPage> {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Container(
-                                              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*0.7),
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.7),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(15),
@@ -295,6 +315,42 @@ class _CommentPageState extends State<CommentPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> showEditDialog(
+      BuildContext blocContext, CommentResponse comment) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text(Values.EDIT_COMMENT.toUpperCase(),style: TextStyle(color: Colors.blueAccent),),
+          content: CupertinoTextField(
+            controller: editController,
+          ),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: Text(Values.CANCEL,
+                  style: TextStyle(color: Colors.deepOrange)),
+              onPressed: () {
+                BlocProvider.of<CommentBloc>(blocContext)
+                    .add(PressCancelEvent());
+              },
+            ),
+            CupertinoDialogAction(
+              child: Text(
+                Values.CONFIRM,
+                style: TextStyle(color: Colors.orange),
+              ),
+              onPressed: () {
+                BlocProvider.of<CommentBloc>(blocContext).add(
+                    PressConfirmEvent(comment, editController.text.trim()));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

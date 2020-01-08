@@ -25,17 +25,29 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         }
       } else if (event is PressSendEvent) {
         yield LoadingState();
-        if(event.content.isNotEmpty){
-          if(await createComment(event.postId, event.content)){
+        if (event.content.isNotEmpty) {
+          if (await createComment(event.postId, event.content)) {
             yield SuccessPressSendState();
-          }else{
+          } else {
             yield FailurePressSendState();
           }
-        }else {
+        } else {
           yield WarningPressSendState();
         }
       } else if (event is PressEditEvent) {
-        yield PressEditState();
+        yield PressEditState(event.comment);
+      } else if (event is PressConfirmEvent) {
+        if (event.newContent.isNotEmpty) {
+          if (await editComment(event.comment.id, event.newContent)) {
+            yield SuccessPressConfirmState();
+          } else {
+            yield FailurePressConfirmState();
+          }
+        } else {
+          yield WarningPressConfirmState();
+        }
+      } else if (event is PressCancelEvent) {
+        yield PressCancelState();
       } else if (event is PressDeleteEvent) {
         yield LoadingState();
         if (await deleteComment(event.comment.id)) {
@@ -66,6 +78,20 @@ Future<List<CommentResponse>> fetchList(String postId) async {
   }
 }
 
+Future<bool> editComment(String commentId, String content) async {
+  try {
+    String token = await Preferences.loadToken();
+    Response response = await Dio().put(
+        Configs.baseUrl + Configs.commentPath + commentId,
+        queryParameters: {'content': content},
+        options: Options(headers: {'Authorization': token}));
+    return response.data;
+  } catch (e) {
+    print(e);
+    return false;
+  }
+}
+
 Future<bool> deleteComment(String commentId) async {
   try {
     String token = await Preferences.loadToken();
@@ -79,7 +105,7 @@ Future<bool> deleteComment(String commentId) async {
   }
 }
 
-Future<bool> createComment(String postId, String content)async{
+Future<bool> createComment(String postId, String content) async {
   try {
     String token = await Preferences.loadToken();
     Response response = await Dio().post(
@@ -92,6 +118,3 @@ Future<bool> createComment(String postId, String content)async{
     return false;
   }
 }
-
-
-

@@ -38,6 +38,24 @@ class PressEditEvent extends CommentEvent{
   List<Object> get props => null;
 }
 
+class PressConfirmEvent extends CommentEvent{
+  CommentResponse comment;
+  String newContent;
+
+  PressConfirmEvent(this.comment,this.newContent);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressCancelEvent extends CommentEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class PressDeleteEvent extends CommentEvent{
 CommentResponse comment;
 

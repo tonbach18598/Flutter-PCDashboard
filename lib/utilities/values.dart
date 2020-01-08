@@ -36,4 +36,5 @@ class Values{
   static final String YOUR_THINKING='Cảm nghĩ của bạn...';
   static final String ADD_IMAGE='Thêm hình ảnh';
   static final String MEMBER_OF='Thành viên của ';
+  static final String EDIT_COMMENT='Sửa bình luận';
 }

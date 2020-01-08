@@ -53,6 +53,38 @@ class WarningPressSendState extends CommentState{
 }
 
 class PressEditState extends CommentState{
+  CommentResponse comment;
+
+  PressEditState(this.comment);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class SuccessPressConfirmState extends CommentState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class WarningPressConfirmState extends CommentState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class FailurePressConfirmState extends CommentState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class PressCancelState extends CommentState{
+
   @override
   // TODO: implement props
   List<Object> get props => null;
