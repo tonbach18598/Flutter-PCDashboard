@@ -328,6 +328,7 @@ class _CommentPageState extends State<CommentPage> {
           title: Text(Values.EDIT_COMMENT.toUpperCase(),style: TextStyle(color: Colors.blueAccent),),
           content: CupertinoTextField(
             controller: editController,
+            cursorColor: Colors.lightBlue,
           ),
           actions: <Widget>[
             CupertinoDialogAction(
