@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pcdashboard/utilities/preferences.dart';
 import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 
@@ -19,9 +20,9 @@ class _ContactPageState extends State<ContactPage> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 4),
+                      Radius.circular(MediaQuery.of(context).size.height / 8.8),
                   bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 4)),
+                      Radius.circular(MediaQuery.of(context).size.height / 8.8)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -41,8 +42,8 @@ class _ContactPageState extends State<ContactPage> {
                 ),
                 child: Center(child: Text(Values.CHAT.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
               ),
-              onTap: () {
-                Navigator.of(context).pushNamed(Routes.chatRoute);
+              onTap: () async {
+                Navigator.of(context).pushNamed(Routes.chatRoute,arguments: (await Preferences.loadSelf()).userId);
               },
             ),
           ),
@@ -54,9 +55,9 @@ class _ContactPageState extends State<ContactPage> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 4),
+                      Radius.circular(MediaQuery.of(context).size.height / 8.8),
                   bottomLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 4)),
+                      Radius.circular(MediaQuery.of(context).size.height / 8.8)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -90,9 +91,9 @@ class _ContactPageState extends State<ContactPage> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 4),
+                      Radius.circular(MediaQuery.of(context).size.height / 8.8),
                   bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 4)),
+                      Radius.circular(MediaQuery.of(context).size.height / 8.8)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

@@ -51,7 +51,7 @@ class _DashboardPageState extends State<DashboardPage> {
           } else if (state is TapFeedbackState) {
             Navigator.of(context).pushNamed(Routes.feedbackRoute);
           } else if (state is TapSignoutState) {
-            Toasts.showSuccessToast("Đăng xuất thành công");
+            Toasts.showSuccessToast('Đăng xuất thành công');
             Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
           }
         },

@@ -76,7 +76,7 @@ class _ChangePageState extends State<ChangePage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
                         child: Image.asset(
-                          "logo.png",
+                          'logo.png',
                           width: MediaQuery.of(context).size.width * 0.75,
                           height: MediaQuery.of(context).size.width * 0.5,
                         ),

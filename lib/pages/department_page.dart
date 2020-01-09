@@ -26,7 +26,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
           if (state is SuccessFetchListState) {
               posts = state.posts;
           } else if (state is FailureFetchListState) {
-            Toasts.showFailureToast("Tải bảng tin thất bại");
+            Toasts.showFailureToast('Tải bảng tin thất bại');
           }
         },
         child: BlocBuilder<DepartmentBloc, DepartmentState>(

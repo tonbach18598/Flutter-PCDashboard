@@ -11,4 +11,6 @@ class Configs{
   static final String changePath='/user/change-password';
   static final String forgetPath='/user/forget-password/';
   static final String chatPath='/message';
+  static final String examPath='/exam';
+  static final String schedulePath='/schedule/';
 }

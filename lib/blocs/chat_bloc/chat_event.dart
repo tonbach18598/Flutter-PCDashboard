@@ -12,6 +12,14 @@ class ConnectSocketEvent extends ChatEvent{
   List<Object> get props => null;
 }
 
+class DisConnectSocketEvent extends ChatEvent{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+
 class FetchListEvent extends ChatEvent{
 
   int number;

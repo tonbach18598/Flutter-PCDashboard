@@ -17,6 +17,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ChatPage extends StatefulWidget {
+  final arguments;
+
+  ChatPage(this.arguments);
+
   @override
   _ChatPageState createState() => _ChatPageState();
 }
@@ -27,7 +31,7 @@ class _ChatPageState extends State<ChatPage> {
   ScrollController scrollController;
   SocketIOManager manager;
   SocketIO socket;
-  String id = '1613013';
+  String selfId;
 
   @override
   void initState() {
@@ -37,6 +41,7 @@ class _ChatPageState extends State<ChatPage> {
     scrollController = ScrollController();
     manager = SocketIOManager();
     connectSocket();
+    selfId=widget.arguments;
   }
 
   @override
@@ -105,7 +110,7 @@ class _ChatPageState extends State<ChatPage> {
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) => messages[index]
                                         .userId ==
-                                    id
+                                    selfId
                                 ? Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(10, 5, 10, 5),

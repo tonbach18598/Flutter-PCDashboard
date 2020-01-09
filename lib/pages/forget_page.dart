@@ -44,11 +44,11 @@ class _ForgetPageState extends State<ForgetPage> {
           } else if (state is SuccessPressGetPasswordState) {
             usernameController.text = '';
             Toasts.showSuccessToast(
-                "Lấy mật khẩu thành công. Vui lòng kiểm tra trong email");
+                'Lấy mật khẩu thành công. Vui lòng kiểm tra trong email');
           } else if (state is FailurePressGetPasswordState) {
-            Toasts.showFailureToast("Lấy mật khẩu thất bại");
+            Toasts.showFailureToast('Lấy mật khẩu thất bại');
           } else if (state is WarningPressGetPasswordState) {
-            Toasts.showWarningToast("Tài khoản không được để trống");
+            Toasts.showWarningToast('Tài khoản không được để trống');
           }
         },
         child: BlocBuilder<ForgetBloc, ForgetState>(

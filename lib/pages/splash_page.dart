@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -34,7 +36,7 @@ class _SplashPageState extends State<SplashPage>
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset("logo.png",width: MediaQuery.of(context).size.width*0.9,height: MediaQuery.of(context).size.width*0.6,),
+              Image.asset('logo.png',width: MediaQuery.of(context).size.width*0.9,height: MediaQuery.of(context).size.width*0.6,),
               SpinKitRing(
                 color: Colors.white,
                 size: 50.0,
@@ -46,7 +48,8 @@ class _SplashPageState extends State<SplashPage>
   }
 
   @override
-  Future afterFirstLayout(BuildContext context) async{
+  Future afterFirstLayout(BuildContext context) async {
+    await Future.delayed(const Duration(seconds:1));
     if (await Preferences.loadToken() == null)
       Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
     else

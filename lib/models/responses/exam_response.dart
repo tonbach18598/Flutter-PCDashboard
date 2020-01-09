@@ -12,7 +12,7 @@ class ExamResponse {
   String name;
   String time;
   String place;
-  int score;
+  double score;
   String userId;
 
   ExamResponse({

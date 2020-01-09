@@ -104,7 +104,7 @@ class _UpdatePageState extends State<UpdatePage> {
                               color: Colors.orange,
                             )),
                             errorWidget: (context, url, error) => Image.asset(
-                              "logo.png",
+                              'logo.png',
                             ),
                           ),
                         ),

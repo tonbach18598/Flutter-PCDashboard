@@ -62,7 +62,7 @@ class Routes{
         case feedbackRoute:
           return CupertinoPageRoute(builder: (_)=>FeedbackPage());
         case chatRoute:
-          return CupertinoPageRoute(builder: (_)=>ChatPage());
+          return CupertinoPageRoute(builder: (_)=>ChatPage(arguments));
         case userRoute:
           return CupertinoPageRoute(builder: (_)=>UserPage(arguments));
       }

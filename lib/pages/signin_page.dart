@@ -43,13 +43,13 @@ class _SigninPageState extends State<SigninPage> {
       child: BlocListener<SigninBloc, SigninState>(
         listener: (context, state) {
           if (state is SuccessPressSigninState) {
-            Toasts.showSuccessToast("Đăng nhập thành công");
+            Toasts.showSuccessToast('Đăng nhập thành công');
             Navigator.of(context).pushReplacementNamed(Routes.dashboardRoute);
           } else if (state is FailurePressSigninState) {
-            Toasts.showFailureToast("Đăng nhập thất bại");
+            Toasts.showFailureToast('Đăng nhập thất bại');
           } else if (state is WarningPressSigninState) {
             Toasts.showWarningToast(
-                "Tài khoản hoặc mật khẩu không được để trống");
+                'Tài khoản hoặc mật khẩu không được để trống');
           } else if (state is PressForgetState) {
             Navigator.of(context).pushNamed(Routes.forgetRoute);
           }
