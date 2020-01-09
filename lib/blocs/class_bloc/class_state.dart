@@ -30,8 +30,9 @@ class InitializeSelfState extends ClassState {
 
 class SuccessFetchListState extends ClassState {
   List<ClassResponse> posts;
+  int number;
 
-  SuccessFetchListState(this.posts);
+  SuccessFetchListState(this.posts,this.number);
 
   @override
   // TODO: implement props

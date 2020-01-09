@@ -23,7 +23,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
         yield LoadingState();
         List<ClassResponse> posts = await fetchList(event.number);
         if (posts != null) {
-          yield SuccessFetchListState(posts);
+          yield SuccessFetchListState(posts,event.number+10);
         } else {
           yield FailureFetchListState();
         }

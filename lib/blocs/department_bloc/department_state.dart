@@ -21,7 +21,9 @@ class LoadingState extends DepartmentState{
 
 class SuccessFetchListState extends DepartmentState{
   List<DepartmentResponse> posts;
-  SuccessFetchListState(this.posts);
+  int number;
+
+  SuccessFetchListState(this.posts,this.number);
 
   @override
   // TODO: implement props

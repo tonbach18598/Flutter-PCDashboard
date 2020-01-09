@@ -101,8 +101,8 @@ class _UpdatePageState extends State<UpdatePage> {
                             ),
                             placeholder: (context, url) => Center(
                                 child: SpinKitDoubleBounce(
-                              color: Colors.orange,
-                            )),
+                                  color: Colors.orange,
+                                )),
                             errorWidget: (context, url, error) => Image.asset(
                               'logo.png',
                             ),
@@ -127,17 +127,17 @@ class _UpdatePageState extends State<UpdatePage> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                        child: UpdateInformationTextField(
-                          readOnly: true,
-                          prefixIcon: Icon(Icons.people,color: Colors.orange,),
-                          borderColor: Colors.orange,
-                          hintText: Values.CLASS,
-                          controller: classController,
-                        )
+                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                          child: UpdateInformationTextField(
+                            readOnly: true,
+                            prefixIcon: Icon(Icons.people,color: Colors.orange,),
+                            borderColor: Colors.orange,
+                            hintText: Values.CLASS,
+                            controller: classController,
+                          )
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                           child: UpdateInformationTextField(
                             prefixIcon: Icon(Icons.mail,color: Colors.lightBlue,),
                             borderColor: Colors.lightBlue,
@@ -146,7 +146,7 @@ class _UpdatePageState extends State<UpdatePage> {
                           )
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
+                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
                           child: UpdateInformationTextField(
                             prefixIcon: Icon(Icons.smartphone,color: Colors.lightBlue,),
                             borderColor: Colors.lightBlue,

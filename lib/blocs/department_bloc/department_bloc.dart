@@ -21,7 +21,7 @@ class DepartmentBloc extends Bloc<DepartmentEvent,DepartmentState>{
         yield LoadingState();
         List<DepartmentResponse>posts=await fetchList(event.number);
         if(posts!=null)
-          yield SuccessFetchListState(posts);
+          yield SuccessFetchListState(posts,event.number+10);
         else yield FailureFetchListState();
       }
       yield InitialDepartmentState();
