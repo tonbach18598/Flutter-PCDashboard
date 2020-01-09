@@ -162,19 +162,14 @@ class _UserPageState extends State<UserPage> {
     return showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
-          return Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height*0.5,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0,10,0,10),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       CachedNetworkImage(
                         imageUrl: use.avatar,
                         imageBuilder: (context, imageProvider) => Container(
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.width / 3,
+                          width: MediaQuery.of(context).size.height / 4,
+                          height: MediaQuery.of(context).size.height / 4,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
@@ -192,14 +187,18 @@ class _UserPageState extends State<UserPage> {
                           color: Colors.orange,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0,20,0,10),
-                        child: Text('${use.name}',style: TextStyle(fontSize: 20,color: Colors.deepOrange,fontWeight: FontWeight.bold),),
+                      Column
+                        (
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0,10,0,10),
+                            child: Text('${use.name}',style: TextStyle(fontSize: 20,color: Colors.deepOrange,fontWeight: FontWeight.bold),),
+                          ),
+                          Text('${use.userId}',style: TextStyle(fontSize: 16,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
+                        ],
                       ),
-                      Text('${use.userId}',style: TextStyle(fontSize: 16,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
+
+                      Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Column(
@@ -230,10 +229,8 @@ class _UserPageState extends State<UserPage> {
                             ),
                           ],
                         ),
-                      ),
                     ],
-                  ),
-              ));
+                  );
         });
   }
 }

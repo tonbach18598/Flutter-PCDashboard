@@ -46,16 +46,17 @@ class _UpdatePageState extends State<UpdatePage> {
             classController.text = self.classId;
             emailController.text = self.email;
             phoneController.text = self.phone;
-          }else if(state is SuccessPressConfirmState){
+          } else if (state is SuccessPressConfirmState) {
             BlocProvider.of<UpdateBloc>(context).add(InitializeSelfEvent());
             Toasts.showSuccessToast('Cập nhật thông tin thành công');
-          }else if(state is WarningEmptyPressConfirmState){
-            Toasts.showWarningToast('Email hoặc số điện thoại không được để trống');
-          }else if(state is WarningEmailPressConfirmState){
+          } else if (state is WarningEmptyPressConfirmState) {
+            Toasts.showWarningToast(
+                'Email hoặc số điện thoại không được để trống');
+          } else if (state is WarningEmailPressConfirmState) {
             Toasts.showWarningToast('Email không hợp lệ');
-          }else if(state is WarningPhonePressConfirmState){
+          } else if (state is WarningPhonePressConfirmState) {
             Toasts.showWarningToast('Số điện thoại không hợp lệ');
-          }else if(state is FailurePressConfirmState){
+          } else if (state is FailurePressConfirmState) {
             Toasts.showFailureToast('Cập nhật thông tin thất bại');
           }
         },
@@ -80,93 +81,129 @@ class _UpdatePageState extends State<UpdatePage> {
             ),
             body: Stack(
               children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, bottom: 20),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.width / 3,
-                          child: CachedNetworkImage(
-                            imageUrl: self.avatar,
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(bottom: 20),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  height: MediaQuery.of(context).size.width / 3,
+                                  child: CachedNetworkImage(
+                                    imageUrl: self.avatar,
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    placeholder: (context, url) => Center(
+                                        child: SpinKitDoubleBounce(
+                                      color: Colors.orange,
+                                    )),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset(
+                                      'logo.png',
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            placeholder: (context, url) => Center(
-                                child: SpinKitDoubleBounce(
-                                  color: Colors.orange,
-                                )),
-                            errorWidget: (context, url, error) => Image.asset(
-                              'logo.png',
-                            ),
+                              Text(self.name,
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.deepOrange,
+                                      fontWeight: FontWeight.bold)),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5),
+                                child: Text(self.userId,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.blueAccent,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Text(self.name,
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.deepOrange,
-                                  fontWeight: FontWeight.bold)),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Text(self.userId,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.blueAccent,
-                                    fontWeight: FontWeight.bold)),
-                          ),
+                          Column(
+                            children: <Widget>[
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                  child: UpdateInformationTextField(
+                                    readOnly: true,
+                                    prefixIcon: Icon(
+                                      Icons.people,
+                                      color: Colors.orange,
+                                    ),
+                                    borderColor: Colors.orange,
+                                    hintText: Values.CLASS,
+                                    controller: classController,
+                                  )),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                  child: UpdateInformationTextField(
+                                    prefixIcon: Icon(
+                                      Icons.mail,
+                                      color: Colors.lightBlue,
+                                    ),
+                                    borderColor: Colors.lightBlue,
+                                    hintText: Values.EMAIL,
+                                    controller: emailController,
+                                  )),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                  child: UpdateInformationTextField(
+                                    prefixIcon: Icon(
+                                      Icons.smartphone,
+                                      color: Colors.lightBlue,
+                                    ),
+                                    borderColor: Colors.lightBlue,
+                                    hintText: Values.PHONE,
+                                    controller: phoneController,
+                                  )),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: SigninButton(
+                                  text: Values.CONFIRM.toUpperCase(),
+                                  onPress: () {
+                                    BlocProvider.of<UpdateBloc>(context).add(
+                                        PressConfirmEvent(
+                                            emailController.text.trim(),
+                                            phoneController.text.trim()));
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 10,
+                              )
+                            ],
+                          )
                         ],
                       ),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                          child: UpdateInformationTextField(
-                            readOnly: true,
-                            prefixIcon: Icon(Icons.people,color: Colors.orange,),
-                            borderColor: Colors.orange,
-                            hintText: Values.CLASS,
-                            controller: classController,
-                          )
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                          child: UpdateInformationTextField(
-                            prefixIcon: Icon(Icons.mail,color: Colors.lightBlue,),
-                            borderColor: Colors.lightBlue,
-                            hintText: Values.EMAIL,
-                            controller: emailController,
-                          )
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
-                          child: UpdateInformationTextField(
-                            prefixIcon: Icon(Icons.smartphone,color: Colors.lightBlue,),
-                            borderColor: Colors.lightBlue,
-                            hintText: Values.PHONE,
-                            controller: phoneController,
-                          )
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: SigninButton(
-                          text: Values.CONFIRM.toUpperCase(),
-                          onPress: () {
-                            BlocProvider.of<UpdateBloc>(context).add(PressConfirmEvent(emailController.text.trim(),phoneController.text.trim()));
-                          },
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 ),
-                state is LoadingState?LoadingUpdate():Container()
+                state is LoadingState ? LoadingUpdate() : Container()
               ],
             ),
           ),

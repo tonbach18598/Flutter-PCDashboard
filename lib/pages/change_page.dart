@@ -70,61 +70,77 @@ class _ChangePageState extends State<ChangePage> {
             ),
             body: Stack(
               children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child: Image.asset(
-                          'logo.png',
-                          width: MediaQuery.of(context).size.width * 0.75,
-                          height: MediaQuery.of(context).size.width * 0.5,
-                        ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Image.asset(
+                                  'logo.png',
+                                  width: MediaQuery.of(context).size.width *0.5,
+                                  height: MediaQuery.of(context).size.width *0.5,
+                                ),
+                          Column(
+                            children: <Widget>[
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                  child: UpdateInformationTextField(
+                                    obscureText: true,
+                                    prefixIcon: Icon(
+                                      Icons.vpn_key,
+                                      color: Colors.orange,
+                                    ),
+                                    borderColor: Colors.orange,
+                                    hintText: Values.OLD_PASSWORD,
+                                    controller: oldController,
+                                  )),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                  child: UpdateInformationTextField(
+                                    obscureText: true,
+                                    prefixIcon: Icon(
+                                      Icons.lock_open,
+                                      color: Colors.lightBlue,
+                                    ),
+                                    borderColor: Colors.lightBlue,
+                                    hintText: Values.NEW_PASSWORD,
+                                    controller: newController,
+                                  )),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                  child: UpdateInformationTextField(
+                                    obscureText: true,
+                                    prefixIcon: Icon(
+                                      Icons.lock_outline,
+                                      color: Colors.lightBlue,
+                                    ),
+                                    borderColor: Colors.lightBlue,
+                                    hintText: Values.RETYPE_PASSWORD,
+                                    controller: retypeController,
+                                  )),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: SigninButton(
+                                  text: Values.CONFIRM.toUpperCase(),
+                                  onPress: () {BlocProvider.of<ChangeBloc>(context).add(PressConfirmEvent(oldController.text.trim(),newController.text.trim(),retypeController.text.trim()));},
+                                ),
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/10,
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 30, right: 30),
-                          child: UpdateInformationTextField(
-                            obscureText: true,
-                            prefixIcon: Icon(
-                              Icons.vpn_key,
-                              color: Colors.orange,
-                            ),
-                            borderColor: Colors.orange,
-                            hintText: Values.OLD_PASSWORD,
-                            controller: oldController,
-                          )),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                          child: UpdateInformationTextField(
-                            obscureText: true,
-                            prefixIcon: Icon(
-                              Icons.lock_open,
-                              color: Colors.lightBlue,
-                            ),
-                            borderColor: Colors.lightBlue,
-                            hintText: Values.NEW_PASSWORD,
-                            controller: newController,
-                          )),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 50),
-                          child: UpdateInformationTextField(
-                            obscureText: true,
-                            prefixIcon: Icon(
-                              Icons.lock_outline,
-                              color: Colors.lightBlue,
-                            ),
-                            borderColor: Colors.lightBlue,
-                            hintText: Values.RETYPE_PASSWORD,
-                            controller: retypeController,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: SigninButton(
-                          text: Values.CONFIRM.toUpperCase(),
-                          onPress: () {BlocProvider.of<ChangeBloc>(context).add(PressConfirmEvent(oldController.text.trim(),newController.text.trim(),retypeController.text.trim()));},
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 ),
                 state is LoadingState?LoadingUpdate():Container()
