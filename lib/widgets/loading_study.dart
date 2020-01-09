@@ -11,7 +11,7 @@ class LoadingStudy extends StatelessWidget {
       child: Center(
         child:SpinKitDoubleBounce(
           color: Colors.orange,
-          size: 40.0,
+          size: 40,
         ),
       ),
     );

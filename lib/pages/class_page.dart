@@ -85,6 +85,7 @@ class _ClassPageState extends State<ClassPage> {
                             .add(FetchListEvent(number));
                       },
                       child: CustomScrollView(
+                        physics: BouncingScrollPhysics(),
                         slivers: <Widget>[
                           SliverAppBar(
                             automaticallyImplyLeading: false,

@@ -48,6 +48,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 },
                 child: ListView.builder(
                     itemCount: posts.length,
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => Card(
                           elevation: 5,
                           shape: RoundedRectangleBorder(

@@ -50,6 +50,7 @@ class _ExamPageState extends State<ExamPage> {
                   ),
                   body: ListView.builder(
                       itemCount: exams.length,
+                      physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) => Card(
                           elevation: 5,
                           shape: RoundedRectangleBorder(
