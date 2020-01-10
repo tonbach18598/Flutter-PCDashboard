@@ -38,7 +38,9 @@ class _DeveloperPageState extends State<DeveloperPage> {
                 textAlign: TextAlign.justify,
                 text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(text: "P&C Dashboard Student", style: TextStyle(color: Colors.deepOrange, fontSize: 24, fontWeight: FontWeight.bold,)),
+                      TextSpan(text: "P", style: TextStyle(color: Colors.deepOrange, fontSize: 24, fontWeight: FontWeight.bold,)),
+                      TextSpan(text: "&", style: TextStyle(color: Colors.deepOrange, fontSize: 18, fontWeight: FontWeight.bold,)),
+                      TextSpan(text: "C Dashboard Student", style: TextStyle(color: Colors.deepOrange, fontSize: 24, fontWeight: FontWeight.bold,)),
                       TextSpan(text: " là ứng dụng quản lý và hỗ trợ học tập dành cho sinh viên bộ môn Vật lý Tin học.", style: TextStyle(fontSize: 22,color: Colors.black)),
                     ]
                 ),
