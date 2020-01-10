@@ -44,7 +44,7 @@ class SuccessTapChangePasswordState extends DashboardState{
   List<Object> get props => null;
 }
 
-class SuccessTapFeedbackState extends DashboardState{
+class SuccessTapDeveloperState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;

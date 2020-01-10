@@ -6,7 +6,7 @@ import 'package:flutter_pcdashboard/pages/comment_page.dart';
 import 'package:flutter_pcdashboard/pages/dashboard_page.dart';
 import 'package:flutter_pcdashboard/pages/edit_page.dart';
 import 'package:flutter_pcdashboard/pages/exam_page.dart';
-import 'package:flutter_pcdashboard/pages/feedback_page.dart';
+import 'package:flutter_pcdashboard/pages/developer_page.dart';
 import 'package:flutter_pcdashboard/pages/forget_page.dart';
 import 'package:flutter_pcdashboard/pages/home_page.dart';
 import 'package:flutter_pcdashboard/pages/post_page.dart';
@@ -29,7 +29,7 @@ class Routes{
   static const homeRoute='/home';
   static const updateRoute='/update';
   static const changeRoute='/change';
-  static const feedbackRoute='/feedback';
+  static const developerRoute='/developer';
   static const chatRoute='/chat';
   static const userRoute='/user';
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -59,8 +59,8 @@ class Routes{
           return CupertinoPageRoute(builder: (_)=>UpdatePage());
         case changeRoute:
           return CupertinoPageRoute(builder: (_)=>ChangePage());
-        case feedbackRoute:
-          return CupertinoPageRoute(builder: (_)=>FeedbackPage());
+        case developerRoute:
+          return CupertinoPageRoute(builder: (_)=>DeveloperPage());
         case chatRoute:
           return CupertinoPageRoute(builder: (_)=>ChatPage(arguments));
         case userRoute:

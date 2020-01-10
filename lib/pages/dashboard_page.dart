@@ -6,6 +6,7 @@ import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:flutter_pcdashboard/blocs/dashboard_bloc/dashboard_state.dart';
 import 'package:flutter_pcdashboard/models/responses/self_response.dart';
+import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
@@ -48,8 +49,8 @@ class _DashboardPageState extends State<DashboardPage> {
             Navigator.of(context).pushNamed(Routes.updateRoute);
           } else if (state is SuccessTapChangePasswordState) {
             Navigator.of(context).pushNamed(Routes.changeRoute);
-          } else if (state is SuccessTapFeedbackState) {
-            Navigator.of(context).pushNamed(Routes.feedbackRoute);
+          } else if (state is SuccessTapDeveloperState) {
+            Navigator.of(context).pushNamed(Routes.developerRoute);
           } else if (state is SuccessTapSignoutState) {
             Toasts.showSuccessToast('Đăng xuất thành công');
             Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
@@ -90,26 +91,23 @@ class _DashboardPageState extends State<DashboardPage> {
                         height: MediaQuery.of(context).size.width,
                         child: CachedNetworkImage(
                           imageUrl: self.avatar,
-                          imageBuilder:
-                              (context, imageProvider) =>
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
                               ),
+                            ),
+                          ),
                           placeholder: (context, url) => Center(
                               child: SpinKitDualRing(
-                                color: Colors.blue,
-                              )),
-                          errorWidget: (context, url, error) =>
-                              Icon(
-                                Icons.error,
-                                color: Colors.blue,
-                              ),
+                            color: Colors.blue,
+                          )),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -147,13 +145,18 @@ class _DashboardPageState extends State<DashboardPage> {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapChangePasswordEvent());
                       }),
-                  DashboardDrawerItem(
-                      title: Values.FEEDBACK,
-                      icon: Icons.feedback,
-                      onTap: () {
-                        BlocProvider.of<DashboardBloc>(context)
-                            .add(TapFeedbackEvent());
-                      }),
+                  ListTile(
+                    leading: FlutterLogo(colors: Colors.orange,),
+                    title: Text(
+                      Values.DEVELOPER,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      BlocProvider.of<DashboardBloc>(context)
+                          .add(TapDeveloperEvent());
+                    },
+                  ),
                   DashboardDrawerItem(
                       title: Values.SIGN_OUT,
                       icon: Icons.exit_to_app,
@@ -161,6 +164,13 @@ class _DashboardPageState extends State<DashboardPage> {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapSignoutEvent());
                       }),
+                  ListTile(
+                    title: Text(
+                      Configs.currentVersion,
+                      style:
+                      TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -34,7 +34,7 @@ class TapChangePasswordEvent extends DashboardEvent{
   List<Object> get props => null;
 }
 
-class TapFeedbackEvent extends DashboardEvent{
+class TapDeveloperEvent extends DashboardEvent{
   @override
   // TODO: implement props
   List<Object> get props => null;

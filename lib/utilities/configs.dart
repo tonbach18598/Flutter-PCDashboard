@@ -1,5 +1,5 @@
 class Configs{
-  static final String currentVersion='1.0.0';
+  static final String currentVersion='Phiên bản: Beta 1.0.0';
   static final String baseUrl='http://pcdashboard.herokuapp.com';
   static final String homeUrl='http://www.phys.hcmus.edu.vn/vlth';
   static final String socketUrl='http://pcdashboard-socket.herokuapp.com';

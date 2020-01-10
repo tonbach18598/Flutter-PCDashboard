@@ -24,8 +24,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         yield SuccessTapUpdateInformationState();
       } else if (event is TapChangePasswordEvent) {
         yield SuccessTapChangePasswordState();
-      } else if (event is TapFeedbackEvent) {
-        yield SuccessTapFeedbackState();
+      } else if (event is TapDeveloperEvent) {
+        yield SuccessTapDeveloperState();
       } else if (event is TapSignoutEvent) {
         await onSignout();
         yield SuccessTapSignoutState();
@@ -41,7 +41,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     return self;
   }
 
-  void onSignout() async {
+  Future<void> onSignout() async {
     await Preferences.clearAll();
   }
 }

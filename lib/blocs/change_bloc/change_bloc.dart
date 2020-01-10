@@ -59,6 +59,6 @@ Future<bool> changePassword(String oldPassword, String newPassword) async {
   }
 }
 
-void onSignout() async {
+Future<void> onSignout() async {
   await Preferences.clearAll();
 }

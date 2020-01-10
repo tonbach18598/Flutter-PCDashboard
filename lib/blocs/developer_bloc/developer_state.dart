@@ -1,29 +1,29 @@
 import 'package:equatable/equatable.dart';
 
-abstract class FeedbackState extends Equatable{
-  const FeedbackState();
+abstract class DeveloperState extends Equatable{
+  const DeveloperState();
 }
 
-class InitialFeedbackState extends FeedbackState{
+class InitialDeveloperState extends DeveloperState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 
 }
 
-class SuccessPressSendState extends FeedbackState{
+class SuccessPressSendState extends DeveloperState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class FailurePressSendState extends FeedbackState{
+class FailurePressSendState extends DeveloperState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class WarningPressSendState extends FeedbackState{
+class WarningPressSendState extends DeveloperState{
   @override
   // TODO: implement props
   List<Object> get props => null;
