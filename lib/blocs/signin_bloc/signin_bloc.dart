@@ -30,7 +30,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
           yield WarningPressSigninState();
         }
       } else if (event is PressForgetEvent) {
-        yield PressForgetState();
+        yield SuccessPressForgetState();
       }
       yield InitialSigninState();
     } catch (e) {

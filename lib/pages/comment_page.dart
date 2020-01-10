@@ -67,7 +67,7 @@ class _CommentPageState extends State<CommentPage> {
             Toasts.showWarningToast('Nội dung bình luận không được để trống');
           } else if (state is FailurePressConfirmState) {
             Toasts.showFailureToast('Sửa bình luận thất bại');
-          } else if (state is PressCancelState) {
+          } else if (state is SuccessPressCancelState) {
             Navigator.of(context).pop();
           } else if (state is SuccessPressSendState) {
             contentController.text = '';
@@ -76,7 +76,7 @@ class _CommentPageState extends State<CommentPage> {
             Toasts.showWarningToast('Nội dung bình luận không được để trống');
           } else if (state is FailurePressSendState) {
             Toasts.showFailureToast('Gửi bình luận thất bại');
-          } else if (state is PressEditState) {
+          } else if (state is SuccessPressEditState) {
             editController.text = state.comment.content;
             showEditDialog(context, state.comment);
           } else if (state is SuccessPressDeleteState) {

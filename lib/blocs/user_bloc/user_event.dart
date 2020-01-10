@@ -25,3 +25,23 @@ TapUserEvent(this.user);
   // TODO: implement props
   List<Object> get props => null;
 }
+
+class TapEmailEvent extends UserEvent{
+  String email;
+
+  TapEmailEvent(this.email);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class TapPhoneEvent extends UserEvent{
+  String phone;
+
+  TapPhoneEvent(this.phone);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}

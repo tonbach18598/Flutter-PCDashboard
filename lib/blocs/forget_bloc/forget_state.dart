@@ -18,7 +18,7 @@ class LoadingState extends ForgetState{
 
 }
 
-class PressBackState extends ForgetState{
+class SuccessPressBackState extends ForgetState{
   @override
   // TODO: implement props
   List<Object> get props => null;

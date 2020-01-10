@@ -17,7 +17,7 @@ class LoadingState extends SigninState{
 
 }
 
-class PressForgetState extends SigninState{
+class SuccessPressForgetState extends SigninState{
   @override
   // TODO: implement props
   List<Object> get props => null;

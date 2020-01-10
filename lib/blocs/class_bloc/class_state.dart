@@ -45,36 +45,36 @@ class FailureFetchListState extends ClassState {
   List<Object> get props => null;
 }
 
-class TapPostState extends ClassState {
+class SuccessTapPostState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapCommentState extends ClassState {
+class SuccessTapCommentState extends ClassState {
   ClassResponse post;
 
-  TapCommentState(this.post);
-
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
-
-class PressMoreState extends ClassState {
-  ClassResponse post;
-
-  PressMoreState(this.post);
+  SuccessTapCommentState(this.post);
 
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class PressEditState extends ClassState {
+class SuccessPressMoreState extends ClassState {
   ClassResponse post;
 
-  PressEditState(this.post);
+  SuccessPressMoreState(this.post);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class SuccessPressEditState extends ClassState {
+  ClassResponse post;
+
+  SuccessPressEditState(this.post);
 
   @override
   // TODO: implement props
@@ -98,7 +98,7 @@ class FailurePressDeleteState extends ClassState {
   List<Object> get props => null;
 }
 
-class PressCancelState extends ClassState {
+class SuccessPressCancelState extends ClassState {
   @override
   // TODO: implement props
   List<Object> get props => null;

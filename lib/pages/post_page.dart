@@ -47,7 +47,7 @@ class _PostPageState extends State<PostPage> {
             Toasts.showWarningToast('Nội dung bài đăng không được để trống');
           }else if(state is FailurePressPostState){
             Toasts.showFailureToast('Đăng bài thất bại');
-          }else if(state is TapImageState){
+          }else if(state is SuccessTapImageState){
             image=state.image;
           }
         },

@@ -28,13 +28,13 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
           yield FailureFetchListState();
         }
       } else if (event is TapPostEvent) {
-        yield TapPostState();
+        yield SuccessTapPostState();
       } else if (event is TapCommentEvent) {
-        yield TapCommentState(event.post);
+        yield SuccessTapCommentState(event.post);
       } else if (event is PressMoreEvent) {
-        yield PressMoreState(event.post);
+        yield SuccessPressMoreState(event.post);
       } else if (event is PressEditEvent) {
-        yield PressEditState(event.post);
+        yield SuccessPressEditState(event.post);
       } else if (event is PressDeleteEvent) {
         yield LoadingState();
         if (await deletePost(event.post.id)) {
@@ -42,7 +42,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
         } else
           yield FailurePressDeleteState();
       } else if (event is PressCancelEvent) {
-        yield PressCancelState();
+        yield SuccessPressCancelState();
       }
       yield InitialClassState();
     } catch (e) {

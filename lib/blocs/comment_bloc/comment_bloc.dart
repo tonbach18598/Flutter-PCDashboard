@@ -35,7 +35,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           yield WarningPressSendState();
         }
       } else if (event is PressEditEvent) {
-        yield PressEditState(event.comment);
+        yield SuccessPressEditState(event.comment);
       } else if (event is PressConfirmEvent) {
         if (event.newContent.isNotEmpty) {
           if (await editComment(event.comment.id, event.newContent)) {
@@ -47,7 +47,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           yield WarningPressConfirmState();
         }
       } else if (event is PressCancelEvent) {
-        yield PressCancelState();
+        yield SuccessPressCancelState();
       } else if (event is PressDeleteEvent) {
         yield LoadingState();
         if (await deleteComment(event.comment.id)) {

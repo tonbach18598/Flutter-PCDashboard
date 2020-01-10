@@ -39,6 +39,7 @@ dependencies:
   adhara_socket_io: 0.4.1
   image_picker: 0.6.2
   lazy_load_refresh_indicator: 1.0.0+1
+  url_launcher: 5.2.7
 
 dev_dependencies:
   flutter_test:

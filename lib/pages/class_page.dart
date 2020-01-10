@@ -45,18 +45,18 @@ class _ClassPageState extends State<ClassPage> {
             number = state.number;
           } else if (state is FailureFetchListState) {
             Toasts.showFailureToast('Tải bảng tin thất bại');
-          } else if (state is TapPostState) {
+          } else if (state is SuccessTapPostState) {
             await Navigator.of(context).pushNamed(Routes.postRoute).then((_) {
               BlocProvider.of<ClassBloc>(context).add(FetchListEvent(number));
             });
-          } else if (state is TapCommentState) {
+          } else if (state is SuccessTapCommentState) {
             Navigator.of(context)
                 .pushNamed(Routes.commentRoute, arguments: state.post);
-          } else if (state is PressMoreState) {
+          } else if (state is SuccessPressMoreState) {
             showMoreActionSheet(context, state.post);
-          } else if (state is PressCancelState) {
+          } else if (state is SuccessPressCancelState) {
             Navigator.of(context).pop();
-          } else if (state is PressEditState) {
+          } else if (state is SuccessPressEditState) {
             Navigator.of(context).pop();
             await Navigator.of(context)
                 .pushNamed(Routes.editRoute, arguments: state.post)

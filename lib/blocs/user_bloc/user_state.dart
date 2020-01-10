@@ -46,3 +46,19 @@ class TapUserState extends UserState{
   // TODO: implement props
   List<Object> get props => null;
 }
+
+class FailureTapEmailState extends UserState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}
+
+class FailureTapPhoneState extends UserState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}

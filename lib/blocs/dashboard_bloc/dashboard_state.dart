@@ -20,37 +20,37 @@ class InitializeSelfState extends DashboardState{
   List<Object> get props => null;
 }
 
-class TapSelfDetailsState extends DashboardState{
+class SuccessTapSelfDetailsState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapHomeState extends DashboardState{
+class SuccessTapHomeState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapUpdateInformationState extends DashboardState{
+class SuccessTapUpdateInformationState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapChangePasswordState extends DashboardState{
+class SuccessTapChangePasswordState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapFeedbackState extends DashboardState{
+class SuccessTapFeedbackState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class TapSignoutState extends DashboardState{
+class SuccessTapSignoutState extends DashboardState{
   @override
   // TODO: implement props
   List<Object> get props => null;

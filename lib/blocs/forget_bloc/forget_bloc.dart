@@ -26,7 +26,7 @@ class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
           yield WarningPressGetPasswordState();
         }
       } else if (event is PressBackEvent) {
-        yield PressBackState();
+        yield SuccessPressBackState();
       }
       yield InitialForgetState();
     } catch (e) {

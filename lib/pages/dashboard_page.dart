@@ -41,16 +41,16 @@ class _DashboardPageState extends State<DashboardPage> {
         listener: (context, state) {
           if (state is InitializeSelfState) {
             self = state.self;
-          } else if (state is TapSelfDetailsState) {
-          } else if (state is TapHomeState) {
+          } else if (state is SuccessTapSelfDetailsState) {
+          } else if (state is SuccessTapHomeState) {
             Navigator.of(context).pushNamed(Routes.homeRoute);
-          } else if (state is TapUpdateInformationState) {
+          } else if (state is SuccessTapUpdateInformationState) {
             Navigator.of(context).pushNamed(Routes.updateRoute);
-          } else if (state is TapChangePasswordState) {
+          } else if (state is SuccessTapChangePasswordState) {
             Navigator.of(context).pushNamed(Routes.changeRoute);
-          } else if (state is TapFeedbackState) {
+          } else if (state is SuccessTapFeedbackState) {
             Navigator.of(context).pushNamed(Routes.feedbackRoute);
-          } else if (state is TapSignoutState) {
+          } else if (state is SuccessTapSignoutState) {
             Toasts.showSuccessToast('Đăng xuất thành công');
             Navigator.of(context).pushReplacementNamed(Routes.signinRoute);
           }

@@ -35,7 +35,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         }
       } else if (event is TapImageEvent) {
         File image = await getImage();
-        yield TapImageState(image);
+        yield SuccessTapImageState(image);
       }
       yield InitialPostState();
     } catch (e) {

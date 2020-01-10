@@ -50,7 +50,7 @@ class _SigninPageState extends State<SigninPage> {
           } else if (state is WarningPressSigninState) {
             Toasts.showWarningToast(
                 'Tài khoản hoặc mật khẩu không được để trống');
-          } else if (state is PressForgetState) {
+          } else if (state is SuccessPressForgetState) {
             Navigator.of(context).pushNamed(Routes.forgetRoute);
           }
         },

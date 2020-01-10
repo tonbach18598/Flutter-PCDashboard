@@ -17,18 +17,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         SelfResponse self=await initializeSelf();
         yield InitializeSelfState(self);
       } else if (event is TapSelfDetailsEvent) {
-        yield TapSelfDetailsState();
+        yield SuccessTapSelfDetailsState();
       } else if (event is TapHomeEvent) {
-        yield TapHomeState();
+        yield SuccessTapHomeState();
       } else if (event is TapUpdateInformationEvent) {
-        yield TapUpdateInformationState();
+        yield SuccessTapUpdateInformationState();
       } else if (event is TapChangePasswordEvent) {
-        yield TapChangePasswordState();
+        yield SuccessTapChangePasswordState();
       } else if (event is TapFeedbackEvent) {
-        yield TapFeedbackState();
+        yield SuccessTapFeedbackState();
       } else if (event is TapSignoutEvent) {
         await onSignout();
-        yield TapSignoutState();
+        yield SuccessTapSignoutState();
       }
       yield InitialDashboardState();
     } catch (e) {

@@ -42,12 +42,14 @@ class _UserPageState extends State<UserPage> {
             users = state.users;
           } else if (state is FailureFetchListState) {
             classId == 'GV'
-                ? Toasts.showFailureToast(
-                    'Tải danh sách giảng viên thất bại')
-                : Toasts.showFailureToast(
-                    'Tải danh sách sinh viên thất bại');
+                ? Toasts.showFailureToast('Tải danh sách giảng viên thất bại')
+                : Toasts.showFailureToast('Tải danh sách sinh viên thất bại');
           } else if (state is TapUserState) {
             showInformationBottomSheet(context, state.user);
+          } else if (state is FailureTapEmailState) {
+            Toasts.showFailureToast('Không thể gửi email');
+          } else if (state is FailureTapPhoneState) {
+            Toasts.showFailureToast('Không thể gọi điện');
           }
         },
         child: BlocBuilder<UserBloc, UserState>(
@@ -147,7 +149,8 @@ class _UserPageState extends State<UserPage> {
                                   ),
                                 )),
                             onTap: () {
-                              BlocProvider.of<UserBloc>(context).add(TapUserEvent(users[index]));
+                              BlocProvider.of<UserBloc>(context)
+                                  .add(TapUserEvent(users[index]));
                             },
                           )),
                   state is LoadingState ? LoadingUser() : Container()
@@ -158,79 +161,114 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Future<void> showInformationBottomSheet(BuildContext blocContext,UserResponse use) async {
+  Future<void> showInformationBottomSheet(
+      BuildContext blocContext, UserResponse use) async {
     return showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
           return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              CachedNetworkImage(
+                imageUrl: use.avatar,
+                imageBuilder: (context, imageProvider) => Container(
+                  width: MediaQuery.of(context).size.height / 4,
+                  height: MediaQuery.of(context).size.height / 4,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => Center(
+                    child: SpinKitDualRing(
+                  color: Colors.blue,
+                )),
+                errorWidget: (context, url, error) => Icon(
+                  Icons.error,
+                  color: Colors.orange,
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: Text(
+                      '${use.name}',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    '${use.userId}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      CachedNetworkImage(
-                        imageUrl: use.avatar,
-                        imageBuilder: (context, imageProvider) => Container(
-                          width: MediaQuery.of(context).size.height / 4,
-                          height: MediaQuery.of(context).size.height / 4,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        placeholder: (context, url) => Center(
-                            child: SpinKitDualRing(
-                          color: Colors.blue,
-                        )),
-                        errorWidget: (context, url, error) => Icon(
-                          Icons.error,
-                          color: Colors.orange,
-                        ),
-                      ),
-                      Column
-                        (
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0,10,0,10),
-                            child: Text('${use.name}',style: TextStyle(fontSize: 20,color: Colors.deepOrange,fontWeight: FontWeight.bold),),
-                          ),
-                          Text('${use.userId}',style: TextStyle(fontSize: 16,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
-                        ],
-                      ),
-
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      InkWell(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      child: Icon(Icons.email,color: Colors.orange,),
-                                    ),
-                                    Text('${use.email}',style: TextStyle(fontSize: 16),),
-                                  ],
-                                ),
-                                SizedBox(height: 10,),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      child: Icon(Icons.smartphone,color: Colors.orange,),
-                                    ),
-                                    Text('${use.phone}',style: TextStyle(fontSize: 16),)
-                                  ],
-                                )
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.email,
+                                color: Colors.orange,
+                              ),
+                            ),
+                            Text(
+                              '${use.email}',
+                              style: TextStyle(fontSize: 16),
                             ),
                           ],
                         ),
+                        onTap: () {BlocProvider.of<UserBloc>(blocContext)
+                            .add(TapEmailEvent(use.email));},
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.smartphone,
+                                color: Colors.orange,
+                              ),
+                            ),
+                            Text(
+                              '${use.phone}',
+                              style: TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          BlocProvider.of<UserBloc>(blocContext)
+                              .add(TapPhoneEvent(use.phone));
+                        },
+                      )
                     ],
-                  );
+                  ),
+                ],
+              ),
+            ],
+          );
         });
   }
 }

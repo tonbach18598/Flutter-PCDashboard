@@ -39,7 +39,7 @@ class _ForgetPageState extends State<ForgetPage> {
       create: (context) => ForgetBloc(),
       child: BlocListener<ForgetBloc, ForgetState>(
         listener: (context, state) {
-          if (state is PressBackState) {
+          if (state is SuccessPressBackState) {
             Navigator.of(context).pop();
           } else if (state is SuccessPressGetPasswordState) {
             usernameController.text = '';

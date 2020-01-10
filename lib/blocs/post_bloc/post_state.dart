@@ -49,10 +49,10 @@ class WarningPressPostState extends PostState{
   List<Object> get props => null;
 }
 
-class TapImageState extends PostState{
+class SuccessTapImageState extends PostState{
   File image;
 
-  TapImageState(this.image);
+  SuccessTapImageState(this.image);
 
   @override
   // TODO: implement props
