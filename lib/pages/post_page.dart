@@ -54,6 +54,10 @@ class _PostPageState extends State<PostPage> {
         child: BlocBuilder<PostBloc,PostState>(
           builder:(context,state)=> Scaffold(
             appBar: GradientAppBar(
+              title: Text(
+                Values.POST_POST.toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -66,16 +70,23 @@ class _PostPageState extends State<PostPage> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
               actions: <Widget>[
-                FlatButton(
-                  child: Text(
-                    Values.POST.toUpperCase(),
-                    style: TextStyle(
+              IconButton(
+                      icon: Icon(
+                        Icons.file_upload,
                         color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: (){BlocProvider.of<PostBloc>(context).add(PressPostEvent(contentController.text.trim(),image));},
-                )
+                      ),
+                onPressed: (){BlocProvider.of<PostBloc>(context).add(PressPostEvent(contentController.text.trim(),image));},
+              ),
+//                FlatButton(
+//                  child: Text(
+//                    Values.POST.toUpperCase(),
+//                    style: TextStyle(
+//                        color: Colors.white,
+//                        fontSize: 18,
+//                        fontWeight: FontWeight.bold),
+//                  ),
+//                  onPressed: (){BlocProvider.of<PostBloc>(context).add(PressPostEvent(contentController.text.trim(),image));},
+//                )
               ],
             ),
             body: Stack(

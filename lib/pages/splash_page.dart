@@ -37,6 +37,7 @@ class _SplashPageState extends State<SplashPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset('logo.png',width: MediaQuery.of(context).size.width*0.9,height: MediaQuery.of(context).size.width*0.6,),
+              SizedBox(height: MediaQuery.of(context).size.height/10,),
               SpinKitRing(
                 color: Colors.white,
                 size: 50.0,

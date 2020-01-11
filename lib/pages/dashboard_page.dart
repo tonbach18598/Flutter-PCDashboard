@@ -168,7 +168,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     title: Text(
                       Configs.currentVersion,
                       style:
-                      TextStyle(fontSize: 14, color: Colors.grey),
+                      TextStyle(fontSize: 14, color: Colors.grey,fontStyle: FontStyle.italic),
                     ),
                   ),
                 ],

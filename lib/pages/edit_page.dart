@@ -56,6 +56,10 @@ class _EditPageState extends State<EditPage> {
         child: BlocBuilder<EditBloc,EditState>(
           builder:(context,state)=> Scaffold(
             appBar: GradientAppBar(
+              title: Text(
+                Values.EDIT_POST.toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -68,16 +72,23 @@ class _EditPageState extends State<EditPage> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
               actions: <Widget>[
-                FlatButton(
-                  child: Text(
-                    Values.EDIT.toUpperCase(),
-                    style: TextStyle(
+              IconButton(
+                      icon: Icon(
+                        Icons.edit,
                         color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: (){BlocProvider.of<EditBloc>(context).add(PressEditEvent(post,contentController.text));},
-                )
+                      ),
+                onPressed: (){BlocProvider.of<EditBloc>(context).add(PressEditEvent(post,contentController.text));},
+                    ),
+//                FlatButton(
+//                  child: Text(
+//                    Values.EDIT.toUpperCase(),
+//                    style: TextStyle(
+//                        color: Colors.white,
+//                        fontSize: 18,
+//                        fontWeight: FontWeight.bold),
+//                  ),
+//                  onPressed: (){},
+//                )
               ],
             ),
             body: Stack(

@@ -37,5 +37,7 @@ class Values{
   static final String ADD_IMAGE='Thêm hình ảnh';
   static final String MEMBER_OF='Thành viên của ';
   static final String EDIT_COMMENT='Sửa bình luận';
+  static final String POST_POST='Đăng bài';
+  static final String EDIT_POST='Sửa bài';
 
 }
