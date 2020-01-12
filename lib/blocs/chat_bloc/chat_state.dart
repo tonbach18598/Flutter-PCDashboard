@@ -28,9 +28,11 @@ class ConnectSocketState extends ChatState{
 
 class SuccessFetchListState extends ChatState{
   List<ChatResponse> messages;
+  int number;
+  bool scroll;
 
 
-  SuccessFetchListState(this.messages);
+  SuccessFetchListState(this.messages,this.number,this.scroll);
 
   @override
   // TODO: implement props

@@ -23,8 +23,9 @@ class DisConnectSocketEvent extends ChatEvent{
 class FetchListEvent extends ChatEvent{
 
   int number;
+  bool scroll;
 
-  FetchListEvent(this.number);
+  FetchListEvent(this.number,this.scroll);
 
   @override
   // TODO: implement props

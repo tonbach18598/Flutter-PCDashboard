@@ -15,6 +15,7 @@ import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_comment.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:lazy_load_refresh_indicator/lazy_load_refresh_indicator.dart';
 
 class ChatPage extends StatefulWidget {
   final arguments;
@@ -32,6 +33,7 @@ class _ChatPageState extends State<ChatPage> {
   SocketIOManager manager;
   SocketIO socket;
   String selfId;
+  int number = 10;
 
   @override
   void initState() {
@@ -41,7 +43,7 @@ class _ChatPageState extends State<ChatPage> {
     scrollController = ScrollController();
     manager = SocketIOManager();
     connectSocket();
-    selfId=widget.arguments;
+    selfId = widget.arguments;
   }
 
   @override
@@ -55,11 +57,13 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ChatBloc()..add(ConnectSocketEvent())..add(FetchListEvent(100)),
+          ChatBloc()..add(ConnectSocketEvent())..add(FetchListEvent(10,true)),
       child: BlocListener<ChatBloc, ChatState>(
         listener: (context, state) {
           if (state is SuccessFetchListState) {
             messages = state.messages;
+            number = state.number;
+            if(state.scroll)
             SchedulerBinding.instance.addPostFrameCallback((_) {
               scrollController.animateTo(
                 scrollController.position.maxScrollExtent,
@@ -104,129 +108,142 @@ class _ChatPageState extends State<ChatPage> {
                   child: Column(
                     children: <Widget>[
                       Expanded(
-                        child: ListView.builder(
-                            controller: scrollController,
-                            itemCount: messages.length,
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) => messages[index]
-                                        .userId ==
-                                    selfId
-                                ? Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        Container(
-                                          constraints: BoxConstraints(
-                                              maxWidth: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              color: Colors.deepOrange),
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                15, 10, 15, 10),
-                                            child: Text(
-                                              '${messages[index].content}',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.white),
+                        child: LazyLoadRefreshIndicator(
+                          onRefresh: () async {
+                            BlocProvider.of<ChatBloc>(context)
+                                .add(FetchListEvent(number,false));
+                          },
+                          onEndOfPage: () {
+
+                          },
+                          child: ListView.builder(
+                              controller: scrollController,
+                              itemCount: messages.length,
+                              physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, index) => messages[index]
+                                          .userId ==
+                                      selfId
+                                  ? Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 10, 5),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Container(
+                                            constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.7),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color: Colors.deepOrange),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      15, 10, 15, 10),
+                                              child: Text(
+                                                '${messages[index].content}',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.white),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 10),
-                                          child: SizedBox(
-                                            width: 40,
-                                            height: 40,
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  messages[index].userAvatar,
-                                              imageBuilder:
-                                                  (context, imageProvider) =>
-                                                      Container(
+                                        ],
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 10, 5),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
+                                            child: SizedBox(
+                                              width: 40,
+                                              height: 40,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    messages[index].userAvatar,
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                        Container(
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                        child: SpinKitDualRing(
+                                                  color: Colors.orange,
+                                                )),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(
+                                                  Icons.error,
+                                                  color: Colors.orange,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        10, 0, 0, 5),
+                                                child: Text(
+                                                  '${messages[index].userName}',
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.grey),
+                                                ),
+                                              ),
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                    maxWidth:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.7),
                                                 decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    color: Colors.white),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          15, 10, 15, 10),
+                                                  child: Text(
+                                                    '${messages[index].content}',
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color:
+                                                            Colors.deepOrange),
                                                   ),
                                                 ),
                                               ),
-                                              placeholder: (context, url) =>
-                                                  Center(
-                                                      child: SpinKitDualRing(
-                                                color: Colors.orange,
-                                              )),
-                                              errorWidget:
-                                                  (context, url, error) => Icon(
-                                                Icons.error,
-                                                color: Colors.orange,
-                                              ),
-                                            ),
+                                            ],
                                           ),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      10, 0, 0, 5),
-                                              child: Text(
-                                                '${messages[index].userName}',
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.grey),
-                                              ),
-                                            ),
-                                            Container(
-                                              constraints: BoxConstraints(
-                                                  maxWidth:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.7),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  color: Colors.white),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        15, 10, 15, 10),
-                                                child: Text(
-                                                  '${messages[index].content}',
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.deepOrange),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )),
+                                        ],
+                                      ),
+                                    )),
+                        ),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -313,11 +330,11 @@ class _ChatPageState extends State<ChatPage> {
         messages.add(message);
         SchedulerBinding.instance.addPostFrameCallback((_) {
           scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            curve: Curves.easeOut,
-            duration: const Duration(milliseconds: 10),
-          );
-        });
+          scrollController.position.maxScrollExtent,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 10),
+        );
+      });
       });
     });
   }

@@ -22,7 +22,7 @@ class ChatBloc extends Bloc<ChatEvent,ChatState>{
         yield LoadingState();
         List<ChatResponse> messages = await fetchList(event.number);
         if (messages != null) {
-          yield SuccessFetchListState(messages);
+          yield SuccessFetchListState(messages,event.number+10,event.scroll);
         } else {
           yield FailureFetchListState();
         }
