@@ -46,7 +46,7 @@ class _ClassPageState extends State<ClassPage> {
           } else if (state is FailureFetchListState) {
             Toasts.showFailureToast('Tải bảng tin thất bại');
           } else if (state is SuccessTapPostState) {
-            await Navigator.of(context).pushNamed(Routes.postRoute).then((_) {
+            Navigator.of(context).pushNamed(Routes.postRoute).then((_) {
               BlocProvider.of<ClassBloc>(context).add(FetchListEvent(number));
             });
           } else if (state is SuccessTapCommentState) {
@@ -58,7 +58,7 @@ class _ClassPageState extends State<ClassPage> {
             Navigator.of(context).pop();
           } else if (state is SuccessPressEditState) {
             Navigator.of(context).pop();
-            await Navigator.of(context)
+            Navigator.of(context)
                 .pushNamed(Routes.editRoute, arguments: state.post)
                 .then((_) {
               BlocProvider.of<ClassBloc>(context).add(FetchListEvent(10));
