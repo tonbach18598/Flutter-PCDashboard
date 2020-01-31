@@ -26,15 +26,6 @@ class ChatBloc extends Bloc<ChatEvent,ChatState>{
         } else {
           yield FailureFetchListState();
         }
-      } else if (event is PressSendEvent) {
-        yield LoadingState();
-        if (event.content.isNotEmpty) {
-
-        } else {
-          yield WarningPressSendState();
-        }
-      } else if (event is ConnectSocketEvent) {
-        yield ConnectSocketState();
       }
       yield InitialChatState();
     } catch (e) {

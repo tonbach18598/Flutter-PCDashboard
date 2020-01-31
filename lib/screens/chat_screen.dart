@@ -57,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ChatBloc()..add(ConnectSocketEvent())..add(FetchListEvent(10,true)),
+          ChatBloc()..add(FetchListEvent(10,true)),
       child: BlocListener<ChatBloc, ChatState>(
         listener: (context, state) {
           if (state is SuccessFetchListState) {
@@ -73,12 +73,6 @@ class _ChatScreenState extends State<ChatScreen> {
             });
           } else if (state is FailureFetchListState) {
             Toasts.showFailureToast('Tải tin nhắn thất bại');
-          } else if (state is SuccessPressSendState) {
-            contentController.text = '';
-          } else if (state is WarningPressSendState) {
-            Toasts.showWarningToast('Nội dung tin nhắn không được để trống');
-          } else if (state is FailurePressSendState) {
-            Toasts.showFailureToast('Gửi tin nhắn thất bại');
           }
         },
         child: BlocBuilder<ChatBloc, ChatState>(

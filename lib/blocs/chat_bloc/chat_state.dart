@@ -19,18 +19,10 @@ class LoadingState extends ChatState{
 
 }
 
-class ConnectSocketState extends ChatState{
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-
-}
-
 class SuccessFetchListState extends ChatState{
   List<ChatResponse> messages;
   int number;
   bool scroll;
-
 
   SuccessFetchListState(this.messages,this.number,this.scroll);
 
@@ -45,22 +37,4 @@ class FailureFetchListState extends ChatState{
   // TODO: implement props
   List<Object> get props => null;
 
-}
-
-class SuccessPressSendState extends ChatState{
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
-
-class FailurePressSendState extends ChatState{
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
-
-class WarningPressSendState extends ChatState{
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
 }
