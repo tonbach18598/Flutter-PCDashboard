@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pcdashboard/pages/change_page.dart';
-import 'package:flutter_pcdashboard/pages/chat_page.dart';
-import 'package:flutter_pcdashboard/pages/comment_page.dart';
-import 'package:flutter_pcdashboard/pages/dashboard_page.dart';
-import 'package:flutter_pcdashboard/pages/edit_page.dart';
-import 'package:flutter_pcdashboard/pages/exam_page.dart';
-import 'package:flutter_pcdashboard/pages/developer_page.dart';
-import 'package:flutter_pcdashboard/pages/forget_page.dart';
-import 'package:flutter_pcdashboard/pages/home_page.dart';
-import 'package:flutter_pcdashboard/pages/post_page.dart';
-import 'package:flutter_pcdashboard/pages/schedule_page.dart';
-import 'package:flutter_pcdashboard/pages/signin_page.dart';
-import 'package:flutter_pcdashboard/pages/splash_page.dart';
-import 'package:flutter_pcdashboard/pages/update_page.dart';
-import 'package:flutter_pcdashboard/pages/user_page.dart';
+import 'package:flutter_pcdashboard/screens/change_screen.dart';
+import 'package:flutter_pcdashboard/screens/chat_screen.dart';
+import 'package:flutter_pcdashboard/screens/comment_screen.dart';
+import 'package:flutter_pcdashboard/screens/dashboard_screen.dart';
+import 'package:flutter_pcdashboard/screens/edit_screen.dart';
+import 'package:flutter_pcdashboard/screens/exam_screen.dart';
+import 'package:flutter_pcdashboard/screens/developer_screen.dart';
+import 'package:flutter_pcdashboard/screens/forget_screen.dart';
+import 'package:flutter_pcdashboard/screens/home_screen.dart';
+import 'package:flutter_pcdashboard/screens/signin_screen.dart';
+import 'package:flutter_pcdashboard/screens/post_screen.dart';
+import 'package:flutter_pcdashboard/screens/schedule_screen.dart';
+import 'package:flutter_pcdashboard/screens/splash_screen.dart';
+import 'package:flutter_pcdashboard/screens/update_screen.dart';
+import 'package:flutter_pcdashboard/screens/user_screen.dart';
 
 class Routes{
   static const splashRoute='/';
@@ -36,35 +36,35 @@ class Routes{
     final arguments = settings.arguments;
       switch(settings.name){
         case splashRoute:
-          return CupertinoPageRoute(builder: (_)=>SplashPage());
+          return CupertinoPageRoute(builder: (_)=>SplashScreen());
         case signinRoute:
-          return CupertinoPageRoute(builder: (_)=>SigninPage());
+          return CupertinoPageRoute(builder: (_)=>SigninScreen());
         case dashboardRoute:
-          return CupertinoPageRoute(builder: (_)=>DashboardPage());
+          return CupertinoPageRoute(builder: (_)=>DashboardScreen());
         case forgetRoute:
-          return CupertinoPageRoute(builder: (_)=>ForgetPage());
+          return CupertinoPageRoute(builder: (_)=>ForgetScreen());
         case postRoute:
-          return CupertinoPageRoute(builder: (_)=>PostPage());
+          return CupertinoPageRoute(builder: (_)=>PostScreen());
         case editRoute:
-          return CupertinoPageRoute(builder: (_)=>EditPage(arguments));
+          return CupertinoPageRoute(builder: (_)=>EditScreen(arguments));
         case commentRoute:
-          return CupertinoPageRoute(builder: (_)=>CommentPage(arguments));
+          return CupertinoPageRoute(builder: (_)=>CommentScreen(arguments));
         case scheduleRoute:
-          return CupertinoPageRoute(builder: (_)=>SchedulePage());
+          return CupertinoPageRoute(builder: (_)=>ScheduleScreen());
         case examRoute:
-          return CupertinoPageRoute(builder: (_)=>ExamPage());
+          return CupertinoPageRoute(builder: (_)=>ExamScreen());
         case homeRoute:
-          return CupertinoPageRoute(builder: (_)=>HomePage());
+          return CupertinoPageRoute(builder: (_)=>HomeScreen());
         case updateRoute:
-          return CupertinoPageRoute(builder: (_)=>UpdatePage());
+          return CupertinoPageRoute(builder: (_)=>UpdateScreen());
         case changeRoute:
-          return CupertinoPageRoute(builder: (_)=>ChangePage());
+          return CupertinoPageRoute(builder: (_)=>ChangeScreen());
         case developerRoute:
-          return CupertinoPageRoute(builder: (_)=>DeveloperPage());
+          return CupertinoPageRoute(builder: (_)=>DeveloperScreen());
         case chatRoute:
-          return CupertinoPageRoute(builder: (_)=>ChatPage(arguments));
+          return CupertinoPageRoute(builder: (_)=>ChatScreen(arguments));
         case userRoute:
-          return CupertinoPageRoute(builder: (_)=>UserPage(arguments));
+          return CupertinoPageRoute(builder: (_)=>UserScreen(arguments));
       }
   }
 }

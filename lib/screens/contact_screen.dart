@@ -3,12 +3,12 @@ import 'package:flutter_pcdashboard/utilities/preferences.dart';
 import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 
-class ContactPage extends StatefulWidget {
+class ContactScreen extends StatefulWidget {
   @override
-  _ContactPageState createState() => _ContactPageState();
+  _ContactScreenState createState() => _ContactScreenState();
 }
 
-class _ContactPageState extends State<ContactPage> {
+class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(

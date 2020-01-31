@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 
-class StudyPage extends StatefulWidget {
+class StudyScreen extends StatefulWidget {
   @override
-  _StudyPageState createState() => _StudyPageState();
+  _StudyScreenState createState() => _StudyScreenState();
 }
 
-class _StudyPageState extends State<StudyPage> {
+class _StudyScreenState extends State<StudyScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(

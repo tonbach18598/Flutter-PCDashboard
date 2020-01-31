@@ -8,16 +8,16 @@ import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/widgets/loading_signin.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
-import 'package:flutter_pcdashboard/widgets/forget_button.dart';
+import 'package:flutter_pcdashboard/widgets/forget_password_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
-import 'package:flutter_pcdashboard/widgets/signin_text_field.dart';
+import 'package:flutter_pcdashboard/widgets/signin_textfield.dart';
 
-class ForgetPage extends StatefulWidget {
+class ForgetScreen extends StatefulWidget {
   @override
-  _ForgetPageState createState() => _ForgetPageState();
+  _ForgetScreenState createState() => _ForgetScreenState();
 }
 
-class _ForgetPageState extends State<ForgetPage> {
+class _ForgetScreenState extends State<ForgetScreen> {
   TextEditingController usernameController;
 
   @override

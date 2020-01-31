@@ -27,13 +27,13 @@ class Values{
   static final String OLD_PASSWORD='Mật khẩu cũ';
   static final String NEW_PASSWORD='Mật khẩu mới';
   static final String RETYPE_PASSWORD='Nhập lại mật khẩu';
-  static final String ENTER_CONTENT='Nhập nội dung...';
-  static final String SHARE_YOUR_THINKING='Chia sẻ cảm nghĩ của bạn...';
+  static final String ENTER_CONTENT='Nhập nội dung';
+  static final String SHARE_YOUR_THINKING='Chia sẻ cảm nghĩ của bạn';
   static final String CONFIRM='Xác nhận';
   static final String STUDENT_LIST='Danh sách sinh viên';
   static final String TEACHER_LIST='Danh sách giảng viên';
   static final String POST='Đăng';
-  static final String YOUR_THINKING='Cảm nghĩ của bạn...';
+  static final String YOUR_THINKING='Cảm nghĩ của bạn';
   static final String ADD_IMAGE='Thêm hình ảnh';
   static final String MEMBER_OF='Thành viên của ';
   static final String EDIT_COMMENT='Sửa bình luận';

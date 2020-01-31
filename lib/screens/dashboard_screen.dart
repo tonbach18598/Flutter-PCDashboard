@@ -10,21 +10,21 @@ import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
-import 'package:flutter_pcdashboard/pages/study_page.dart';
-import 'package:flutter_pcdashboard/pages/contact_page.dart';
-import 'package:flutter_pcdashboard/pages/department_page.dart';
-import 'package:flutter_pcdashboard/widgets/drawer_item.dart';
-import 'package:flutter_pcdashboard/widgets/tab_bar_item.dart';
+import 'package:flutter_pcdashboard/screens/study_screen.dart';
+import 'package:flutter_pcdashboard/screens/contact_screen.dart';
+import 'package:flutter_pcdashboard/screens/department_screen.dart';
+import 'package:flutter_pcdashboard/widgets/custom_drawer_item.dart';
+import 'package:flutter_pcdashboard/widgets/custom_tabbar_item.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'class_page.dart';
+import 'class_screen.dart';
 
-class DashboardPage extends StatefulWidget {
+class DashboardScreen extends StatefulWidget {
   @override
-  _DashboardPageState createState() => _DashboardPageState();
+  _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardScreenState extends State<DashboardScreen> {
   SelfResponse self;
 
   @override
@@ -124,21 +124,21 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     onTap: () {},
                   ),
-                  DashboardDrawerItem(
+                  CustomDrawerItem(
                       title: Values.HOME_PAGE,
                       icon: Icons.home,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapHomeEvent());
                       }),
-                  DashboardDrawerItem(
+                  CustomDrawerItem(
                       title: Values.UPDATE_INFORMATION,
                       icon: Icons.account_circle,
                       onTap: () {
                         BlocProvider.of<DashboardBloc>(context)
                             .add(TapUpdateInformationEvent());
                       }),
-                  DashboardDrawerItem(
+                  CustomDrawerItem(
                       title: Values.CHANGE_PASSWORD,
                       icon: Icons.settings,
                       onTap: () {
@@ -157,7 +157,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           .add(TapDeveloperEvent());
                     },
                   ),
-                  DashboardDrawerItem(
+                  CustomDrawerItem(
                       title: Values.SIGN_OUT,
                       icon: Icons.exit_to_app,
                       onTap: () {
@@ -188,21 +188,21 @@ class _DashboardPageState extends State<DashboardPage> {
                             unselectedLabelColor: Colors.blue,
                             labelColor: Colors.deepOrangeAccent,
                             tabs: <Widget>[
-                              DashboardTabBarItem(
+                              CustomTabBarItem(
                                   Values.DEPARTMENT, Icons.fiber_new),
-                              DashboardTabBarItem(Values.CLASS, Icons.people),
-                              DashboardTabBarItem(Values.CONTACT, Icons.public),
-                              DashboardTabBarItem(Values.STUDY, Icons.school)
+                              CustomTabBarItem(Values.CLASS, Icons.people),
+                              CustomTabBarItem(Values.CONTACT, Icons.public),
+                              CustomTabBarItem(Values.STUDY, Icons.school)
                             ],
                           ),
                         ),
                         Expanded(
                           child: TabBarView(
                             children: <Widget>[
-                              DepartmentPage(),
-                              ClassPage(),
-                              ContactPage(),
-                              StudyPage(),
+                              DepartmentScreen(),
+                              ClassScreen(),
+                              ContactScreen(),
+                              StudyScreen(),
                             ],
                           ),
                         ),

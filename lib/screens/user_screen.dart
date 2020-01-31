@@ -12,16 +12,16 @@ import 'package:flutter_pcdashboard/widgets/loading_user.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class UserPage extends StatefulWidget {
+class UserScreen extends StatefulWidget {
   final arguments;
 
-  UserPage(this.arguments);
+  UserScreen(this.arguments);
 
   @override
-  _UserPageState createState() => _UserPageState();
+  _UserScreenState createState() => _UserScreenState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _UserScreenState extends State<UserScreen> {
   String classId;
   List<UserResponse> users = [];
 

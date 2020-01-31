@@ -14,12 +14,12 @@ import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class PostPage extends StatefulWidget {
+class PostScreen extends StatefulWidget {
   @override
-  _PostPageState createState() => _PostPageState();
+  _PostScreenState createState() => _PostScreenState();
 }
 
-class _PostPageState extends State<PostPage> {
+class _PostScreenState extends State<PostScreen> {
   TextEditingController contentController;
   SelfResponse self;
   File image;

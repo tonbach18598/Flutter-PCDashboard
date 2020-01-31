@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DashboardDrawerItem extends StatelessWidget {
+class CustomDrawerItem extends StatelessWidget {
   String title;
   IconData icon;
   VoidCallback onTap;
 
-  DashboardDrawerItem({@required this.title, @required this.icon, @required this.onTap});
+  CustomDrawerItem({@required this.title, @required this.icon, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {

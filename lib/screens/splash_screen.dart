@@ -7,13 +7,13 @@ import 'package:flutter_pcdashboard/utilities/routes.dart';
 import 'package:flutter_pcdashboard/utilities/preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
-  _SplashPageState createState() => _SplashPageState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashPageState extends State<SplashPage>
-    with AfterLayoutMixin<SplashPage> {
+class _SplashScreenState extends State<SplashScreen>
+    with AfterLayoutMixin<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

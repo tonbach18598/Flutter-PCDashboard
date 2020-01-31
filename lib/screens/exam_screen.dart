@@ -10,12 +10,12 @@ import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_study.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class ExamPage extends StatefulWidget {
+class ExamScreen extends StatefulWidget {
   @override
-  _ExamPageState createState() => _ExamPageState();
+  _ExamScreenState createState() => _ExamScreenState();
 }
 
-class _ExamPageState extends State<ExamPage> {
+class _ExamScreenState extends State<ExamScreen> {
   List<ExamResponse> exams = [];
 
   @override

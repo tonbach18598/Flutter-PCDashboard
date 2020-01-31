@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class DeveloperPage extends StatefulWidget {
+class DeveloperScreen extends StatefulWidget {
   @override
-  _DeveloperPageState createState() => _DeveloperPageState();
+  _DeveloperScreenState createState() => _DeveloperScreenState();
 }
 
-class _DeveloperPageState extends State<DeveloperPage> {
+class _DeveloperScreenState extends State<DeveloperScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

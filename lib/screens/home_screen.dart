@@ -4,12 +4,12 @@ import 'package:flutter_pcdashboard/utilities/configs.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

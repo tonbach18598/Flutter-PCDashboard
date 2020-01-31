@@ -14,12 +14,12 @@ import 'package:flutter_pcdashboard/widgets/loading_dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lazy_load_refresh_indicator/lazy_load_refresh_indicator.dart';
 
-class ClassPage extends StatefulWidget {
+class ClassScreen extends StatefulWidget {
   @override
-  _ClassPageState createState() => _ClassPageState();
+  _ClassScreenState createState() => _ClassScreenState();
 }
 
-class _ClassPageState extends State<ClassPage> {
+class _ClassScreenState extends State<ClassScreen> {
   SelfResponse self;
   List<ClassResponse> posts = [];
   int number = 10;

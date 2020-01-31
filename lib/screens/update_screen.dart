@@ -9,16 +9,16 @@ import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_update.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
-import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
+import 'package:flutter_pcdashboard/widgets/update_information_textfield.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class UpdatePage extends StatefulWidget {
+class UpdateScreen extends StatefulWidget {
   @override
-  _UpdatePageState createState() => _UpdatePageState();
+  _UpdateScreenState createState() => _UpdateScreenState();
 }
 
-class _UpdatePageState extends State<UpdatePage> {
+class _UpdateScreenState extends State<UpdateScreen> {
   SelfResponse self;
   TextEditingController classController;
   TextEditingController emailController;

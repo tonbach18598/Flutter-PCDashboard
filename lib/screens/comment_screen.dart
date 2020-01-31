@@ -16,16 +16,16 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class CommentPage extends StatefulWidget {
+class CommentScreen extends StatefulWidget {
   final arguments;
 
-  CommentPage(this.arguments);
+  CommentScreen(this.arguments);
 
   @override
-  _CommentPageState createState() => _CommentPageState();
+  _CommentScreenState createState() => _CommentScreenState();
 }
 
-class _CommentPageState extends State<CommentPage> {
+class _CommentScreenState extends State<CommentScreen> {
   List<CommentResponse> comments = [];
   ClassResponse post;
   TextEditingController contentController;

@@ -10,12 +10,12 @@ import 'package:flutter_pcdashboard/widgets/loading_dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lazy_load_refresh_indicator/lazy_load_refresh_indicator.dart';
 
-class DepartmentPage extends StatefulWidget {
+class DepartmentScreen extends StatefulWidget {
   @override
-  _DepartmentPageState createState() => _DepartmentPageState();
+  _DepartmentScreenState createState() => _DepartmentScreenState();
 }
 
-class _DepartmentPageState extends State<DepartmentPage> {
+class _DepartmentScreenState extends State<DepartmentScreen> {
   List<DepartmentResponse> posts = [];
   int number = 10;
   bool isLoading = false;

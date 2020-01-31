@@ -9,12 +9,12 @@ import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_study.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class SchedulePage extends StatefulWidget {
+class ScheduleScreen extends StatefulWidget {
   @override
-  _SchedulePageState createState() => _SchedulePageState();
+  _ScheduleScreenState createState() => _ScheduleScreenState();
 }
 
-class _SchedulePageState extends State<SchedulePage> {
+class _ScheduleScreenState extends State<ScheduleScreen> {
   List<ScheduleResponse> schedules = [];
 
   @override

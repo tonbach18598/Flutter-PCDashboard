@@ -17,16 +17,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:lazy_load_refresh_indicator/lazy_load_refresh_indicator.dart';
 
-class ChatPage extends StatefulWidget {
+class ChatScreen extends StatefulWidget {
   final arguments;
 
-  ChatPage(this.arguments);
+  ChatScreen(this.arguments);
 
   @override
-  _ChatPageState createState() => _ChatPageState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatScreenState extends State<ChatScreen> {
   List<ChatResponse> messages = [];
   TextEditingController contentController;
   ScrollController scrollController;

@@ -12,16 +12,16 @@ import 'package:flutter_pcdashboard/widgets/loading_post.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class EditPage extends StatefulWidget {
+class EditScreen extends StatefulWidget {
   final arguments;
 
-  EditPage(this.arguments);
+  EditScreen(this.arguments);
 
   @override
-  _EditPageState createState() => _EditPageState();
+  _EditScreenState createState() => _EditScreenState();
 }
 
-class _EditPageState extends State<EditPage> {
+class _EditScreenState extends State<EditScreen> {
   TextEditingController contentController;
   SelfResponse self;
   ClassResponse post;
