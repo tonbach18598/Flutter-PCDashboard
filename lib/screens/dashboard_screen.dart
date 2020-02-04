@@ -14,7 +14,7 @@ import 'package:flutter_pcdashboard/screens/study_screen.dart';
 import 'package:flutter_pcdashboard/screens/contact_screen.dart';
 import 'package:flutter_pcdashboard/screens/department_screen.dart';
 import 'package:flutter_pcdashboard/widgets/custom_drawer_item.dart';
-import 'package:flutter_pcdashboard/widgets/custom_tabbar_item.dart';
+import 'package:flutter_pcdashboard/widgets/custom_tab_item.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'class_screen.dart';
@@ -89,7 +89,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       currentAccountPicture: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width,
-                        child: CachedNetworkImage(
+                        child: self.avatar!=null?
+                        CachedNetworkImage(
                           imageUrl: self.avatar,
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
@@ -108,6 +109,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Icons.error,
                             color: Colors.blue,
                           ),
+                        ):Icon(
+                          Icons.error,
+                          color: Colors.blue,
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -188,11 +192,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             unselectedLabelColor: Colors.blue,
                             labelColor: Colors.deepOrangeAccent,
                             tabs: <Widget>[
-                              CustomTabBarItem(
+                              CustomTabItem(
                                   Values.DEPARTMENT, Icons.fiber_new),
-                              CustomTabBarItem(Values.CLASS, Icons.people),
-                              CustomTabBarItem(Values.CONTACT, Icons.public),
-                              CustomTabBarItem(Values.STUDY, Icons.school)
+                              CustomTabItem(Values.CLASS, Icons.people),
+                              CustomTabItem(Values.CONTACT, Icons.public),
+                              CustomTabItem(Values.STUDY, Icons.school)
                             ],
                           ),
                         ),

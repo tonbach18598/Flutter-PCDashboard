@@ -101,7 +101,7 @@ class _ContactScreenState extends State<ContactScreen> {
                         Colors.blueAccent,
                         Colors.blue,
                         Colors.lightBlue,
-                        Colors.lightBlueAccent,
+                        Colors.black,
                       ],
                       begin: FractionalOffset.topCenter,
                       end: FractionalOffset.bottomCenter),

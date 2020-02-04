@@ -88,6 +88,7 @@ class _UserScreenState extends State<UserScreen> {
                                       const EdgeInsets.fromLTRB(30, 10, 30, 10),
                                   child: Row(
                                     children: <Widget>[
+                                      users[index].avatar!=null?
                                       CachedNetworkImage(
                                         imageUrl: users[index].avatar,
                                         imageBuilder:
@@ -118,6 +119,9 @@ class _UserScreenState extends State<UserScreen> {
                                           Icons.error,
                                           color: Colors.orange,
                                         ),
+                                      ):Icon(
+                                        Icons.error,
+                                        color: Colors.orange,
                                       ),
                                       SizedBox(width: 20),
                                       Expanded(
@@ -162,15 +166,16 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   Future<void> showInformationBottomSheet(
-      BuildContext blocContext, UserResponse use) async {
+      BuildContext blocContext, UserResponse user) async {
     return showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+              user.avatar!=null?
               CachedNetworkImage(
-                imageUrl: use.avatar,
+                imageUrl: user.avatar,
                 imageBuilder: (context, imageProvider) => Container(
                   width: MediaQuery.of(context).size.height / 4,
                   height: MediaQuery.of(context).size.height / 4,
@@ -190,13 +195,16 @@ class _UserScreenState extends State<UserScreen> {
                   Icons.error,
                   color: Colors.orange,
                 ),
+              ):Icon(
+                Icons.error,
+                color: Colors.orange,
               ),
               Column(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                     child: Text(
-                      '${use.name}',
+                      '${user.name}',
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.deepOrange,
@@ -204,7 +212,7 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                   ),
                   Text(
-                    '${use.userId}',
+                    '${user.userId}',
                     style: TextStyle(
                         fontSize: 16,
                         color: Colors.blueAccent,
@@ -230,13 +238,13 @@ class _UserScreenState extends State<UserScreen> {
                               ),
                             ),
                             Text(
-                              '${use.email}',
+                              '${user.email}',
                               style: TextStyle(fontSize: 16),
                             ),
                           ],
                         ),
                         onTap: () {BlocProvider.of<UserBloc>(blocContext)
-                            .add(TapEmailEvent(use.email));},
+                            .add(TapEmailEvent(user.email));},
                       ),
                       SizedBox(
                         height: 10,
@@ -253,14 +261,14 @@ class _UserScreenState extends State<UserScreen> {
                               ),
                             ),
                             Text(
-                              '${use.phone}',
+                              '${user.phone}',
                               style: TextStyle(fontSize: 16),
                             )
                           ],
                         ),
                         onTap: () {
                           BlocProvider.of<UserBloc>(blocContext)
-                              .add(TapPhoneEvent(use.phone));
+                              .add(TapPhoneEvent(user.phone));
                         },
                       )
                     ],

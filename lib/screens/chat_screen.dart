@@ -164,7 +164,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                             child: SizedBox(
                                               width: 40,
                                               height: 40,
-                                              child: CachedNetworkImage(
+                                              child: messages[index].userAvatar!=null?
+                                              CachedNetworkImage(
                                                 imageUrl:
                                                     messages[index].userAvatar,
                                                 imageBuilder:
@@ -189,6 +190,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                                   Icons.error,
                                                   color: Colors.orange,
                                                 ),
+                                              ):Icon(
+                                                Icons.error,
+                                                color: Colors.orange,
                                               ),
                                             ),
                                           ),

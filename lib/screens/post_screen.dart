@@ -104,7 +104,8 @@ class _PostScreenState extends State<PostScreen> {
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: CachedNetworkImage(
+                                  child: self.avatar!=null?
+                                  CachedNetworkImage(
                                     imageUrl: self.avatar,
                                     imageBuilder:
                                         (context, imageProvider) =>
@@ -126,6 +127,9 @@ class _PostScreenState extends State<PostScreen> {
                                           Icons.error,
                                           color: Colors.orange,
                                         ),
+                                  ):Icon(
+                                    Icons.error,
+                                    color: Colors.orange,
                                   ),
                                 ),
                               ),

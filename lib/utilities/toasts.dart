@@ -31,7 +31,7 @@ class Toasts {
       message,
       duration: Duration(seconds: 2),
       position: ToastPosition.center,
-      backgroundColor: Colors.amber.withOpacity(0.8),
+      backgroundColor: Colors.amber,
       radius: 30.0,
       textPadding: EdgeInsets.all(15),
       textStyle: TextStyle(color: Colors.white, fontSize: 16),

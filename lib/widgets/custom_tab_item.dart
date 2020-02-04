@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CustomTabBarItem extends StatelessWidget {
+class CustomTabItem extends StatelessWidget {
   String title;
   IconData icon;
 
-  CustomTabBarItem(this.title, this.icon);
+  CustomTabItem(this.title, this.icon);
 
   @override
   Widget build(BuildContext context) {

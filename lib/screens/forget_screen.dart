@@ -66,30 +66,26 @@ class _ForgetScreenState extends State<ForgetScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
+                                Logo(),
                                 Column(
                                   children: <Widget>[
-                                        Logo(),
-                                        Column(
-                                            children: <Widget>[
-                                              Padding(
-                                                  padding: const EdgeInsets.fromLTRB(
-                                                      30,10,30,10),
-                                                  child: SigninTextField(
-                                                    textEditingController: usernameController,
-                                                    labelText: Values.ACCOUNT,
-                                                    prefixIcon: Icon(Icons.person),
-                                                  )),
-                                              ForgetPasswordButton(
-                                                text: Values.BACK,
-                                                onPress: () {
-                                                  BlocProvider.of<ForgetBloc>(context)
-                                                      .add(PressBackEvent());
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                      ],
+                                    Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            30,10,30,10),
+                                        child: SigninTextField(
+                                          textEditingController: usernameController,
+                                          labelText: Values.ACCOUNT,
+                                          prefixIcon: Icon(Icons.person),
+                                        )),
+                                    ForgetPasswordButton(
+                                      text: Values.BACK,
+                                      onPress: () {
+                                        BlocProvider.of<ForgetBloc>(context)
+                                            .add(PressBackEvent());
+                                      },
                                     ),
+                                  ],
+                                ),
                                 Column(
                                   children: <Widget>[
                                     Padding(

@@ -69,36 +69,32 @@ class _SigninScreenState extends State<SigninScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
+                            Logo(),
                             Column(
                               children: <Widget>[
-                                Logo(),
-                                Column(
-                                  children: <Widget>[
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            30, 10, 30, 10),
-                                        child: SigninTextField(
-                                          textEditingController: usernameController,
-                                          labelText: Values.ACCOUNT,
-                                          prefixIcon: Icon(Icons.person),
-                                        )),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            30, 10, 30, 10),
-                                        child: SigninTextField(
-                                          textEditingController: passwordController,
-                                          labelText: Values.PASSWORD,
-                                          obscureText: true,
-                                          prefixIcon: Icon(Icons.lock),
-                                        )),
-                                    ForgetPasswordButton(
-                                        text: Values.FORGET_PASSWORD,
-                                        onPress: () {
-                                          BlocProvider.of<SigninBloc>(context)
-                                              .add(PressForgetEvent());
-                                        }),
-                                  ],
-                                ),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        30, 10, 30, 10),
+                                    child: SigninTextField(
+                                      textEditingController: usernameController,
+                                      labelText: Values.ACCOUNT,
+                                      prefixIcon: Icon(Icons.person),
+                                    )),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        30, 10, 30, 10),
+                                    child: SigninTextField(
+                                      textEditingController: passwordController,
+                                      labelText: Values.PASSWORD,
+                                      obscureText: true,
+                                      prefixIcon: Icon(Icons.lock),
+                                    )),
+                                ForgetPasswordButton(
+                                    text: Values.FORGET_PASSWORD,
+                                    onPress: () {
+                                      BlocProvider.of<SigninBloc>(context)
+                                          .add(PressForgetEvent());
+                                    }),
                               ],
                             ),
                             Column(

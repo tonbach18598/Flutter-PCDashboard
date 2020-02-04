@@ -99,7 +99,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width / 3,
                                   height: MediaQuery.of(context).size.width / 3,
-                                  child: CachedNetworkImage(
+                                  child: self.avatar!=null?
+                                  CachedNetworkImage(
                                     imageUrl: self.avatar,
                                     imageBuilder: (context, imageProvider) =>
                                         Container(
@@ -119,6 +120,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                         Image.asset(
                                       'logo.png',
                                     ),
+                                  ):Image.asset(
+                                    'logo.png',
                                   ),
                                 ),
                               ),

@@ -108,7 +108,8 @@ class _ClassScreenState extends State<ClassScreen> {
                                       height: 55,
                                       child: Padding(
                                         padding: const EdgeInsets.all(5),
-                                        child: CachedNetworkImage(
+                                        child: self.avatar!=null?
+                                        CachedNetworkImage(
                                           imageUrl: self.avatar,
                                           imageBuilder:
                                               (context, imageProvider) =>
@@ -130,6 +131,9 @@ class _ClassScreenState extends State<ClassScreen> {
                                             Icons.error,
                                             color: Colors.orange,
                                           ),
+                                        ):Icon(
+                                          Icons.error,
+                                          color: Colors.orange,
                                         ),
                                       ),
                                     ),
@@ -179,7 +183,8 @@ class _ClassScreenState extends State<ClassScreen> {
                                               SizedBox(
                                                 width: 40,
                                                 height: 40,
-                                                child: CachedNetworkImage(
+                                                child: posts[index].userAvatar!=null?
+                                                CachedNetworkImage(
                                                   imageUrl:
                                                       posts[index].userAvatar,
                                                   imageBuilder: (context,
@@ -205,6 +210,9 @@ class _ClassScreenState extends State<ClassScreen> {
                                                     Icons.error,
                                                     color: Colors.orange,
                                                   ),
+                                                ):Icon(
+                                                  Icons.error,
+                                                  color: Colors.orange,
                                                 ),
                                               ),
                                               Padding(

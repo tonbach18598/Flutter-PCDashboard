@@ -135,7 +135,8 @@ class _CommentScreenState extends State<CommentScreen> {
                                           child: SizedBox(
                                             width: 40,
                                             height: 40,
-                                            child: CachedNetworkImage(
+                                            child: comments[index].userAvatar!=null?
+                                            CachedNetworkImage(
                                               imageUrl:
                                                   comments[index].userAvatar,
                                               imageBuilder:
@@ -159,6 +160,9 @@ class _CommentScreenState extends State<CommentScreen> {
                                                 Icons.error,
                                                 color: Colors.orange,
                                               ),
+                                            ):Icon(
+                                              Icons.error,
+                                              color: Colors.orange,
                                             ),
                                           ),
                                         ),

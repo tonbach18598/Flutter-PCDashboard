@@ -105,7 +105,8 @@ class _EditScreenState extends State<EditScreen> {
                               child: SizedBox(
                                 width: 50,
                                 height: 50,
-                                child: CachedNetworkImage(
+                                child: self.avatar!=null?
+                                CachedNetworkImage(
                                   imageUrl: self.avatar,
                                   imageBuilder:
                                       (context, imageProvider) =>
@@ -127,6 +128,9 @@ class _EditScreenState extends State<EditScreen> {
                                         Icons.error,
                                         color: Colors.orange,
                                       ),
+                                ):Icon(
+                                  Icons.error,
+                                  color: Colors.orange,
                                 ),
                               ),
                             ),
