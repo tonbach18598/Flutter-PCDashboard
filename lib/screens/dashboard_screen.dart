@@ -26,12 +26,21 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   SelfResponse self;
+  int currentIndex;
+  List<Widget> children;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     self = SelfResponse(userId: '', name: '', avatar: '');
+    currentIndex = 0;
+    children = [
+      DepartmentScreen(),
+      ClassScreen(),
+      ContactScreen(),
+      StudyScreen()
+    ];
   }
 
   @override
@@ -70,151 +79,141 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
             ),
-            drawer: Drawer(
-              child: ListView(
-                // Important: Remove any padding from the ListView.
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  InkWell(
-                    child: UserAccountsDrawerHeader(
-                      accountName: Text(
-                        self.name.toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      accountEmail: Text(
-                        self.userId,
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      currentAccountPicture: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.width,
-                        child: self.avatar!=null?
-                        CachedNetworkImage(
-                          imageUrl: self.avatar,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          placeholder: (context, url) => Center(
-                              child: SpinKitDualRing(
-                            color: Colors.blue,
-                          )),
-                          errorWidget: (context, url, error) => Icon(
-                            Icons.error,
-                            color: Colors.blue,
-                          ),
-                        ):Icon(
-                          Icons.error,
-                          color: Colors.blue,
+            drawer: Theme(
+              data: Theme.of(context).copyWith(
+                canvasColor: Colors.white,
+              ),
+              child: Drawer(
+                child: ListView(
+                  // Important: Remove any padding from the ListView.
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    InkWell(
+                      child: UserAccountsDrawerHeader(
+                        accountName: Text(
+                          self.name.toUpperCase(),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        accountEmail: Text(
+                          self.userId,
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        currentAccountPicture: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width,
+                          child: self.avatar != null
+                              ? CachedNetworkImage(
+                                  imageUrl: self.avatar,
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  placeholder: (context, url) => Center(
+                                      child: SpinKitDualRing(
+                                    color: Colors.blue,
+                                  )),
+                                  errorWidget: (context, url, error) => Icon(
+                                    Icons.error,
+                                    color: Colors.blue,
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.error,
+                                  color: Colors.blue,
+                                ),
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [
+                                Colors.deepOrange,
+                                Colors.deepOrangeAccent,
+                                Colors.orange,
+                                Colors.orangeAccent,
+                              ],
+                              begin: FractionalOffset.bottomLeft,
+                              end: FractionalOffset.topRight),
                         ),
                       ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.deepOrange,
-                              Colors.deepOrangeAccent,
-                              Colors.orange,
-                              Colors.orangeAccent,
-                            ],
-                            begin: FractionalOffset.bottomLeft,
-                            end: FractionalOffset.topRight),
+                      onTap: () {},
+                    ),
+                    CustomDrawerItem(
+                        title: Values.HOME_PAGE,
+                        icon: Icons.home,
+                        onTap: () {
+                          BlocProvider.of<DashboardBloc>(context)
+                              .add(TapHomeEvent());
+                        }),
+                    CustomDrawerItem(
+                        title: Values.UPDATE_INFORMATION,
+                        icon: Icons.account_circle,
+                        onTap: () {
+                          BlocProvider.of<DashboardBloc>(context)
+                              .add(TapUpdateInformationEvent());
+                        }),
+                    CustomDrawerItem(
+                        title: Values.CHANGE_PASSWORD,
+                        icon: Icons.settings,
+                        onTap: () {
+                          BlocProvider.of<DashboardBloc>(context)
+                              .add(TapChangePasswordEvent());
+                        }),
+                    CustomDrawerItem(
+                        title: Values.DEVELOPER,
+                        icon: Icons.developer_mode,
+                        onTap: () {
+                          BlocProvider.of<DashboardBloc>(context)
+                              .add(TapDeveloperEvent());
+                        }),
+                    CustomDrawerItem(
+                        title: Values.SIGN_OUT,
+                        icon: Icons.exit_to_app,
+                        onTap: () {
+                          BlocProvider.of<DashboardBloc>(context)
+                              .add(TapSignoutEvent());
+                        }),
+                    ListTile(
+                      title: Text(
+                        Configs.currentVersion,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontStyle: FontStyle.italic),
                       ),
                     ),
-                    onTap: () {},
-                  ),
-                  CustomDrawerItem(
-                      title: Values.HOME_PAGE,
-                      icon: Icons.home,
-                      onTap: () {
-                        BlocProvider.of<DashboardBloc>(context)
-                            .add(TapHomeEvent());
-                      }),
-                  CustomDrawerItem(
-                      title: Values.UPDATE_INFORMATION,
-                      icon: Icons.account_circle,
-                      onTap: () {
-                        BlocProvider.of<DashboardBloc>(context)
-                            .add(TapUpdateInformationEvent());
-                      }),
-                  CustomDrawerItem(
-                      title: Values.CHANGE_PASSWORD,
-                      icon: Icons.settings,
-                      onTap: () {
-                        BlocProvider.of<DashboardBloc>(context)
-                            .add(TapChangePasswordEvent());
-                      }),
-                  ListTile(
-                    leading: FlutterLogo(colors: Colors.orange,),
-                    title: Text(
-                      Values.DEVELOPER,
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    onTap: () {
-                      BlocProvider.of<DashboardBloc>(context)
-                          .add(TapDeveloperEvent());
-                    },
-                  ),
-                  CustomDrawerItem(
-                      title: Values.SIGN_OUT,
-                      icon: Icons.exit_to_app,
-                      onTap: () {
-                        BlocProvider.of<DashboardBloc>(context)
-                            .add(TapSignoutEvent());
-                      }),
-                  ListTile(
-                    title: Text(
-                      Configs.currentVersion,
-                      style:
-                      TextStyle(fontSize: 14, color: Colors.grey,fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  child: DefaultTabController(
-                    length: 4,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          constraints: BoxConstraints(maxHeight: 150),
-                          child: TabBar(
-                            indicatorColor: Colors.deepOrangeAccent,
-                            unselectedLabelColor: Colors.blue,
-                            labelColor: Colors.deepOrangeAccent,
-                            tabs: <Widget>[
-                              CustomTabItem(
-                                  Values.DEPARTMENT, Icons.fiber_new),
-                              CustomTabItem(Values.CLASS, Icons.people),
-                              CustomTabItem(Values.CONTACT, Icons.public),
-                              CustomTabItem(Values.STUDY, Icons.school)
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: TabBarView(
-                            children: <Widget>[
-                              DepartmentScreen(),
-                              ClassScreen(),
-                              ContactScreen(),
-                              StudyScreen(),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+            body: children[currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.fiber_new),
+                    title: Text(Values.DEPARTMENT)),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.people), title: Text(Values.CLASS)),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.public), title: Text(Values.CONTACT)),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.school), title: Text(Values.STUDY)),
               ],
+              selectedItemColor: Colors.deepOrangeAccent,
+              unselectedItemColor: Colors.blue,
+              type: BottomNavigationBarType.fixed,
+              currentIndex: currentIndex,
+              backgroundColor: Colors.white,
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
             ),
           ),
         ),

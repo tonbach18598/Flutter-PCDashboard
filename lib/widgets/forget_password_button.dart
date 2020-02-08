@@ -16,7 +16,7 @@ class ForgetPasswordButton extends StatelessWidget {
           child: FlatButton(
             child: Text(
               text,
-              style: TextStyle(color: Colors.black54,fontSize: 16),
+              style: TextStyle(color: Colors.grey,fontSize: 16),
             ),
             onPressed: onPress,
           ),

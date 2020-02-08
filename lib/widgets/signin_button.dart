@@ -39,7 +39,7 @@ class SigninButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30.0))),
           color: Colors.transparent,
-          splashColor: Colors.black45,
+          splashColor: Colors.grey,
           onPressed: onPress,
           child: Text(text,
               style: TextStyle(

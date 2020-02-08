@@ -10,7 +10,7 @@ import 'package:flutter_pcdashboard/widgets/loading_signin.dart';
 import 'package:flutter_pcdashboard/widgets/logo.dart';
 import 'package:flutter_pcdashboard/widgets/forget_password_button.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
-import 'package:flutter_pcdashboard/widgets/signin_textfield.dart';
+import 'package:flutter_pcdashboard/widgets/signin_text_field.dart';
 
 class ForgetScreen extends StatefulWidget {
   @override

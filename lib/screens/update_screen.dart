@@ -9,7 +9,7 @@ import 'package:flutter_pcdashboard/utilities/toasts.dart';
 import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/widgets/loading_update.dart';
 import 'package:flutter_pcdashboard/widgets/signin_button.dart';
-import 'package:flutter_pcdashboard/widgets/update_information_textfield.dart';
+import 'package:flutter_pcdashboard/widgets/update_information_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
