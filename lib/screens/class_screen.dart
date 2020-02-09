@@ -291,10 +291,9 @@ class _ClassScreenState extends State<ClassScreen> {
                                                       )),
                                                       errorWidget: (context,
                                                               url, error) =>
-                                                          Icon(
-                                                        Icons.error,
-                                                        color: Colors.orange,
-                                                      ),
+                                                          Image.asset(
+                                                            'logo.png',
+                                                          ),
                                                     )),
                                               )
                                             : Container(),

@@ -105,7 +105,9 @@ class _DepartmentScreenState extends State<DepartmentScreen> {
                                             color: Colors.orange,
                                           )),
                                           errorWidget: (context, url, error) =>
-                                              Icon(Icons.error),
+                                              Image.asset(
+                                                'logo.png',
+                                              ),
                                         ),
                                       ),
                                     )
