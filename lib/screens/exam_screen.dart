@@ -16,26 +16,37 @@ class ExamScreen extends StatefulWidget {
 }
 
 class _ExamScreenState extends State<ExamScreen> {
-  List<ExamResponse> exams = [];
+  List<ExamResponse> exams;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    exams = [];
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>ExamBloc()..add(FetchListEvent()),
-      child: BlocListener<ExamBloc,ExamState>(
-        listener: (context,state){
-          if(state is SuccessFetchListState){
-            exams=state.exams;
-          }else if(state is FailureFetchListState){
+      create: (context) => ExamBloc()..add(FetchListEvent()),
+      child: BlocListener<ExamBloc, ExamState>(
+        listener: (context, state) {
+          if (state is SuccessFetchListState) {
+            exams = state.exams;
+          } else if (state is FailureFetchListState) {
             Toasts.showFailureToast('Tải lịch thi thất bại');
           }
         },
-        child: BlocBuilder<ExamBloc,ExamState>(
-          builder:(context,state)=> Stack(
+        child: BlocBuilder<ExamBloc, ExamState>(
+          builder: (context, state) => Stack(
             children: <Widget>[
               Scaffold(
                   appBar: GradientAppBar(
-                    title: Text(Values.EXAM.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
+                    title: Text(
+                      Values.EXAM.toUpperCase(),
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    centerTitle: true,
                     elevation: 0,
                     automaticallyImplyLeading: true,
                     gradient: LinearGradient(
@@ -60,32 +71,52 @@ class _ExamScreenState extends State<ExamScreen> {
                               Expanded(
                                 flex: 3,
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(10,10,5,10),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 10, 5, 10),
                                   child: Column(
                                     children: <Widget>[
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 5),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5),
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: Icon(Icons.book,color: Colors.orange,),
+                                              padding: const EdgeInsets.only(
+                                                  right: 10),
+                                              child: Icon(
+                                                Icons.book,
+                                                color: Colors.orange,
+                                              ),
                                             ),
-                                            Text('${exams[index].name}',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+                                            Text(
+                                              '${exams[index].name}',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            )
                                           ],
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 5),
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: Icon(Icons.timer,color: Colors.orange,),
+                                              padding: const EdgeInsets.only(
+                                                  right: 10),
+                                              child: Icon(
+                                                Icons.timer,
+                                                color: Colors.orange,
+                                              ),
                                             ),
-                                            Text('${exams[index].time}',style: TextStyle(fontSize: 14),)
+                                            Text(
+                                              '${exams[index].time}',
+                                              style: TextStyle(fontSize: 14),
+                                            )
                                           ],
                                         ),
                                       )
@@ -96,32 +127,52 @@ class _ExamScreenState extends State<ExamScreen> {
                               Expanded(
                                 flex: 1,
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5,10,10,10),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 10, 10, 10),
                                   child: Column(
                                     children: <Widget>[
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 5),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5),
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: Icon(Icons.score,color: Colors.orange,),
+                                              padding: const EdgeInsets.only(
+                                                  right: 10),
+                                              child: Icon(
+                                                Icons.score,
+                                                color: Colors.orange,
+                                              ),
                                             ),
-                                            Text('${exams[index].score}',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+                                            Text(
+                                              '${exams[index].score}',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            )
                                           ],
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 5),
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: Icon(Icons.place,color: Colors.orange,),
+                                              padding: const EdgeInsets.only(
+                                                  right: 10),
+                                              child: Icon(
+                                                Icons.place,
+                                                color: Colors.orange,
+                                              ),
                                             ),
-                                            Text('${exams[index].place}',style: TextStyle(fontSize: 14),)
+                                            Text(
+                                              '${exams[index].place}',
+                                              style: TextStyle(fontSize: 14),
+                                            )
                                           ],
                                         ),
                                       )
@@ -131,7 +182,7 @@ class _ExamScreenState extends State<ExamScreen> {
                               )
                             ],
                           )))),
-              state is LoadingState?LoadingStudy():Container()
+              state is LoadingState ? LoadingStudy() : Container()
             ],
           ),
         ),

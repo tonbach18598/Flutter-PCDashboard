@@ -21,14 +21,16 @@ class ClassScreen extends StatefulWidget {
 
 class _ClassScreenState extends State<ClassScreen> {
   SelfResponse self;
-  List<ClassResponse> posts = [];
-  int number = 10;
+  List<ClassResponse> posts;
+  int number;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     self = SelfResponse(avatar: '');
+    number = 10;
+    posts = [];
   }
 
   @override
@@ -108,33 +110,36 @@ class _ClassScreenState extends State<ClassScreen> {
                                       height: 55,
                                       child: Padding(
                                         padding: const EdgeInsets.all(5),
-                                        child: self.avatar!=null?
-                                        CachedNetworkImage(
-                                          imageUrl: self.avatar,
-                                          imageBuilder:
-                                              (context, imageProvider) =>
-                                                  Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover,
+                                        child: self.avatar != null
+                                            ? CachedNetworkImage(
+                                                imageUrl: self.avatar,
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                        Container(
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                        child: SpinKitDualRing(
+                                                  color: Colors.orange,
+                                                )),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(
+                                                  Icons.error,
+                                                  color: Colors.orange,
+                                                ),
+                                              )
+                                            : Icon(
+                                                Icons.error,
+                                                color: Colors.orange,
                                               ),
-                                            ),
-                                          ),
-                                          placeholder: (context, url) => Center(
-                                              child: SpinKitDualRing(
-                                            color: Colors.orange,
-                                          )),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(
-                                            Icons.error,
-                                            color: Colors.orange,
-                                          ),
-                                        ):Icon(
-                                          Icons.error,
-                                          color: Colors.orange,
-                                        ),
                                       ),
                                     ),
                                     Expanded(
@@ -183,37 +188,45 @@ class _ClassScreenState extends State<ClassScreen> {
                                               SizedBox(
                                                 width: 40,
                                                 height: 40,
-                                                child: posts[index].userAvatar!=null?
-                                                CachedNetworkImage(
-                                                  imageUrl:
-                                                      posts[index].userAvatar,
-                                                  imageBuilder: (context,
-                                                          imageProvider) =>
-                                                      Container(
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.cover,
+                                                child: posts[index]
+                                                            .userAvatar !=
+                                                        null
+                                                    ? CachedNetworkImage(
+                                                        imageUrl: posts[index]
+                                                            .userAvatar,
+                                                        imageBuilder: (context,
+                                                                imageProvider) =>
+                                                            Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  imageProvider,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            Center(
+                                                                child:
+                                                                    SpinKitDualRing(
+                                                          color: Colors.orange,
+                                                        )),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(
+                                                          Icons.error,
+                                                          color: Colors.orange,
+                                                        ),
+                                                      )
+                                                    : Icon(
+                                                        Icons.error,
+                                                        color: Colors.orange,
                                                       ),
-                                                    ),
-                                                  ),
-                                                  placeholder: (context, url) =>
-                                                      Center(
-                                                          child:
-                                                              SpinKitDualRing(
-                                                    color: Colors.orange,
-                                                  )),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Icon(
-                                                    Icons.error,
-                                                    color: Colors.orange,
-                                                  ),
-                                                ):Icon(
-                                                  Icons.error,
-                                                  color: Colors.orange,
-                                                ),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(

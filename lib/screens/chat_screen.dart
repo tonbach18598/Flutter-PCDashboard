@@ -27,23 +27,25 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  List<ChatResponse> messages = [];
+  List<ChatResponse> messages;
   TextEditingController contentController;
   ScrollController scrollController;
   SocketIOManager manager;
   SocketIO socket;
   String selfId;
-  int number = 10;
+  int number;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    messages = [];
     contentController = TextEditingController();
     scrollController = ScrollController();
     manager = SocketIOManager();
     connectSocket();
     selfId = widget.arguments;
+    number = 10;
   }
 
   @override
@@ -56,21 +58,20 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ChatBloc()..add(FetchListEvent(10,true)),
+      create: (context) => ChatBloc()..add(FetchListEvent(10, true)),
       child: BlocListener<ChatBloc, ChatState>(
         listener: (context, state) {
           if (state is SuccessFetchListState) {
             messages = state.messages;
             number = state.number;
-            if(state.scroll)
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              scrollController.animateTo(
-                scrollController.position.maxScrollExtent,
-                curve: Curves.easeOut,
-                duration: const Duration(milliseconds: 10),
-              );
-            });
+            if (state.scroll)
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                scrollController.animateTo(
+                  scrollController.position.maxScrollExtent,
+                  curve: Curves.easeOut,
+                  duration: const Duration(milliseconds: 10),
+                );
+              });
           } else if (state is FailureFetchListState) {
             Toasts.showFailureToast('Tải tin nhắn thất bại');
           }
@@ -82,6 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Values.CHAT.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              centerTitle: true,
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -105,11 +107,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: LazyLoadRefreshIndicator(
                           onRefresh: () async {
                             BlocProvider.of<ChatBloc>(context)
-                                .add(FetchListEvent(number,false));
+                                .add(FetchListEvent(number, false));
                           },
-                          onEndOfPage: () {
-
-                          },
+                          onEndOfPage: () {},
                           child: ListView.builder(
                               controller: scrollController,
                               itemCount: messages.length,
@@ -164,36 +164,45 @@ class _ChatScreenState extends State<ChatScreen> {
                                             child: SizedBox(
                                               width: 40,
                                               height: 40,
-                                              child: messages[index].userAvatar!=null?
-                                              CachedNetworkImage(
-                                                imageUrl:
-                                                    messages[index].userAvatar,
-                                                imageBuilder:
-                                                    (context, imageProvider) =>
-                                                        Container(
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    image: DecorationImage(
-                                                      image: imageProvider,
-                                                      fit: BoxFit.cover,
+                                              child: messages[index]
+                                                          .userAvatar !=
+                                                      null
+                                                  ? CachedNetworkImage(
+                                                      imageUrl: messages[index]
+                                                          .userAvatar,
+                                                      imageBuilder: (context,
+                                                              imageProvider) =>
+                                                          Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image:
+                                                              DecorationImage(
+                                                            image:
+                                                                imageProvider,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Center(
+                                                              child:
+                                                                  SpinKitDualRing(
+                                                        color: Colors.orange,
+                                                      )),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Icon(
+                                                        Icons.error,
+                                                        color: Colors.orange,
+                                                      ),
+                                                    )
+                                                  : Icon(
+                                                      Icons.error,
+                                                      color: Colors.orange,
                                                     ),
-                                                  ),
-                                                ),
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                        child: SpinKitDualRing(
-                                                  color: Colors.orange,
-                                                )),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(
-                                                  Icons.error,
-                                                  color: Colors.orange,
-                                                ),
-                                              ):Icon(
-                                                Icons.error,
-                                                color: Colors.orange,
-                                              ),
                                             ),
                                           ),
                                           Column(
@@ -328,11 +337,11 @@ class _ChatScreenState extends State<ChatScreen> {
         messages.add(message);
         SchedulerBinding.instance.addPostFrameCallback((_) {
           scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          curve: Curves.easeOut,
-          duration: const Duration(milliseconds: 10),
-        );
-      });
+            scrollController.position.maxScrollExtent,
+            curve: Curves.easeOut,
+            duration: const Duration(milliseconds: 10),
+          );
+        });
       });
     });
   }

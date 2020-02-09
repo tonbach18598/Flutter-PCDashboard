@@ -19,16 +19,16 @@ class _StudyScreenState extends State<StudyScreen> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   topLeft:
-                  Radius.circular(MediaQuery.of(context).size.height / 4.4),
-                  topRight:
-                  Radius.circular(MediaQuery.of(context).size.height / 4.4)),
+                      Radius.circular(MediaQuery.of(context).size.height / 4.4),
+                  topRight: Radius.circular(
+                      MediaQuery.of(context).size.height / 4.4)),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 4),
-                      topRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 4)),
+                      topLeft: Radius.circular(
+                          MediaQuery.of(context).size.height / 4),
+                      topRight: Radius.circular(
+                          MediaQuery.of(context).size.height / 4)),
                   gradient: LinearGradient(
                       colors: [
                         Colors.deepOrange,
@@ -39,7 +39,14 @@ class _StudyScreenState extends State<StudyScreen> {
                       begin: FractionalOffset.topCenter,
                       end: FractionalOffset.bottomCenter),
                 ),
-                child: Center(child: Text(Values.SCHEDULE.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(
+                    child: Text(
+                  Values.SCHEDULE.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
               onTap: () {
                 Navigator.of(context).pushNamed(Routes.scheduleRoute);
@@ -54,16 +61,17 @@ class _StudyScreenState extends State<StudyScreen> {
             child: InkWell(
               borderRadius: BorderRadius.only(
                   bottomLeft:
-                  Radius.circular(MediaQuery.of(context).size.height / 4.4),
-                  bottomRight:
-                  Radius.circular(MediaQuery.of(context).size.height / 4.4)),
+                      Radius.circular(MediaQuery.of(context).size.height / 4.4),
+                  bottomRight: Radius.circular(
+                      MediaQuery.of(context).size.height / 4.4)),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      bottomLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 4),
-                      bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 4)),                  gradient: LinearGradient(
+                      bottomLeft: Radius.circular(
+                          MediaQuery.of(context).size.height / 4),
+                      bottomRight: Radius.circular(
+                          MediaQuery.of(context).size.height / 4)),
+                  gradient: LinearGradient(
                       colors: [
                         Colors.blueAccent,
                         Colors.blue,
@@ -73,7 +81,14 @@ class _StudyScreenState extends State<StudyScreen> {
                       begin: FractionalOffset.topCenter,
                       end: FractionalOffset.bottomCenter),
                 ),
-                child: Center(child: Text(Values.EXAM.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(
+                    child: Text(
+                  Values.EXAM.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
               onTap: () {
                 Navigator.of(context).pushNamed(Routes.examRoute);

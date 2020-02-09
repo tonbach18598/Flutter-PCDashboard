@@ -23,13 +23,14 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   String classId;
-  List<UserResponse> users = [];
+  List<UserResponse> users;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     classId = widget.arguments;
+    users = [];
   }
 
   @override
@@ -61,6 +62,7 @@ class _UserScreenState extends State<UserScreen> {
                       : Values.STUDENT_LIST.toUpperCase(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                centerTitle: true,
                 elevation: 0,
                 automaticallyImplyLeading: true,
                 gradient: LinearGradient(
@@ -88,41 +90,43 @@ class _UserScreenState extends State<UserScreen> {
                                       const EdgeInsets.fromLTRB(30, 10, 30, 10),
                                   child: Row(
                                     children: <Widget>[
-                                      users[index].avatar!=null?
-                                      CachedNetworkImage(
-                                        imageUrl: users[index].avatar,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
+                                      users[index].avatar != null
+                                          ? CachedNetworkImage(
+                                              imageUrl: users[index].avatar,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    6,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    6,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  Center(
+                                                      child: SpinKitDualRing(
+                                                color: Colors.blue,
+                                              )),
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                Icons.error,
+                                                color: Colors.orange,
+                                              ),
+                                            )
+                                          : Icon(
+                                              Icons.error,
+                                              color: Colors.orange,
                                             ),
-                                          ),
-                                        ),
-                                        placeholder: (context, url) => Center(
-                                            child: SpinKitDualRing(
-                                          color: Colors.blue,
-                                        )),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(
-                                          Icons.error,
-                                          color: Colors.orange,
-                                        ),
-                                      ):Icon(
-                                        Icons.error,
-                                        color: Colors.orange,
-                                      ),
                                       SizedBox(width: 20),
                                       Expanded(
                                           child: Column(
@@ -173,32 +177,33 @@ class _UserScreenState extends State<UserScreen> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              user.avatar!=null?
-              CachedNetworkImage(
-                imageUrl: user.avatar,
-                imageBuilder: (context, imageProvider) => Container(
-                  width: MediaQuery.of(context).size.height / 4,
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
+              user.avatar != null
+                  ? CachedNetworkImage(
+                      imageUrl: user.avatar,
+                      imageBuilder: (context, imageProvider) => Container(
+                        width: MediaQuery.of(context).size.height / 4,
+                        height: MediaQuery.of(context).size.height / 4,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      placeholder: (context, url) => Center(
+                          child: SpinKitDualRing(
+                        color: Colors.blue,
+                      )),
+                      errorWidget: (context, url, error) => Icon(
+                        Icons.error,
+                        color: Colors.orange,
+                      ),
+                    )
+                  : Icon(
+                      Icons.error,
+                      color: Colors.orange,
                     ),
-                  ),
-                ),
-                placeholder: (context, url) => Center(
-                    child: SpinKitDualRing(
-                  color: Colors.blue,
-                )),
-                errorWidget: (context, url, error) => Icon(
-                  Icons.error,
-                  color: Colors.orange,
-                ),
-              ):Icon(
-                Icons.error,
-                color: Colors.orange,
-              ),
               Column(
                 children: <Widget>[
                   Padding(
@@ -243,8 +248,10 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ],
                         ),
-                        onTap: () {BlocProvider.of<UserBloc>(blocContext)
-                            .add(TapEmailEvent(user.email));},
+                        onTap: () {
+                          BlocProvider.of<UserBloc>(blocContext)
+                              .add(TapEmailEvent(user.email));
+                        },
                       ),
                       SizedBox(
                         height: 10,

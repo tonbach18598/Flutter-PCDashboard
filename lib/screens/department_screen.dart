@@ -16,9 +16,16 @@ class DepartmentScreen extends StatefulWidget {
 }
 
 class _DepartmentScreenState extends State<DepartmentScreen> {
-  List<DepartmentResponse> posts = [];
+  List<DepartmentResponse> posts;
   int number = 10;
-  bool isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    posts = [];
+    number = 10;
+  }
 
   @override
   Widget build(BuildContext context) {

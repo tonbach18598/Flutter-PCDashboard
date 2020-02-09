@@ -28,36 +28,37 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    contentController=TextEditingController();
-    self=SelfResponse(name: '',classId: '',avatar: '');
+    contentController = TextEditingController();
+    self = SelfResponse(name: '', classId: '', avatar: '');
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>PostBloc()..add(InitializeSelfEvent()),
-      child: BlocListener<PostBloc,PostState>(
-        listener: (context,state){
-          if(state is InitializeSelfState){
-            self=state.self;
-          }
-          else if(state is SuccessPressPostState){
+      create: (context) => PostBloc()..add(InitializeSelfEvent()),
+      child: BlocListener<PostBloc, PostState>(
+        listener: (context, state) {
+          if (state is InitializeSelfState) {
+            self = state.self;
+          } else if (state is SuccessPressPostState) {
             Toasts.showSuccessToast('Đăng bài thành công');
             Navigator.of(context).pop();
-          }else if(state is WarningPressPostState){
+          } else if (state is WarningPressPostState) {
             Toasts.showWarningToast('Nội dung bài đăng không được để trống');
-          }else if(state is FailurePressPostState){
+          } else if (state is FailurePressPostState) {
             Toasts.showFailureToast('Đăng bài thất bại');
-          }else if(state is SuccessTapImageState){
-            image=state.image;
+          } else if (state is SuccessTapImageState) {
+            image = state.image;
           }
         },
-        child: BlocBuilder<PostBloc,PostState>(
-          builder:(context,state)=> Scaffold(
+        child: BlocBuilder<PostBloc, PostState>(
+          builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
               title: Text(
                 Values.POST_POST.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              centerTitle: true,
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -70,23 +71,16 @@ class _PostScreenState extends State<PostScreen> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
               actions: <Widget>[
-              IconButton(
-                      icon: Icon(
-                        Icons.file_upload,
-                        color: Colors.white,
-                      ),
-                onPressed: (){BlocProvider.of<PostBloc>(context).add(PressPostEvent(contentController.text.trim(),image));},
-              ),
-//                FlatButton(
-//                  child: Text(
-//                    Values.POST.toUpperCase(),
-//                    style: TextStyle(
-//                        color: Colors.white,
-//                        fontSize: 18,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                  onPressed: (){BlocProvider.of<PostBloc>(context).add(PressPostEvent(contentController.text.trim(),image));},
-//                )
+                IconButton(
+                  icon: Icon(
+                    Icons.file_upload,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    BlocProvider.of<PostBloc>(context).add(
+                        PressPostEvent(contentController.text.trim(), image));
+                  },
+                ),
               ],
             ),
             body: Stack(
@@ -100,37 +94,39 @@ class _PostScreenState extends State<PostScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: self.avatar!=null?
-                                  CachedNetworkImage(
-                                    imageUrl: self.avatar,
-                                    imageBuilder:
-                                        (context, imageProvider) =>
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
+                                  child: self.avatar != null
+                                      ? CachedNetworkImage(
+                                          imageUrl: self.avatar,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                    placeholder: (context, url) => Center(
-                                        child: SpinKitDualRing(
-                                          color: Colors.blue,
-                                        )),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(
+                                          placeholder: (context, url) => Center(
+                                              child: SpinKitDualRing(
+                                            color: Colors.blue,
+                                          )),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(
+                                            Icons.error,
+                                            color: Colors.orange,
+                                          ),
+                                        )
+                                      : Icon(
                                           Icons.error,
                                           color: Colors.orange,
                                         ),
-                                  ):Icon(
-                                    Icons.error,
-                                    color: Colors.orange,
-                                  ),
                                 ),
                               ),
                               Column(
@@ -144,8 +140,9 @@ class _PostScreenState extends State<PostScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 5),
                                     child: Text(
-                                      Values.MEMBER_OF+self.classId,
-                                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                                      Values.MEMBER_OF + self.classId,
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.grey),
                                     ),
                                   )
                                 ],
@@ -153,26 +150,26 @@ class _PostScreenState extends State<PostScreen> {
                             ],
                           )),
                       Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          child: Container(
-                            child: TextField(
-                              controller: contentController,
-                              cursorColor: Colors.lightBlue,
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: Values.YOUR_THINKING,
-                                  hintStyle: TextStyle(fontSize: 20)),
-                            ),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Container(
+                          child: TextField(
+                            controller: contentController,
+                            cursorColor: Colors.lightBlue,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            style: TextStyle(fontSize: 20),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: Values.YOUR_THINKING,
+                                hintStyle: TextStyle(fontSize: 20)),
                           ),
+                        ),
                       ),
-                      image!=null?Image.file(image):Container(),
+                      image != null ? Image.file(image) : Container(),
                     ],
                   ),
                 ),
-                state is LoadingState?LoadingPost():Container()
+                state is LoadingState ? LoadingPost() : Container()
               ],
             ),
             bottomNavigationBar: InkWell(
@@ -210,7 +207,9 @@ class _PostScreenState extends State<PostScreen> {
                   ],
                 ),
               ),
-              onTap: (){BlocProvider.of<PostBloc>(context).add(TapImageEvent());},
+              onTap: () {
+                BlocProvider.of<PostBloc>(context).add(TapImageEvent());
+              },
             ),
           ),
         ),

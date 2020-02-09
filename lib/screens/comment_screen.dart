@@ -26,7 +26,7 @@ class CommentScreen extends StatefulWidget {
 }
 
 class _CommentScreenState extends State<CommentScreen> {
-  List<CommentResponse> comments = [];
+  List<CommentResponse> comments;
   ClassResponse post;
   TextEditingController contentController;
   ScrollController scrollController;
@@ -40,6 +40,7 @@ class _CommentScreenState extends State<CommentScreen> {
     contentController = TextEditingController();
     scrollController = ScrollController();
     editController = TextEditingController();
+    comments = [];
   }
 
   @override
@@ -93,6 +94,7 @@ class _CommentScreenState extends State<CommentScreen> {
                 Values.COMMENT.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              centerTitle: true,
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -135,35 +137,40 @@ class _CommentScreenState extends State<CommentScreen> {
                                           child: SizedBox(
                                             width: 40,
                                             height: 40,
-                                            child: comments[index].userAvatar!=null?
-                                            CachedNetworkImage(
-                                              imageUrl:
-                                                  comments[index].userAvatar,
-                                              imageBuilder:
-                                                  (context, imageProvider) =>
-                                                      Container(
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
+                                            child: comments[index].userAvatar !=
+                                                    null
+                                                ? CachedNetworkImage(
+                                                    imageUrl: comments[index]
+                                                        .userAvatar,
+                                                    imageBuilder: (context,
+                                                            imageProvider) =>
+                                                        Container(
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        image: DecorationImage(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        Center(
+                                                            child:
+                                                                SpinKitDualRing(
+                                                      color: Colors.orange,
+                                                    )),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Icon(
+                                                      Icons.error,
+                                                      color: Colors.orange,
+                                                    ),
+                                                  )
+                                                : Icon(
+                                                    Icons.error,
+                                                    color: Colors.orange,
                                                   ),
-                                                ),
-                                              ),
-                                              placeholder: (context, url) =>
-                                                  Center(
-                                                      child: SpinKitDualRing(
-                                                color: Colors.orange,
-                                              )),
-                                              errorWidget:
-                                                  (context, url, error) => Icon(
-                                                Icons.error,
-                                                color: Colors.orange,
-                                              ),
-                                            ):Icon(
-                                              Icons.error,
-                                              color: Colors.orange,
-                                            ),
                                           ),
                                         ),
                                         Column(
@@ -329,7 +336,10 @@ class _CommentScreenState extends State<CommentScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: Text(Values.EDIT_COMMENT.toUpperCase(),style: TextStyle(color: Colors.blueAccent),),
+          title: Text(
+            Values.EDIT_COMMENT.toUpperCase(),
+            style: TextStyle(color: Colors.blueAccent),
+          ),
           content: CupertinoTextField(
             controller: editController,
             cursorColor: Colors.lightBlue,

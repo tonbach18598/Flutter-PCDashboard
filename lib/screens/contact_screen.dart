@@ -21,8 +21,8 @@ class _ContactScreenState extends State<ContactScreen> {
               borderRadius: BorderRadius.only(
                   topLeft:
                       Radius.circular(MediaQuery.of(context).size.height / 8.8),
-                  bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 8.8)),
+                  bottomRight: Radius.circular(
+                      MediaQuery.of(context).size.height / 8.8)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -40,10 +40,18 @@ class _ContactScreenState extends State<ContactScreen> {
                       bottomRight: Radius.circular(
                           MediaQuery.of(context).size.height / 8)),
                 ),
-                child: Center(child: Text(Values.CHAT.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(
+                    child: Text(
+                  Values.CHAT.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
               onTap: () async {
-                Navigator.of(context).pushNamed(Routes.chatRoute,arguments: (await Preferences.loadSelf()).userId);
+                Navigator.of(context).pushNamed(Routes.chatRoute,
+                    arguments: (await Preferences.loadSelf()).userId);
               },
             ),
           ),
@@ -56,8 +64,8 @@ class _ContactScreenState extends State<ContactScreen> {
               borderRadius: BorderRadius.only(
                   topRight:
                       Radius.circular(MediaQuery.of(context).size.height / 8.8),
-                  bottomLeft:
-                      Radius.circular(MediaQuery.of(context).size.height / 8.8)),
+                  bottomLeft: Radius.circular(
+                      MediaQuery.of(context).size.height / 8.8)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -75,7 +83,14 @@ class _ContactScreenState extends State<ContactScreen> {
                       bottomLeft: Radius.circular(
                           MediaQuery.of(context).size.height / 8)),
                 ),
-                child: Center(child: Text(Values.STUDENT_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(
+                    child: Text(
+                  Values.STUDENT_LIST.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
               onTap: () {
                 Navigator.of(context)
@@ -92,8 +107,8 @@ class _ContactScreenState extends State<ContactScreen> {
               borderRadius: BorderRadius.only(
                   topLeft:
                       Radius.circular(MediaQuery.of(context).size.height / 8.8),
-                  bottomRight:
-                      Radius.circular(MediaQuery.of(context).size.height / 8.8)),
+                  bottomRight: Radius.circular(
+                      MediaQuery.of(context).size.height / 8.8)),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -111,7 +126,14 @@ class _ContactScreenState extends State<ContactScreen> {
                       bottomRight: Radius.circular(
                           MediaQuery.of(context).size.height / 8)),
                 ),
-                child: Center(child: Text(Values.TEACHER_LIST.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),)),
+                child: Center(
+                    child: Text(
+                  Values.TEACHER_LIST.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
               onTap: () {
                 Navigator.of(context)

@@ -28,12 +28,6 @@ class _ForgetScreenState extends State<ForgetScreen> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ForgetBloc(),

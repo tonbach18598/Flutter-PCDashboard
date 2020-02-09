@@ -30,36 +30,37 @@ class _EditScreenState extends State<EditScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    contentController=TextEditingController();
-    self=SelfResponse(name: '',classId: '',avatar: '');
-    post=widget.arguments;
-    contentController.text=post.content;
+    contentController = TextEditingController();
+    self = SelfResponse(name: '', classId: '', avatar: '');
+    post = widget.arguments;
+    contentController.text = post.content;
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>EditBloc()..add(InitializeSelfEvent()),
-      child: BlocListener<EditBloc,EditState>(
-        listener: (context,state){
-          if(state is InitializeSelfState){
-            self=state.self;
-          }
-          else if(state is SuccessPressEditState){
+      create: (context) => EditBloc()..add(InitializeSelfEvent()),
+      child: BlocListener<EditBloc, EditState>(
+        listener: (context, state) {
+          if (state is InitializeSelfState) {
+            self = state.self;
+          } else if (state is SuccessPressEditState) {
             Toasts.showSuccessToast('Sửa bài đăng thành công');
             Navigator.of(context).pop();
-          }else if(state is WarningPressEditState){
+          } else if (state is WarningPressEditState) {
             Toasts.showWarningToast('Nội dung bài đăng không được để trống');
-          }else if(state is FailurePressEditState){
+          } else if (state is FailurePressEditState) {
             Toasts.showFailureToast('Sửa bài đăng thất bại');
           }
         },
-        child: BlocBuilder<EditBloc,EditState>(
-          builder:(context,state)=> Scaffold(
+        child: BlocBuilder<EditBloc, EditState>(
+          builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
               title: Text(
                 Values.EDIT_POST.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              centerTitle: true,
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -72,23 +73,16 @@ class _EditScreenState extends State<EditScreen> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter),
               actions: <Widget>[
-              IconButton(
-                      icon: Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                      ),
-                onPressed: (){BlocProvider.of<EditBloc>(context).add(PressEditEvent(post,contentController.text));},
-                    ),
-//                FlatButton(
-//                  child: Text(
-//                    Values.EDIT.toUpperCase(),
-//                    style: TextStyle(
-//                        color: Colors.white,
-//                        fontSize: 18,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                  onPressed: (){},
-//                )
+                IconButton(
+                  icon: Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    BlocProvider.of<EditBloc>(context)
+                        .add(PressEditEvent(post, contentController.text));
+                  },
+                ),
               ],
             ),
             body: Stack(
@@ -101,37 +95,39 @@ class _EditScreenState extends State<EditScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: SizedBox(
                                 width: 50,
                                 height: 50,
-                                child: self.avatar!=null?
-                                CachedNetworkImage(
-                                  imageUrl: self.avatar,
-                                  imageBuilder:
-                                      (context, imageProvider) =>
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
+                                child: self.avatar != null
+                                    ? CachedNetworkImage(
+                                        imageUrl: self.avatar,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                  placeholder: (context, url) => Center(
-                                      child: SpinKitDualRing(
-                                        color: Colors.blue,
-                                      )),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(
+                                        placeholder: (context, url) => Center(
+                                            child: SpinKitDualRing(
+                                          color: Colors.blue,
+                                        )),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(
+                                          Icons.error,
+                                          color: Colors.orange,
+                                        ),
+                                      )
+                                    : Icon(
                                         Icons.error,
                                         color: Colors.orange,
                                       ),
-                                ):Icon(
-                                  Icons.error,
-                                  color: Colors.orange,
-                                ),
                               ),
                             ),
                             Column(
@@ -145,8 +141,9 @@ class _EditScreenState extends State<EditScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5),
                                   child: Text(
-                                    Values.MEMBER_OF+self.classId,
-                                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                                    Values.MEMBER_OF + self.classId,
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.grey),
                                   ),
                                 )
                               ],
@@ -173,7 +170,7 @@ class _EditScreenState extends State<EditScreen> {
                     )
                   ],
                 ),
-                state is LoadingState?LoadingPost():Container()
+                state is LoadingState ? LoadingPost() : Container()
               ],
             ),
             bottomNavigationBar: GestureDetector(
@@ -181,11 +178,11 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors: [
-                          Colors.deepOrange,
-                          Colors.deepOrangeAccent,
-                          Colors.orange,
-                          Colors.orangeAccent,
-                        ],
+                      Colors.deepOrange,
+                      Colors.deepOrangeAccent,
+                      Colors.orange,
+                      Colors.orangeAccent,
+                    ],
                         begin: FractionalOffset.bottomCenter,
                         end: FractionalOffset.topCenter)),
                 child: Row(
@@ -204,14 +201,14 @@ class _EditScreenState extends State<EditScreen> {
                         flex: 1,
                         child: IconButton(
                             icon: Icon(
-                              Icons.image,
-                              size: 30,
-                              color: Colors.white,
-                            )))
+                          Icons.image,
+                          size: 30,
+                          color: Colors.white,
+                        )))
                   ],
                 ),
               ),
-              onTap: (){},
+              onTap: () {},
             ),
           ),
         ),

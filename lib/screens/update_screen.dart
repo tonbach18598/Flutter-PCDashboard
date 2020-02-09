@@ -67,6 +67,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                 Values.UPDATE_INFORMATION.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              centerTitle: true,
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(
@@ -94,35 +95,36 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           Column(
                             children: <Widget>[
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(bottom: 20),
+                                padding: const EdgeInsets.only(bottom: 20),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width / 3,
                                   height: MediaQuery.of(context).size.width / 3,
-                                  child: self.avatar!=null?
-                                  CachedNetworkImage(
-                                    imageUrl: self.avatar,
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.cover,
+                                  child: self.avatar != null
+                                      ? CachedNetworkImage(
+                                          imageUrl: self.avatar,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) => Center(
+                                              child: SpinKitDoubleBounce(
+                                            color: Colors.orange,
+                                          )),
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                            'logo.png',
+                                          ),
+                                        )
+                                      : Image.asset(
+                                          'logo.png',
                                         ),
-                                      ),
-                                    ),
-                                    placeholder: (context, url) => Center(
-                                        child: SpinKitDoubleBounce(
-                                      color: Colors.orange,
-                                    )),
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(
-                                      'logo.png',
-                                    ),
-                                  ):Image.asset(
-                                    'logo.png',
-                                  ),
                                 ),
                               ),
                               Text(self.name,
@@ -131,8 +133,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                       color: Colors.deepOrange,
                                       fontWeight: FontWeight.bold)),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5),
+                                padding: const EdgeInsets.only(top: 5),
                                 child: Text(self.userId,
                                     style: TextStyle(
                                         fontSize: 20,

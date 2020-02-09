@@ -31,12 +31,6 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SigninBloc(),
@@ -56,74 +50,81 @@ class _SigninScreenState extends State<SigninScreen> {
         },
         child: BlocBuilder<SigninBloc, SigninState>(
             builder: (context, state) => Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                Scaffold(
-                  body: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: SingleChildScrollView(
-                      child: Container(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    Scaffold(
+                      body: Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Logo(),
-                            Column(
+                        child: SingleChildScrollView(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        30, 10, 30, 10),
-                                    child: SigninTextField(
-                                      textEditingController: usernameController,
-                                      labelText: Values.ACCOUNT,
-                                      prefixIcon: Icon(Icons.person),
-                                    )),
-                                Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        30, 10, 30, 10),
-                                    child: SigninTextField(
-                                      textEditingController: passwordController,
-                                      labelText: Values.PASSWORD,
-                                      obscureText: true,
-                                      prefixIcon: Icon(Icons.lock),
-                                    )),
-                                ForgetPasswordButton(
-                                    text: Values.FORGET_PASSWORD,
-                                    onPress: () {
-                                      BlocProvider.of<SigninBloc>(context)
-                                          .add(PressForgetEvent());
-                                    }),
-                              ],
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                  child: SigninButton(
-                                      text: Values.SIGN_IN.toUpperCase(),
-                                      onPress: () {
-                                        BlocProvider.of<SigninBloc>(context).add(
-                                            PressSigninEvent(
-                                                usernameController.text.trim(),
-                                                passwordController.text.trim()));
-                                      }),
+                                Logo(),
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            30, 10, 30, 10),
+                                        child: SigninTextField(
+                                          textEditingController:
+                                              usernameController,
+                                          labelText: Values.ACCOUNT,
+                                          prefixIcon: Icon(Icons.person),
+                                        )),
+                                    Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            30, 10, 30, 10),
+                                        child: SigninTextField(
+                                          textEditingController:
+                                              passwordController,
+                                          labelText: Values.PASSWORD,
+                                          obscureText: true,
+                                          prefixIcon: Icon(Icons.lock),
+                                        )),
+                                    ForgetPasswordButton(
+                                        text: Values.FORGET_PASSWORD,
+                                        onPress: () {
+                                          BlocProvider.of<SigninBloc>(context)
+                                              .add(PressForgetEvent());
+                                        }),
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height/10,
-                                )
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 10, 0, 10),
+                                      child: SigninButton(
+                                          text: Values.SIGN_IN.toUpperCase(),
+                                          onPress: () {
+                                            BlocProvider.of<SigninBloc>(context)
+                                                .add(PressSigninEvent(
+                                                    usernameController.text
+                                                        .trim(),
+                                                    passwordController.text
+                                                        .trim()));
+                                          }),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              10,
+                                    )
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                state is LoadingState ? LoadingSignin() : Container()
-              ],
-            )),
+                    state is LoadingState ? LoadingSignin() : Container()
+                  ],
+                )),
       ),
     );
   }

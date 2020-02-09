@@ -56,6 +56,7 @@ class _ChangeScreenState extends State<ChangeScreen> {
                 Values.CHANGE_PASSWORD.toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              centerTitle: true,
               elevation: 0,
               automaticallyImplyLeading: true,
               gradient: LinearGradient(

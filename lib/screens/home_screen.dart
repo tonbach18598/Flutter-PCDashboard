@@ -13,23 +13,26 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GradientAppBar(
-        title: Text(Values.HOME_PAGE.toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
-        elevation: 0,
-        automaticallyImplyLeading: true,
-        gradient: LinearGradient(
-            colors: [
-              Colors.deepOrange,
-              Colors.deepOrangeAccent,
-              Colors.orange,
-              Colors.orangeAccent,
-            ],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter),
-      ),
-      body: EasyWebView(
-        src: Configs.homeUrl,
-      )
-    );
+        appBar: GradientAppBar(
+          title: Text(
+            Values.HOME_PAGE.toUpperCase(),
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          elevation: 0,
+          automaticallyImplyLeading: true,
+          gradient: LinearGradient(
+              colors: [
+                Colors.deepOrange,
+                Colors.deepOrangeAccent,
+                Colors.orange,
+                Colors.orangeAccent,
+              ],
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter),
+        ),
+        body: EasyWebView(
+          src: Configs.homeUrl,
+        ));
   }
 }
