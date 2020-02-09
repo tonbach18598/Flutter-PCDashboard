@@ -16,6 +16,7 @@ class _DeveloperScreenState extends State<DeveloperScreen> {
           Values.DEVELOPER.toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
         elevation: 0,
         automaticallyImplyLeading: true,
         gradient: LinearGradient(
