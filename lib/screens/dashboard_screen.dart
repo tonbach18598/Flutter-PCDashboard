@@ -140,43 +140,82 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               end: FractionalOffset.topRight),
                         ),
                       ),
-                      onTap: () {},
                     ),
-                    CustomDrawerItem(
-                        title: Values.HOME_PAGE,
-                        icon: Icons.home,
-                        onTap: () {
-                          BlocProvider.of<DashboardBloc>(context)
-                              .add(TapHomeEvent());
-                        }),
-                    CustomDrawerItem(
-                        title: Values.UPDATE_INFORMATION,
-                        icon: Icons.account_circle,
-                        onTap: () {
-                          BlocProvider.of<DashboardBloc>(context)
-                              .add(TapUpdateInformationEvent());
-                        }),
-                    CustomDrawerItem(
-                        title: Values.CHANGE_PASSWORD,
-                        icon: Icons.settings,
-                        onTap: () {
-                          BlocProvider.of<DashboardBloc>(context)
-                              .add(TapChangePasswordEvent());
-                        }),
-                    CustomDrawerItem(
-                        title: Values.DEVELOPER,
-                        icon: Icons.developer_mode,
-                        onTap: () {
-                          BlocProvider.of<DashboardBloc>(context)
-                              .add(TapDeveloperEvent());
-                        }),
-                    CustomDrawerItem(
-                        title: Values.SIGN_OUT,
-                        icon: Icons.exit_to_app,
-                        onTap: () {
-                          BlocProvider.of<DashboardBloc>(context)
-                              .add(TapSignoutEvent());
-                        }),
+                    ListTile(
+                      leading: Icon(
+                        Icons.home,
+                        color: Colors.orange,
+                      ),
+                      title: Text(
+                        Values.HOME_PAGE,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<DashboardBloc>(context)
+                            .add(TapHomeEvent());
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.account_circle,
+                        color: Colors.orange,
+                      ),
+                      title: Text(
+                        Values.UPDATE_INFORMATION,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<DashboardBloc>(context)
+                            .add(TapUpdateInformationEvent());
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.settings,
+                        color: Colors.orange,
+                      ),
+                      title: Text(
+                        Values.UPDATE_INFORMATION,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<DashboardBloc>(context)
+                            .add(TapChangePasswordEvent());
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.developer_mode,
+                        color: Colors.orange,
+                      ),
+                      title: Text(
+                        Values.DEVELOPER,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<DashboardBloc>(context)
+                            .add(TapDeveloperEvent());
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.exit_to_app,
+                        color: Colors.orange,
+                      ),
+                      title: Text(
+                        Values.SIGN_OUT,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<DashboardBloc>(context)
+                            .add(TapSignoutEvent());
+                      },
+                    ),
                     ListTile(
                       title: Text(
                         Configs.currentVersion,
