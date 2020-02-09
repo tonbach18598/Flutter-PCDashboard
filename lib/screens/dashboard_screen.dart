@@ -196,13 +196,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
               items: [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.fiber_new),
-                    title: Text(Values.DEPARTMENT)),
+                    title: Text(
+                      Values.DEPARTMENT,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    )),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.people), title: Text(Values.CLASS)),
+                    icon: Icon(Icons.people),
+                    title: Text(
+                      Values.CLASS,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    )),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.public), title: Text(Values.CONTACT)),
+                    icon: Icon(Icons.public),
+                    title: Text(
+                      Values.CONTACT,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    )),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.school), title: Text(Values.STUDY)),
+                    icon: Icon(Icons.school),
+                    title: Text(
+                      Values.STUDY,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    )),
               ],
               selectedItemColor: Colors.deepOrangeAccent,
               unselectedItemColor: Colors.blue,
