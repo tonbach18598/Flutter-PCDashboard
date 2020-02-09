@@ -33,7 +33,7 @@ class _DeveloperScreenState extends State<DeveloperScreen> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
-              Image.asset('logo.png',width: MediaQuery.of(context).size.height/3,height: MediaQuery.of(context).size.height/3,),
+              Image.asset('logo.png',width: MediaQuery.of(context).size.height/2,height: MediaQuery.of(context).size.height/3,),
               RichText(
                 textAlign: TextAlign.justify,
                 text: TextSpan(
