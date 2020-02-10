@@ -35,7 +35,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           yield WarningPressSendState();
         }
       } else if (event is PressEditEvent) {
-        yield SuccessPressEditState(event.comment);
+        if(await isEditable(event.comment.userId)){
+          yield SuccessPressEditState(event.comment);
+        } else yield FailurePressEditState();
       } else if (event is PressConfirmEvent) {
         if (event.newContent.isNotEmpty) {
           if (await editComment(event.comment.id, event.newContent)) {
@@ -76,6 +78,11 @@ Future<List<CommentResponse>> fetchList(String postId) async {
     print(e);
     return null;
   }
+}
+
+Future<bool> isEditable(String userId) async {
+  String selfId = (await Preferences.loadSelf()).userId;
+  return selfId==userId;
 }
 
 Future<bool> editComment(String commentId, String content) async {

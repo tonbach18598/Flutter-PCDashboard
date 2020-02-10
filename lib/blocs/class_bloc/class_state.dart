@@ -81,6 +81,13 @@ class SuccessPressEditState extends ClassState {
   List<Object> get props => null;
 }
 
+class FailurePressEditState extends ClassState {
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class SuccessPressDeleteState extends ClassState {
   ClassResponse post;
 

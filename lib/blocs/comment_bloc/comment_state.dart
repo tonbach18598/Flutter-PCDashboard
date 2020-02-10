@@ -62,6 +62,13 @@ class SuccessPressEditState extends CommentState{
   List<Object> get props => null;
 }
 
+class FailurePressEditState extends CommentState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
 class SuccessPressConfirmState extends CommentState{
 
   @override

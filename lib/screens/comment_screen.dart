@@ -80,6 +80,8 @@ class _CommentScreenState extends State<CommentScreen> {
           } else if (state is SuccessPressEditState) {
             editController.text = state.comment.content;
             showEditDialog(context, state.comment);
+          } else if (state is FailurePressEditState) {
+            Toasts.showFailureToast('Sửa bình luận thất bại');
           } else if (state is SuccessPressDeleteState) {
             comments.remove(state.comment);
             Toasts.showSuccessToast('Xoá bình luận thành công');

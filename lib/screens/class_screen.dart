@@ -65,6 +65,9 @@ class _ClassScreenState extends State<ClassScreen> {
                 .then((_) {
               BlocProvider.of<ClassBloc>(context).add(FetchListEvent(10));
             });
+          } else if (state is FailurePressEditState) {
+            Navigator.of(context).pop();
+            Toasts.showFailureToast('Sửa bài viết thất bại');
           } else if (state is SuccessPressDeleteState) {
             Navigator.of(context).pop();
             posts.remove(state.post);
@@ -153,7 +156,8 @@ class _ClassScreenState extends State<ClassScreen> {
                                                 BorderRadius.circular(25),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                            padding: const EdgeInsets.only(
+                                                top: 10, bottom: 10),
                                             child: Center(
                                               child: Text(
                                                 Values.SHARE_YOUR_THINKING,
@@ -295,8 +299,8 @@ class _ClassScreenState extends State<ClassScreen> {
                                                       errorWidget: (context,
                                                               url, error) =>
                                                           Image.asset(
-                                                            'logo.png',
-                                                          ),
+                                                        'logo.png',
+                                                      ),
                                                     )),
                                               )
                                             : Container(),

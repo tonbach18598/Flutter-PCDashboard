@@ -23,7 +23,7 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
         yield LoadingState();
         List<ClassResponse> posts = await fetchList(event.number);
         if (posts != null) {
-          yield SuccessFetchListState(posts,event.number+10);
+          yield SuccessFetchListState(posts, event.number + 10);
         } else {
           yield FailureFetchListState();
         }
@@ -34,7 +34,10 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
       } else if (event is PressMoreEvent) {
         yield SuccessPressMoreState(event.post);
       } else if (event is PressEditEvent) {
-        yield SuccessPressEditState(event.post);
+        if (await isEditable(event.post.userId)) {
+          yield SuccessPressEditState(event.post);
+        } else
+          yield FailurePressEditState();
       } else if (event is PressDeleteEvent) {
         yield LoadingState();
         if (await deletePost(event.post.id)) {
@@ -72,6 +75,11 @@ Future<List<ClassResponse>> fetchList(int number) async {
     print(e);
     return null;
   }
+}
+
+Future<bool> isEditable(String userId) async {
+  String selfId = (await Preferences.loadSelf()).userId;
+  return selfId==userId;
 }
 
 Future<bool> deletePost(String postId) async {
