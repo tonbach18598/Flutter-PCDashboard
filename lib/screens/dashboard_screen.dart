@@ -177,7 +177,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         color: Colors.orange,
                       ),
                       title: Text(
-                        Values.UPDATE_INFORMATION,
+                        Values.CHANGE_PASSWORD,
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
@@ -226,25 +226,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 10),
+                      padding: const EdgeInsets.only(left: 10),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            width: 100,
-                            height: 100,
-                            child: QrImage(
+                          QrImage(
                               data: self.userId,
                               version: QrVersions.auto,
+                              size: 120,
                               gapless: false,
                               embeddedImage: AssetImage('assets/logo.png'),
                               embeddedImageStyle: QrEmbeddedImageStyle(
                                 size: Size(30, 30),
                               ),
                             ),
-                          ),
                         ],
                       ),
                     )
