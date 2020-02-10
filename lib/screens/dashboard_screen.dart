@@ -15,6 +15,7 @@ import 'package:flutter_pcdashboard/screens/contact_screen.dart';
 import 'package:flutter_pcdashboard/screens/department_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'class_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -224,6 +225,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             fontStyle: FontStyle.italic),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, left: 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            width: 100,
+                            height: 100,
+                            child: QrImage(
+                              data: self.userId,
+                              version: QrVersions.auto,
+                              gapless: false,
+                              embeddedImage: AssetImage('assets/logo.png'),
+                              embeddedImageStyle: QrEmbeddedImageStyle(
+                                size: Size(30, 30),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),

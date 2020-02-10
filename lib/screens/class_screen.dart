@@ -152,12 +152,15 @@ class _ClassScreenState extends State<ClassScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(25),
                                           ),
-                                          child: Center(
-                                            child: Text(
-                                              Values.SHARE_YOUR_THINKING,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                            child: Center(
+                                              child: Text(
+                                                Values.SHARE_YOUR_THINKING,
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14),
+                                              ),
                                             ),
                                           ),
                                         ),
