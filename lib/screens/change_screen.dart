@@ -83,8 +83,8 @@ class _ChangeScreenState extends State<ChangeScreen> {
                         children: <Widget>[
                           Image.asset(
                                   'logo.png',
-                                  width: MediaQuery.of(context).size.width *0.5,
-                                  height: MediaQuery.of(context).size.width *0.5,
+                                  width: MediaQuery.of(context).size.width *0.6,
+                                  height: MediaQuery.of(context).size.width *0.4,
                                 ),
                           Column(
                             children: <Widget>[

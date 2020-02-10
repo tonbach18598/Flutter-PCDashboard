@@ -13,7 +13,6 @@ import 'package:flutter_pcdashboard/utilities/values.dart';
 import 'package:flutter_pcdashboard/screens/study_screen.dart';
 import 'package:flutter_pcdashboard/screens/contact_screen.dart';
 import 'package:flutter_pcdashboard/screens/department_screen.dart';
-import 'package:flutter_pcdashboard/widgets/custom_drawer_item.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'class_screen.dart';
