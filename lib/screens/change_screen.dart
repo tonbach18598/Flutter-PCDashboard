@@ -130,7 +130,7 @@ class _ChangeScreenState extends State<ChangeScreen> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 child: SigninButton(
-                                  text: Values.CONFIRM.toUpperCase(),
+                                  title: Values.CONFIRM.toUpperCase(),
                                   onPress: () {BlocProvider.of<ChangeBloc>(context).add(PressConfirmEvent(oldController.text.trim(),newController.text.trim(),retypeController.text.trim()));},
                                 ),
                               ),

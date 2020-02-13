@@ -72,7 +72,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                                           prefixIcon: Icon(Icons.person),
                                         )),
                                     ForgetPasswordButton(
-                                      text: Values.BACK,
+                                      title: Values.BACK,
                                       onPress: () {
                                         BlocProvider.of<ForgetBloc>(context)
                                             .add(PressBackEvent());
@@ -85,7 +85,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(0,10,0,10),
                                       child: SigninButton(
-                                        text: Values.GET_PASSWORD.toUpperCase(),
+                                        title: Values.GET_PASSWORD.toUpperCase(),
                                         onPress: () {
                                           BlocProvider.of<ForgetBloc>(context).add(
                                               PressGetPasswordEvent(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SigninButton extends StatelessWidget {
-  String text;
+  String title;
   VoidCallback onPress;
 
-  SigninButton({@required this.text, @required this.onPress});
+  SigninButton({@required this.title, @required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class SigninButton extends StatelessWidget {
           color: Colors.transparent,
           splashColor: Colors.grey,
           onPressed: onPress,
-          child: Text(text,
+          child: Text(title,
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,

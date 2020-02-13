@@ -188,7 +188,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 child: SigninButton(
-                                  text: Values.CONFIRM.toUpperCase(),
+                                  title: Values.CONFIRM.toUpperCase(),
                                   onPress: () {
                                     BlocProvider.of<UpdateBloc>(context).add(
                                         PressConfirmEvent(

@@ -86,7 +86,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                           prefixIcon: Icon(Icons.lock),
                                         )),
                                     ForgetPasswordButton(
-                                        text: Values.FORGET_PASSWORD,
+                                        title: Values.FORGET_PASSWORD,
                                         onPress: () {
                                           BlocProvider.of<SigninBloc>(context)
                                               .add(PressForgetEvent());
@@ -99,7 +99,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                       padding: const EdgeInsets.fromLTRB(
                                           0, 10, 0, 10),
                                       child: SigninButton(
-                                          text: Values.SIGN_IN.toUpperCase(),
+                                          title: Values.SIGN_IN.toUpperCase(),
                                           onPress: () {
                                             BlocProvider.of<SigninBloc>(context)
                                                 .add(PressSigninEvent(
