@@ -69,7 +69,7 @@ Future<List<CommentResponse>> fetchList(String postId) async {
     String token = await Preferences.loadToken();
     Response response = await Dio().get(
         Configs.baseUrl + Configs.commentPath + postId,
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     List<CommentResponse> comments = (response.data as List)
         .map((item) => CommentResponse.fromJson(item))
         .toList();
@@ -91,7 +91,7 @@ Future<bool> editComment(String commentId, String content) async {
     Response response = await Dio().put(
         Configs.baseUrl + Configs.commentPath + commentId,
         queryParameters: {'content': content},
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);
@@ -104,7 +104,7 @@ Future<bool> deleteComment(String commentId) async {
     String token = await Preferences.loadToken();
     Response response = await Dio().delete(
         Configs.baseUrl + Configs.commentPath + commentId,
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);
@@ -118,7 +118,7 @@ Future<bool> createComment(String postId, String content) async {
     Response response = await Dio().post(
         Configs.baseUrl + Configs.commentPath + postId,
         queryParameters: {'content': content},
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);

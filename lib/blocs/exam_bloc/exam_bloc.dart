@@ -37,7 +37,7 @@ Future<List<ExamResponse>> fetchList()async{
     String token = await Preferences.loadToken();
     Response response = await Dio().get(
         Configs.baseUrl + Configs.examPath,
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     List<ExamResponse> exams=(response.data as List).map((item)=>ExamResponse.fromJson(item)).toList();
     return exams;
   } catch (e) {

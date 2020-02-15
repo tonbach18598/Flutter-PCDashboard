@@ -34,7 +34,7 @@ class DepartmentBloc extends Bloc<DepartmentEvent,DepartmentState>{
 Future<List<DepartmentResponse>> fetchList(int number)async{
   try{
     String token=await Preferences.loadToken();
-    Response response=await Dio().get(Configs.baseUrl+Configs.departmentPath,queryParameters: {'number':number},options: Options(headers: {'Authorization': token}));
+    Response response=await Dio().get(Configs.baseUrl+Configs.departmentPath,queryParameters: {'number':number},options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     List<DepartmentResponse> posts=(response.data as List).map((item)=>DepartmentResponse.fromJson(item)).toList();
     return posts;
   }catch (e){

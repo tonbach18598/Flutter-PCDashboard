@@ -40,7 +40,7 @@ Future<List<ChatResponse>> fetchList(int number) async {
     Response response = await Dio().get(
         Configs.baseUrl + Configs.chatPath,
         queryParameters: {'number':number},
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     List<ChatResponse> messages = (response.data as List)
         .map((item) => ChatResponse.fromJson(item))
         .toList();

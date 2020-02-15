@@ -38,7 +38,7 @@ class ForgetBloc extends Bloc<ForgetEvent, ForgetState> {
 Future<bool> getPassword(String userId) async {
   try {
     Response response =
-        await Dio().put(Configs.baseUrl + Configs.forgetPath + userId);
+        await Dio().put(Configs.baseUrl + Configs.forgetPath + userId).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);

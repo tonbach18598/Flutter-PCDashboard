@@ -66,7 +66,7 @@ Future<List<ClassResponse>> fetchList(int number) async {
     Response response = await Dio().get(
         Configs.baseUrl + Configs.classPath + self.classId,
         queryParameters: {'number': number},
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     List<ClassResponse> posts = (response.data as List)
         .map((item) => ClassResponse.fromJson(item))
         .toList();
@@ -87,7 +87,7 @@ Future<bool> deletePost(String postId) async {
     String token = await Preferences.loadToken();
     Response response = await Dio().delete(
         Configs.baseUrl + Configs.classPath + postId,
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);

@@ -36,7 +36,7 @@ Future<List<ScheduleResponse>> fetchList() async {
     String classId = (await Preferences.loadSelf()).classId;
     Response response = await Dio().get(
         Configs.baseUrl + Configs.schedulePath + classId,
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     List<ScheduleResponse> schedules = (response.data as List)
         .map((item) => ScheduleResponse.fromJson(item))
         .toList();

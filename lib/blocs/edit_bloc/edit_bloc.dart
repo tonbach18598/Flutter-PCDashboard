@@ -48,7 +48,7 @@ Future<bool> updatePost(String postId,String content)async{
     Response response = await Dio().put(
         Configs.baseUrl + Configs.classPath+postId,
         queryParameters: {'content': content},
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);

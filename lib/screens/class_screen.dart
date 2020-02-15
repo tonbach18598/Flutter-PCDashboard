@@ -92,6 +92,7 @@ class _ClassScreenState extends State<ClassScreen> {
                       child: CustomScrollView(
                         physics: BouncingScrollPhysics(),
                         slivers: <Widget>[
+                          AppBar(),
                           SliverAppBar(
                             automaticallyImplyLeading: false,
                             expandedHeight: 0,

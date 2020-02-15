@@ -7,7 +7,7 @@ class LoadingPost extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      color: Colors.black,
+      color: Colors.grey[300],
       child: Center(
         child:SpinKitCubeGrid(
           color: Colors.orange,

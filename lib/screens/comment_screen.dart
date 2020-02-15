@@ -284,7 +284,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                       borderRadius: BorderRadius.circular(20),
                                       color: Colors.white),
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 20, right: 20),
                                     child: TextField(
                                       controller: contentController,
                                       cursorColor: Colors.lightBlue,

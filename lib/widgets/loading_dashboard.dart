@@ -7,7 +7,7 @@ class LoadingDashboard extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      color: Colors.black12,
+      color: Colors.grey[300],
       child: Center(
         child:SpinKitHourGlass(
           color: Colors.orange,

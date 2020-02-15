@@ -57,14 +57,14 @@ Future<bool> createPost(String content, File image) async {
     if (image == null) {
       response = await Dio().post(Configs.baseUrl + Configs.classPath,
           queryParameters: {'content': content, 'classId': classId},
-          options: Options(headers: {'Authorization': token}));
+          options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     } else {
       response = await Dio().post(Configs.baseUrl + Configs.classPath,
           queryParameters: {'content': content, 'classId': classId},
           options: Options(headers: {'Authorization': token}),
           data: FormData.fromMap({
             'file': await MultipartFile.fromFile(image.path),
-          }));
+          })).timeout(const Duration(milliseconds: 3000));
     }
     return response.data;
   } catch (e) {

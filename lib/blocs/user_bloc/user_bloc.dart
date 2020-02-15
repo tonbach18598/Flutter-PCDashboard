@@ -44,7 +44,7 @@ Future<List<UserResponse>> fetchList(String classId) async {
     if (classId != 'GV') classId = (await Preferences.loadSelf()).classId;
     Response response = await Dio().get(
         Configs.baseUrl + Configs.userPath + classId,
-        options: Options(headers: {"Authorization": token}));
+        options: Options(headers: {"Authorization": token})).timeout(const Duration(milliseconds: 3000));
     List<UserResponse> users = (response.data as List)
         .map((item) => UserResponse.fromJson(item))
         .toList();

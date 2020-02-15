@@ -62,7 +62,7 @@ Future<SelfResponse> updateInformation(String email, String phone) async {
         data:
             UpdateInformationRequest(userId: userId, email: email, phone: phone)
                 .toJson(),
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     SelfResponse self = SelfResponse.fromJson(response.data);
     await Preferences.saveSelf(self);
     return self;

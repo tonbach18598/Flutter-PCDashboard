@@ -51,7 +51,7 @@ Future<bool> changePassword(String oldPassword, String newPassword) async {
         data:
         ChangePasswordRequest(userId: userId, oldPassword: oldPassword, newPassword: newPassword)
             .toJson(),
-        options: Options(headers: {'Authorization': token}));
+        options: Options(headers: {'Authorization': token})).timeout(const Duration(milliseconds: 3000));
     return response.data;
   } catch (e) {
     print(e);
