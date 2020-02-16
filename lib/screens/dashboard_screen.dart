@@ -67,6 +67,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) => Scaffold(
             appBar: GradientAppBar(
+              title: Text(
+                Values.PHYSICS_COMPUTER_SCIENCE.toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              centerTitle: true,
               elevation: 0,
               gradient: LinearGradient(
                   colors: [

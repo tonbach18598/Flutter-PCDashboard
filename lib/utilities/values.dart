@@ -39,5 +39,6 @@ class Values{
   static final String EDIT_COMMENT='Sửa bình luận';
   static final String POST_POST='Đăng bài';
   static final String EDIT_POST='Sửa bài';
+  static final String PHYSICS_COMPUTER_SCIENCE='Vật lý Tin học';
 
 }
